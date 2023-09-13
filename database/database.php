@@ -8,7 +8,7 @@ class Database {
     protected $query_closed = TRUE;
 	public $query_count = 0;
 
-	public function __construct($dbhost = DB_HOST, $dbuser = DB_USER, $dbpass = DB_USER, $dbname = DB_NAME, $charset = 'utf8') {
+	public function __construct($dbhost = DB_HOST, $dbuser = DB_USER, $dbpass = DB_PASS, $dbname = DB_NAME, $charset = 'utf8') {
 		$this->connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 		if ($this->connection->connect_error) {
 			$this->error('Failed to connect to MySQL - ' . $this->connection->connect_error);
