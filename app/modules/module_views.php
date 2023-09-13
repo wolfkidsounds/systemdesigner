@@ -3,21 +3,22 @@
 if (!defined("VIEWSPATH")) {
 	define("VIEWSPATH", ABSPATH . "app/views/");
 }
-
-require_once(Modules::Components()->ViewComponents());
-
 class Views {
     
     public function Index() {
-        ViewComponents::Partials()->OpenHTML();
-        ViewComponents::Partials()->Styles();
-        ViewComponents::Partials()->Header();
-        ViewComponents::Partials()->Navigation();
-        ViewComponents::Partials()->Sidebar();
+        //out("found index in views");
         require_once(VIEWSPATH . "index.php");
-        ViewComponents::Partials()->Footer();
-        ViewComponents::Partials()->Scripts();
-        ViewComponents::Partials()->CloseHTML();
     }
-
+    public function Login() {
+        //out("found login in views");
+        require_once(VIEWSPATH . "login.php");
+    }
+    public function Logout() {
+        //out("found login in views");
+        require_once(VIEWSPATH . "logout.php");
+    }
+    public function App_Dashboard() {
+        //out("found login in views");
+        require_once(VIEWSPATH . "/app/dashboard.php");
+    }
 }
