@@ -15,6 +15,7 @@ get('/', function () { Modules::Views()->Index(); });
 
 get('/login', function () { Modules::Views()->Login(); });
 get('/logout', function () { Modules::Views()->Logout(); });
+get('/register', function () { Modules::Views()->Register(); });
 
 get('/app', function () { Modules::Views()->App_Dashboard(); });
 get('/app/dashboard', function () { Modules::Views()->App_Dashboard(); });
