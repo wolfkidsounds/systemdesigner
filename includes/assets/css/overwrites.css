@@ -1,0 +1,33 @@
+.btn.btn-link,
+.btn.btn-link:visited,
+a,
+a:visited,
+.nav,
+.nav-item,
+.nav .nav-item a
+ {
+    transition:all .3s ease;
+    color:rgba(255,255,255,.8);
+}
+
+a:hover,
+.btn.btn-link:hover,
+.nav-item:hover,
+.nav .nav-item a:focus, 
+.nav .nav-item a:hover {
+    color:rgba(255,255,255,1);
+}
+
+.table th {
+    color:#fff;
+}
+
+tbody tr {
+    color:#fff;
+    transition:all .3s ease;
+    background:rgba(255,255,255,.1);
+}
+
+tbody tr:hover {
+    background:rgba(255,255,255,.2);
+}

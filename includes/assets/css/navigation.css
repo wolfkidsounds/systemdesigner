@@ -1,29 +1,23 @@
+:root {
+    --navbar-height:60px;
+}
 header.navbar {
-    padding:10px;
-    padding-left:calc(10vw);
-    padding-right:calc(10vw);
+    position:fixed;
+    top:0px;
+    left:0px;
+    width:100%;
+    padding:var(--padding-general);
+    padding-left:20px;
+    padding-right:20px;
     background:rgba(255,255,255,.1);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border-bottom: 1px solid rgba(255, 255, 255, .1);
     color:rgba(255,255,255,.8);
-    height:60px;
+    height:var(--navbar-height);
 }
 
 header .navbar-center {
     color:#fff;
-}
-
-header a,
-header .btn.btn-link,
-header a:visited,
-header .btn.btn-link:visited {
-    transition:all .3s ease;
-    color:rgba(255,255,255,.8);
-}
-
-header a:hover,
-header .btn.btn-link:hover {
-    color:rgba(255,255,255,1);
 }
