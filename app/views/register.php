@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $registration = Functions::registerUser($name, $mail, $password);
 
     if ($registration) {
-        header("Location: dashboard.php");
+        header("Location: /login");
         exit();
 
     } else {
