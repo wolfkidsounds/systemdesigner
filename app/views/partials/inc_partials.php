@@ -15,9 +15,6 @@ class Partials {
             require_once __DIR__ . "/sidebar.php";
         }
     }
-    public static function Footer() {
-        require_once __DIR__ . "/footer.php";
-    }
     public static function Close() {
         require_once __DIR__ . "/close.php";
     }

@@ -1,14 +1,10 @@
 <?php //functions.php
-
 class Functions {
     public static function checkUserLoggedIn() {
-        $user_loggedIn = $_SESSION["user_id"];
-    
-        if (isset($user_loggedIn)) {
+        if (isset($_SESSION["user_id"])) {
             return true;
-        }
-    
-        if (!empty($user_loggedIn)) {
+        }   
+        if (!empty($_SESSION["user_id"])) {
             return true;
         }
         return false;
