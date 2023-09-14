@@ -19,6 +19,10 @@ class Views {
     }
     public function App_Dashboard() {
         //out("found login in views");
-        require_once(VIEWSPATH . "/app/dashboard.php");
+        require_once(VIEWSPATH . "app/dashboard.php");
+    }
+    public function Not_Found() {
+        //out("found login in views");
+        require_once(VIEWSPATH . "404.php");
     }
 }

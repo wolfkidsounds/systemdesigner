@@ -17,3 +17,5 @@ get('/login', function () { Modules::Views()->Login(); });
 get('/logout', function () { Modules::Views()->Logout(); });
 
 get('/app/dashboard', function () { Modules::Views()->App_Dashboard(); });
+
+any('/404', 'app/views/404.php');
