@@ -12,4 +12,6 @@
 require_once VIEWSPATH . "partials/inc_partials.php";
 Partials::Open();
 Partials::Header(true, true);
+
+
 Partials::Close();
