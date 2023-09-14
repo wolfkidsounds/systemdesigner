@@ -13,8 +13,15 @@ Partials::Open();
 Partials::Header(true, true);
 ?>
 
+<h3>Amplifiers</h3>
+
+<div class="toolbar">
+    <ul>
+        <li><a href="/app/new/amplifier">New Amplifier</a></li>
+    </ul>
+</div>
+
 <div class="table-custom">
-    <h3>Amplifiers</h3>
     <table class="table">
     <thead>
         <tr>
