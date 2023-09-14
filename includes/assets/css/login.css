@@ -1,0 +1,27 @@
+.container {
+    display:block;
+    position:relative !important;
+    width:40vw !important;
+    height:40vh !important;
+    margin-left:30vw !important;
+    margin-top:10vh !important;
+    padding:40px !important;
+    border-radius:4px !important;
+}
+
+.form-group input {
+    margin-bottom:10px !important;
+}
+
+.login-form {
+    margin-bottom:10px;
+}
+
+.form-group a,
+.form-group p {
+    margin:0px;
+}
+
+.container h3 {
+    margin-bottom:20px;
+}
