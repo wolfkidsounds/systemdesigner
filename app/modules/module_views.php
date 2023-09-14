@@ -18,8 +18,12 @@ class Views {
         require_once(VIEWSPATH . "logout.php");
     }
     public function App_Dashboard() {
-        //out("found login in views");
+        //out("found App_Dashboard in views");
         require_once(VIEWSPATH . "app/dashboard.php");
+    }
+    public function App_Amplifiers() {
+        //out("found App_Amplifiers in views");
+        require_once(VIEWSPATH . "app/amplifiers.php");
     }
     public function Not_Found() {
         //out("found login in views");
