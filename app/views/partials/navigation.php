@@ -6,7 +6,13 @@
     <h5>Pulsation Audio - Designer</h5>
   </section>
   <section class="navbar-section">
-    <a href="/user/account" class="btn btn-link">Account</a>
-    <a href="/user/settings" class="btn btn-link">Settings</a>
+    <?php
+
+    require_once ABSPATH . "/app/functions.php";    
+    if (Functions::checkLogin()) { ?>
+
+    <a class="nav-account" href="/user/account" class="btn btn-link"><i class="fa-solid fa-user"></i><?php out($_SESSION['user_name']) ?></a>
+      
+    <?php } ?>
   </section>
 </header>
