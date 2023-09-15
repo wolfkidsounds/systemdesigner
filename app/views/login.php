@@ -1,7 +1,6 @@
 <link rel="stylesheet" href="includes/assets/css/login.css">
 <?php //login.php
 
-session_start();
 require_once ABSPATH . "/app/functions.php";
 if (Functions::checkLogin()) {
     header("Location: /app/dashboard");
@@ -20,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     if (empty($mail) || empty($password)) {
         ?> 
-        <div class="toast error">
+        <div class="toast toast-error">
             <p>The Fields can not be empty.</p>
         </div>
         <?php
@@ -32,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     ?>
     <h3>Login</h3>
-    <form name="login" method="post">
+    <form name="login" method="post" action="/login">
     <div class="form-group">
         <div class="login-form">
             <input class="form-input" type="email" id="email" name="mail" value="<?php out($email) ?>" placeholder="E-Mail">
@@ -62,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     ?>
     <h3>Login</h3>
-    <form name="login" method="post">
+    <form name="login" method="post" action="/login">
     <div class="form-group">
         <div class="login-form">
             <input class="form-input" type="email" id="email" name="mail" placeholder="E-Mail">
