@@ -1,8 +1,7 @@
 <?php // index.php
 
-session_start();
 require_once ABSPATH . "/app/functions.php";
-if (Functions::CheckUserLoggedIn()) {
+if (Functions::checkLogin()) {
     header("Location: /app/dashboard");
     exit();
 }
