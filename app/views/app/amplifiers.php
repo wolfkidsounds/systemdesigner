@@ -1,13 +1,6 @@
 <link rel="stylesheet" href="/includes/assets/css/amplifiers.css">
 <?php //amplifier.php
 
-// session_start();
-// require_once ABSPATH . "/app/functions.php";
-// if (!Functions::CheckUserLoggedIn()) {
-//     header("Location: /");
-//     exit();
-// }
-
 require_once VIEWSPATH . "partials/inc_partials.php";
 Partials::Open();
 Partials::Header(true, true);
@@ -18,6 +11,12 @@ Partials::Header(true, true);
 <div class="toolbar">
     <ul>
         <li><a href="/app/new/amplifier">New Amplifier</a></li>
+    </ul>
+</div>
+
+<div class="toolbar-search">
+    <ul>
+        <li><input class="form-input table-custom-search" type="search" id="search_brand" placeholder="Search Brand..."></li>
     </ul>
 </div>
 
@@ -56,5 +55,17 @@ Partials::Header(true, true);
     </tbody>
     </table>
 </div>
+
+<script src="/node_modules\jquery\dist\jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    $("#search_brand").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $(".table tbody tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+});
+</script>
 
 <?php Partials::Close(); ?>
