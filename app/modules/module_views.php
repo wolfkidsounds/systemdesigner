@@ -15,7 +15,7 @@ class Views {
     }
     public function Logout() {
         //out("found login in views");
-        require_once(VIEWSPATH . "logout.php");
+        require_once(VIEWSPATH . "user/logout.php");
     }
     public function Register() {
         //out("found login in views");
@@ -28,6 +28,22 @@ class Views {
     public function App_Amplifiers() {
         //out("found App_Amplifiers in views");
         require_once(VIEWSPATH . "app/amplifiers.php");
+    }
+    public function App_Speakers() {
+        //out("found App_Amplifiers in views");
+        require_once(VIEWSPATH . "app/speakers.php");
+    }
+    public function App_Processors() {
+        //out("found App_Amplifiers in views");
+        require_once(VIEWSPATH . "app/processors.php");
+    }
+    public function App_Brands() {
+        //out("found App_Amplifiers in views");
+        require_once(VIEWSPATH . "app/brands.php");
+    }
+    public function User_Account() {
+        //out("found App_Amplifiers in views");
+        require_once(VIEWSPATH . "user/account.php");
     }
     public function Not_Found() {
         //out("found login in views");
