@@ -1,5 +1,7 @@
 <link rel="stylesheet" href="/includes/assets/css/brands.css">
-<?php //amplifier.php
+<link rel="stylesheet" href="/includes/assets/css/new_item.css">
+
+<?php //new/brand.php
 
 require_once VIEWSPATH . "partials/inc_partials.php";
 Partials::Open();
@@ -7,9 +9,9 @@ Partials::Header(true, true);
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
-    $name = $_POST['brand_name'];
+    $brand_name = $_POST['brand_name'];
 
-    if (empty($name)) {
+    if (empty($brand_name)) {
         ?> 
         <div class="toast toast-error">
             <p>The Fields can not be empty.</p>
@@ -17,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         <?php
     }
 
-    if (Functions::checkEmptyFields($name)) {
+    if (Functions::checkEmptyFields($brand_name)) {
         Functions::registerBrand($brand_name);
     }
 
