@@ -30,28 +30,50 @@ Partials::Header(true, true);
             <th>Power @ 8Ω</th>
             <th>Power @ 4Ω</th>
             <th>Power @ 2Ω</th>
-            <th>Edit</th>
+            <th>Power Bridge @ 8Ω</th>
+            <th>Power Bridge @ 4Ω</th>
+            <th>Contributors</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>the t.amp</td>
-            <td>Quadro 500 DSP</td>
-            <td>4</td>
-            <td>250 Watt</td>
-            <td>500 Watt</td>
-            <td>0 Watt</td>
-            <td><a class="edit" href="/app/amplifiers/edit/ID"><i class="fa-solid fa-pen"></i></a></td>
-        </tr>
-        <tr>
-            <td>Fame</td>
-            <td>MS 5004</td>
-            <td>2</td>
-            <td>350 Watt</td>
-            <td>520 Watt</td>
-            <td>0 Watt</td>
-            <td><a class="edit" href="/app/amplifiers/edit/ID"><i class="fa-solid fa-pen"></i></a></td>
-        </tr>
+        <?php 
+            
+            $amplifiers = Functions::Amplifiers()->getAllAmplifiers();
+
+            foreach ($amplifiers as $amplifier) { ?>
+                <tr>
+                    <td>
+                        <?php
+                            $brand_id = $amplifier["amp_brand"];
+                            $brand = Functions::Brands()->getBrand($brand_id);
+                            $brand_name = $brand["brand_name"];
+                            out($brand_name); 
+                        ?>
+                    </td>
+                    <td><?php out($amplifier["amp_model"]); ?></td>
+                    <td><?php out($amplifier["amp_ch"]); ?></td>
+                    <td><?php out($amplifier["amp_power_8"]); ?></td>
+                    <td><?php out($amplifier["amp_power_4"]); ?></td>
+                    <td><?php out($amplifier["amp_power_2"]); ?></td>
+                    <td><?php out($amplifier["amp_power_bridge_8"]); ?></td>
+                    <td><?php out($amplifier["amp_power_bridge_4"]); ?></td>
+                    <td>
+                        <?php
+                            $user_id = $amplifier["user_id"];
+                            $user = Functions::Users()->getUser($user_id);
+                            $user_name = $user["user_name"];
+                            out($user_name); 
+                        ?>
+                    </td>
+                    <td>
+                        <a class="edit" href="/app/amplifiers/edit/<?php out($amplifier["id"]); ?>"><i class="fa-solid fa-pen"></i></a>
+                        <a class="del" href="/app/amplifiers/del/<?php out($amplifier["id"]); ?>"><i class="fas fa-trash"></i></a>
+                        <a class="download" href="/app/amplifiers/download/<?php out($amplifier["id"]); ?>"><i class="fas fa-file-download"></i></a>
+                    </td>
+                </tr>
+
+        <?php } ?>
     </tbody>
     </table>
 </div>

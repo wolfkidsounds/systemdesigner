@@ -2,8 +2,8 @@
 <link rel="stylesheet" href="includes/assets/css/register.css">
 <?php //register.php
 
-require_once ABSPATH . "/app/functions.php";
-if (Functions::checkLogin()) {
+require_once ABSPATH . "/app/functions/functions.php";
+if (Functions::Users()->checkLogin()) {
     header("Location: /app/dashboard");
     exit();
 }
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         <?php
     }
 
-    if (Functions::checkUser($mail)) {
+    if (Functions::Users()->checkUser($mail)) {
         ?> 
         <div class="toast toast-error">
             <p>The email was already registered.</p>
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         <?php
     }
 
-    $registration = Functions::registerUser($name, $mail, $password);
+    $registration = Functions::Users()->registerUser($name, $mail, $password);
 
     if ($registration) {
         header("Location: /login");

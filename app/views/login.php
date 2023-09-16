@@ -1,10 +1,10 @@
 <link rel="stylesheet" href="includes/assets/css/login.css">
 <?php //login.php
 
-require_once ABSPATH . "/app/functions.php";
-Functions::checkRememberMe();
+require_once ABSPATH . "app/functions/functions.php";
+Functions::Users()->checkRememberMe();
 
-if (Functions::checkLogin()) {
+if (Functions::Users()->checkLogin()) {
     header("Location: /app/dashboard");
     exit();
 }
@@ -27,8 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         <?php
     }
 
-    if (Functions::checkUser($mail)) {
-        Functions::loginUser($mail, $password, $remember_me);
+    if (Functions::Users()->checkUser($mail)) {
+        Functions::Users()->loginUser($mail, $password, $remember_me);
     }
 
     ?>

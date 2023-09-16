@@ -9,8 +9,7 @@ if ($loader == false) {
 
 require_once __DIR__ . '/router.php';
 require_once ABSPATH . 'app/modules/modules.php';
-
-require_once ABSPATH . 'app/functions.php';
+require_once ABSPATH . 'app/functions/functions.php';
 
 Functions::startSession();
 

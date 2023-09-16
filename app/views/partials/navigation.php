@@ -8,10 +8,10 @@
   <section class="navbar-section">
     <?php
 
-    require_once ABSPATH . "/app/functions.php";    
-    if (Functions::checkLogin()) { ?>
+    require_once ABSPATH . "app/functions/functions.php";    
+    if (Functions::Users()->checkLogin()) { ?>
 
-    <a class="nav-account" href="/user/account" class="btn btn-link"><i class="fa-solid fa-user"></i><?php out($_SESSION['user_name']) ?></a>
+    <a class="nav-account" href="/user/account" class="btn btn-link"><i class="fas fa-user"></i><?php out($_SESSION['user_name']) ?></a>
       
     <?php } ?>
   </section>

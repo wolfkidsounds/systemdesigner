@@ -26,17 +26,26 @@ Partials::Header(true, true);
         <tr>
             <th>Brand</th>
             <th>Edit</th>
+            <th>Contributor</th>
         </tr>
     </thead>
     <tbody>
             <?php 
             
-            $brands = Functions::getAllBrands();
+            $brands = Functions::Brands()->getAllBrands();
 
             foreach ($brands as $brand) { ?>
                 <tr>
                     <td><?php out($brand["brand_name"]); ?></td>
                     <td><a class="edit" href="/app/edit/brand/<?php out($brand["id"]); ?>"><i class="fa-solid fa-pen"></i></a></td>
+                    <td>
+                        <?php
+                            $user_id = $brand["user_id"];
+                            $user = Functions::Users()->getUser($user_id);
+                            $user_name = $user["user_name"];
+                            out($user_name); 
+                        ?>
+                    </td>
                 </tr>
 
             <?php } ?>

@@ -10,38 +10,62 @@ Partials::Header(true, true);
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     $brand_name = $_POST['brand_name'];
-    $amp_model = $_POST['amp_model'];
+    $amp_model = $_POST['model_name'];
     $amp_height = $_POST['amp_height'];
     $amp_channels = $_POST['amp_channels'];
-    $amp_power_16 = $_POST['amp_power_16'];
-    $amp_vpeak_16 = $_POST['amp_vpeak_16'];
-    $amp_vgain_16 = $_POST['amp_vgain_16'];
-    $amp_power_8 = $_POST['amp_power_8'];
-    $amp_vpeak_8 = $_POST['amp_vpeak_8'];
-    $amp_vgain_8 = $_POST['amp_vgain_8'];
-    $amp_power_4 = $_POST['amp_power_4'];
-    $amp_vpeak_4 = $_POST['amp_vpeak_4'];
-    $amp_vgain_4 = $_POST['amp_vgain_4'];
-    $amp_power_2 = $_POST['amp_power_2'];
-    $amp_vpeak_2 = $_POST['amp_vpeak_2'];
-    $amp_vgain_2 = $_POST['amp_vgain_2'];
-    $amp_power_bridge_8 = $_POST['amp_power_bridge_8'];
-    $amp_vpeak_bridge_8 = $_POST['amp_vpeak_bridge_8'];
-    $amp_vgain_bridge_8 = $_POST['amp_vgain_bridge_8'];
-    $amp_power_bridge_4 = $_POST['amp_power_bridge_4'];
-    $amp_vpeak_bridge_4 = $_POST['amp_vpeak_bridge_4'];
-    $amp_vgain_bridge_4 = $_POST['amp_vgain_bridge_4'];
 
-    if (empty($brand_name) || empty($amp_model) || empty($amp_height) || empty($amp_channels) || empty($amp_power_16) || empty($amp_power_8) || empty($amp_power_4) || empty($amp_power_2) || empty($amp_power_bridge_8) || empty($amp_power_bridge_4)) {
+    if (empty($brand_name) || empty($amp_model) || empty($amp_height) || empty($amp_channels)) {
         ?> 
         <div class="toast toast-error">
-            <p>The Fields can not be empty.</p>
+            <p>Brand Name, Amp Model, Amp Height and Amp Channels can not be empty.</p>
         </div>
         <?php
     }
 
-    if (Functions::checkEmptyFields($brand_name)) {
-        Functions::registerAmplifier($brand_name);
+    $amplifier_id = Functions::Amplifiers()->registerAmplifierModel($brand_name, $amp_model, $amp_height, $amp_channels);
+
+    // Define an array of power specifications to loop through
+    $power_specifications = [
+        16, 8, 4, 2
+    ];
+
+    $bridge_power_specifications = [
+        8, 4
+    ];
+
+    // Process each power specification
+    foreach ($power_specifications as $ohm) {
+        $amp_power = $_POST["amp_power_{$ohm}"];
+        $amp_vpeak = $_POST["amp_vpeak_{$ohm}"];
+        $amp_vgain = $_POST["amp_vgain_{$ohm}"];
+
+        // Set default values if empty
+        if (empty($amp_power) || empty($amp_vpeak) || empty($amp_vgain)) {
+            $amp_power = 0;
+            $amp_vpeak = 0;
+            $amp_vgain = 0;
+        }
+
+        // Register the amplifier power for the current specification
+        Functions::Amplifiers()->registerAmplifierPower($amplifier_id, $amp_power, $amp_vpeak, $amp_vgain, $ohm, false);
+    }
+
+    foreach ($bridge_power_specifications as $ohm) {
+        // Handle bridge variant
+        $amp_power_bridge = $_POST["amp_power_bridge_{$ohm}"];
+        $amp_vpeak_bridge = $_POST["amp_vpeak_bridge_{$ohm}"];
+        $amp_vgain_bridge = $_POST["amp_vgain_bridge_{$ohm}"];
+
+        // Set default values if empty
+        if (empty($amp_power_bridge) || empty($amp_vpeak_bridge) || empty($amp_vgain_bridge)) {
+            $amp_power_bridge = 0;
+            $amp_vpeak_bridge = 0;
+            $amp_vgain_bridge = 0;
+        }
+
+        // Register the amplifier power for the current specification (bridge)
+        Functions::Amplifiers()->registerAmplifierPower($amplifier_id, $amp_power_bridge, $amp_vpeak_bridge, $amp_vgain_bridge, $ohm, true);
+
     }
 
     header("Location: /app/amplifiers");
@@ -64,10 +88,10 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                         <option>Select Brand...</option>
                         <?php 
                     
-                            $brands = Functions::getAllBrands();
+                            $brands = Functions::Brands()->getAllBrands();
 
                             foreach ($brands as $brand) { ?>
-                                <option><?php out($brand["brand_name"]); ?></option>
+                                <option value="<?php out($brand["id"]); ?>"><?php out($brand["brand_name"]); ?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -251,6 +275,15 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                         <input class="form-input" type="number" step="0.01" id="amp_vgain_bridge_4" name="amp_vgain_bridge_4" placeholder="Vgain (dB)...">
                         <span class="input-group-addon addon-sm">dB</span>
                     </div>
+                </div>
+            </div>
+            <h6>Documents/Manual</h6>
+            <div class="form-divider">
+                <div class="form-element-tooltip">
+                    <div class="tooltip tooltip-right" data-tooltip="Upload the PDF manual of the amplifier">
+                        <i class="fa-solid fa-question"></i>
+                    </div>
+                    <input class="form-input" type="file" id="amp_manual" name="amp_manual" accept=".pdf">
                 </div>
             </div>
             <button class="btn btn-primary input-group-btn">Register</button>

@@ -19,8 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         <?php
     }
 
-    if (Functions::checkEmptyFields($brand_name)) {
-        Functions::registerBrand($brand_name);
+    if (Functions::Forms()->checkEmptyFields($brand_name)) {
+        Functions::Brands()->registerBrand($brand_name);
     }
 
     header("Location: /app/brands");
