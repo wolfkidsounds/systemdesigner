@@ -18,9 +18,9 @@ body {
 
 .container {
     margin-top:calc(var(--navbar-height) + 20px);
+    margin-bottom:20px;
     margin-left:calc(15vw + 20px);
-    width:calc(100vw - 15vw - 40px);
-
+    width:calc(100vw - 15vw - 50px - 8px);
     padding:var(--padding-general);
     background:rgba(255,255,255,.1);
     border-radius:6px;

@@ -40,3 +40,25 @@ tbody tr:hover {
 table {
     width:100%;
 }
+
+.scroll {
+    overflow:scroll !important;
+    height:100px;
+}
+
+.tooltip::after {
+    max-width:none !important;
+    background:rgba(0,0,0,.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.input-group .input-group-addon {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    color:#3b4351;
+    height:1.8rem;
+}
