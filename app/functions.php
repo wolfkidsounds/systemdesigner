@@ -147,7 +147,7 @@ class Functions {
      */
     public static function checkBrand($brand_name) {
         $db = new Database();
-        $query = "SELECT COUNT(*) AS count FROM brands WHERE brand_name = ?";
+        $query = "SELECT COUNT(*) AS count FROM brand WHERE brand_name = ?";
         $exists = $db->query($query, $brand_name)->fetchArray()['count'] > 0;
         
         if ($exists) {
@@ -166,8 +166,13 @@ class Functions {
     public static function registerBrand($brand_name) {
         Functions::startSession();
 
+        if (Functions::checkBrand($brand_name)) {
+            header("Location: /app/brands");
+            exit();
+        }
+
         $db = new Database();
-        $query = "INSERT INTO brands (brand_name, user_id) VALUES (?, ?)";
+        $query = "INSERT INTO brand (brand_name, user_id) VALUES (?, ?)";
         $result = $db->query($query, $brand_name, $_SESSION["user_id"]);
         
         if ($result) {
@@ -177,5 +182,21 @@ class Functions {
         
         $db->close();
         return false;
+    }
+
+    /**
+     * Returns all brands for admin_user and current_user
+     *
+     * @return $brands
+     */
+    public static function getAllBrands() {
+        Functions::startSession();
+
+        $main_user = 1;
+        $current_user = $_SESSION["user_id"];
+
+        $db = new Database();
+        $brands = $db->query("SELECT * FROM brand WHERE user_id = ? OR user_id = ?", array($main_user, $current_user))->fetchAll();
+        return $brands;
     }
 }
