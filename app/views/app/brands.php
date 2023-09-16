@@ -29,28 +29,33 @@ Partials::Header(true, true);
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>the t.amp</td>
-            <td><a class="edit" href="/app/edit/brand/ID"><i class="fa-solid fa-pen"></i></a></td>
-        </tr>
-        <tr>
-            <td>Fame</td>
-            <td><a class="edit" href="/app/edit/brand/ID"><i class="fa-solid fa-pen"></i></a></td>
-        </tr>
+            <?php 
+            
+            $brands = Functions::getAllBrands();
+
+            foreach ($brands as $brand) { ?>
+                <tr>
+                    <td><?php out($brand["brand_name"]); ?></td>
+                    <td><a class="edit" href="/app/edit/brand/<?php out($brand["id"]); ?>"><i class="fa-solid fa-pen"></i></a></td>
+                </tr>
+
+            <?php } ?>
     </tbody>
     </table>
 </div>
 
 <script src="/node_modules\jquery\dist\jquery.min.js"></script>
 <script>
-$(document).ready(function() {
-    $("#search_brand").on("keyup", function() {
-        var value = $(this).val().toLowerCase();
-        $(".table tbody tr").filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    $('table').scrollTableBody();
+
+    $(document).ready(function() {
+        $("#search_brand").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $(".table tbody tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
         });
     });
-});
 </script>
 
 <?php Partials::Close(); ?>
