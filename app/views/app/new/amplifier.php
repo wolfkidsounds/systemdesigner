@@ -152,7 +152,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             <div class="form-divider">
                 <div style="grid-column:1/3;" class="form-element-tooltip">
                     <div class="input-group">
-                        <input class="form-input" type="number" id="amp_power_8" name="amp_power_8" placeholder="Power (W)...">
+                        <input class="form-input" type="number" id="amp_power_8" name="amp_power_8" oninput="calculateVpeakAndVgain('amp_power_8', 'amp_vpeak_8', 'amp_vgain_8', 8)" placeholder="Power (W)...">
                         <span class="input-group-addon addon-sm">Watt</span>
                     </div>
                 </div>
@@ -173,7 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             <div class="form-divider">
                 <div style="grid-column:1/3;" class="form-element-tooltip">
                     <div class="input-group">
-                        <input class="form-input" type="number" id="amp_power_4" name="amp_power_4" placeholder="Power (W)...">
+                        <input class="form-input" type="number" id="amp_power_4" name="amp_power_4" oninput="calculateVpeakAndVgain('amp_power_4', 'amp_vpeak_4', 'amp_vgain_4', 4)" placeholder="Power (W)...">
                         <span class="input-group-addon addon-sm">Watt</span>
                     </div>
                 </div>
@@ -194,7 +194,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             <div class="form-divider">
                 <div style="grid-column:1/3;" class="form-element-tooltip">
                     <div class="input-group">
-                        <input class="form-input" type="number" id="amp_power_2" name="amp_power_2" placeholder="Power (W)...">
+                        <input class="form-input" type="number" id="amp_power_2" name="amp_power_2" oninput="calculateVpeakAndVgain('amp_power_2', 'amp_vpeak_2', 'amp_vgain_2', 2)" placeholder="Power (W)...">
                         <span class="input-group-addon addon-sm">Watt</span>
                     </div>
                 </div>
@@ -215,7 +215,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             <div class="form-divider">
                 <div style="grid-column:1/3;" class="form-element-tooltip">
                     <div class="input-group">
-                        <input class="form-input" type="number" id="amp_power_bridge_8" name="amp_power_bridge_8" placeholder="Power Bridged (W)...">
+                        <input class="form-input" type="number" id="amp_power_bridge_8" name="amp_power_bridge_8" oninput="calculateVpeakAndVgain('amp_power_bridge_8', 'amp_vpeak_bridge_8', 'amp_vgain_bridge_8', 8)" placeholder="Power Brdiged (W)...">
                         <span class="input-group-addon addon-sm">Watt</span>
                     </div>
                 </div>
@@ -236,7 +236,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             <div class="form-divider">
                 <div style="grid-column:1/3;" class="form-element-tooltip">
                     <div class="input-group">
-                        <input class="form-input" type="number" id="amp_power_bridge_4" name="amp_power_bridge_4" placeholder="Power Bridged (W)...">
+                        <input class="form-input" type="number" id="amp_power_bridge_4" name="amp_power_bridge_4" oninput="calculateVpeakAndVgain('amp_power_bridge_4', 'amp_vpeak_bridge_4', 'amp_vgain_bridge_4', 4)" placeholder="Power Bridged (W)...">
                         <span class="input-group-addon addon-sm">Watt</span>
                     </div>
                 </div>
