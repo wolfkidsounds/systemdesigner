@@ -29,6 +29,10 @@ class Views {
         //out("found App_Amplifiers in views");
         require_once(VIEWSPATH . "app/amplifiers.php");
     }
+    public function App_New_Amplifier() {
+        //out("found App_Amplifiers in views");
+        require_once(VIEWSPATH . "app/new/amplifier.php");
+    }
     public function App_Speakers() {
         //out("found App_Amplifiers in views");
         require_once(VIEWSPATH . "app/speakers.php");
@@ -40,6 +44,10 @@ class Views {
     public function App_Brands() {
         //out("found App_Amplifiers in views");
         require_once(VIEWSPATH . "app/brands.php");
+    }
+    public function App_New_Brand() {
+        //out("found App_Amplifiers in views");
+        require_once(VIEWSPATH . "app/new/brand.php");
     }
     public function User_Account() {
         //out("found App_Amplifiers in views");
