@@ -2,6 +2,8 @@
 <?php //login.php
 
 require_once ABSPATH . "/app/functions.php";
+Functions::checkRememberMe();
+
 if (Functions::checkLogin()) {
     header("Location: /app/dashboard");
     exit();
@@ -15,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     $mail = $_POST['mail'];
     $password = $_POST['password'];
-    $remember = $_POST['remember'];
+    $remember_me = $_POST['remember_me'];
 
     if (empty($mail) || empty($password)) {
         ?> 
@@ -26,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     }
 
     if (Functions::checkUser($mail)) {
-        Functions::loginUser($mail, $password);
+        Functions::loginUser($mail, $password, $remember_me);
     }
 
     ?>
@@ -38,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             <input class="form-input" type="password" id="Password" name="password" placeholder="Password">
 
             <label class="form-checkbox">
-                <input type="checkbox" name="remember" value="<?php out($remember) ?>">
+            <input type="checkbox" id="remember_me" name="remember_me" value="<?php out($remember) ?>">
                 <i class="form-icon"></i> Remember Me
             </label>
 
@@ -57,7 +59,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     <?php
 
-} else {
+}
+
+else {
 
     ?>
     <h3>Login</h3>
@@ -67,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             <input class="form-input" type="email" id="email" name="mail" placeholder="E-Mail">
             <input class="form-input" type="password" id="Password" name="password" placeholder="Password">
             <label class="form-checkbox">
-                <input type="checkbox" name="remember">
+                <input type="checkbox" id="remember_me" name="remember_me">
                 <i class="form-icon"></i> Remember Me
             </label>
             <button class="btn btn-primary input-group-btn">Login</button>

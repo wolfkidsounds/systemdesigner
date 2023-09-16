@@ -72,9 +72,9 @@ class Functions {
      *
      * @param [type] $mail
      * @param [type] $password
-     * @return void if the user was logged in succesfully, false otherwise
+     * @return boolean if the user was logged in succesfully, false otherwise
      */
-    public static function loginUser($mail, $password) {
+    public static function loginUser($mail, $password, $remember_me) {
         Functions::startSession();
        
         $db = new Database();
@@ -83,9 +83,15 @@ class Functions {
 
         if ($user && password_verify($password, $user['user_pass'])) {
             session_regenerate_id(true);
-            $_SESSION['user_id'] = $user['user'];
+            $user_id = $user['user'];
+            $_SESSION['user_id'] = $user_id;
             $_SESSION['user_name'] = $user['user_name'];
             $_SESSION['user_mail'] = $user['user_mail'];
+
+            if ($remember_me) {
+                Functions::setRememberMe($user_id);
+            }
+
             $db->close();
             header("Location: /dashboard");
             exit();
@@ -198,5 +204,49 @@ class Functions {
         $db = new Database();
         $brands = $db->query("SELECT * FROM brand WHERE user_id = ? OR user_id = ?", array($main_user, $current_user))->fetchAll();
         return $brands;
+    }
+    public static function checkRememberMe() {
+        Functions::startSession();
+
+        if (isset($_COOKIE['remember_me'])) {
+            $token = $_COOKIE['remember_me'];
+
+            $db = new Database();
+            $token_query = "SELECT user_id FROM remember_me_tokens WHERE token = '$token' AND expires_at >= NOW()";
+            $result = $db->query($token_query);
+
+            if ($result && $row = $result->fetchArray()) {
+                $user_id = $row["user_id"];
+                $user_query = "SELECT user, user_name, user_mail FROM user WHERE user_id = ?";
+                $user = $db->query($user_query, $user_id)->fetchArray();
+                
+                $_SESSION['user_id'] = $user["user_id"];
+                $_SESSION['user_name'] = $user["user_name"];
+                $_SESSION['user_mail'] = $user["user_mail"];
+                
+                $new_expires_at = date('Y-m-d H:i:s', strtotime('+30 days'));
+                $update_query = "UPDATE remember_me_tokens SET expires_at = '$new_expires_at' WHERE token = '$token'";
+                $db->query($update_query);
+
+                setcookie('remember_me', $token, strtotime('+30 days'), '/');
+
+                header('Location: dashboard.php');
+                exit();
+            }
+        }
+    }
+    public static function setRememberMe($user_id) {
+
+        if (isset($_COOKIE['remember_me'])) {
+            Functions::checkRememberMe();
+            
+        } else {
+            $token = bin2hex(random_bytes(32));
+            $expires_at = date('Y-m-d H:i:s', strtotime('+30 days'));
+            $db = new Database();
+            $query = "INSERT INTO remember_me_tokens (user_id, token, expires_at) VALUES ($user_id, '$token', '$expires_at')";
+            $db->query($query);
+            setcookie('remember_me', $token, strtotime('+30 days'), '/');
+        }
     }
 }
