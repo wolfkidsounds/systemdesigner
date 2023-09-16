@@ -28,6 +28,9 @@ get('/dashboard', function () { Modules::Views()->App_Dashboard(); });
 get('/app/dashboard', function () { Modules::Views()->App_Dashboard(); });
 
 get('/app/amplifiers', function () { Modules::Views()->App_Amplifiers(); });
+get('/app/new/amplifier', function () { Modules::Views()->App_New_Amplifier(); });
+post('/app/new/amplifier', function () { Modules::Views()->App_New_Amplifier(); });
+
 get('/app/speakers', function () { Modules::Views()->App_Speakers(); });
 get('/app/processors', function () { Modules::Views()->App_Processors(); });
 
@@ -36,6 +39,8 @@ get('/app/configurations', function () { Modules::Views()->App_Configuration(); 
 get('/app/management', function () { Modules::Views()->App_Management(); });
 
 get('/app/brands', function () { Modules::Views()->App_Brands(); });
+get('/app/new/brand', function () { Modules::Views()->App_New_Brand(); });
+post('/app/new/brand', function () { Modules::Views()->App_New_Brand(); });
 
 get('/user/account', function () { Modules::Views()->User_Account(); });
 
