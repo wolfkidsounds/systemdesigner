@@ -33,6 +33,11 @@ class Views {
         //out("found App_Amplifiers in views");
         require_once(VIEWSPATH . "app/new/amplifier.php");
     }
+    public function App_Edit_Amplifier($amplifier_id) {
+        $amplifier_id = trim($amplifier_id);
+        //out("found App_Amplifiers in views");
+        require_once(VIEWSPATH . "app/edit/amplifier.php");
+    }
     public function App_Speakers() {
         //out("found App_Amplifiers in views");
         require_once(VIEWSPATH . "app/speakers.php");
@@ -48,6 +53,11 @@ class Views {
     public function App_New_Brand() {
         //out("found App_Amplifiers in views");
         require_once(VIEWSPATH . "app/new/brand.php");
+    }
+    public function App_Edit_Brand($brand_id) {
+        $brand_id = trim($brand_id);
+        //out("found App Brand in views");
+        require_once(VIEWSPATH . "app/edit/brand.php");
     }
     public function User_Account() {
         //out("found App_Amplifiers in views");
