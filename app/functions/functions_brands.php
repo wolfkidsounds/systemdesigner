@@ -70,4 +70,17 @@ class Brands {
         $db->close();
         return false;
     }
+
+    /**
+     * Updates a brand
+     *
+     * @param [type] $brand_id
+     * @param [type] $brand_name
+     * @return void
+     */
+    public static function updateBrand($brand_id, $brand_name) {
+        $db = new Database();
+        $query = "UPDATE brand SET brand_name = ? WHERE id = ?";
+        $db->query($query, $brand_name, $brand_id);
+    }
 }
