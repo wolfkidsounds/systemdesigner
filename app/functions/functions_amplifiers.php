@@ -13,6 +13,13 @@ class Amplifiers {
         return $amplifiers;
     }
 
+    public static function getAmplifier($amplifier_id) {
+        $db = new Database();
+        $query = "SELECT * FROM amplifier WHERE id = ?";
+        $amplifier = $db->query($query, $amplifier_id)->fetchArray();
+        return $amplifier;
+    }
+
     public static function checkAmplifier($brand_name, $model_name) {
         $db = new Database();
         $query = "SELECT COUNT(*) AS count FROM amplifier WHERE amp_brand = ? AND amp_model = ?";
@@ -64,6 +71,30 @@ class Amplifiers {
         }
     
         $query = "UPDATE amplifier SET $amp_power_column = ?, $amp_vpeak_column = ?, $amp_vgain_column = ? WHERE id = ?";
+        $db->query($query, $amp_power, $amp_vpeak, $amp_vgain, $amplifier_id);
+        $db->close();
+    }
+
+    public static function updateAmplifier($amplifier_id, $brand_name, $model_name, $amp_height, $amp_channels) {
+        $db = new Database();
+        $query = "UPDATE amplifier SET amp_brand = ?, amp_model = ?, amp_ru = ?, amp_ch = ?, date_edited = NOW() WHERE id = ?";
+        $db->query($query, $brand_name, $model_name, $amp_height, $amp_channels, $amplifier_id);
+        $db->close();        
+    }
+
+    public static function updateAmplifierPower($amplifier_id, $amp_power, $amp_vpeak, $amp_vgain, $ohm, $bridge) {
+        $db = new Database();
+        if ($bridge) {
+            $amp_power_column = "amp_power_bridge_" . $ohm;
+            $amp_vpeak_column = "amp_vpeak_bridge_" . $ohm;
+            $amp_vgain_column = "amp_vgain_bridge_" . $ohm;
+        } else {
+            $amp_power_column = "amp_power_" . $ohm;
+            $amp_vpeak_column = "amp_vpeak_" . $ohm;
+            $amp_vgain_column = "amp_vgain_" . $ohm;
+        }
+    
+        $query = "UPDATE amplifier SET $amp_power_column = ?, $amp_vpeak_column = ?, $amp_vgain_column = ?, date_edited = NOW() WHERE id = ?";
         $db->query($query, $amp_power, $amp_vpeak, $amp_vgain, $amplifier_id);
         $db->close();
     }
