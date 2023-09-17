@@ -30,6 +30,9 @@ get('/app/amplifiers', function () { Modules::Views()->App_Amplifiers(); });
 get('/app/new/amplifier', function () { Modules::Views()->App_New_Amplifier(); });
 post('/app/new/amplifier', function () { Modules::Views()->App_New_Amplifier(); });
 
+get('/app/edit/amplifier/$amplifier_id', function ($amplifier_id) { Modules::Views()->App_Edit_Amplifier($amplifier_id); });
+post('/app/edit/amplifier/$amplifier_id', function ($amplifier_id) { Modules::Views()->App_Edit_Amplifier($amplifier_id); });
+
 get('/app/speakers', function () { Modules::Views()->App_Speakers(); });
 get('/app/processors', function () { Modules::Views()->App_Processors(); });
 
@@ -40,6 +43,8 @@ get('/app/management', function () { Modules::Views()->App_Management(); });
 get('/app/brands', function () { Modules::Views()->App_Brands(); });
 get('/app/new/brand', function () { Modules::Views()->App_New_Brand(); });
 post('/app/new/brand', function () { Modules::Views()->App_New_Brand(); });
+get('/app/edit/brand/$brand_id', function ($brand_id) { Modules::Views()->App_Edit_Brand($brand_id); });
+post('/app/edit/brand/$brand_id', function ($brand_id) { Modules::Views()->App_Edit_Brand($brand_id); });
 
 get('/user/account', function () { Modules::Views()->User_Account(); });
 
