@@ -67,9 +67,9 @@ Partials::Header(true, true);
                         ?>
                     </td>
                     <td>
-                        <a class="edit" href="/app/amplifiers/edit/<?php out($amplifier["id"]); ?>"><i class="fa-solid fa-pen"></i></a>
-                        <a class="del" href="/app/amplifiers/del/<?php out($amplifier["id"]); ?>"><i class="fas fa-trash"></i></a>
-                        <a class="download" href="/app/amplifiers/download/<?php out($amplifier["id"]); ?>"><i class="fas fa-file-download"></i></a>
+                        <a class="edit" href="/app/edit/amplifier/<?php out($amplifier["id"]); ?>"><i class="fa-solid fa-pen"></i></a>
+                        <a class="del" href="/app/del/amplifier/<?php out($amplifier["id"]); ?>"><i class="fas fa-trash"></i></a>
+                        <a class="download" href="/app/download/amplifier/<?php out($amplifier["id"]); ?>"><i class="fas fa-file-download"></i></a>
                     </td>
                 </tr>
 
