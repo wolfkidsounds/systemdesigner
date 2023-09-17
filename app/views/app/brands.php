@@ -25,8 +25,8 @@ Partials::Header(true, true);
     <thead>
         <tr>
             <th>Brand</th>
-            <th>Edit</th>
             <th>Contributor</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -37,7 +37,6 @@ Partials::Header(true, true);
             foreach ($brands as $brand) { ?>
                 <tr>
                     <td><?php out($brand["brand_name"]); ?></td>
-                    <td><a class="edit" href="/app/edit/brand/<?php out($brand["id"]); ?>"><i class="fa-solid fa-pen"></i></a></td>
                     <td>
                         <?php
                             $user_id = $brand["user_id"];
@@ -45,6 +44,10 @@ Partials::Header(true, true);
                             $user_name = $user["user_name"];
                             out($user_name); 
                         ?>
+                    </td>
+                    <td>
+                        <a class="edit" href="/app/edit/brand/<?php out($brand["id"]); ?>"><i class="fas fa-pen"></i></a>
+                        <a class="del" href="/app/del/brand/<?php out($brand["id"]); ?>"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
 
