@@ -84,6 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             $result = $db->query($query, $filename, $amplifier_id);
             $db->close();
         }
+    }
 
     header("Location: /app/amplifiers");
 
@@ -330,5 +331,5 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     <?php 
 } 
 
-Partials::Close(); 
+Partials::Close();
 ?>
