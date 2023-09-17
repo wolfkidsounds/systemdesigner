@@ -65,8 +65,25 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
         // Register the amplifier power for the current specification (bridge)
         Functions::Amplifiers()->registerAmplifierPower($amplifier_id, $amp_power_bridge, $amp_vpeak_bridge, $amp_vgain_bridge, $ohm, true);
-
     }
+
+    if ($_FILES['amp_manual']['error'] === UPLOAD_ERR_OK) {
+
+        // Upload File
+        $upload_dir = ABSPATH . 'uploads/';
+        $filename = $_FILES['amp_manual']['name'];
+        $new_filename = $brand_name . " - " . $amp_model . '.pdf';
+        $upload_file = $upload_dir . $new_filename;
+
+        if (move_uploaded_file($_FILES['amp_manual']['tmp_name'], $upload_file)) {
+
+            // Register File
+            $filename = $new_filename;
+            $db = new Database();
+            $query = "UPDATE amplifier SET manual_file_name = ? WHERE id = ?";
+            $result = $db->query($query, $filename, $amplifier_id);
+            $db->close();
+        }
 
     header("Location: /app/amplifiers");
 
