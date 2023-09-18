@@ -46,6 +46,15 @@ class Views {
         //out("found App_Amplifiers in views");
         require_once(VIEWSPATH . "app/processors.php");
     }
+    public function App_New_Processor() {
+        //out("found App_Amplifiers in views");
+        require_once(VIEWSPATH . "app/new/processor.php");
+    }
+    public function App_Edit_Processor($processor_id) {
+        $processor_id = trim($processor_id);
+        //out("found App_processors in views");
+        require_once(VIEWSPATH . "app/edit/processor.php");
+    }
     public function App_Brands() {
         //out("found App_Amplifiers in views");
         require_once(VIEWSPATH . "app/brands.php");

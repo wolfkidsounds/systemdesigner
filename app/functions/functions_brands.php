@@ -53,7 +53,7 @@ class Brands {
     public static function registerBrand($brand_name) {
         Functions::startSession();
 
-        if (Functions::checkBrand($brand_name)) {
+        if (Functions::Brands()->checkBrand($brand_name)) {
             header("Location: /app/brands");
             exit();
         }

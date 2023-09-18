@@ -19,6 +19,10 @@ class Functions {
         require_once __DIR__ . "/functions_brands.php";
         return new Brands();
     }
+    public static function Processors() {
+        require_once __DIR__ . "/functions_processors.php";
+        return new Processors();
+    }
 
     /**
      * Starts a session safely

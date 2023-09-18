@@ -29,26 +29,43 @@ Partials::Header(true, true);
             <th>Inputs</th>
             <th>Outputs</th>
             <th>Offset</th>
-            <th>Edit</th>
+            <th>Contributor</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>Behringer</td>
-            <td>DCX2496 Pro</td>
-            <td>3</td>
-            <td>6</td>
-            <td>22</td>
-            <td><a class="edit" href="/app/edit/processor/ID"><i class="fa-solid fa-pen"></i></a></td>
-        </tr>
-        <tr>
-            <td>Behringer</td>
-            <td>DCX2496 LE</td>
-            <td>2</td>
-            <td>6</td>
-            <td>22</td>
-            <td><a class="edit" href="/app/edit/processor/ID"><i class="fa-solid fa-pen"></i></a></td>
-        </tr>
+        <?php 
+            $processors = Functions::Processors()->getAllProcessors();
+            foreach ($processors as $processor) { ?>
+                <tr>
+                    <td>
+                        <?php
+                            $brand_id = $processor["brand_id"];
+                            $brand = Functions::Brands()->getBrand($brand_id);
+                            $brand_name = $brand["brand_name"];
+                            out($brand_name); 
+                        ?>
+                    </td>
+                    <td><?php out($processor["model_name"]); ?></td>
+                    <td><?php out($processor["inputs"]); ?></td>
+                    <td><?php out($processor["outputs"]); ?></td>
+                    <td><?php out($processor["offset"]); ?></td>
+                    <td>
+                        <?php
+                            $user_id = $processor["user_id"];
+                            $user = Functions::Users()->getUser($user_id);
+                            $user_name = $user["user_name"];
+                            out($user_name); 
+                        ?>
+                    </td>
+                    <td>
+                        <a class="edit" href="/app/edit/processor/<?php out($processor["id"]); ?>"><i class="fa-solid fa-pen"></i></a>
+                        <a class="del" href="/app/del/processor/<?php out($processor["id"]); ?>"><i class="fas fa-trash"></i></a>
+                        <a class="download" href="/app/download/processor/<?php out($processor["id"]); ?>"><i class="fas fa-file-download"></i></a>
+                    </td>
+                </tr>
+
+        <?php } ?>
     </tbody>
     </table>
 </div>

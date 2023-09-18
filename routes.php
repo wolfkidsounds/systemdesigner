@@ -29,9 +29,14 @@ get('/app/dashboard', function () { Modules::Views()->App_Dashboard(); });
 get('/app/amplifiers', function () { Modules::Views()->App_Amplifiers(); });
 get('/app/new/amplifier', function () { Modules::Views()->App_New_Amplifier(); });
 post('/app/new/amplifier', function () { Modules::Views()->App_New_Amplifier(); });
-
 get('/app/edit/amplifier/$amplifier_id', function ($amplifier_id) { Modules::Views()->App_Edit_Amplifier($amplifier_id); });
 post('/app/edit/amplifier/$amplifier_id', function ($amplifier_id) { Modules::Views()->App_Edit_Amplifier($amplifier_id); });
+
+get('/app/processors', function () { Modules::Views()->App_Processors(); });
+get('/app/new/processor', function () { Modules::Views()->App_New_Processor(); });
+post('/app/new/processor', function () { Modules::Views()->App_New_Processor(); });
+get('/app/edit/processor/$processor_id', function ($processor_id) { Modules::Views()->App_Edit_Processor($processor_id); });
+post('/app/edit/processor/$processor_id', function ($processor_id) { Modules::Views()->App_Edit_Processor($processor_id); });
 
 get('/app/speakers', function () { Modules::Views()->App_Speakers(); });
 get('/app/processors', function () { Modules::Views()->App_Processors(); });
