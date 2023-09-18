@@ -10,6 +10,7 @@ if ($loader == false) {
 require_once __DIR__ . '/router.php';
 require_once ABSPATH . 'app/modules/modules.php';
 require_once ABSPATH . 'app/functions/functions.php';
+Modules::Translator();
 
 Functions::startSession();
 
@@ -39,9 +40,18 @@ get('/app/edit/processor/$processor_id', function ($processor_id) { Modules::Vie
 post('/app/edit/processor/$processor_id', function ($processor_id) { Modules::Views()->App_Edit_Processor($processor_id); });
 
 get('/app/speakers', function () { Modules::Views()->App_Speakers(); });
-get('/app/processors', function () { Modules::Views()->App_Processors(); });
+get('/app/new/speaker', function () { Modules::Views()->App_New_Speaker(); });
+post('/app/new/speaker', function () { Modules::Views()->App_New_Speaker(); });
+get('/app/edit/speaker/$speaker_id', function ($speaker_id) { Modules::Views()->App_Edit_Speaker($speaker_id); });
+post('/app/edit/speaker/$speaker_id', function ($speaker_id) { Modules::Views()->App_Edit_Speaker($speaker_id); });
 
-get('/app/setups', function () { Modules::Views()->App_Setup(); });
+get('/app/setups', function () { Modules::Views()->App_Setups(); });
+get('/app/new/setup', function () { Modules::Views()->App_New_Setup(); });
+post('/app/new/setup', function () { Modules::Views()->App_New_Setup(); });
+get('/app/edit/setup/$setup_id', function ($setup_id) { Modules::Views()->App_Edit_Setup($setup_id); });
+post('/app/edit/setup/$setup_id', function ($setup_id) { Modules::Views()->App_Edit_Setup($setup_id); });
+
+
 get('/app/configurations', function () { Modules::Views()->App_Configuration(); });
 get('/app/management', function () { Modules::Views()->App_Management(); });
 
