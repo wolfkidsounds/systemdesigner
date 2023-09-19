@@ -1,6 +1,11 @@
 :root {
     --navbar-height:60px;
 }
+
+header {
+    z-index:999;
+}
+
 header.navbar {
     position:fixed;
     top:0px;
