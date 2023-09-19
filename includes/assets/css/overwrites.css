@@ -62,3 +62,7 @@ table {
     color:#3b4351;
     height:1.8rem;
 }
+
+a:focus {
+    box-shadow:none;
+}
