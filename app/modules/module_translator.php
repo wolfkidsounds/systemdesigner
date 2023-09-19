@@ -13,7 +13,7 @@ class Translator {
                 return out($translations[$key]);
 
             } else {
-                echo "Translation key '$key' not found in file '$translation_file'.";
+                //echo "Translation key '$key' not found in file '$translation_file'.";
                 return out($key);
             }
 
