@@ -6,17 +6,17 @@ Partials::Open();
 Partials::Header(true, true);
 ?>
 
-<h3>Speakers (Cabinets)</h3>
+<h3><?php Translator::translate("speakers.speakers"); ?></h3>
 
 <div class="toolbar">
     <ul>
-        <li><a href="/app/new/speaker">New Speaker</a></li>
+        <li><a href="/app/new/speaker"><?php Translator::translate("speakers.new_speaker"); ?></a></li>
     </ul>
 </div>
 
 <div class="toolbar-search">
     <ul>
-        <li><input class="form-input table-custom-search" type="search" id="search_brand" placeholder="Search Brand..."></li>
+        <li><input class="form-input table-custom-search" type="search" id="search" placeholder="<?php Translator::translate("speakers.search"); ?>..."></li>
     </ul>
 </div>
 
@@ -24,34 +24,52 @@ Partials::Header(true, true);
     <table class="table">
     <thead>
         <tr>
-            <th>Brand</th>
-            <th>Model</th>
-            <th>AES/RMS Power (W)</th>
+            <th><?php Translator::translate("speakers.brand"); ?></th>
+            <th><?php Translator::translate("speakers.model"); ?></th>
+            <th>AES/RMS <?php Translator::translate("speakers.power"); ?> (W)</th>
             <th>Z nom. (Ω)</th>
             <th>Vrms (V)</th>
-            <th>Sensitivity 1W @ 1m (dB SPL)</th>
-            <th>Edit</th>
+            <th><?php Translator::translate("speakers.sensitivity"); ?> 1W @ 1m (dB SPL)</th>
+            <th><?php Translator::translate("speakers.contributors"); ?></th>
+            <th><?php Translator::translate("speakers.actions"); ?></th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>Carvin</td>
-            <td>1331</td>
-            <td>500</td>
-            <td>8</td>
-            <td>63,2</td>
-            <td>105</td>
-            <td><a class="edit" href="/app/amplifiers/edit/ID"><i class="fa-solid fa-pen"></i></a></td>
-        </tr>
-        <tr>
-            <td>Carvin</td>
-            <td>2470-R520</td>
-            <td>90</td>
-            <td>8</td>
-            <td>26,8</td>
-            <td>105</td>
-            <td><a class="edit" href="/app/amplifiers/edit/ID"><i class="fa-solid fa-pen"></i></a></td>
-        </tr>
+        <?php 
+            
+            $speakers = Functions::Speakers()->getAllSpeakers();
+
+            foreach ($speakers as $speaker) { ?>
+                <tr>
+                    <td>
+                        <?php
+                            $brand_id = $speaker["speaker_brand"];
+                            $brand = Functions::Brands()->getBrand($brand_id);
+                            $brand_name = $brand["brand_name"];
+                            out($brand_name); 
+                        ?>
+                    </td>
+                    <td><?php out($speaker["speaker_model"]); ?></td>
+                    <td><?php out($speaker["speaker_power_rms"]); ?></td>
+                    <td><?php out($speaker["speaker_impedance_z"]); ?></td>
+                    <td><?php out($speaker["speaker_vrms"]); ?></td>
+                    <td><?php out($speaker["speaker_sens_spl"]); ?></td>
+                    <td>
+                        <?php
+                            $user_id = $speaker["user_id"];
+                            $user = Functions::Users()->getUser($user_id);
+                            $user_name = $user["user_name"];
+                            out($user_name); 
+                        ?>
+                    </td>
+                    <td>
+                        <a class="edit" href="/app/edit/speaker/<?php out($speaker["id"]); ?>"><i class="fa-solid fa-pen"></i></a>
+                        <a class="del" href="/app/del/speaker/<?php out($speaker["id"]); ?>"><i class="fas fa-trash"></i></a>
+                        <a class="download" href="/app/download/speaker/<?php out($speaker["id"]); ?>"><i class="fas fa-file-download"></i></a>
+                    </td>
+                </tr>
+
+        <?php } ?>
     </tbody>
     </table>
 </div>
@@ -59,7 +77,7 @@ Partials::Header(true, true);
 <script src="/node_modules\jquery\dist\jquery.min.js"></script>
 <script>
 $(document).ready(function() {
-    $("#search_brand").on("keyup", function() {
+    $("#search").on("keyup", function() {
         var value = $(this).val().toLowerCase();
         $(".table tbody tr").filter(function() {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
