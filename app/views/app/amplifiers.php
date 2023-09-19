@@ -6,17 +6,17 @@ Partials::Open();
 Partials::Header(true, true);
 ?>
 
-<h3>Amplifiers</h3>
+<h3><?php Translator::translate("amplifiers.amplifiers"); ?></h3>
 
 <div class="toolbar">
     <ul>
-        <li><a href="/app/new/amplifier">New Amplifier</a></li>
+        <li><a href="/app/new/amplifier"><?php Translator::translate("amplifiers.new_amplifier"); ?></a></li>
     </ul>
 </div>
 
 <div class="toolbar-search">
     <ul>
-        <li><input class="form-input table-custom-search" type="search" id="search_brand" placeholder="Search Brand..."></li>
+        <li><input class="form-input table-custom-search" type="search" id="search_brand" placeholder="<?php Translator::translate("amplifiers.search"); ?>..."></li>
     </ul>
 </div>
 
@@ -24,16 +24,16 @@ Partials::Header(true, true);
     <table class="table">
     <thead>
         <tr>
-            <th>Brand</th>
-            <th>Model</th>
-            <th>Channels</th>
-            <th>Power @ 8Ω</th>
-            <th>Power @ 4Ω</th>
-            <th>Power @ 2Ω</th>
-            <th>Power Bridge @ 8Ω</th>
-            <th>Power Bridge @ 4Ω</th>
-            <th>Contributors</th>
-            <th>Actions</th>
+            <th><?php Translator::translate("amplifiers.brand"); ?></th>
+            <th><?php Translator::translate("amplifiers.model"); ?></th>
+            <th><?php Translator::translate("amplifiers.channels"); ?></th>
+            <th><?php Translator::translate("amplifiers.power"); ?> @ 8Ω</th>
+            <th><?php Translator::translate("amplifiers.power"); ?> @ 4Ω</th>
+            <th><?php Translator::translate("amplifiers.power"); ?> @ 2Ω</th>
+            <th><?php Translator::translate("amplifiers.power_bridge"); ?> @ 8Ω</th>
+            <th><?php Translator::translate("amplifiers.power_bridge"); ?> @ 4Ω</th>
+            <th><?php Translator::translate("amplifiers.contributor"); ?></th>
+            <th><?php Translator::translate("amplifiers.actions"); ?></th>
         </tr>
     </thead>
     <tbody>
