@@ -70,14 +70,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             <p>Something went wrong during registration.</p>
         </div>
 
-        <h3>Register</h3>
+        <h3><?php Translator::translate("register.register"); ?></h3>
         <form name="Register" method="post" action="/register">
         <div class="form-group">
             <div class="register-form">
-                <input class="form-input" type="name" id="name" name="name" value="<?php out($name) ?>" placeholder="Name">
-                <input class="form-input" type="email" id="mail" name="mail" value="<?php out($mail) ?>" placeholder="E-Mail">
-                <input class="form-input" type="password" id="password" name="password" placeholder="Password">
-                <button class="btn btn-primary input-group-btn">Register</button>
+                <input class="form-input" type="name" id="name" name="name" value="<?php out($name) ?>" placeholder="<?php Translator::translate("register.name"); ?>">
+                <input class="form-input" type="email" id="mail" name="mail" value="<?php out($mail) ?>" placeholder="<?php Translator::translate("register.email"); ?>">
+                <input class="form-input" type="password" id="password" name="password" placeholder="<?php Translator::translate("register.password"); ?>">
+                <button class="btn btn-primary input-group-btn"><?php Translator::translate("register.register"); ?></button>
             </div>
         </div>
         </form>
@@ -90,14 +90,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     ?>
 
-    <h3>Register</h3>
+    <h3><?php Translator::translate("register.register"); ?></h3>
     <form name="Register" method="post" action="/register">
     <div class="form-group">
         <div class="register-form">
-        <input class="form-input" type="name" id="name" name="name" placeholder="Name">
-                <input class="form-input" type="email" id="mail" name="mail" placeholder="E-Mail">
-                <input class="form-input" type="password" id="password" name="password" placeholder="Password">
-            <button class="btn btn-primary input-group-btn">Register</button>
+        <input class="form-input" type="name" id="name" name="name" placeholder="<?php Translator::translate("register.name"); ?>">
+                <input class="form-input" type="email" id="mail" name="mail" placeholder="<?php Translator::translate("register.email"); ?>">
+                <input class="form-input" type="password" id="password" name="password" placeholder="<?php Translator::translate("register.password"); ?>">
+            <button class="btn btn-primary input-group-btn"><?php Translator::translate("register.register"); ?></button>
         </div>
     </div>
     </form>
