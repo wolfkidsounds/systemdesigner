@@ -6,17 +6,17 @@ Partials::Open();
 Partials::Header(true, true);
 ?>
 
-<h3>Brands</h3>
+<h3><?php Translator::translate("brands.brands"); ?></h3>
 
 <div class="toolbar">
     <ul>
-        <li><a href="/app/new/brand">New Brand</a></li>
+        <li><a href="/app/new/brand"><?php Translator::translate("brands.new_brand"); ?></a></li>
     </ul>
 </div>
 
 <div class="toolbar-search">
     <ul>
-        <li><input class="form-input table-custom-search" type="search" id="search_brand" placeholder="Search Brand..."></li>
+        <li><input class="form-input table-custom-search" type="search" id="search_brand" placeholder="<?php Translator::translate("brands.search"); ?>..."></li>
     </ul>
 </div>
 
@@ -24,9 +24,9 @@ Partials::Header(true, true);
     <table class="table">
     <thead>
         <tr>
-            <th>Brand</th>
-            <th>Contributor</th>
-            <th>Actions</th>
+            <th><?php Translator::translate("brands.brand"); ?></th>
+            <th><?php Translator::translate("brands.contributor"); ?></th>
+            <th><?php Translator::translate("brands.actions"); ?></th>
         </tr>
     </thead>
     <tbody>
