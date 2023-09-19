@@ -35,4 +35,5 @@ class Functions {
             session_start();
         }
     }
+    
 }
