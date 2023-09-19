@@ -6,17 +6,17 @@ Partials::Open();
 Partials::Header(true, true);
 ?>
 
-<h3>Processors (DSP)</h3>
+<h3><?php Translator::translate("processors.processors"); ?></h3>
 
 <div class="toolbar">
     <ul>
-        <li><a href="/app/new/processor">New Processor</a></li>
+        <li><a href="/app/new/processor"><?php Translator::translate("processors.new"); ?></a></li>
     </ul>
 </div>
 
 <div class="toolbar-search">
     <ul>
-        <li><input class="form-input table-custom-search" type="search" id="search_brand" placeholder="Search Brand..."></li>
+        <li><input class="form-input table-custom-search" type="search" id="search" placeholder="<?php Translator::translate("processors.search"); ?>..."></li>
     </ul>
 </div>
 
@@ -24,13 +24,13 @@ Partials::Header(true, true);
     <table class="table">
     <thead>
         <tr>
-            <th>Brand</th>
-            <th>Model</th>
-            <th>Inputs</th>
-            <th>Outputs</th>
-            <th>Offset</th>
-            <th>Contributor</th>
-            <th>Actions</th>
+            <th><?php Translator::translate("processors.brand"); ?></th>
+            <th><?php Translator::translate("processors.model"); ?></th>
+            <th><?php Translator::translate("processors.inputs"); ?></th>
+            <th><?php Translator::translate("processors.outputs"); ?></th>
+            <th><?php Translator::translate("processors.offset"); ?></th>
+            <th><?php Translator::translate("processors.contributors"); ?></th>
+            <th><?php Translator::translate("processors.actions"); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -40,19 +40,19 @@ Partials::Header(true, true);
                 <tr>
                     <td>
                         <?php
-                            $brand_id = $processor["brand_id"];
+                            $brand_id = $processor["proc_brand_id"];
                             $brand = Functions::Brands()->getBrand($brand_id);
                             $brand_name = $brand["brand_name"];
                             out($brand_name); 
                         ?>
                     </td>
-                    <td><?php out($processor["model_name"]); ?></td>
-                    <td><?php out($processor["inputs"]); ?></td>
-                    <td><?php out($processor["outputs"]); ?></td>
-                    <td><?php out($processor["offset"]); ?></td>
+                    <td><?php out($processor["proc_model_name"]); ?></td>
+                    <td><?php out($processor["proc_inputs"]); ?></td>
+                    <td><?php out($processor["proc_outputs"]); ?></td>
+                    <td><?php out($processor["proc_offset"]); ?></td>
                     <td>
                         <?php
-                            $user_id = $processor["user_id"];
+                            $user_id = $processor["proc_user_id"];
                             $user = Functions::Users()->getUser($user_id);
                             $user_name = $user["user_name"];
                             out($user_name); 
@@ -73,7 +73,7 @@ Partials::Header(true, true);
 <script src="/node_modules\jquery\dist\jquery.min.js"></script>
 <script>
 $(document).ready(function() {
-    $("#search_brand").on("keyup", function() {
+    $("#search").on("keyup", function() {
         var value = $(this).val().toLowerCase();
         $(".table tbody tr").filter(function() {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
