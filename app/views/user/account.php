@@ -15,7 +15,7 @@ Partials::Header(true, true);
 
 <div class="toolbar">
     <ul>
-        <li><a href="/logout">Logout</a></li>
+        <li><a href="/logout"><?php Translator::translate("account.logout"); ?></a></li>
     </ul>
 </div>
 
@@ -23,8 +23,8 @@ Partials::Header(true, true);
     <table class="table">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>E-Mail</th>
+            <th><?php Translator::translate("account.name"); ?></th>
+            <th><?php Translator::translate("account.email"); ?></th>
         </tr>
     </thead>
     <tbody>
