@@ -9,7 +9,7 @@ class Processors {
         $current_user = $_SESSION["user_id"];
 
         $db = new Database();
-        $brands = $db->query("SELECT * FROM processor WHERE user_id = ? OR user_id = ?", array($main_user, $current_user))->fetchAll();
+        $brands = $db->query("SELECT * FROM processor WHERE proc_user_id = ? OR proc_user_id = ?", array($main_user, $current_user))->fetchAll();
         return $brands;
     }
 
@@ -38,17 +38,11 @@ class Processors {
         Functions::startSession();
 
         $db = new Database();
-        $query = "INSERT INTO processor (brand_name, user_id, model_name, inputs, outputs, offset) VALUES (?, ?, ?, ?, ?, ?)";
-        $result = $db->query($query, $brand_name, $_SESSION["user_id"], $model_name, $inputs, $outputs, $offset);
-        
-        if ($result) {
-            $db->close();
-            return true;
-        }
-        
+        $query = "INSERT INTO processor (proc_user_id, proc_brand_id, proc_model_name, proc_inputs, proc_outputs, proc_offset) VALUES (?, ?, ?, ?, ?, ?)";   
+        $db->query($query, $_SESSION["user_id"], $brand_name,  $model_name, $inputs, $outputs, $offset);
         $db->close();
-        return false;
     }
+    
 
     /**
      * Updates a brand
