@@ -16,4 +16,9 @@ class Modules {
         require_once __DIR__ . "/module_modal.php";
         return new Modals();
     }
+
+    public static function Features() {
+        require_once __DIR__ . "/module_features.php";
+        return new Features();
+    }
 }
