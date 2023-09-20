@@ -9,21 +9,38 @@ Partials::Header(true, true);
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
-    $brand_name = $_POST['brand_name'];
-    $model_name = $_POST['model_name'];
+    $brand_id = $_POST['brand_id'];
+    $name = $_POST['name'];
     $inputs = $_POST['inputs'];
     $outputs = $_POST['outputs'];
     $offset = $_POST['offset'];
+    $manual = $_FILES['manual']['tmp_name'];
+    $brand = Functions::Brands()->get($brand_id);
+    $brand_name = $brand["name"];
+    $upload_directory = "/uploads/";
 
-    Functions::Processors()->registerProcessor($brand_name, $model_name, $inputs, $outputs, $offset);
+    $user_id = Functions::Users()->getUserID();
+    $id = Functions::Processors()->set($user_id);
+    Functions::Processors()->setBrand($id, $brand_id);
+    Functions::Processors()->setName($id, $name);
+    Functions::Processors()->setInputs($id, $inputs);
+    Functions::Processors()->setOutputs($id, $outputs);
+    Functions::Processors()->setOffset($id, $offset);
+    $filename = $brand_name . "_-_" . $name . ".pdf";
+    $destination = $_SERVER['DOCUMENT_ROOT'] . $upload_directory . $filename;
 
+    if (file_exists($destination)) {
+        echo "File already exists.";
+    } else if (move_uploaded_file($_FILES['manual']['tmp_name'], $destination)) {
+        Functions::Processors()->setFile($id, $filename);
+    }
     header("Location: /app/processors");
 
 } else {
 
     ?>
     <h3>New Processor</h3>
-    <form name="new_processor" method="post" action="/app/new/processor">
+    <form name="new_processor" method="post" action="/app/new/processor" enctype="multipart/form-data">
     <div class="form-group">
         <div class="new_processor_form">
             <h3>General</h3>
@@ -32,14 +49,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                     <div class="tooltip tooltip-right" data-tooltip="Select the Brand that Manufacture">
                         <i class="fa-solid fa-question"></i>
                     </div>
-                    <select class="form-select" id="brand_name" name="brand_name">
+                    <select class="form-select" id="brand_id" name="brand_id">
                         <option>Select Brand...</option>
                         <?php 
                     
-                            $brands = Functions::Brands()->getAllBrands();
+                            $brands = Functions::Brands()->getAll();
 
                             foreach ($brands as $brand) { ?>
-                                <option value="<?php out($brand["id"]); ?>"><?php out($brand["brand_name"]); ?></option>
+                                <option value="<?php out($brand["id"]); ?>"><?php out($brand["name"]); ?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -47,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                     <div class="tooltip tooltip-right" data-tooltip="Enter the Model Name">
                         <i class="fa-solid fa-question"></i>
                     </div>
-                    <input class="form-input" type="text" id="model_name" name="model_name" placeholder="Model Name...">
+                    <input class="form-input" type="text" id="name" name="name" placeholder="Model Name...">
                 </div>
             </div>
 
@@ -108,7 +125,16 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                         <span class="input-group-addon addon-sm">dB</span>
                     </div>
                 </div>
-                
+            </div>
+
+            <h6>Documents/Manual</h6>
+            <div class="form-divider">
+                <div class="form-element-tooltip">
+                    <div class="tooltip tooltip-right" data-tooltip="Upload the PDF manual of the amplifier">
+                        <i class="fa-solid fa-question"></i>
+                    </div>
+                    <input class="form-input" type="file" id="manual" name="manual" accept=".pdf">
+                </div>
             </div>
             <button class="btn btn-primary input-group-btn">Register</button>
         </div>
