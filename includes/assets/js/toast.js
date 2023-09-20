@@ -11,7 +11,8 @@ class Toasts {
             numToasts: 0,
             duration: '.5s',
             timing: 'ease',
-            dimOld: true
+            dimOld: true,
+            dismissAfter: '3s'
         };
         this.options = Object.assign(defaults, options);
     }
@@ -252,10 +253,10 @@ class Toasts {
 }
 
 const toasts = new Toasts({
-    offsetX: 20, // 20px
-    offsetY: 20, // 20px
-    gap: 20, // The gap size in pixels between toasts
-    width: 300, // 300px
+    offsetX: 40, // 20px
+    offsetY: 40, // 20px
+    gap: 40, // The gap size in pixels between toasts
+    width: 350, // 300px
     timing: 'ease', // See list of available CSS transition timings
     duration: '.3s', // Transition duration
     dimOld: true, // Dim old notifications while the newest notification stays highlighted
