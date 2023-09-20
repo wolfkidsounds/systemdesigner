@@ -15,6 +15,10 @@ class Functions {
         require_once __DIR__ . "/functions_amplifiers.php";
         return new Amplifiers();
     }
+    public static function Speakers() {
+        require_once __DIR__ . "/functions_speakers.php";
+        return new Speakers();
+    }
     public static function Brands() {
         require_once __DIR__ . "/functions_brands.php";
         return new Brands();
@@ -26,6 +30,10 @@ class Functions {
     public static function Func_Modals() {
         require_once __DIR__ . "/functions_modals.php";
         return new Func_Modals();
+    }
+    public static function Toasts() {
+        require_once __DIR__ . "/functions_toasts.php";
+        return new Toasts();
     }
 
     /**
