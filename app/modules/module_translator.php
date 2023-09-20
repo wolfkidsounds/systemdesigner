@@ -24,6 +24,30 @@ class Translator {
         return out($key);
     }
 
+    public static function translateReturn($key) {
+        $translation_file = Modules::Translator()->getLanguage();
+        //out("getLanguage:" . $translation_file);
+    
+        if (file_exists($translation_file)) {
+            //out("translation exists:" . $translation_file);
+            $translations = require($translation_file);
+
+            if (isset($translations[$key])) {
+                //out("key was set:" . $translations[$key]);
+                return $translations[$key];
+
+            } else {
+                //echo "Translation key '$key' not found in file '$translation_file'.";
+                return $key;
+            }
+
+        } else {
+            echo "Translation file '$translation_file' not found.";
+        }
+        
+        return $key;
+    }
+
     public static function getLanguage() {
         if (!isset($_SESSION['selected_language'])) {
             $lang = $_SESSION['selected_language'] = 'en';
