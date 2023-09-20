@@ -19,14 +19,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         <?php
     }
 
-    Functions::Brands()->updateBrand($brand_id, $brand_name);
+    Functions::Brands()->update($brand_id, $brand_name);
 
     header("Location: /app/brands");
 
 } else {
 
-    $brand = Functions::Brands()->getBrand($brand_id);
-    $brand_name = $brand["brand_name"];
+    $brand = Functions::Brands()->get($brand_id);
+    $brand_name = $brand["name"];
 
     ?>
     <h3>Edit Brand</h3>
