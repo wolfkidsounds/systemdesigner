@@ -11,12 +11,7 @@ Partials::Header(true, true);
 <div class="toolbar">
     <ul>
         <li><a href="/app/new/brand"><?php Translator::translate("brands.new_brand"); ?></a></li>
-    </ul>
-</div>
-
-<div class="toolbar-search">
-    <ul>
-        <li><input class="form-input table-custom-search" type="search" id="search_brand" placeholder="<?php Translator::translate("brands.search"); ?>..."></li>
+        <input class="form-input table-custom-search" type="search" id="search" placeholder="<?php Translator::translate("brands.search"); ?>..."></li>
     </ul>
 </div>
 
@@ -32,11 +27,11 @@ Partials::Header(true, true);
     <tbody>
             <?php 
             
-            $brands = Functions::Brands()->getAllBrands();
+            $brands = Functions::Brands()->getAll();
 
             foreach ($brands as $brand) { ?>
-                <tr>
-                    <td><?php out($brand["brand_name"]); ?></td>
+                <tr data-id="<?php out($brand["id"]); ?>">
+                    <td><?php out($brand["name"]); ?></td>
                     <td>
                         <?php
                             $user_id = $brand["user_id"];
@@ -46,8 +41,8 @@ Partials::Header(true, true);
                         ?>
                     </td>
                     <td>
-                        <a class="edit action-button tooltip" data-tooltip="<?php Translator::translate("brands.edit"); ?>" href="/app/edit/brand/<?php out($brand["id"]); ?>"><i class="fa-solid fa-pen"></i></a>
-                        <a class="del action-button tooltip" data-tooltip="<?php Translator::translate("brands.delete"); ?>" href="/app/del/brand/<?php out($brand["id"]); ?>"><i class="fas fa-trash"></i></a>
+                        <a class="edit action-button tooltip" data-id="<?php out($brand["id"]); ?>" data-tooltip="<?php Translator::translate("brands.edit"); ?>" href="/app/edit/brand/<?php out($brand["id"]); ?>"><i class="fa-solid fa-pen"></i></a>
+                        <a class="del action-button tooltip" data-id="<?php out($brand["id"]); ?>" data-tooltip="<?php Translator::translate("brands.delete"); ?>" href="javascript:void(0);" onclick="deleteBrand(<?php out($brand['id']); ?>);"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
 
@@ -57,17 +52,30 @@ Partials::Header(true, true);
 </div>
 
 <script src="/node_modules\jquery\dist\jquery.min.js"></script>
+<script src="/includes\assets\js\search.js"></script>
 <script>
-    $('table').scrollTableBody();
+function deleteBrand(brandId) {
+  // Add the "loading" class to the button
+  const row = $(`tr[data-id="${brandId}"]`);
+  row.addClass("loading");
 
-    $(document).ready(function() {
-        $("#search_brand").on("keyup", function() {
-            var value = $(this).val().toLowerCase();
-            $(".table tbody tr").filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
+  // Send an AJAX request
+  $.ajax({
+    type: "POST",
+    url: `/app/del/brand/${brandId}`,
+    success: function (response) {
+        $(`tr[data-id="${brandId}"]`).removeClass("loading");
+        $(`tr[data-id="${brandId}"]`).remove();
+        toasts.push({
+            title: '<?php Translator::translate("toast.success"); ?>',
+            content: '<?php Translator::translate("toast.brand.delete.success"); ?>',
+            style: 'success'
         });
-    });
+    },
+    complete: function () {
+        $(`tr[data-id="${brandId}"]`).removeClass("loading");
+    },
+  });
+}
 </script>
-
 <?php Partials::Close(); ?>
