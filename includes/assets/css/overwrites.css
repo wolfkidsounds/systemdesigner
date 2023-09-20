@@ -75,3 +75,23 @@ a:focus {
     backdrop-filter: blur(8px) !important;
     -webkit-backdrop-filter: blur(8px) !important;
 }
+
+.btn.btn-link, .btn.btn-link:visited, a, a:visited, .nav, .nav-item, .nav .nav-item a {
+    background:rgba(255,255,255,.1);
+}
+
+.menu .menu-item>a {
+    color:#3b4351;
+}
+
+.btn.btn-link.active, .btn.btn-link:active, .btn.btn-link:focus, .btn.btn-link:hover {
+    color:#fff;
+}
+
+a.action-button {
+    background:none;
+}
+
+a.action-button:hover {
+    color:#918fe6;
+}
