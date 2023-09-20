@@ -2,33 +2,51 @@
 
 class Features {
     public static function getSpeakerFeature() {
-        return false;
+        //out("Speakers are currently a disabled feature");
+        return true;
     }
     public static function getAmplifierFeature() {
-        return false;
+        //out("Amplifiers are currently a disabled feature");
+        return true;
+    }
+    public static function getLimiterFeature() {
+        //out("Amplifiers are currently a disabled feature");
+        return true;
+    }
+    public static function getProcessorFeature() {
+        //out("Processors are currently a disabled feature");
+        return true;
     }
     public static function getBrandFeature() {
-        return false;
+        //out("Brands are currently a disabled feature");
+        return true;
     }
     public static function getChassisFeature() {
+        //out("Chassis are currently a disabled feature");
         return false;
     }
-    public static function getRacksFeature() {
+    public static function getRackFeature() {
+        //out("Racks are currently a disabled feature");
         return false;
     }
     public static function getConfigurationFeature() {
+        //out("Configurations are currently a disabled feature");
         return false;
     }
     public static function getManagementFeature() {
+        //out("Managements are currently a disabled feature");
         return false;
     }
     public static function getDownloadsFeature() {
+        //out("Downloads are currently a disabled feature");
         return false;
     }
     public static function getUserAccountFeature() {
-        return false;
+        //out("User Accounts are currently a disabled feature");
+        return true;
     }
     public static function getUserRegisterFeature() {
+        //out("User Registration are currently a disabled feature");
         return false;
     }
 
