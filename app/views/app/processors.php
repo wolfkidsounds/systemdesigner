@@ -11,11 +11,6 @@ Partials::Header(true, true);
 <div class="toolbar">
     <ul>
         <li><a href="/app/new/processor"><?php Translator::translate("processors.new"); ?></a></li>
-    </ul>
-</div>
-
-<div class="toolbar-search">
-    <ul>
         <li><input class="form-input table-custom-search" type="search" id="search" placeholder="<?php Translator::translate("processors.search"); ?>..."></li>
     </ul>
 </div>
@@ -35,24 +30,29 @@ Partials::Header(true, true);
     </thead>
     <tbody>
         <?php 
-            $processors = Functions::Processors()->getAllProcessors();
+            $processors = Functions::Processors()->getAll();
             foreach ($processors as $processor) { ?>
-                <tr>
+                <tr data-id="<?php out($processor["id"]); ?>">
                     <td>
                         <?php
-                            $brand_id = $processor["proc_brand_id"];
-                            $brand = Functions::Brands()->getBrand($brand_id);
-                            $brand_name = $brand["brand_name"];
-                            out($brand_name); 
+                            $brand_id = $processor["brand_id"];
+                            $brand = Functions::Brands()->get($brand_id);
+                            if ($brand) {
+                                $brand_name = $brand["name"];
+                                out($brand_name);
+                            } else {
+                                out(Translator::translate("brands.not_found"));
+                            }
+                             
                         ?>
                     </td>
-                    <td><?php out($processor["proc_model_name"]); ?></td>
-                    <td><?php out($processor["proc_inputs"]); ?></td>
-                    <td><?php out($processor["proc_outputs"]); ?></td>
+                    <td><?php out($processor["name"]); ?></td>
+                    <td><?php out($processor["ch_inputs"]); ?></td>
+                    <td><?php out($processor["ch_outputs"]); ?></td>
                     <td><?php out($processor["proc_offset"]); ?></td>
                     <td>
                         <?php
-                            $user_id = $processor["proc_user_id"];
+                            $user_id = $processor["user_id"];
                             $user = Functions::Users()->getUser($user_id);
                             $user_name = $user["user_name"];
                             out($user_name); 
@@ -60,8 +60,8 @@ Partials::Header(true, true);
                     </td>
                     <td>
                         <a class="edit action-button tooltip" data-tooltip="<?php Translator::translate("processors.edit"); ?>" href="/app/edit/processor/<?php out($processor["id"]); ?>"><i class="fa-solid fa-pen"></i></a>
-                        <a class="del action-button tooltip" data-tooltip="<?php Translator::translate("processors.delete"); ?>" href="/app/del/processor/<?php out($processor["id"]); ?>"><i class="fas fa-trash"></i></a>
-                        <a class="download action-button tooltip" data-tooltip="<?php Translator::translate("processors.download_manual"); ?>" href="/app/download/processor/<?php out($processor["id"]); ?>"><i class="fas fa-file-download"></i></a>
+                        <a class="del action-button tooltip" data-id="<?php out($processor["id"]); ?>" data-tooltip="<?php Translator::translate("processors.delete"); ?>" href="javascript:void(0);" onclick="deleteProcessor(<?php out($processor['id']); ?>);"><i class="fas fa-trash"></i></a>
+                        <?php if ($processor["file_attachment"]) { ?> <a download class="download action-button tooltip" data-tooltip="<?php Translator::translate("processors.download_manual"); ?>" href="/uploads/<?php echo $processor["file_attachment"]; ?>"><i class="fas fa-file-download"></i></a><?php } ?>
                     </td>
                 </tr>
 
@@ -71,15 +71,32 @@ Partials::Header(true, true);
 </div>
 
 <script src="/node_modules\jquery\dist\jquery.min.js"></script>
+<script src="/includes\assets\js\search.js"></script>
+
 <script>
-$(document).ready(function() {
-    $("#search").on("keyup", function() {
-        var value = $(this).val().toLowerCase();
-        $(".table tbody tr").filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+function deleteProcessor(processorID) {
+  // Add the "loading" class to the button
+  const row = $(`tr[data-id="${processorID}"]`);
+  row.addClass("loading");
+
+  // Send an AJAX request
+  $.ajax({
+    type: "POST",
+    url: `/app/del/processor/${processorID}`,
+    success: function (response) {
+        $(`tr[data-id="${processorID}"]`).removeClass("loading");
+        $(`tr[data-id="${processorID}"]`).remove();
+        toasts.push({
+            title: '<?php Translator::translate("toast.success"); ?>',
+            content: '<?php Translator::translate("toast.processor.delete.success"); ?>',
+            style: 'success'
         });
-    });
-});
+    },
+    complete: function () {
+        $(`tr[data-id="${processorID}"]`).removeClass("loading");
+    },
+  });
+}
 </script>
 
 <?php Partials::Close(); ?>
