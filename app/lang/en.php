@@ -1,14 +1,40 @@
 <?php
 
 $lang = array(
+    'app.version' => 'Version',
+    'app.changelog' => 'Changelog',
+
+    'login.login' => 'Login',
+    'login.email' => 'Email',
+    'login.password' => 'Password',
+    'login.remember_me' => 'Remember Me',
+    'login.no_account' => "Don't have an account?",
+    'login.register' => 'Register',
+
+    'dashboard.dashboard' => 'Dashboard',
+
+    'navigation.account' => 'Account',
+    'navigation.settings' => 'Settings',
+    'navigation.logout' => 'Logout',
+    
     'sidebar.amplifiers' => 'Amplifiers',
     'sidebar.speakers' => 'Speakers',
     'sidebar.chassis' => 'Chassis',
     'sidebar.processors' => 'Processors',
     'sidebar.brands' => 'Brands',
-    'sidebar.setups' => 'Setups',
+    'sidebar.racks' => 'Racks',
     'sidebar.configurations' => 'Configurations',
     'sidebar.management' => 'Management',
+    'sidebar.limiters' => 'Limiters',
+
+    'brands.brands' => 'Brands',
+    'brands.new_brand' => 'New Brand',
+    'brands.search' => 'Search',
+    'brands.brand' => 'Brand',
+    'brands.contributor' => 'Contributor',
+    'brands.actions' => 'Actions',
+    'brands.edit' => 'Edit',
+    'brands.delete' => 'Delete',
 
     'amplifiers.amplifiers' => 'Amplifiers',
     'amplifiers.new_amplifier' => 'New Amplifier',
@@ -48,7 +74,7 @@ $lang = array(
     'show_registered_speakers' => 'Show Pre-Registered Speakers',
     'show_registered_chassis' => 'Show Pre-Registered Chassis',
     'show_registered_brands' => 'Show Pre-Registered Brands',
-    'show_registered_processors' => 'Show Pre-Registered Processors'
+    'show_registered_processors' => 'Show Pre-Registered Processors',   
 
 );
 
