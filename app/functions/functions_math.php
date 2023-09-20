@@ -14,4 +14,36 @@ class Math {
         if ($bandwidth == "hf") { return $hf; }
         if ($bandwidth == "fr") { return $fr; }
     }
+
+    public static function Vclip() {
+
+    }
+
+    public static function Vpeak() {
+
+    }
+
+    public static function Vrms() {
+
+    }
+
+    public static function Vgain() {
+        
+
+    }
+
+    public static function Lim_Clip($v_clip, $v_input, $v_gain) {
+        20*LOG10($v_clip/$v_input)-$v_gain;
+
+    }
+
+    public static function Lim_Peak($v_peak, $v_input, $v_gain) {
+        20*LOG10($v_peak/$v_input)-$v_gain;
+        
+    }
+
+    public static function Lim_Rms($v_rms, $v_input, $v_gain) {
+        20*LOG10($v_rms/$v_input)-$v_gain;
+        
+    }
 }
