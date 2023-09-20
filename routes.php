@@ -25,8 +25,10 @@ post('/login', function () { Modules::Views()->Login(); });
 get('/logout', function () { Modules::Views()->Logout(); });
 
 //Register Routes
-get('/register', function () { Modules::Views()->Register(); });
-post('/register', function () { Modules::Views()->Register(); });
+if (Modules::Features()->getUserRegisterFeature()) {
+  get('/register', function () { Modules::Views()->Register(); });
+  post('/register', function () { Modules::Views()->Register(); });
+}
 
 // Dashboard Routes
 get('/app', function () { Modules::Views()->App_Dashboard(); });
