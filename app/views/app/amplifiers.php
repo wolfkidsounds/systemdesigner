@@ -11,12 +11,7 @@ Partials::Header(true, true);
 <div class="toolbar">
     <ul>
         <li><a href="/app/new/amplifier"><?php Translator::translate("amplifiers.new_amplifier"); ?></a></li>
-    </ul>
-</div>
-
-<div class="toolbar-search">
-    <ul>
-        <li><input class="form-input table-custom-search" type="search" id="search_brand" placeholder="<?php Translator::translate("amplifiers.search"); ?>..."></li>
+        <li><input class="form-input table-custom-search" type="search" id="search" placeholder="<?php Translator::translate("amplifiers.search"); ?>..."></li>
     </ul>
 </div>
 
@@ -79,15 +74,6 @@ Partials::Header(true, true);
 </div>
 
 <script src="/node_modules\jquery\dist\jquery.min.js"></script>
-<script>
-$(document).ready(function() {
-    $("#search_brand").on("keyup", function() {
-        var value = $(this).val().toLowerCase();
-        $(".table tbody tr").filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
-    });
-});
-</script>
+<script src="/includes\assets\js\search.js"></script>
 
 <?php Partials::Close(); ?>
