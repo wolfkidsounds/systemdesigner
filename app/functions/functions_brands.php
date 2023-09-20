@@ -1,86 +1,76 @@
 <?php //functions_brands.php
 
 class Brands {
-
-    /**
-     * Returns all brands for admin_user and current_user
-     *
-     * @return $brands
-     */
-    public static function getAllBrands() {
+    public static function getAll() {
         Functions::startSession();
 
+        $load_all = Functions::Users()->getSetting("show_registered_brands");
         $main_user = 1;
-        $current_user = $_SESSION["user_id"];
-
+        $current_user = Functions::Users()->getUserID();
         $db = new Database();
-        $brands = $db->query("SELECT * FROM brand WHERE user_id = ? OR user_id = ?", array($main_user, $current_user))->fetchAll();
+
+        if (isset($load_all) && $load_all == true) { $brands = $db->query("SELECT * FROM brand WHERE user_id = ? OR user_id = ?", array($main_user, $current_user))->fetchAll(); }
+        else { $brands = $db->query("SELECT * FROM brand WHERE user_id = ?", array($current_user))->fetchAll(); }
         return $brands;
     }
 
-    public static function getBrand($brand_id) {
+    public static function count() {
+        Functions::startSession();
+        $current_user = Functions::Users()->getUserID();
+        $db = new Database();
+        $brands = $db->query("SELECT * FROM brand WHERE user_id = ?", array($current_user));
+        return $brands->numRows();
+    }
+
+    public static function get($id) {
         $db = new Database();
         $query = "SELECT * FROM brand WHERE id = ?";
-        $brand = $db->query($query, $brand_id)->fetchArray();
+        $brand = $db->query($query, $id)->fetchArray();
         return $brand;
     }
 
-    /**
-     * Checks if a Brand Name already exists
-     *
-     * @param [type] $brand_name
-     * @return true if already exists, false otherwise
-     */
-    public static function checkBrand($brand_name) {
+    public static function check($name) {
         $db = new Database();
-        $query = "SELECT COUNT(*) AS count FROM brand WHERE brand_name = ?";
-        $exists = $db->query($query, $brand_name)->fetchArray()['count'] > 0;
+        $query = "SELECT COUNT(*) AS count FROM brand WHERE name = ?";
+        $exists = $db->query($query, $name)->fetchArray()['count'] > 0;
         
         if ($exists) {
             $db->close();
             return true;
         }
+        
         $db->close();
         return false;
     }
 
-    /**
-     * Registers a new brand
-     *
-     * @param [type] $brand_name
-     * @return true if successfully registered, false otherwise
-     */
-    public static function registerBrand($brand_name) {
+    public static function set($name) {
         Functions::startSession();
 
-        if (Functions::Brands()->checkBrand($brand_name)) {
+        if (Functions::Brands()->check($name)) {
             header("Location: /app/brands");
             exit();
         }
 
         $db = new Database();
-        $query = "INSERT INTO brand (brand_name, user_id) VALUES (?, ?)";
-        $result = $db->query($query, $brand_name, $_SESSION["user_id"]);
-        
-        if ($result) {
-            $db->close();
-            return true;
-        }
-        
-        $db->close();
-        return false;
+        $query = "INSERT INTO brand (name, user_id) VALUES (?, ?)";
+        $result = $db->query($query, $name, $_SESSION["user_id"]);
+        return $result;
     }
 
-    /**
-     * Updates a brand
-     *
-     * @param [type] $brand_id
-     * @param [type] $brand_name
-     * @return void
-     */
-    public static function updateBrand($brand_id, $brand_name) {
+    public static function update($brand_id, $name) {
         $db = new Database();
-        $query = "UPDATE brand SET brand_name = ? WHERE id = ?";
-        $db->query($query, $brand_name, $brand_id);
+        $query = "UPDATE brand SET name = ? WHERE id = ?";
+        $db->query($query, $name, $brand_id);
+    }
+
+    public static function delete($brand_id) {
+        $db = new Database();
+        $query = "DELETE FROM brand WHERE id = ?";
+        $result = $db->query($query, $brand_id);
+        if ($result) {
+            return json_encode(["success" => true]);
+        } else {
+            return json_encode(["success" => false]);
+        }
     }
 }
