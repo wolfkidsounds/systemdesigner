@@ -67,9 +67,9 @@ Partials::Header(true, true);
                         ?>
                     </td>
                     <td>
-                        <a class="edit" href="/app/edit/amplifier/<?php out($amplifier["id"]); ?>"><i class="fa-solid fa-pen"></i></a>
-                        <a class="del" href="/app/del/amplifier/<?php out($amplifier["id"]); ?>"><i class="fas fa-trash"></i></a>
-                        <a class="download" href="/app/download/amplifier/<?php out($amplifier["id"]); ?>"><i class="fas fa-file-download"></i></a>
+                        <a class="edit action-button tooltip" data-tooltip="<?php Translator::translate("amplifiers.edit"); ?>" href="/app/edit/amplifier/<?php out($amplifier["id"]); ?>"><i class="fa-solid fa-pen"></i></a>
+                        <a class="del action-button tooltip" data-tooltip="<?php Translator::translate("amplifiers.delete"); ?>" href="/app/del/amplifier/<?php out($amplifier["id"]); ?>"><i class="fas fa-trash"></i></a>
+                        <a class="download action-button tooltip" data-tooltip="<?php Translator::translate("amplifiers.download_manual"); ?>" href="/app/download/amplifier/<?php out($amplifier["id"]); ?>"><i class="fas fa-file-download"></i></a>
                     </td>
                 </tr>
 

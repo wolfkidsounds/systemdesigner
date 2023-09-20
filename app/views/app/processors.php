@@ -59,9 +59,9 @@ Partials::Header(true, true);
                         ?>
                     </td>
                     <td>
-                        <a class="edit" href="/app/edit/processor/<?php out($processor["id"]); ?>"><i class="fa-solid fa-pen"></i></a>
-                        <a class="del" href="/app/del/processor/<?php out($processor["id"]); ?>"><i class="fas fa-trash"></i></a>
-                        <a class="download" href="/app/download/processor/<?php out($processor["id"]); ?>"><i class="fas fa-file-download"></i></a>
+                        <a class="edit action-button tooltip" data-tooltip="<?php Translator::translate("processors.edit"); ?>" href="/app/edit/processor/<?php out($processor["id"]); ?>"><i class="fa-solid fa-pen"></i></a>
+                        <a class="del action-button tooltip" data-tooltip="<?php Translator::translate("processors.delete"); ?>" href="/app/del/processor/<?php out($processor["id"]); ?>"><i class="fas fa-trash"></i></a>
+                        <a class="download action-button tooltip" data-tooltip="<?php Translator::translate("processors.download_manual"); ?>" href="/app/download/processor/<?php out($processor["id"]); ?>"><i class="fas fa-file-download"></i></a>
                     </td>
                 </tr>
 

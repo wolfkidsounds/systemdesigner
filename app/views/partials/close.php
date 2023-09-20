@@ -1,5 +1,5 @@
 </div>
-
+<div id="modal-wrapper"></div>
 <?php require_once __DIR__ . "/scripts.php" ?>
 
 <!-- Language Selector

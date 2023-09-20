@@ -46,8 +46,8 @@ Partials::Header(true, true);
                         ?>
                     </td>
                     <td>
-                        <a class="edit" href="/app/edit/brand/<?php out($brand["id"]); ?>"><i class="fas fa-pen"></i></a>
-                        <a class="del" href="/app/del/brand/<?php out($brand["id"]); ?>"><i class="fas fa-trash"></i></a>
+                        <a class="edit action-button tooltip" data-tooltip="<?php Translator::translate("brands.edit"); ?>" href="/app/edit/brand/<?php out($brand["id"]); ?>"><i class="fa-solid fa-pen"></i></a>
+                        <a class="del action-button tooltip" data-tooltip="<?php Translator::translate("brands.delete"); ?>" href="/app/del/brand/<?php out($brand["id"]); ?>"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
 

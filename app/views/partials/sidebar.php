@@ -22,7 +22,7 @@ if (!Functions::Users()->checkLogin()) {
         </li>
         <div class="horizontal-divider"></div>
         <li class="nav-item">
-            <a href="/app/processors"><?php Translator::translate("sidebar.processor"); ?></a>
+            <a href="/app/processors"><?php Translator::translate("sidebar.processors"); ?></a>
         </li>
         <div class="horizontal-divider"></div>
         <li class="nav-item">
@@ -33,7 +33,7 @@ if (!Functions::Users()->checkLogin()) {
             <a href="/app/setups"><?php Translator::translate("sidebar.setups"); ?></a>
         </li>
         <li class="nav-item">
-            <a href="/app/configurations"><?php Translator::translate("sidebar.configuration"); ?></a>
+            <a href="/app/configurations"><?php Translator::translate("sidebar.configurations"); ?></a>
         </li>
         <li class="nav-item">
             <a href="/app/management"><?php Translator::translate("sidebar.management"); ?></a>
