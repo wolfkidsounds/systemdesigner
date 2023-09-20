@@ -1,0 +1,16 @@
+
+VERSION 0.0.4-alpha (WIP)
+- Implemented Versioning system
+- Added Translation Support
+
+VERSION 0.0.3-alpha
+- Implemented "Processors" Module
+- Fixed Visual glitches
+- Searching Tables is now possible
+
+VERSION 0.0.2-alpha
+- Implemented "Brands" Module
+- File Uploads for Processors
+
+VERSION 0.0.1-alpha
+- Initial Alpha
