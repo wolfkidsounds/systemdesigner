@@ -5,11 +5,16 @@ class Amplifiers {
     public static function getAllAmplifiers() {
         Functions::startSession();
 
+        $load_all = Functions::Users()->getSetting("show_registered_amplifiers");
         $main_user = 1;
-        $current_user = $_SESSION["user_id"];
-
+        $current_user = Functions::Users()->getUserID();
         $db = new Database();
-        $amplifiers = $db->query("SELECT * FROM amplifier WHERE user_id = ? OR user_id = ?", array($main_user, $current_user))->fetchAll();
+
+        if (isset($load_all) && $load_all == true) {
+            $amplifiers = $db->query("SELECT * FROM amplifier WHERE user_id = ? OR user_id = ?", array($main_user, $current_user))->fetchAll();
+        } else {
+            $amplifiers = $db->query("SELECT * FROM amplifier WHERE user_id = ?", array($current_user))->fetchAll();
+        }
         return $amplifiers;
     }
 

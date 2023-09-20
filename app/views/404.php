@@ -1,3 +1,3 @@
 <?php //404.php
 
-out("404 - Not Found");
+Translator::translate("404");

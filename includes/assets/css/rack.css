@@ -1,0 +1,214 @@
+:root {
+    --rack-height:40px;
+}
+
+.rack-container {
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap:40px;
+    padding:10px;
+}
+
+.rack {
+    margin-top:10px;
+    width:100%;
+    border-radius:6px;
+    background:rgba(255,255,255,.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.rack-name,
+.slot-title {
+    margin:0px;
+    padding:6px;
+    text-align:center;
+}
+
+.rack-name {
+    background:rgba(255,255,255,.8);
+    color:#000;
+    border-radius: 6px 6px 0px 0px;
+}
+
+.slot-header {
+    border-bottom:1px solid rgba(255,255,255,.4);
+    width:90%;
+    margin-left:5%;
+    padding:4px;
+}
+
+.rack-slot {
+    margin-top:10px;
+    margin-bottom:10px;
+    margin-left:1%;
+    width:98%;
+    border:1px dashed rgba(255,255,255,.3);
+    background:rgba(255,255,255,.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.rack-name p,
+.slot-title p {
+    margin:0px;
+    padding:0px;
+}
+
+.slot-settings {
+    text-align: center;
+    color: rgba(255,255,255,.6);
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.connection-title {
+    padding-left:10px;
+}
+
+.slot-height {
+    height:calc(var(--rack-height) * 3);
+}
+
+.slot-height i {
+    font-size:12px;
+}
+
+.connections {
+    padding:4px;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap:20px;
+}
+
+.slot-input,
+.slot-output {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    border-radius:50%;
+    aspect-ratio:1/1;
+    padding:10px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.slot-inputs,
+.slot-outputs {
+    height:50%;
+    padding:10px;
+}
+
+.slot-input {
+    transition:all .3s ease;
+    background:rgba(0,255,0,.2);
+}
+
+.slot-output {
+    transition:all .3s ease;
+    background:rgba(255,0,0,.2);
+}
+
+.rack-slot.cleared {
+    margin-top:10px;
+    margin-bottom:10px;
+    margin-left:1%;
+    width:98%;
+    border:1px dashed rgba(255,255,255,.3);
+    background:rgba(255,255,255,.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    height:60px !important;
+}
+
+.form-checkbox, .form-radio, .form-switch {
+    margin: 0px !important;
+    min-height: unset !important;
+    padding: 10px !important;
+}
+
+.rack-slot.cleared {
+    transition:all .3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.rack-slot.cleared:hover,
+.slot-option:hover {
+    transform:scale(1.02);
+    background:rgba(255,255,255,.3);
+}
+
+.parallel-mode-active {
+    transition:all .3s ease;
+    opacity: 0.5; /* Adjust opacity as needed */
+    background:rgba(0,255,0,.1);
+}
+
+/* Style for the fine line from 1st to 2nd input in parallel mode */
+.parallel-mode-active::before {
+    transition:all .3s ease;
+    content: '';
+    position: absolute;
+    width: 20px;
+    background-color: #fff;
+    height: 2px;
+    top: 50%;
+    left: -20px;
+    transform: translateY(-50%);
+}
+
+.bridge-mode-active {
+    transition:all .3s ease;
+    opacity: 0.5; /* Adjust opacity as needed */
+    background:rgba(255,0,0,.1);
+}
+
+/* Style for the fine line from 1st to 2nd input in parallel mode */
+.bridge-mode-active::before {
+    transition:all .3s ease;
+    content: '';
+    position: absolute;
+    width: 20px;
+    background-color: #fff;
+    height: 2px;
+    top: 50%;
+    left: -20px;
+    transform: translateY(-50%);
+}
+
+.slot-options {
+    border-top: 1px dashed rgba(255,255,255,.4);
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    width:90%;
+    margin-left:5%;
+}
+
+.slot-option {
+    text-align:center;
+    padding:10px;
+    background:rgba(255,255,255,.1);
+    border-radius:4px;
+    width:100%;
+}
+
+.rack-slot button {
+    width:100%;
+}

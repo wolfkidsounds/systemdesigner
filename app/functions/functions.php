@@ -23,6 +23,10 @@ class Functions {
         require_once __DIR__ . "/functions_processors.php";
         return new Processors();
     }
+    public static function Func_Modals() {
+        require_once __DIR__ . "/functions_modals.php";
+        return new Func_Modals();
+    }
 
     /**
      * Starts a session safely
@@ -35,4 +39,5 @@ class Functions {
             session_start();
         }
     }
+    
 }

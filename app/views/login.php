@@ -2,7 +2,7 @@
 <?php //login.php
 
 require_once ABSPATH . "app/functions/functions.php";
-Functions::Users()->checkRememberMe();
+//Functions::Users()->checkRememberMe();
 
 if (Functions::Users()->checkLogin()) {
     header("Location: /app/dashboard");
@@ -32,25 +32,25 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     }
 
     ?>
-    <h3>Login</h3>
+    <h3><?php Translator::translate("login.login"); ?></h3>
     <form name="login" method="post" action="/login">
     <div class="form-group">
         <div class="login-form">
-            <input class="form-input" type="email" id="email" name="mail" value="<?php out($email) ?>" placeholder="E-Mail">
-            <input class="form-input" type="password" id="Password" name="password" placeholder="Password">
+            <input class="form-input" type="email" id="email" name="mail" value="<?php out($email) ?>" placeholder="<?php Translator::translate("login.email"); ?>">
+            <input class="form-input" type="password" id="Password" name="password" placeholder="<?php Translator::translate("login.password"); ?>">
 
             <label class="form-checkbox">
             <input type="checkbox" id="remember_me" name="remember_me" value="<?php out($remember) ?>">
-                <i class="form-icon"></i> Remember Me
+                <i class="form-icon"></i> <?php Translator::translate("login.remember_me"); ?>
             </label>
 
-            <button class="btn btn-primary input-group-btn">Login</button>
+            <button class="btn btn-primary input-group-btn"><?php Translator::translate("login.login"); ?></button>
         </div>
 
         <div class="horizontal-divider"></div>
         <div class="form-group">
-            <p>Don't have an account?</p>
-            <a class="input-sm" href="/register">Register</a>
+            <p><?php Translator::translate("login.no_account"); ?></p>
+            <a class="input-sm" href="/register"><?php Translator::translate("login.register"); ?></a>
         </div>
 
     </div>
@@ -64,22 +64,22 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 else {
 
     ?>
-    <h3>Login</h3>
+    <h3><?php Translator::translate("login.login"); ?></h3>
     <form name="login" method="post" action="/login">
     <div class="form-group">
         <div class="login-form">
-            <input class="form-input" type="email" id="email" name="mail" placeholder="E-Mail">
-            <input class="form-input" type="password" id="Password" name="password" placeholder="Password">
+            <input class="form-input" type="email" id="email" name="mail" placeholder="<?php Translator::translate("login.email"); ?>">
+            <input class="form-input" type="password" id="Password" name="password" placeholder="<?php Translator::translate("login.password"); ?>">
             <label class="form-checkbox">
                 <input type="checkbox" id="remember_me" name="remember_me">
-                <i class="form-icon"></i> Remember Me
+                <i class="form-icon"></i> <?php Translator::translate("login.remember_me"); ?>
             </label>
-            <button class="btn btn-primary input-group-btn">Login</button>
+            <button class="btn btn-primary input-group-btn"><?php Translator::translate("login.login"); ?></button>
         </div>
         <div class="horizontal-divider"></div>
         <div class="form-group">
-            <p>Don't have an account yet?</p>
-            <a class="input-sm" href="/register">Register</a>
+            <p><?php Translator::translate("login.no_account"); ?></p>
+            <a class="input-sm" href="/register"><?php Translator::translate("login.register"); ?></a>
         </div>
     </div>
 

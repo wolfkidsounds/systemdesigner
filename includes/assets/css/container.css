@@ -1,7 +1,4 @@
 :root {
-    --color-primary:;
-    --color-secondary:;
-    --color-accent:;
     --padding-general:10px;
 }
 
@@ -34,4 +31,10 @@ body {
     margin:0px;
     margin-top:10px;
     margin-bottom:10px;
+}
+
+.language-selector {
+    position:fixed;
+    right:20px;
+    bottom:20px;
 }

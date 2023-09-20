@@ -68,6 +68,19 @@ class Views {
         //out("found App Brand in views");
         require_once(VIEWSPATH . "app/edit/brand.php");
     }
+    public function App_Setups() {
+        //out("found App_Amplifiers in views");
+        require_once(VIEWSPATH . "app/setups.php");
+    }
+    public function App_New_Setup() {
+        //out("found App_Amplifiers in views");
+        require_once(VIEWSPATH . "app/new/setup.php");
+    }
+    public function App_Edit_Setup($amplifier_id) {
+        $amplifier_id = trim($amplifier_id);
+        //out("found App_Amplifiers in views");
+        require_once(VIEWSPATH . "app/edit/setup.php");
+    }
     public function User_Account() {
         //out("found App_Amplifiers in views");
         require_once(VIEWSPATH . "user/account.php");

@@ -6,17 +6,17 @@ Partials::Open();
 Partials::Header(true, true);
 ?>
 
-<h3>Amplifiers</h3>
+<h3><?php Translator::translate("amplifiers.amplifiers"); ?></h3>
 
 <div class="toolbar">
     <ul>
-        <li><a href="/app/new/amplifier">New Amplifier</a></li>
+        <li><a href="/app/new/amplifier"><?php Translator::translate("amplifiers.new_amplifier"); ?></a></li>
     </ul>
 </div>
 
 <div class="toolbar-search">
     <ul>
-        <li><input class="form-input table-custom-search" type="search" id="search_brand" placeholder="Search Brand..."></li>
+        <li><input class="form-input table-custom-search" type="search" id="search_brand" placeholder="<?php Translator::translate("amplifiers.search"); ?>..."></li>
     </ul>
 </div>
 
@@ -24,16 +24,16 @@ Partials::Header(true, true);
     <table class="table">
     <thead>
         <tr>
-            <th>Brand</th>
-            <th>Model</th>
-            <th>Channels</th>
-            <th>Power @ 8Ω</th>
-            <th>Power @ 4Ω</th>
-            <th>Power @ 2Ω</th>
-            <th>Power Bridge @ 8Ω</th>
-            <th>Power Bridge @ 4Ω</th>
-            <th>Contributors</th>
-            <th>Actions</th>
+            <th><?php Translator::translate("amplifiers.brand"); ?></th>
+            <th><?php Translator::translate("amplifiers.model"); ?></th>
+            <th><?php Translator::translate("amplifiers.channels"); ?></th>
+            <th><?php Translator::translate("amplifiers.power"); ?> @ 8Ω</th>
+            <th><?php Translator::translate("amplifiers.power"); ?> @ 4Ω</th>
+            <th><?php Translator::translate("amplifiers.power"); ?> @ 2Ω</th>
+            <th><?php Translator::translate("amplifiers.power_bridge"); ?> @ 8Ω</th>
+            <th><?php Translator::translate("amplifiers.power_bridge"); ?> @ 4Ω</th>
+            <th><?php Translator::translate("amplifiers.contributor"); ?></th>
+            <th><?php Translator::translate("amplifiers.actions"); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -67,9 +67,9 @@ Partials::Header(true, true);
                         ?>
                     </td>
                     <td>
-                        <a class="edit" href="/app/edit/amplifier/<?php out($amplifier["id"]); ?>"><i class="fa-solid fa-pen"></i></a>
-                        <a class="del" href="/app/del/amplifier/<?php out($amplifier["id"]); ?>"><i class="fas fa-trash"></i></a>
-                        <a class="download" href="/app/download/amplifier/<?php out($amplifier["id"]); ?>"><i class="fas fa-file-download"></i></a>
+                        <a class="edit action-button tooltip" data-tooltip="<?php Translator::translate("amplifiers.edit"); ?>" href="/app/edit/amplifier/<?php out($amplifier["id"]); ?>"><i class="fa-solid fa-pen"></i></a>
+                        <a class="del action-button tooltip" data-tooltip="<?php Translator::translate("amplifiers.delete"); ?>" href="/app/del/amplifier/<?php out($amplifier["id"]); ?>"><i class="fas fa-trash"></i></a>
+                        <a class="download action-button tooltip" data-tooltip="<?php Translator::translate("amplifiers.download_manual"); ?>" href="/app/download/amplifier/<?php out($amplifier["id"]); ?>"><i class="fas fa-file-download"></i></a>
                     </td>
                 </tr>
 

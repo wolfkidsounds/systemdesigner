@@ -113,12 +113,75 @@ class Users {
         $result = $db->query($query, $name, $mail, $hashed_password);
         
         if ($result) {
+            $user_id = $db->lastInsertID();
+            Functions::Users()->createSettings($user_id);
+
             $db->close();
             return true;
         }
         
         $db->close();
         return false;
+    }
+
+    public static function getAllSettings($user_id) {
+        $db = new Database();
+        $query = "SELECT * FROM user_settings WHERE user_id = ?";
+        $settings = $db->query($query, $user_id)->fetchAll();
+        return $settings;
+    }
+
+    public static function getSetting($key) {
+        $user_id = Functions::Users()->getUserID();
+        $db = new Database();
+        $query = "SELECT setting_value FROM user_settings WHERE user_id = ? AND setting_key = ?";
+        $setting = $db->query($query, $user_id, $key)->fetchArray();
+        return $setting;
+    }
+
+    public static function setSetting() {
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $data = json_decode(file_get_contents("php://input"));
+            $key = $data->optionName;
+            $value = $data->isChecked;
+            $user_id = Functions::Users()->getUserID();
+
+            if (isset($value) && $value == "checked") {
+                $value = "true";
+
+            } else {
+                $value = "false";
+            }
+            
+            $db = new Database();
+            $query = "UPDATE user_settings SET setting_value = ? WHERE user_id = ? AND setting_key = ?";
+            $result = $db->query($query, $value, $user_id, $key);
+            $db->close();
+
+            return $result;
+        }
+    }
+
+    public static function createSettings($user_id) {
+        $db = new Database();
+        $settings = array (
+            'show_registered_amplifiers' => 'true',
+            'show_registered_speaker' => 'true',
+            'show_registered_chassis' => 'true',
+            'show_registered_brands' => 'true',
+            'show_registered_processors' => 'true'
+        );
+
+        foreach ($settings as $setting_key => $setting_value) {
+            $query = "INSERT INTO user_settings (user_id, setting_key, setting_value) VALUES (?, ?, ?)";
+            $db->query($query, $user_id, $setting_key, $setting_value);
+        }
+
+        $db->close();
+    }
+
+    public static function getUserID() {
+        return $_SESSION["user_id"];
     }
 
     // public static function checkRememberMe() {

@@ -10,4 +10,10 @@ class Modules {
         require_once __DIR__ . "/module_translator.php";
         return new Translator();
     }
+
+    public static function Modals() {
+        //out("found translator in modules");
+        require_once __DIR__ . "/module_modal.php";
+        return new Modals();
+    }
 }

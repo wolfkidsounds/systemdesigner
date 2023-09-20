@@ -66,3 +66,12 @@ table {
 a:focus {
     box-shadow:none;
 }
+
+.action-button {
+    margin-right:10px;
+}
+
+.modal.active .modal-overlay, .modal:target .modal-overlay {
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+}

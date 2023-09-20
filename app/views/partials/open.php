@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="/includes/assets/css/container.css">
     <link rel="stylesheet" href="/includes/assets/css/overwrites.css">
     <link rel="stylesheet" href="/includes/assets/css/toolbar.css">
+    <link rel="stylesheet" href="/includes\assets\css\chips.css">
+    <link href="/node_modules\select2\dist\css\select2.min.css" rel="stylesheet"/>
   </head>
 
   <body>
