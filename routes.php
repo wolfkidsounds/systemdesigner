@@ -79,7 +79,7 @@ if (Modules::Features()->getSpeakerFeature()) {
   post('/app/new/speaker', function () { Modules::Views()->App_New_Speaker(); });
   get('/app/edit/speaker/$speaker_id', function ($speaker_id) { Modules::Views()->App_Edit_Speaker($speaker_id); });
   post('/app/edit/speaker/$speaker_id', function ($speaker_id) { Modules::Views()->App_Edit_Speaker($speaker_id); });
-  post('/app/del/speaker/$speaker_id', function ($speaker_id) { Functions::Amplifiers()->delete($speaker_id); });
+  post('/app/del/speaker/$speaker_id', function ($speaker_id) { Functions::Speakers()->delete($speaker_id); });
 }
 
 //Racks Routes
