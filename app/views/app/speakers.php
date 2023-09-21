@@ -65,8 +65,10 @@ Partials::Header(true, true);
                         ?>
                     </td>
                     <td>
-                        <a class="edit action-button tooltip" data-tooltip="<?php Translator::translate("speakers.edit"); ?>" href="/app/edit/speaker/<?php out($speaker["id"]); ?>"><i class="fa-solid fa-pen"></i></a>
-                        <a class="del action-button tooltip" data-id="<?php out($speaker["id"]); ?>" data-tooltip="<?php Translator::translate("speakers.delete"); ?>" href="javascript:void(0);" onclick="deleteItem('speaker', <?php out($speaker['id']); ?>);"><i class="fas fa-trash"></i></a>
+                        <?php if (Functions::Users()->getUserID() == $user_id = $speaker["user_id"]) { ?>
+                            <a class="edit action-button tooltip" data-tooltip="<?php Translator::translate("speakers.edit"); ?>" href="/app/edit/speaker/<?php out($speaker["id"]); ?>"><i class="fa-solid fa-pen"></i></a>
+                            <a class="del action-button tooltip" data-id="<?php out($speaker["id"]); ?>" data-tooltip="<?php Translator::translate("speakers.delete"); ?>" href="javascript:void(0);" onclick="deleteItem('speaker', <?php out($speaker['id']); ?>);"><i class="fas fa-trash"></i></a>
+                        <?php } ?>
                     </td>
                 </tr>
 
