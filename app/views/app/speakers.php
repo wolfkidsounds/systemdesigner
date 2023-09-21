@@ -35,6 +35,10 @@ Partials::Header(true, true);
             
             $speakers = Functions::Speakers()->getAll();
 
+            if (!$speakers) {
+                out("No Speakers were found.");
+            }
+
             foreach ($speakers as $speaker) { ?>
                 <tr data-id="<?php out($speaker["id"]); ?>">
                     <td>
