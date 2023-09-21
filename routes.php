@@ -1,6 +1,12 @@
 <?php // routes.php
+use marcocesarato\security\Security;
 
 require_once __DIR__ . '/app_config.php';
+require_once ABSPATH . 'vendor\autoload.php';
+
+$isAPI = false; // default is FALSE (this remove some check that could block API request)
+$security = new Security($isAPI);
+
 require_once ABSPATH . 'includes/inc_loader.php';
 
 if ($loader == false) {
