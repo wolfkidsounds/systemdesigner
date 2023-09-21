@@ -60,7 +60,7 @@ Partials::Header(true, true);
                     </td>
                     <td>
                         <a class="edit action-button tooltip" data-tooltip="<?php Translator::translate("processors.edit"); ?>" href="/app/edit/processor/<?php out($processor["id"]); ?>"><i class="fa-solid fa-pen"></i></a>
-                        <a class="del action-button tooltip" data-id="<?php out($processor["id"]); ?>" data-tooltip="<?php Translator::translate("processors.delete"); ?>" href="javascript:void(0);" onclick="deleteProcessor(<?php out($processor['id']); ?>);"><i class="fas fa-trash"></i></a>
+                        <a class="del action-button tooltip" data-id="<?php out($processor["id"]); ?>" data-tooltip="<?php Translator::translate("processors.delete"); ?>" href="javascript:void(0);" onclick="deleteItem(<?php out($processor['id']); ?>);"><i class="fas fa-trash"></i></a>
                         <?php if ($processor["file_attachment"]) { ?> <a download class="download action-button tooltip" data-tooltip="<?php Translator::translate("processors.download_manual"); ?>" href="/uploads/<?php echo $processor["file_attachment"]; ?>"><i class="fas fa-file-download"></i></a><?php } ?>
                     </td>
                 </tr>
@@ -71,32 +71,7 @@ Partials::Header(true, true);
 </div>
 
 <script src="/node_modules\jquery\dist\jquery.min.js"></script>
-<script src="/includes\assets\js\search.js"></script>
-
-<script>
-function deleteProcessor(processorID) {
-  // Add the "loading" class to the button
-  const row = $(`tr[data-id="${processorID}"]`);
-  row.addClass("loading");
-
-  // Send an AJAX request
-  $.ajax({
-    type: "POST",
-    url: `/app/del/processor/${processorID}`,
-    success: function (response) {
-        $(`tr[data-id="${processorID}"]`).removeClass("loading");
-        $(`tr[data-id="${processorID}"]`).remove();
-        toasts.push({
-            title: '<?php Translator::translate("toast.success"); ?>',
-            content: '<?php Translator::translate("toast.processor.delete.success"); ?>',
-            style: 'success'
-        });
-    },
-    complete: function () {
-        $(`tr[data-id="${processorID}"]`).removeClass("loading");
-    },
-  });
-}
-</script>
+<script src="/includes\assets\js\overviews\search.js"></script>
+<script src="/includes\assets\js\overviews\delete_item.js"></script>
 
 <?php Partials::Close(); ?>
