@@ -8,8 +8,6 @@ class Users {
      * @return true if the user is logged in, false otherwise.
      */
     public static function checkLogin() {
-        Functions::startSession();
-
         if (isset($_SESSION['user_id']) && isset($_SESSION['user_name']) && isset($_SESSION['user_mail'])) {
             return true;
         }   
@@ -28,7 +26,6 @@ class Users {
      * @return true if a user exists, false otherwise
      */
     public static function checkUser($mail) {
-        Functions::startSession();
         $db = new Database();
         $query = "SELECT COUNT(*) AS count FROM user WHERE user_mail = ?";
         $exists = $db->query($query, $mail)->fetchArray()['count'] > 0;
@@ -55,9 +52,7 @@ class Users {
      * @param [type] $password
      * @return boolean if the user was logged in succesfully, false otherwise
      */
-    public static function loginUser($mail, $password, $remember_me) {
-        Functions::startSession();
-       
+    public static function loginUser($mail, $password, $remember_me) {       
         $db = new Database();
         $query = "SELECT id, user_name, user_mail, user_pass FROM user WHERE user_mail = ?";
         $user = $db->query($query, $mail)->fetchArray();
@@ -88,7 +83,6 @@ class Users {
      * @return void
      */
     public static function logoutUser() {
-        Functions::startSession();
         $_SESSION = [];
         session_destroy();
         session_regenerate_id(true);
@@ -105,7 +99,6 @@ class Users {
      * @return true if the user is registered successfully, false otherwise
      */
     public static function registerUser($name, $mail, $password) {
-        Functions::startSession();
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         $db = new Database();
@@ -169,7 +162,8 @@ class Users {
             'show_registered_speakers' => 'true',
             'show_registered_chassis' => 'true',
             'show_registered_brands' => 'true',
-            'show_registered_processors' => 'true'
+            'show_registered_processors' => 'true',
+            'show_registered_limiters' => 'true',
         );
 
         foreach ($settings as $setting_key => $setting_value) {
