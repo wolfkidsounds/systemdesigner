@@ -40,8 +40,10 @@ Partials::Header(true, true);
                         ?>
                     </td>
                     <td>
-                        <a class="edit action-button tooltip" data-id="<?php out($brand["id"]); ?>" data-tooltip="<?php Translator::translate("brands.edit"); ?>" href="/app/edit/brand/<?php out($brand["id"]); ?>"><i class="fa-solid fa-pen"></i></a>
-                        <a class="del action-button tooltip" data-id="<?php out($brand["id"]); ?>" data-tooltip="<?php Translator::translate("brands.delete"); ?>" href="javascript:void(0);" onclick="deleteItem('brand', <?php out($brand['id']); ?>);"><i class="fas fa-trash"></i></a>
+                        <?php if (Functions::Users()->getUserID() == $user_id = $brand["user_id"]) { ?>
+                            <a class="edit action-button tooltip" data-id="<?php out($brand["id"]); ?>" data-tooltip="<?php Translator::translate("brands.edit"); ?>" href="/app/edit/brand/<?php out($brand["id"]); ?>"><i class="fa-solid fa-pen"></i></a>
+                            <a class="del action-button tooltip" data-id="<?php out($brand["id"]); ?>" data-tooltip="<?php Translator::translate("brands.delete"); ?>" href="javascript:void(0);" onclick="deleteItem('brand', <?php out($brand['id']); ?>);"><i class="fas fa-trash"></i></a>
+                        <?php } ?>
                     </td>
                 </tr>
 
