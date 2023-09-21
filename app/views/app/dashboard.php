@@ -13,6 +13,11 @@ $brand_count = Functions::Brands()->count();
 ?>
 <h3><?php Translator::translate("dashboard.dashboard"); ?></h3>
 
+<h4>Current Session Information</h4>
+<?php var_dump($_SESSION); ?>
+<br>
+<br>
+
 <div class="chart amplifiers"><p>You have currently registered <?php out($amplifier_count); ?> Amplifiers.</p></div>
 <div class="chart speakers"><p>You have currently registered <?php out($speaker_count); ?> Speakers.</p></div>
 <div class="chart processor"><p>You have currently registered <?php out($processor_count); ?> Processors.</p></div>
