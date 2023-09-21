@@ -28,6 +28,10 @@ Partials::Header(true, true);
             
             $brands = Functions::Brands()->getAll();
 
+            if (!$brands) {
+                out("No Brands were found.");
+            }
+
             foreach ($brands as $brand) { ?>
                 <tr data-id="<?php out($brand["id"]); ?>">
                     <td><?php out($brand["name"]); ?></td>
