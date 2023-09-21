@@ -17,8 +17,16 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $manual = $_FILES['manual']['tmp_name'];
     $brand = Functions::Brands()->get($brand_id);
     $brand_name = $brand["name"];
-    $upload_directory = "/uploads/";
 
+    $exists = Functions::Processors()->check($brand_id, $name);
+    
+    if ($exists) {
+        header("Location: /app/processors");
+        exit();
+    }
+
+
+    $upload_directory = "/uploads/";
     $user_id = Functions::Users()->getUserID();
     $id = Functions::Processors()->set($user_id);
     Functions::Processors()->setBrand($id, $brand_id);
@@ -34,6 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     } else if (move_uploaded_file($_FILES['manual']['tmp_name'], $destination)) {
         Functions::Processors()->setFile($id, $filename);
     }
+
     header("Location: /app/processors");
 
 } else {
