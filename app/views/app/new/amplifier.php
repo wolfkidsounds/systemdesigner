@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     if (file_exists($destination)) {
         echo "File already exists.";
     } else if (move_uploaded_file($_FILES['manual']['tmp_name'], $destination)) {
-        Functions::Processors()->setFile($id, $filename);
+        Functions::Amplifiers()->setFile($id, $filename);
     }
 
     $power_specifications = [
