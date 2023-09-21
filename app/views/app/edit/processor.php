@@ -16,13 +16,13 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $offset = $_POST['offset'];
     $brand = Functions::Brands()->get($brand_id);
     $brand_name = $brand["name"];
-    $upload_directory = "/uploads/";
     $id = $processor_id;
     Functions::Processors()->setBrand($id, $brand_id);
     Functions::Processors()->setName($id, $name);
     Functions::Processors()->setInputs($id, $inputs);
     Functions::Processors()->setOutputs($id, $outputs);
     Functions::Processors()->setOffset($id, $offset);
+    $upload_directory = "/uploads/";
     $filename = $brand_name . "_-_" . $name . ".pdf";
     $destination = $_SERVER['DOCUMENT_ROOT'] . $upload_directory . $filename;
 
