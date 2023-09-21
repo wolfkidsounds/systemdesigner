@@ -26,11 +26,11 @@ namespace marcocesarato\security;
          *  Change these settings based on your needs
          *********************************************/
 
-        public static $basedir = __DIR__; // Project basedir where is located .htaccess
+        public static $basedir = ABSPATH; // Project basedir where is located .htaccess
         public static $salt = '_SALT'; // Salt for crypt
         public static $session_name = 'XSESSID'; // Session cookie name
         public static $session_lifetime = 288000; // Session lifetime | default = 8 hours
-        public static $session_regenerate_id = false; // Regenerate session id
+        public static $session_regenerate_id = true; // Regenerate session id
         public static $session_database = false; // Store sessions on database
         public static $csrf_session = '_CSRFTOKEN'; // CSRF session token name
         public static $csrf_formtoken = '_FORMTOKEN'; // CSRF form token input name
@@ -42,7 +42,7 @@ namespace marcocesarato\security;
         public static $clean_post_xss = true; // Remove XSS on post global
         public static $compress_output = true; // Compress output
         public static $force_https = false; // Force HTTPS
-        public static $hide_errors = true; // Hide php errors (useful for hide vulnerabilities)
+        public static $hide_errors = false; // Hide php errors (useful for hide vulnerabilities)
         public static $database; // \PDO instance
 
         // Autostart
@@ -51,7 +51,7 @@ namespace marcocesarato\security;
 
         public static $auto_block_tor = true; // If you want block TOR clients
         public static $auto_csrf = false; // If you want enable CSRF (need use output method)
-        public static $auto_clean_global = false; // Global clean at start
+        public static $auto_clean_global = true; // Global clean at start
         public static $auto_antidos = true; // Block the client ip when there are too many requests
 
         // Error Template
