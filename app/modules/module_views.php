@@ -81,4 +81,16 @@ class Views {
         $speaker_id = trim($speaker_id);
         require_once(VIEWSPATH . "app/edit/speaker.php");
     }
+
+    //Limiters
+    public function App_Limiters() {
+        require_once(VIEWSPATH . "app/limiters.php");
+    }
+    public function App_New_Limiter() {
+        require_once(VIEWSPATH . "app/new/limiter.php");
+    }
+    public function App_Edit_Limiter($limiter_id) {
+        $limiter_id = trim($limiter_id);
+        require_once(VIEWSPATH . "app/edit/limiter.php");
+    }
 }
