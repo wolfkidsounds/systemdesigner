@@ -9,16 +9,16 @@ Partials::Header(true, true);
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
-    $brand_name = $_POST['brand_name'];
+    $name = $_POST['name'];
 
     $exists = Functions::Brands()->check($name);
     if ($exists) {
-        header("Location: /app/processors");
+        header("Location: /app/brands");
         exit();
     }
 
-    if (Functions::Forms()->checkEmptyFields($brand_name)) {
-        Functions::Brands()->set($brand_name);
+    if (Functions::Forms()->checkEmptyFields($name)) {
+        Functions::Brands()->set($name);
     }
 
 } else {
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     <form name="new_brand" method="post" action="/app/new/brand">
     <div class="form-group">
         <div class="new_brand_form">
-            <input class="form-input" type="text" id="brand_name" name="brand_name" placeholder="Brand Name...">
+            <input class="form-input" type="text" id="name" name="name" placeholder="Brand Name...">
             <button class="btn btn-primary input-group-btn">Register</button>
         </div>
     </div>
