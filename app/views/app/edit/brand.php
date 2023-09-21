@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $brand_name = $brand["name"];
 
     ?>
-    <h3>Edit Brand</h3>
+    <h3>Edit <?php out($brand_name); ?></h3>
     <form name="edit_brand" method="post" action="/app/edit/brand/<?php out($brand_id); ?>">
     <div class="form-group">
         <div class="edit_brand_form">

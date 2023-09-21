@@ -21,6 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         Functions::Brands()->set($name);
     }
 
+    header("Location: /app/brands");
+
 } else {
 
     ?>

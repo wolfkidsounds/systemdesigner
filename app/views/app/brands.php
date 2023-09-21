@@ -1,5 +1,4 @@
-<link rel="stylesheet" href="/includes/assets/css/brands.css">
-<?php //amplifier.php
+<?php //brands.php
 
 require_once VIEWSPATH . "partials/inc_partials.php";
 Partials::Open();
@@ -42,7 +41,7 @@ Partials::Header(true, true);
                     </td>
                     <td>
                         <a class="edit action-button tooltip" data-id="<?php out($brand["id"]); ?>" data-tooltip="<?php Translator::translate("brands.edit"); ?>" href="/app/edit/brand/<?php out($brand["id"]); ?>"><i class="fa-solid fa-pen"></i></a>
-                        <a class="del action-button tooltip" data-id="<?php out($brand["id"]); ?>" data-tooltip="<?php Translator::translate("brands.delete"); ?>" href="javascript:void(0);" onclick="deleteItem(<?php out($brand['id']); ?>);"><i class="fas fa-trash"></i></a>
+                        <a class="del action-button tooltip" data-id="<?php out($brand["id"]); ?>" data-tooltip="<?php Translator::translate("brands.delete"); ?>" href="javascript:void(0);" onclick="deleteItem('brand', <?php out($brand['id']); ?>);"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
 

@@ -1,5 +1,5 @@
 {
     "require": {
-        "shieldon/shieldon": "2"
+        "marcocesarato/security": "0.2.8.179"
     }
 }

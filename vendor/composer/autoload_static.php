@@ -7,61 +7,16 @@ namespace Composer\Autoload;
 class ComposerStaticInitee031b773e4d9b4cd08a1ea45cd7ace4
 {
     public static $prefixLengthsPsr4 = array (
-        'S' => 
+        'm' => 
         array (
-            'Shieldon\\Security\\' => 18,
-            'Shieldon\\Psr7\\' => 14,
-            'Shieldon\\Psr17\\' => 15,
-            'Shieldon\\Psr15\\' => 15,
-            'Shieldon\\Messenger\\' => 19,
-            'Shieldon\\Firewall\\' => 18,
-            'Shieldon\\Event\\' => 15,
-        ),
-        'P' => 
-        array (
-            'Psr\\Http\\Server\\' => 16,
-            'Psr\\Http\\Message\\' => 17,
+            'marcocesarato\\security\\' => 23,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Shieldon\\Security\\' => 
+        'marcocesarato\\security\\' => 
         array (
-            0 => __DIR__ . '/..' . '/shieldon/web-security/src/Security',
-        ),
-        'Shieldon\\Psr7\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/shieldon/psr-http/src/Psr7',
-        ),
-        'Shieldon\\Psr17\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/shieldon/psr-http/src/Psr17',
-        ),
-        'Shieldon\\Psr15\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/shieldon/psr-http/src/Psr15',
-        ),
-        'Shieldon\\Messenger\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/shieldon/messenger/src/Messenger',
-        ),
-        'Shieldon\\Firewall\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/shieldon/shieldon/src/Firewall',
-        ),
-        'Shieldon\\Event\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/shieldon/event-dispatcher/src/Event',
-        ),
-        'Psr\\Http\\Server\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/http-server-handler/src',
-            1 => __DIR__ . '/..' . '/psr/http-server-middleware/src',
-        ),
-        'Psr\\Http\\Message\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/marcocesarato/security/src',
         ),
     );
 

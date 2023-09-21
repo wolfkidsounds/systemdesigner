@@ -49,9 +49,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     ?>
     <h3>Edit <?php out($brand_name . " - " . $name); ?></h3>
-    <form name="new_processor" method="post" action="/app/edit/processor/<?php out($processor_id); ?>" enctype="multipart/form-data">
+    <form name="edit_processor" method="post" action="/app/edit/processor/<?php out($processor_id); ?>" enctype="multipart/form-data">
     <div class="form-group">
-        <div class="new_processor_form">
+        <div class="edit_processor_form">
             <h3>General</h3>
             <div class="form-divider">
                 <div class="form-element-tooltip">

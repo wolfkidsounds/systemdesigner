@@ -1,6 +1,12 @@
 <?php // routes.php
+use marcocesarato\security\Security;
 
 require_once __DIR__ . '/app_config.php';
+require_once ABSPATH . 'vendor\autoload.php';
+
+$isAPI = false; // default is FALSE (this remove some check that could block API request)
+$security = new Security($isAPI);
+
 require_once ABSPATH . 'includes/inc_loader.php';
 
 if ($loader == false) {
@@ -46,15 +52,6 @@ if (Modules::Features()->getBrandFeature()) {
   post('/app/del/brand/$brand_id', function ($brand_id) { Functions::Brands()->delete($brand_id); });
 }
 
-//Amplifier Routes
-if (Modules::Features()->getAmplifierFeature()) {
-  get('/app/amplifiers', function () { Modules::Views()->App_Amplifiers(); });
-  get('/app/new/amplifier', function () { Modules::Views()->App_New_Amplifier(); });
-  post('/app/new/amplifier', function () { Modules::Views()->App_New_Amplifier(); });
-  get('/app/edit/amplifier/$amplifier_id', function ($amplifier_id) { Modules::Views()->App_Edit_Amplifier($amplifier_id); });
-  post('/app/edit/amplifier/$amplifier_id', function ($amplifier_id) { Modules::Views()->App_Edit_Amplifier($amplifier_id); });
-}
-
 //Processor Routes
 if (Modules::Features()->getProcessorFeature()) {
   get('/app/processors', function () { Modules::Views()->App_Processors(); });
@@ -65,6 +62,16 @@ if (Modules::Features()->getProcessorFeature()) {
   post('/app/del/processor/$processor_id', function ($processor_id) { Functions::Processors()->delete($processor_id); });
 }
 
+//Amplifier Routes
+if (Modules::Features()->getAmplifierFeature()) {
+  get('/app/amplifiers', function () { Modules::Views()->App_Amplifiers(); });
+  get('/app/new/amplifier', function () { Modules::Views()->App_New_Amplifier(); });
+  post('/app/new/amplifier', function () { Modules::Views()->App_New_Amplifier(); });
+  get('/app/edit/amplifier/$amplifier_id', function ($amplifier_id) { Modules::Views()->App_Edit_Amplifier($amplifier_id); });
+  post('/app/edit/amplifier/$amplifier_id', function ($amplifier_id) { Modules::Views()->App_Edit_Amplifier($amplifier_id); });
+  post('/app/del/amplifier/$amplifier_id', function ($amplifier_id) { Functions::Amplifiers()->delete($amplifier_id); });
+}
+
 //Speaker Routes
 if (Modules::Features()->getSpeakerFeature()) {
   get('/app/speakers', function () { Modules::Views()->App_Speakers(); });
@@ -72,6 +79,7 @@ if (Modules::Features()->getSpeakerFeature()) {
   post('/app/new/speaker', function () { Modules::Views()->App_New_Speaker(); });
   get('/app/edit/speaker/$speaker_id', function ($speaker_id) { Modules::Views()->App_Edit_Speaker($speaker_id); });
   post('/app/edit/speaker/$speaker_id', function ($speaker_id) { Modules::Views()->App_Edit_Speaker($speaker_id); });
+  post('/app/del/speaker/$speaker_id', function ($speaker_id) { Functions::Speakers()->delete($speaker_id); });
 }
 
 //Racks Routes

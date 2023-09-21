@@ -6,13 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Shieldon\\Security\\' => array($vendorDir . '/shieldon/web-security/src/Security'),
-    'Shieldon\\Psr7\\' => array($vendorDir . '/shieldon/psr-http/src/Psr7'),
-    'Shieldon\\Psr17\\' => array($vendorDir . '/shieldon/psr-http/src/Psr17'),
-    'Shieldon\\Psr15\\' => array($vendorDir . '/shieldon/psr-http/src/Psr15'),
-    'Shieldon\\Messenger\\' => array($vendorDir . '/shieldon/messenger/src/Messenger'),
-    'Shieldon\\Firewall\\' => array($vendorDir . '/shieldon/shieldon/src/Firewall'),
-    'Shieldon\\Event\\' => array($vendorDir . '/shieldon/event-dispatcher/src/Event'),
-    'Psr\\Http\\Server\\' => array($vendorDir . '/psr/http-server-handler/src', $vendorDir . '/psr/http-server-middleware/src'),
-    'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src', $vendorDir . '/psr/http-factory/src'),
+    'marcocesarato\\security\\' => array($vendorDir . '/marcocesarato/security/src'),
 );
