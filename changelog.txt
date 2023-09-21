@@ -1,7 +1,9 @@
 
-VERSION 0.0.4-alpha (WIP)
+VERSION 0.0.4-alpha
 - Implemented Versioning system
 - Added Translation Support
+- Implemented "Amplifiers" Module
+- Fixed a file-upload bug
 
 VERSION 0.0.3-alpha
 - Implemented "Processors" Module
