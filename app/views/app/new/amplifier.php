@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     $exists = Functions::Amplifiers()->check($brand_id, $name);
     if ($exists) {
-        header("Location: /app/processors");
+        header("Location: /app/amplifiers");
         exit();
     }
 
