@@ -134,9 +134,9 @@ class Users {
     public static function getSetting($key) {
         $user_id = Functions::Users()->getUserID();
         $db = new Database();
-        $query = "SELECT setting_value FROM user_settings WHERE user_id = ? AND setting_key = ?";
-        $setting = $db->query($query, $user_id, $key)->fetchArray();
-        return $setting;
+        $query = "SELECT * FROM user_settings WHERE setting_key = ? AND user_id = ?";
+        $setting = $db->query($query, $key, $user_id)->fetchArray();
+        return $setting["setting_value"];
     }
 
     public static function setSetting() {
@@ -166,7 +166,7 @@ class Users {
         $db = new Database();
         $settings = array (
             'show_registered_amplifiers' => 'true',
-            'show_registered_speaker' => 'true',
+            'show_registered_speakers' => 'true',
             'show_registered_chassis' => 'true',
             'show_registered_brands' => 'true',
             'show_registered_processors' => 'true'
