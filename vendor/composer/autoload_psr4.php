@@ -6,4 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'marcocesarato\\security\\' => array($vendorDir . '/marcocesarato/security/src'),
 );

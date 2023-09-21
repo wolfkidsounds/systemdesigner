@@ -4,8 +4,49 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8d070178755c320c69f93ee4800660ef",
-    "packages": [],
+    "content-hash": "543f26ae44157d0752a93d83a990e84d",
+    "packages": [
+        {
+            "name": "marcocesarato/security",
+            "version": "0.2.8.179",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/marcocesarato/PHP-AIO-Security.git",
+                "reference": "5fec05a3ccd6379a0bfe12b316c7555e3042c2fa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/marcocesarato/PHP-AIO-Security/zipball/5fec05a3ccd6379a0bfe12b316c7555e3042c2fa",
+                "reference": "5fec05a3ccd6379a0bfe12b316c7555e3042c2fa",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.1.2"
+            },
+            "type": "console",
+            "autoload": {
+                "psr-4": {
+                    "marcocesarato\\security\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Marco Cesarato",
+                    "email": "cesarato.developer@gmail.com"
+                }
+            ],
+            "description": "AIO Security Class offer an automatic system of protection for developers's projects and simplify some security operations as the check of CSRF or XSS all in a simple class. Infact you could just call the main method to have better security yet without too much complicated operations.",
+            "support": {
+                "issues": "https://github.com/marcocesarato/PHP-AIO-Security/issues",
+                "source": "https://github.com/marcocesarato/PHP-AIO-Security/tree/0.2.8.179"
+            },
+            "time": "2019-09-11T08:22:22+00:00"
+        }
+    ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
