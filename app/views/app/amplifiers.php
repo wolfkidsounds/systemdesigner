@@ -34,20 +34,20 @@ Partials::Header(true, true);
     <tbody>
         <?php 
             
-            $amplifiers = Functions::Amplifiers()->getAllAmplifiers();
+            $amplifiers = Functions::Amplifiers()->getAll();
 
             foreach ($amplifiers as $amplifier) { ?>
-                <tr>
+                <tr data-id="<?php out($amplifier["id"]); ?>">
                     <td>
                         <?php
-                            $brand_id = $amplifier["amp_brand"];
-                            $brand = Functions::Brands()->getBrand($brand_id);
-                            $brand_name = $brand["brand_name"];
+                            $brand_id = $amplifier["brand_id"];
+                            $brand = Functions::Brands()->get($brand_id);
+                            $brand_name = $brand["name"];
                             out($brand_name); 
                         ?>
                     </td>
-                    <td><?php out($amplifier["amp_model"]); ?></td>
-                    <td><?php out($amplifier["amp_ch"]); ?></td>
+                    <td><?php out($amplifier["name"]); ?></td>
+                    <td><?php out($amplifier["ch_outputs"]); ?></td>
                     <td><?php out($amplifier["amp_power_8"]); ?></td>
                     <td><?php out($amplifier["amp_power_4"]); ?></td>
                     <td><?php out($amplifier["amp_power_2"]); ?></td>
@@ -63,8 +63,8 @@ Partials::Header(true, true);
                     </td>
                     <td>
                         <a class="edit action-button tooltip" data-tooltip="<?php Translator::translate("amplifiers.edit"); ?>" href="/app/edit/amplifier/<?php out($amplifier["id"]); ?>"><i class="fa-solid fa-pen"></i></a>
-                        <a class="del action-button tooltip" data-tooltip="<?php Translator::translate("amplifiers.delete"); ?>" href="/app/del/amplifier/<?php out($amplifier["id"]); ?>"><i class="fas fa-trash"></i></a>
-                        <a class="download action-button tooltip" data-tooltip="<?php Translator::translate("amplifiers.download_manual"); ?>" href="/app/download/amplifier/<?php out($amplifier["id"]); ?>"><i class="fas fa-file-download"></i></a>
+                        <a class="del action-button tooltip" data-id="<?php out($amplifier["id"]); ?>" data-tooltip="<?php Translator::translate("amplifiers.delete"); ?>" href="javascript:void(0);" onclick="deleteItem(<?php out($amplifier['id']); ?>);"><i class="fas fa-trash"></i></a>
+                        <?php if ($amplifier["file_attachment"]) { ?> <a download class="download action-button tooltip" data-tooltip="<?php Translator::translate("amplifiers.download_manual"); ?>" href="/uploads/<?php echo $amplifier["file_attachment"]; ?>"><i class="fas fa-file-download"></i></a><?php } ?>
                     </td>
                 </tr>
 
@@ -74,6 +74,7 @@ Partials::Header(true, true);
 </div>
 
 <script src="/node_modules\jquery\dist\jquery.min.js"></script>
-<script src="/includes\assets\js\search.js"></script>
+<script src="/includes\assets\js\overviews\search.js"></script>
+<script src="/includes\assets\js\overviews\delete_item.js"></script>
 
 <?php Partials::Close(); ?>
