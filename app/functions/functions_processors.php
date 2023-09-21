@@ -29,10 +29,10 @@ class Processors {
         return $processor;
     }
 
-    public static function check($brand_id) {
+    public static function check($brand_id, $name) {
         $db = new Database();
-        $query = "SELECT COUNT(*) AS count FROM processor WHERE brand_id = ?";
-        $count = $db->query($query, $brand_id)->fetchArray()['count'] > 0;
+        $query = "SELECT COUNT(*) AS count FROM processor WHERE brand_id = ? AND name = ?";
+        $count = $db->query($query, $brand_id, $name)->fetchArray()['count'] > 0;
         return $count;
     }
 
