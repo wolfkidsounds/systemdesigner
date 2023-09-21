@@ -31,6 +31,11 @@ Partials::Header(true, true);
     <tbody>
         <?php 
             $processors = Functions::Processors()->getAll();
+
+            if (!$processors) {
+                out("No Processors were found.");
+            }
+
             foreach ($processors as $processor) { ?>
                 <tr data-id="<?php out($processor["id"]); ?>">
                     <td>
