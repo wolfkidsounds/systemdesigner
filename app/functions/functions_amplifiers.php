@@ -10,8 +10,12 @@ class Amplifiers {
         $current_user = Functions::Users()->getUserID();
         $db = new Database();
 
-        if (isset($load_all) && $load_all == true) { $amplifiers = $db->query("SELECT * FROM amplifier WHERE user_id = ? OR user_id = ?", array($main_user, $current_user))->fetchAll(); }
-        else { $amplifiers = $db->query("SELECT * FROM amplifier WHERE user_id = ?", array($current_user))->fetchAll(); }
+        if (isset($load_all) && $load_all == true) { 
+            $amplifiers = $db->query("SELECT * FROM amplifier WHERE user_id = ? OR user_id = ?", array($main_user, $current_user))->fetchAll(); 
+        } else { 
+            $amplifiers = $db->query("SELECT * FROM amplifier WHERE user_id = ?", array($current_user))->fetchAll(); 
+        }
+
         return $amplifiers;
     }
 
@@ -23,6 +27,13 @@ class Amplifiers {
         return $amplifiers->numRows();
     }
 
+    public static function check($brand_id, $name) {
+        $db = new Database();
+        $query = "SELECT COUNT(*) AS count FROM amplifier WHERE brand_id = ? AND name = ?";
+        $count = $db->query($query, $brand_id, $name)->fetchArray()['count'] > 0;
+        return $count;
+    }
+
     public static function get($id) {
         $db = new Database();
         $query = "SELECT * FROM amplifier WHERE id = ?";
@@ -30,51 +41,50 @@ class Amplifiers {
         return $amplifier;
     }
 
-    public static function register($brand_id, $name, $rack_units, $ch_outputs) {
+    public static function set($user_id) {
         Functions::startSession();
-
-        if (Functions::Amplifiers()->checkAmplifier($brand_id, $name)) {
-            header("Location: /app/amplifiers");
-            exit();
-        }
-
         $db = new Database();
-        $query = "INSERT INTO amplifier (user_id, brand_id, name, rack_units, ch_outputs) VALUES (?, ?, ?, ?, ?)";
-        $result = $db->query($query, $_SESSION["user_id"], $brand_id, $name, $rack_units, $ch_outputs);
-
-        if ($result) {
-            $amplifier_id = $db->lastInsertID();
-            $db->close();
-            return $amplifier_id;
-        }
-        
-        $db->close();
-        return false;
-
+        $query = "INSERT INTO amplifier (user_id) VALUES (?)";
+        $db->query($query, $user_id);
+        return $db->lastInsertID();
     }
 
-    public static function check($brand_id, $name) {
+    public static function setBrand($id, $brand_id) {
+        Functions::startSession();
         $db = new Database();
-        $query = "SELECT COUNT(*) AS count FROM amplifier WHERE brand_id = ? AND name = ?";
-        $exists = $db->query($query, $brand_id, $name)->fetchArray()['count'] > 0;
-        
-        if ($exists) {
-            $db->close();
-            return true;
-        }
-        
-        $db->close();
-        return false;
+        $query = "UPDATE amplifier SET brand_id = ? WHERE id = ?";
+        $db->query($query, $brand_id, $id);
     }
 
-    public static function update($id, $brand_id, $name, $rack_units, $ch_outputs) {
+    public static function setName($id, $name) {
+        Functions::startSession();
         $db = new Database();
-        $query = "UPDATE amplifier SET brand_id = ?, name = ?, rack_units = ?, ch_outputs = ?, date_edited = NOW() WHERE id = ?";
-        $db->query($query, $brand_id, $name, $rack_units, $ch_outputs, $id);
-        $db->close();        
+        $query = "UPDATE amplifier SET name = ? WHERE id = ?";
+        $db->query($query, $name, $id);
     }
 
-    public static function updatePower($id, $amp_power, $amp_vpeak, $amp_vgain, $ohm, $bridge) {
+    public static function setHeight($id, $rack_units) {
+        Functions::startSession();
+        $db = new Database();
+        $query = "UPDATE amplifier SET rack_units = ? WHERE id = ?";
+        $db->query($query, $rack_units, $id);
+    }
+
+    public static function setOutputs($id, $ch_outputs) {
+        Functions::startSession();
+        $db = new Database();
+        $query = "UPDATE amplifier SET ch_outputs = ? WHERE id = ?";
+        $db->query($query, $ch_outputs, $id);
+    }
+
+    public static function setFile($id, $file_attachment) {
+        Functions::startSession();
+        $db = new Database();
+        $query = "UPDATE amplifier SET file_attachment = ? WHERE id = ?";
+        $db->query($query, $file_attachment, $id);
+    }
+
+    public static function setPower($id, $amp_power, $amp_vpeak, $amp_vgain, $ohm, $bridge) {
         $db = new Database();
         if ($bridge) {
             $amp_power_column = "amp_power_bridge_" . $ohm;
@@ -89,5 +99,16 @@ class Amplifiers {
         $query = "UPDATE amplifier SET $amp_power_column = ?, $amp_vpeak_column = ?, $amp_vgain_column = ?, date_edited = NOW() WHERE id = ?";
         $db->query($query, $amp_power, $amp_vpeak, $amp_vgain, $id);
         $db->close();
+    }
+
+    public static function delete($id) {
+        $db = new Database();
+        $query = "DELETE FROM amplifier WHERE id = ?";
+        $result = $db->query($query, $id);
+        if ($result) {
+            return json_encode(["success" => true]);
+        } else {
+            return json_encode(["success" => false]);
+        }
     }
 }
