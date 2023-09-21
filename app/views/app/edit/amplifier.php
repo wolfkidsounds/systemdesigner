@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $manual = $amplifier['file_attachment'];
     ?>
 
-    <h3>Edit Amplifier</h3>
+    <h3>Edit <?php out($brand_name . " - " . $name); ?></h3>
     <form name="edit_amplifier" method="post" action="/app/edit/amplifier/<?php out($amplifier_id); ?>" enctype="multipart/form-data">
     <div class="form-group">
         <div class="edit_amplifier_form">
