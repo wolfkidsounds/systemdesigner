@@ -17,7 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $brand = Functions::Brands()->get($brand_id);
     $brand_name = $brand["name"];
     $upload_directory = "/uploads/";
-
     $id = $processor_id;
     Functions::Processors()->setBrand($id, $brand_id);
     Functions::Processors()->setName($id, $name);
@@ -34,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         Functions::Processors()->setFile($id, $filename);
     }
 
-    header("Location: /app/processors");
+    header("Location: /app/edit/processor/" . $id);
 
 } else {
 
