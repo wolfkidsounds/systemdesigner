@@ -36,6 +36,10 @@ Partials::Header(true, true);
             
             $amplifiers = Functions::Amplifiers()->getAll();
 
+            if (!$amplifiers) {
+                out("No Amplifiers were found.");
+            }
+
             foreach ($amplifiers as $amplifier) { ?>
                 <tr data-id="<?php out($amplifier["id"]); ?>">
                     <td>
