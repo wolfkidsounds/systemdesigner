@@ -9,13 +9,30 @@ Partials::Header(true, true);
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
-    $brand_name = $_POST['brand_name'];
-    $amp_model = $_POST['model_name'];
-    $amp_height = $_POST['amp_height'];
-    $amp_channels = $_POST['amp_channels'];
+    $name = $_POST['name'];
+    $height = $_POST['height'];
+    $outputs = $_POST['channels'];
+    $brand_id = $_POST['brand_id'];
+    $brand = Functions::Brands()->get($brand_id);
+    $brand_name = $brand["name"];
+    $user_id = Functions::Users()->getUserID();
+    $id = $amplifier_id;
+    Functions::Amplifiers()->setBrand($id, $brand_id);
+    Functions::Amplifiers()->setName($id, $name);
+    Functions::Amplifiers()->setHeight($id, $height);
+    Functions::Amplifiers()->setOutputs($id, $outputs);
 
-    Functions::Amplifiers()->updateAmplifier($amplifier_id, $brand_name, $amp_model, $amp_height, $amp_channels);
-    // Define an array of power specifications to loop through
+    $upload_directory = "/uploads/";
+    $filename = $brand_name . "_-_" . $name . ".pdf";
+    $destination = $_SERVER['DOCUMENT_ROOT'] . $upload_directory . $filename;
+
+    if (file_exists($destination)) {
+        unlink($destination);
+    }
+    if (move_uploaded_file($_FILES['manual']['tmp_name'], $destination)) {
+        Functions::Processors()->setFile($id, $filename);
+    }
+
     $power_specifications = [
         16, 8, 4, 2
     ];
@@ -24,7 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         8, 4
     ];
 
-    // Process each power specification
     foreach ($power_specifications as $ohm) {
         $amp_power = $_POST["amp_power_{$ohm}"];
         $amp_vpeak = $_POST["amp_vpeak_{$ohm}"];
@@ -38,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         }
 
         // Register the amplifier power for the current specification
-        Functions::Amplifiers()->updateAmplifierPower($amplifier_id, $amp_power, $amp_vpeak, $amp_vgain, $ohm, false);
+        Functions::Amplifiers()->setPower($id, $amp_power, $amp_vpeak, $amp_vgain, $ohm, false);
     }
 
     foreach ($bridge_power_specifications as $ohm) {
@@ -55,39 +71,22 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         }
 
         // Register the amplifier power for the current specification (bridge)
-        Functions::Amplifiers()->updateAmplifierPower($amplifier_id, $amp_power_bridge, $amp_vpeak_bridge, $amp_vgain_bridge, $ohm, true);
+        Functions::Amplifiers()->setPower($id, $amp_power_bridge, $amp_vpeak_bridge, $amp_vgain_bridge, $ohm, true);
     }
 
-    if ($_FILES['amp_manual']['error'] === UPLOAD_ERR_OK) {
-
-        // Upload File
-        $upload_dir = ABSPATH . 'uploads/';
-        $filename = $brand_name . " - " . $amp_model . '.pdf';
-        $upload_file = $upload_dir . $filename;
-
-        if (move_uploaded_file($_FILES['amp_manual']['tmp_name'], $upload_file)) {
-
-            // Register File
-            $db = new Database();
-            $query = "UPDATE amplifier SET manual_file_name = ? WHERE id = ?";
-            $result = $db->query($query, $filename, $amplifier_id);
-            $db->close();
-        }
-    }
-
-    header("Location: /app/amplifiers");
+    header("Location: /app/edit/amplifier/" . $id);
 
 } else {
 
-    $amplifier = Functions::Amplifiers()->getAmplifier($amplifier_id);
+    $amplifier = Functions::Amplifiers()->get($amplifier_id);
 
-    $amplifier_brand_id = $amplifier["amp_brand"];
-    $amplifier_brand = Functions::Brands()->getBrand($amplifier_brand_id);
-    $amplifier_brand_name = $amplifier_brand["brand_name"];
+    $amplifier_brand_id = $amplifier["brand_id"];
+    $amplifier_brand = Functions::Brands()->get($amplifier_brand_id);
+    $amplifier_brand_name = $amplifier_brand["name"];
 
-    $amplifier_model_name = $amplifier["amp_model"];
-    $amplifier_height = $amplifier["amp_ru"];
-    $amplifier_channels = $amplifier["amp_ch"];
+    $amplifier_model_name = $amplifier["name"];
+    $amplifier_height = $amplifier["rack_units"];
+    $amplifier_channels = $amplifier["ch_outputs"];
 
     $amplifier_power_16 = $amplifier["amp_power_16"];
     $amplifier_vpeak_16 = $amplifier["amp_vpeak_16"];
@@ -113,11 +112,11 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $amplifier_vpeak_bridge_4 = $amplifier["amp_vpeak_bridge_4"];
     $amplifier_vgain_bridge_4 = $amplifier["amp_vgain_bridge_4"];
 
-    $amplifier_manual = $amplifier['manual_file_name'];
+    $manual = $amplifier['file_attachment'];
     ?>
 
     <h3>Edit Amplifier</h3>
-    <form name="edit_amplifier" method="post" action="/app/edit/amplifier/<?php out($amplifier_id); ?>">
+    <form name="edit_amplifier" method="post" action="/app/edit/amplifier/<?php out($amplifier_id); ?>" enctype="multipart/form-data">
     <div class="form-group">
         <div class="edit_amplifier_form">
             <h3>General</h3>
@@ -126,14 +125,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                     <div class="tooltip tooltip-right" data-tooltip="Select the Brand that Manufacture">
                         <i class="fa-solid fa-question"></i>
                     </div>
-                    <select class="form-select" id="brand_name" name="brand_name">
+                    <select class="form-select" id="brand_id" name="brand_id">
                         <option value="<?php out($amplifier_brand_id); ?>" selected><?php out($amplifier_brand_name); ?></option>
                         <?php 
                     
-                            $brands = Functions::Brands()->getAllBrands();
+                            $brands = Functions::Brands()->getAll();
 
                             foreach ($brands as $brand) { ?>
-                                <option value="<?php out($brand["id"]); ?>"><?php out($brand["brand_name"]); ?></option>
+                                <option value="<?php out($brand["id"]); ?>"><?php out($brand["name"]); ?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -141,14 +140,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                     <div class="tooltip tooltip-right" data-tooltip="Enter the Model Name">
                         <i class="fa-solid fa-question"></i>
                     </div>
-                    <input class="form-input" type="text" id="model_name" name="model_name" value="<?php out($amplifier_model_name); ?>" placeholder="Model Name...">
+                    <input class="form-input" type="text" id="name" name="name" value="<?php out($amplifier_model_name); ?>" placeholder="Model Name...">
                 </div>
                 <div class="form-element-tooltip">
                     <div class="tooltip tooltip-right" data-tooltip="Select the height in Rack Units (RU)">
                         <i class="fa-solid fa-question"></i>
                     </div>
                     <div class="input-group">
-                        <select class="form-select" id="amp_height" name="amp_height">
+                        <select class="form-select" id="height" name="height">
                             <option value="<?php out($amplifier_height); ?>" selected><?php out($amplifier_height); ?></option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -165,7 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                         <i class="fa-solid fa-question"></i>
                     </div>
                     <div class="input-group">
-                        <select class="form-select" id="amp_channels" name="amp_channels">
+                        <select class="form-select" id="channels" name="channels">
                             <option value="<?php out($amplifier_channels); ?>" selected><?php out($amplifier_channels); ?></option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -321,26 +320,12 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             </div>
             <h6>Documents/Manual</h6>
             <div class="form-divider">
+                <?php if ($manual) { ?>
+                    <a class="btn" href="/uploads/<?php echo $manual; ?>" download>Download Manual</a>
+                <?php } ?> 
                 <div class="form-element-tooltip">
-                    <div class="tooltip tooltip-right" data-tooltip="Upload the PDF manual of the amplifier">
-                        <i class="fa-solid fa-question"></i>
-                    </div>
-                    <input class="form-input" type="file" id="amp_manual" name="amp_manual" accept=".pdf">
+                    <input class="form-input" type="file" id="manual" name="manual" accept=".pdf">
                 </div>
-
-                <?php 
-
-                if (!empty($amplifier_manual)) {
-                    // If a manual is uploaded, show the "Download Manual" button
-                    ?>
-                    <a href="/uploads/<?php echo $amplifier_manual; ?>" download>
-                        <button class="btn btn-primary">Download Manual</button>
-                    </a>
-                    <?php
-                }
-
-                ?>
-                
             </div>
             <button class="btn btn-primary input-group-btn">Update</button>
         </div>
