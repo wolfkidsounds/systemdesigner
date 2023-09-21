@@ -3,8 +3,6 @@
 class Amplifiers {
 
     public static function getAll() {
-        Functions::startSession();
-
         $load_all = filter_var(Functions::Users()->getSetting("show_registered_amplifiers"), FILTER_VALIDATE_BOOLEAN);
         $main_user = 1;
         $current_user = Functions::Users()->getUserID();
