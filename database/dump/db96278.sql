@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 21. Sep 2023 um 16:25
+-- Erstellungszeit: 21. Sep 2023 um 22:30
 -- Server-Version: 10.4.28-MariaDB
 -- PHP-Version: 8.2.4
 
@@ -184,7 +184,6 @@ CREATE TABLE `processor` (
 --
 
 INSERT INTO `processor` (`id`, `user_id`, `brand_id`, `name`, `ch_inputs`, `ch_outputs`, `proc_offset`, `date_created`, `date_edited`, `file_attachment`) VALUES
-(1, 1, 8, 'DCX 2496 Pro', '3', '4', '22', NULL, NULL, 'Behringer_-_DCX 2496 Pro.pdf'),
 (2, 1, 8, 'DCX 2496 LE', '2', '6', '22', NULL, NULL, NULL),
 (11, 1, 31, 'DS 2/4', '2', '4', '0', NULL, NULL, NULL),
 (12, 1, 31, 'DSP 206', '2', '6', '0', NULL, NULL, NULL),
@@ -212,12 +211,29 @@ CREATE TABLE `remember_me_tokens` (
 
 CREATE TABLE `speaker` (
   `id` int(20) UNSIGNED NOT NULL COMMENT 'Primary Key',
-  `created_time` datetime DEFAULT NULL COMMENT 'Create Time',
-  `edited_time` datetime DEFAULT NULL,
   `user_id` int(20) UNSIGNED DEFAULT NULL,
   `brand_id` int(20) UNSIGNED DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL
+  `name` varchar(255) DEFAULT NULL,
+  `power_rms` varchar(255) DEFAULT NULL,
+  `power_program` varchar(255) DEFAULT NULL,
+  `power_peak` varchar(255) DEFAULT NULL,
+  `impedance` varchar(255) DEFAULT NULL,
+  `vpeak` varchar(255) DEFAULT NULL,
+  `vrms` varchar(255) DEFAULT NULL,
+  `sensitivity` varchar(255) DEFAULT NULL,
+  `max_spl` varchar(255) DEFAULT NULL,
+  `date_created` datetime DEFAULT NULL,
+  `date_edited` datetime DEFAULT NULL,
+  `sp_type` varchar(255) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Daten für Tabelle `speaker`
+--
+
+INSERT INTO `speaker` (`id`, `user_id`, `brand_id`, `name`, `power_rms`, `power_program`, `power_peak`, `impedance`, `vpeak`, `vrms`, `sensitivity`, `max_spl`, `date_created`, `date_edited`, `sp_type`) VALUES
+(5, 1, 14, '2470-R520', '90', '180', '360', '8', '37.95', '26.83', '105', '124.54', NULL, NULL, 'HF'),
+(4, 1, 14, '1331', '500', '1000', '2000', '8', '89.44', '63.25', '105', '131.99', NULL, NULL, 'FR');
 
 -- --------------------------------------------------------
 
@@ -336,7 +352,7 @@ ALTER TABLE `amplifier`
 -- AUTO_INCREMENT für Tabelle `brand`
 --
 ALTER TABLE `brand`
-  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT für Tabelle `chassis`
@@ -366,7 +382,7 @@ ALTER TABLE `remember_me_tokens`
 -- AUTO_INCREMENT für Tabelle `speaker`
 --
 ALTER TABLE `speaker`
-  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Primary Key';
+  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Primary Key', AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT für Tabelle `user`
