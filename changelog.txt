@@ -1,4 +1,14 @@
 
+VERSION 0.0.5-alpha
+- Implement security measures
+- Fix a bug in security class
+- Implement "Speakers" Module
+- fixed a bug where processors are deleted always
+- now shows if a brand is missing
+- show item name that is currently edited
+- correctly named forms for internal use
+- corrected headers for "new-item" forms
+
 VERSION 0.0.4-alpha
 - Implemented Versioning system
 - Added Translation Support
