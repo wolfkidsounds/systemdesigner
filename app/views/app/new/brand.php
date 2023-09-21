@@ -11,16 +11,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     $brand_name = $_POST['brand_name'];
 
-    if (empty($brand_name)) {
-        ?> 
-        <div class="toast toast-error">
-            <p>The Fields can not be empty.</p>
-        </div>
-        <?php
+    $exists = Functions::Brands()->check($name);
+    if ($exists) {
+        header("Location: /app/processors");
+        exit();
     }
 
     if (Functions::Forms()->checkEmptyFields($brand_name)) {
-        $register = Functions::Brands()->set($brand_name);
+        Functions::Brands()->set($brand_name);
     }
 
 } else {
