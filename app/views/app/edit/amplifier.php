@@ -125,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                     <div class="tooltip tooltip-right" data-tooltip="Select the Brand that Manufacture">
                         <i class="fa-solid fa-question"></i>
                     </div>
-                    <select class="form-select" id="brand_id" name="brand_id">
+                    <select class="form-select select2js" id="brand_id" name="brand_id">
                         <option value="<?php out($amplifier_brand_id); ?>" selected><?php out($amplifier_brand_name); ?></option>
                         <?php 
                     
@@ -331,6 +331,10 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         </div>
     </div>
     </form>
+
+    <script src="/node_modules\jquery\dist\jquery.min.js"></script>
+    <script src="/node_modules\select2\dist\js\select2.min.js"></script>
+    <script src="/includes\assets\js\select2.js"></script>
 
     <script>
         function calculateVpeakAndVgain(powerInputId, vpeakInputId, vgainInputId, ohms) {
