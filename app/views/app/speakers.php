@@ -55,7 +55,7 @@ Partials::Header(true, true);
                         ?>
                     </td>
                     <td><?php out($speaker["name"]); ?></td>
-                    <td><?php out(Translator::translateReturn("speakers.type_" . $speaker["sp_type"])); ?></td>
+                    <td><?php out(Translator::translateReturn("speakers.bandwidth_" . $speaker["bandwidth"])); ?></td>
                     <td><?php out($speaker["power_rms"]); ?></td>
                     <td><?php out($speaker["impedance"]); ?></td>
                     <td><?php out($speaker["vrms"]); ?></td>
