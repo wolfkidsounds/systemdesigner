@@ -18,8 +18,6 @@ require_once ABSPATH . 'app/modules/modules.php';
 require_once ABSPATH . 'app/functions/functions.php';
 Modules::Translator();
 
-Functions::startSession();
-
 // DEFINE ROUTES
 
 // Standard Route
@@ -80,6 +78,16 @@ if (Modules::Features()->getSpeakerFeature()) {
   get('/app/edit/speaker/$speaker_id', function ($speaker_id) { Modules::Views()->App_Edit_Speaker($speaker_id); });
   post('/app/edit/speaker/$speaker_id', function ($speaker_id) { Modules::Views()->App_Edit_Speaker($speaker_id); });
   post('/app/del/speaker/$speaker_id', function ($speaker_id) { Functions::Speakers()->delete($speaker_id); });
+}
+
+//Limiter Routes
+if (Modules::Features()->getLimiterFeature()) {
+  get('/app/limiters', function () { Modules::Views()->App_Limiters(); });
+  get('/app/new/limiter', function () { Modules::Views()->App_New_Limiter(); });
+  post('/app/new/limiter', function () { Modules::Views()->App_New_Limiter(); });
+  get('/app/edit/limiter/$limiter_id', function ($limiter_id) { Modules::Views()->App_Edit_Limiter($limiter_id); });
+  post('/app/edit/limiter/$limiter_id', function ($limiter_id) { Modules::Views()->App_Edit_Limiter($limiter_id); });
+  post('/app/del/limiter/$limiter_id', function ($limiter_id) { Functions::Limiters()->delete($limiter_id); });
 }
 
 //Racks Routes
