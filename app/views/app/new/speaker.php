@@ -10,7 +10,7 @@ Partials::Header(true, true);
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $brand_id = $_POST['brand_id'];
     $name = $_POST['name'];
-    $type = $_POST['type'];
+    $bandwidth = $_POST['bandwidth'];
     $power_rms = $_POST['power_rms'];
     $power_program = $_POST['power_program'];
     $power_peak = $_POST['power_peak'];
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $id = Functions::Speakers()->set($user_id);
     Functions::Speakers()->setBrand($id, $brand_id);
     Functions::Speakers()->setName($id, $name);
-    Functions::Speakers()->setType($id, $type);
+    Functions::Speakers()->setBandwidth($id, $bandwidth);
     Functions::Speakers()->setPower_RMS($id, $power_rms);
     Functions::Speakers()->setPower_Program($id, $power_program);
     Functions::Speakers()->setPower_Peak($id, $power_peak);
@@ -77,12 +77,12 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                     <input class="form-input" type="text" id="name" name="name" placeholder="Model Name...">
                 </div>
                 <div class="form-element-tooltip">
-                    <div class="tooltip tooltip-left" data-tooltip="Select Type">
+                    <div class="tooltip tooltip-left" data-tooltip="Select Bandwidth">
                         <i class="fa-solid fa-question"></i>
                     </div>
                     <div class="input-group">
-                        <select class="form-select" id="type" name="type">
-                            <option>Select Speaker Type...</option>
+                        <select class="form-select" id="bandwidth" name="bandwidth">
+                            <option>Select Speaker Bandwidth...</option>
                             <option value="SUB">Subwoofer (20 - 150 Hz)</option>
                             <option value="LF">Low Frequency (100 - 300 Hz)</option>
                             <option value="MF">Mid Frequency (200 - 2000 Hz)</option>
