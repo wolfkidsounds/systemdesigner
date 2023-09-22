@@ -59,10 +59,10 @@ class Speakers {
         $db->query($query, $name, $id);
     }
 
-    public static function setType($id, $type) {
+    public static function setBandwidth($id, $bandwith) {
         $db = new Database();
-        $query = "UPDATE speaker SET sp_type = ? WHERE id = ?";
-        $db->query($query, $type, $id);
+        $query = "UPDATE speaker SET bandwith = ? WHERE id = ?";
+        $db->query($query, $bandwith, $id);
     }
 
     public static function setPower_RMS($id, $power_rms) {
