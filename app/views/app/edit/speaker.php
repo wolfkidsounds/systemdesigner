@@ -10,7 +10,7 @@ Partials::Header(true, true);
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $brand_id = $_POST['brand_id'];
     $name = $_POST['name'];
-    $type = $_POST['type'];
+    $bandwidth = $_POST['bandwidth'];
     $power_rms = $_POST['power_rms'];
     $power_program = $_POST['power_program'];
     $power_peak = $_POST['power_peak'];
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $id = $speaker_id;
     Functions::Speakers()->setBrand($id, $brand_id);
     Functions::Speakers()->setName($id, $name);
-    Functions::Speakers()->setType($id, $type);
+    Functions::Speakers()->setBandwidth($id, $type);
     Functions::Speakers()->setPower_RMS($id, $power_rms);
     Functions::Speakers()->setPower_Program($id, $power_program);
     Functions::Speakers()->setPower_Peak($id, $power_peak);
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $brand_name = $brand["name"];
 
     $name = $speaker['name'];
-    $type = $speaker['sp_type'];
+    $bandwidth = $speaker['bandwidth'];
     $power_rms = $speaker['power_rms'];
     $power_program = $speaker['power_program'];
     $power_peak = $speaker['power_peak'];
@@ -88,12 +88,12 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                     <input class="form-input" type="text" id="name" name="name" value="<?php out($name); ?>" placeholder="Model Name...">
                 </div>
                 <div class="form-element-tooltip">
-                    <div class="tooltip tooltip-left" data-tooltip="Select Type">
+                    <div class="tooltip tooltip-left" data-tooltip="Select Bandwidth">
                         <i class="fa-solid fa-question"></i>
                     </div>
                     <div class="input-group">
-                        <select class="form-select" id="type" name="type">
-                            <option value="<?php out($type); ?>"><?php out($type); ?></option>
+                        <select class="form-select" id="bandwidth" name="bandwidth">
+                            <option value="<?php out($bandwidth); ?>"><?php out($bandwidth); ?></option>
                             <option value="SUB">Subwoofer (20 - 150 Hz)</option>
                             <option value="LF">Low Frequency (100 - 300 Hz)</option>
                             <option value="MF">Mid Frequency (200 - 2000 Hz)</option>
