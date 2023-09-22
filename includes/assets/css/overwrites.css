@@ -95,3 +95,13 @@ a.action-button {
 a.action-button:hover {
     color:#918fe6;
 }
+
+.tooltip::after {
+    font-family:-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+    font-weight:400;
+    background:rgba(0,0,0,.4) !important;
+    backdrop-filter: 10px;
+    -webkit-backdrop-filter: 10px;
+    padding:6px !important;
+    border-radius:3px !important    ;
+}
