@@ -87,7 +87,13 @@ class Views {
         require_once(VIEWSPATH . "app/limiters.php");
     }
     public function App_New_Limiter() {
-        require_once(VIEWSPATH . "app/new/limiter.php");
+        $mode = Functions::Users()->getSetting('limiter_easy_mode');
+        if ($mode === true) {
+            require_once(VIEWSPATH . "app/new/limiter_easy.php");
+        } else {
+            require_once(VIEWSPATH . "app/new/limiter_advanced.php");
+        }
+        
     }
     public function App_Edit_Limiter($limiter_id) {
         $limiter_id = trim($limiter_id);
