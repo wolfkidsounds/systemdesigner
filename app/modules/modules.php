@@ -21,4 +21,9 @@ class Modules {
         require_once __DIR__ . "/module_features.php";
         return new Features();
     }
+
+    public static function API() {
+        require_once __DIR__ . "/module_api.php";
+        return new API();
+    }
 }
