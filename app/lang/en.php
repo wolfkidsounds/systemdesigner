@@ -117,7 +117,9 @@ $lang = array(
     'show_registered_speakers' => 'Show Pre-Registered Speakers',
     'show_registered_chassis' => 'Show Pre-Registered Chassis',
     'show_registered_brands' => 'Show Pre-Registered Brands',
-    'show_registered_processors' => 'Show Pre-Registered Processors',   
+    'show_registered_processors' => 'Show Pre-Registered Processors',
+    'show_registered_limiters' => 'Show Pre-Registered Limiters',
+    'limiter_easy_mode' => 'Use Easy-Mode for Limiter Calculations',   
 
 );
 
