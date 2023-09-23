@@ -129,7 +129,8 @@ class Users {
         $db = new Database();
         $query = "SELECT * FROM user_settings WHERE setting_key = ? AND user_id = ?";
         $setting = $db->query($query, $key, $user_id)->fetchArray();
-        return $setting["setting_value"];
+        $setting_bool = filter_var($setting["setting_value"], FILTER_VALIDATE_BOOLEAN);
+        return $setting_bool;
     }
 
     public static function setSetting() {
@@ -164,6 +165,7 @@ class Users {
             'show_registered_brands' => 'true',
             'show_registered_processors' => 'true',
             'show_registered_limiters' => 'true',
+            'limiter_easy_mode' => 'true',
         );
 
         foreach ($settings as $setting_key => $setting_value) {
