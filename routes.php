@@ -106,6 +106,14 @@ if (Modules::Features()->getUserAccountFeature()) {
   get('/user/settings', function () { Modules::Views()->User_Settings(); });
 }
 
+// API Routes
+if (Modules::Features()->getAPIFeature()) {
+  post('/api/get/processor', function () { Modules::API()->getProcessor(); });
+  post('/api/get/amplifier', function () { Modules::API()->getAmplifier(); });
+  post('/api/get/speaker', function () { Modules::API()->getSpeaker(); });
+  post('/api/get/limiter/calc', function () { Modules::API()->calcLimiter(); });
+}
+
 //Modal Routes
 get('/app/modal/open/$type/$action/$rack_id', function ($type, $action, $rack_id) { Modules::Modals()->OpenModal($type, $action, $rack_id); });
 
