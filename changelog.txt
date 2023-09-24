@@ -27,6 +27,7 @@ VERSION 0.0.6-alpha
 - new api endpoint : get/processor
 - new api endpoint : calc/limiter
 - new translations for the new settings
+- ne limiter checks
 
 VERSION 0.0.5-alpha
 - Implement security measures
