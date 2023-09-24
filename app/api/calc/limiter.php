@@ -17,7 +17,6 @@ if (!(isset($request_data->http_user_token)) || !($request_data->http_user_token
 $processor_id = $request_data->processor_id;
 $amplifier_id = $request_data->amplifier_id;
 $speaker_id = $request_data->speaker_id;
-$scaling = $request_data->scaling;
 $bridge_mode_enabled = $request_data->bridge_mode;
 
 // get all the databse information
@@ -25,8 +24,42 @@ $processor = Functions::Processors()->get($processor_id);
 $amplifier = Functions::Amplifiers()->get($amplifier_id);
 $speaker = Functions::Speakers()->get($speaker_id);
 
-$speaker_bandwidth = $speaker["bandwidth"];
-$processor_offset = $processor["proc_offset"];
+// CONFIG INFORMATION
+
+// Speaker Data
+$speaker_power_peak = $speaker["power_peak"]; // speaker_power_peak
+$speaker_power_program = $speaker["power_program"]; // speaker_power_program
+$speaker_power_rms = $speaker["power_rms"]; // speaker_power_rms
+$speaker_impedance = $speaker["impedance"]; // speaker_impedance
+$speaker_max_spl = $speaker["max_spl"]; // speaker_max_spl
+$speaker_spl = $speaker["sensitivity"]; // speaker_spl
+
+// Amplifier Data
+$amplifier_height = $amplifier["rack_units"]; // amplifier_height
+$amplifier_outputs = $amplifier["ch_outputs"]; // amplifier_outputs
+
+$amplifier_power_16 = $amplifier["amp_power_16"]; // amplifier_power_16
+$amplifier_power_8 = $amplifier["amp_power_8"]; // amplifier_power_8
+$amplifier_power_4 = $amplifier["amp_power_4"]; // amplifier_power_4
+$amplifier_power_2 = $amplifier["amp_power_2"]; // amplifier_power_2
+$amplifier_power_bridge_8 = $amplifier["amp_power_bridge_8"]; // amplifier_power_bridge_8
+$amplifier_power_bridge_4 = $amplifier["amp_power_bridge_4"]; // amplifier_power_bridge_4
+
+// Processor Data
+$processor_inputs = $processor["ch_inputs"]; // processor_inputs
+$processor_outputs = $processor["ch_outputs"]; // processor_outputs
+$processor_offset = $processor["proc_offset"]; // processor_offsets
+
+// SETTINGS & SETUP FOR CALCUALTIONS
+
+$setup_speakers_parallel = $request_data->speakers_in_parallel; // setup_speakers_parallel
+$setup_speakers_series = 1; // setup_speakers_series
+$speaker_bandwidth = $speaker["bandwidth"]; // speaker_bandwidth
+$setup_scaling = $request_data->scaling; // setup_scaling
+$setup_bridge_mode = $request_data->bridge_mode; // setup_bridge_mode
+
+
+// ----------------------------------------------------------------
 
 $lim_rms_releases = array(
     "SUB" => "4000-8000",
@@ -52,7 +85,7 @@ if (array_key_exists($speaker_bandwidth, $lim_rms_attacks)) {
     $lim_rms_attack = $lim_rms_attacks[$speaker_bandwidth];
 }
 
-$peak_release_times = array(
+$lim_peak_releases = array(
     "SUB" => "128-384",
     "LF" => "64-256",
     "MF" => "16-64",
@@ -60,11 +93,11 @@ $peak_release_times = array(
     "HF" => "8-32",
 );
 $peak_release_time = '';
-if (array_key_exists($speaker_bandwidth, $peak_release_times)) {
-    $peak_release_time = $peak_release_times[$speaker_bandwidth];
+if (array_key_exists($speaker_bandwidth, $lim_peak_releases)) {
+    $peak_release_time = $lim_peak_releases[$speaker_bandwidth];
 }
 
-$peak_attack_times = array(
+$lim_peak_attacks = array(
     "SUB" => "16-32",
     "LF" => "8-16",
     "MF" => "2-8",
@@ -72,8 +105,8 @@ $peak_attack_times = array(
     "HF" => "0.5-2",
 );
 $peak_attack_time = '';
-if (array_key_exists($speaker_bandwidth, $peak_attack_times)) {
-    $peak_attack_time = $peak_attack_times[$speaker_bandwidth];
+if (array_key_exists($speaker_bandwidth, $lim_peak_attacks)) {
+    $peak_attack_time = $lim_peak_attacks[$speaker_bandwidth];
 }
 
 $rms_scaling = array(
@@ -88,81 +121,174 @@ if (array_key_exists($speaker_bandwidth, $rms_scaling)) {
     $rms_limit_correction = $rms_scaling[$speaker_bandwidth];
 }
 
-// get speaker information
-// speaker.impedance
-// speaker.impedance / speaker_amount_parallel (8/1 = 8) -> $impedance_requested
-// $impedance_requested = speaker.impedance / speaker_amount_parallel
-// $speaker_requested_power = speaker.power * speaker_amount_parallel
+// Select the right impedance
+// $speaker_impedance from database
+$calc_impedance = $speaker_impedance / $setup_speakers_parallel; // calculated impedance
+$closest_impedance = getClosestImpedance($calc_impedance);
 
-// get amplifier information
-// $amplifier_impedance = round($impedance_requested);
-// $amplifier_power = amplifer.power_impedance
+// 1 * 400W * (75/100) = 300W;
+$calc_peak_power = $setup_speakers_parallel * $speaker_power_peak * ( $setup_scaling / 100 ); // calc_peak_power
+$power_request_peak = $calc_peak_power;
 
-// compare $amplifier_power with $speaker_request_power
-// if speaker request power is larger than amplifier power -> Amplifier is limiting factor. Calculate Limiter values for Amplifier.
-// if speaker request power is smaller than Amplifier power -> Speaker is limiting factor. Calculate Limiter values for Speaker
+// 1 * 200W * (75/100) = 150W;
+$calc_program_power = $setup_speakers_parallel * $speaker_power_program * ($setup_scaling / 100 ); // calc_program_power
+$power_request_program = $calc_program_power;
 
-// limiter value = $dbu - $vgain - $processor_offset
-// limiter value =( 20 * LOG10( SQRT( $power * $impedance) / 0,775 ) - $vgain ) - $processor_offset
-// $power -> Database
-// $impedance -> Database
-// $processor_offset -> Database
-// $vrms = SQRT( $power * $impedance )
-// $dbu = 20 * LOG10( $vrms / 0,775 )
-// $vgain = ( $vrms ) - ( 20 * LOG10( $input_sensitivity / 0,775 ) )
-// $vpeak = SQRT( 2 ) * $vrms
+// 1 * 100W * (75/100) = 75W;
+$calc_rms_power = $setup_speakers_parallel * $speaker_power_rms * ($setup_scaling / 100);
+$power_request_rms = $calc_rms_power;
+
+$actual_power_request = getActualPower($calc_peak_power, $closest_impedance, $calc_impedance);
+$amplifier_output_peak_single = getAmplifierOutput($amplifier, $closest_impedance);
+$amplifier_peak_power_request_single = ( $actual_power_request / $amplifier_output_peak_single ) * 100;
+
+$amplifier_output_peak_bridge = getAmplifierOutputBridge($amplifier, $closest_impedance);
+$amplifier_peak_power_request_bridge = ( $actual_power_request / $amplifier_output_peak_bridge ) * 100;
+
+$loudspeaker_usage_potential_single = min(100, 100 / $amplifier_peak_power_request_single) * 100;
+$loudspeaker_usage_potential_headroom_single = (-10 * log10($amplifier_peak_power_request_single / 100));
+
+$loudspeaker_usage_potential_bridge = min(100, 100 / $amplifier_peak_power_request_bridge) * 100;
+$loudspeaker_usage_potential_headroom_bridge = -10 * log10($amplifier_peak_power_request_bridge / 100);
+
+$calc_Vpeak = sqrt( $calc_peak_power * $calc_impedance ); // calc_Vpeak
+$calc_Vrms = sqrt( $calc_rms_power * $calc_impedance); // calc_Vrms
+$calc_Apeak = SQRT( $calc_peak_power / $calc_impedance ); // calc_Apeak
+$calc_Arms = SQRT( $calc_rms_power / $calc_impedance); // calc_Arms
+
+$limiting_factor = defineLimitingFactor( $amplifier_output_peak_single, $actual_power_request );
+
+
 
 if ($bridge_mode_enabled) {
-    $bridge_mode = true;
+    $lim_clip_Vclip = $calc_Vpeak * 1.05 / 1; // clip voltage
 
+    $max_output_voltage = sqrt($amplifier_output_peak_bridge * $closest_impedance);
+    $lim_peak_Vpeak = sqrt($power_request_peak * $calc_impedance) / 1; // peak voltage
+
+    $lim_rms_Vrms = sqrt( $power_request_rms * $calc_impedance ) / 1 * $rms_limit_correction; // rms voltage
+
+    $bridge_mode_enabled_2 = 0;
 } else {
-    $bridge_mode = false;
+    $lim_clip_Vclip = $calc_Vpeak * 1.05 / 2; // clip voltage
+
+    $max_output_voltage = sqrt($amplifier_output_peak_single * $closest_impedance);
+    $lim_peak_Vpeak = sqrt($power_request_peak * $calc_impedance) / 2; // peak voltage
+
+    $lim_rms_Vrms = sqrt( $power_request_rms * $calc_impedance ) / 2 * $rms_limit_correction; // rms voltage
+
+    $bridge_mode_enabled_2 = 1;
 }
 
-$vgain_correction = ''; //value comes from the form
+$input_sens = $request_data->input_sensitivity;
 
-$impedance = ( Config!B10 / Output!B3 );
+$lim_clip_value = calculateLimiter($power_request_peak, $calc_impedance, $input_sens, $processor_offset);
+$lim_peak_value = calculateLimiter($power_request_program, $calc_impedance, $input_sens, $processor_offset);
+$lim_rms_value = calculateLimiter($power_request_rms, $calc_impedance, $input_sens, $processor_offset);
 
-$peak_power = ( Output!B3 * Output!B4 * Config!B7 * ( Output!B6 / 100 ) * 100 );
-$peak_voltage = ( SQRT( $peak_power * $impedance ) );
 
-$lim_clip_volts = ( IF( AND( $peak_voltage > 0; $peak_voltage < > 0 ); $peak_voltage * 1,05 / CALC!B5; "Missing MaxOutVoltage" ) );
-$lim_peak_volts = ( IF( AND( Config!E18 > 0; Config!E18 < > 0 ); MIN( 0,8 *SQRT( $peak_power * $impedance ) / CALC!B5; Config!E18 ); "Missing MaxOutVoltage" ) );
-$lim_rms_volts = ( SQRT( Output!H6 * $impedance ) / CALC!B5 * CALC!E1 );
+// Zuweisung
+$apr_single = $amplifier_peak_power_request_single;
+$apr_bridge = $amplifier_peak_power_request_bridge;
+$lup_single = $loudspeaker_usage_potential_single;
+$lup_bridge = $loudspeaker_usage_potential_bridge;
+$lup_headroom_single = $loudspeaker_usage_potential_headroom_single;
+$lup_headroom_bridge = $loudspeaker_usage_potential_headroom_bridge;
+$apr_power_peak = $power_request_peak;
+$apr_power_program = $power_request_program;
+$apr_power_rms = $power_request_rms;
+$apr_impedance = $calc_impedance;
+$apr_vpeak = $calc_Vpeak;
+$apr_vrms = $calc_Vrms;
+$apr_apeak = $calc_Apeak;
+$apr_arms = $calc_Arms;
+$lim_clip_volts = $lim_clip_Vclip;
+$lim_peak_volts = $lim_peak_Vpeak;
+$lim_rms_volts = $lim_rms_Vrms;
 
-$input_sensitivity = $request_data->input_sensitivity; // this is 0.775 as default
-$input_level = ( 20 * LOG10( $input_sensitivity / 0,775 ) ); // this is in dBu
-$vgain = 20 * LOG10( SQRT( $power_request * $impedance ) / 0,775 ) - $input_level; // this is in dBu
 
-$lim_clip_value = ( 20 * LOG10( $lim_clip_volts / 0,775 ) - $vgain - $processor_offset ); 
-$lim_peak_value = ( 20 * LOG10( $lim_peak_volts / 0,775 ) - $vgain - $processor_offset );
-$lim_rms_value = ( 20 * LOG10( $lim_rms_volts / 0,775 ) - $vgain - $processor_offset );
+// Functions
+function getClosestImpedance ($calc_impedance) {
+    if ($calc_impedance < 2) {
+        $closest_impedance = 0;
+    }
+    
+    if ( ($calc_impedance >= 2) && !($calc_impedance >= 3) ) {
+        $closest_impedance = 2;
+    }
+    
+    if ( ($calc_impedance >= 3) && !($calc_impedance >= 6) ) {
+        $closest_impedance = 4;
+    }
+    
+    if ( ($calc_impedance >= 6) && !($calc_impedance >= 12) ) {
+        $closest_impedance = 8;
+    }
+    
+    if ( ($calc_impedance >= 12) && !($calc_impedance >= 17) ) {
+        $closest_impedance = 16;
+    }
 
+    return $closest_impedance;
+}
+
+function getAmplifierOutput($amplifier, $closest_impedance) {
+    return $amplifier["amp_power_" . $closest_impedance];
+}
+
+function getAmplifierOutputBridge($amplifier, $closest_impedance) {
+    return $amplifier["amp_power_bridge_" . $closest_impedance];
+}
+
+function getActualPower($peak_power, $closest_impedance, $real_impedance) {
+    return $peak_power * $real_impedance / $closest_impedance / 2;
+}
+
+function calculateLimiter($power, $impedance, $sens, $offset) {
+    $amplification_volts = SQRT( $power * $impedance);
+    $amplification_dbu = 20 * LOG10( $amplification_volts / 0.775 );
+    $input_sens_dbu = 20 * log10($sens / 0.775);
+    $vgain = $amplification_dbu - $input_sens_dbu;
+    $limiter_dbu = $amplification_dbu - $vgain;
+    return $limiter = $limiter_dbu - $offset;
+}
+
+function defineLimitingFactor($amplifier_power, $speaker_power) {
+    if ($amplifier_power >= $speaker_power) {
+        $limiting_factor = "Speaker";
+    } if ($speaker_power >= $amplifier_power) {
+        $limiting_factor = "Amplifier";
+    }
+    return $limiting_factor;
+}
+
+// RETURN DATA
 $return_data = array(
-    'apr_single' => '',
-    'apr_bridge' => '',
-    'lup_single' => '',
-    'lup_bridge' => '',
-    'lup_headroom_single' => '',
-    'lup_headroom_bridge' => '',
-    'apr_power_peak' => '',
-    'apr_power_program' => '',
-    'apr_power_rms' => '',
-    'apr_impedance' => '',
-    'apr_vpeak' => '',
-    'apr_vrms' => '',
-    'apr_apeak' => '',
-    'apr_arms' => '',
-    'lim_clip_v' => $lim_clip_volts,
-    'lim_clip_value' => $lim_clip_value,
-    'lim_peak_v' => $lim_peak_volts,
-    'lim_peak_value' => $lim_peak_value,
+    'apr_single' => $apr_single,
+    'apr_bridge' => $apr_bridge,
+    'lup_single' => round($lup_single, 2),
+    'lup_bridge' => round($lup_bridge, 2),
+    'lup_headroom_single' => round($lup_headroom_single, 2),
+    'lup_headroom_bridge' => round($lup_headroom_bridge, 2),
+    'apr_power_peak' => round($apr_power_peak, 2),
+    'apr_power_program' => round($apr_power_program, 2),
+    'apr_power_rms' => round($apr_power_rms, 2),
+    'apr_impedance' => round($apr_impedance, 2),
+    'apr_vpeak' => round($apr_vpeak, 2),
+    'apr_vrms' => round($apr_vrms, 2),
+    'apr_apeak' => round($apr_apeak, 2),
+    'apr_arms' => round($apr_arms, 2),
+    'lim_clip_v' => round($lim_clip_volts, 2),
+    'lim_clip_value' => round($lim_clip_value, 2),
+    'lim_peak_v' => round($lim_peak_volts, 2),
+    'lim_peak_value' => round($lim_peak_value, 2),
     'lim_peak_attack' => $peak_attack_time,
     'lim_peak_release' => $peak_release_time,
-    'lim_rms_v' => $lim_rms_volts,
-    'lim_rms_value' => $lim_rms_value,
+    'lim_rms_v' => round($lim_rms_volts, 2),
+    'lim_rms_value' => round($lim_rms_value, 2),
     'lim_rms_attack' => $lim_rms_attack,
     'lim_rms_release' => $lim_rms_release,
+    'limiting_factor' => $limiting_factor,
 );
 
 

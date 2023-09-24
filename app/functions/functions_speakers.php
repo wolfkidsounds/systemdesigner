@@ -61,7 +61,7 @@ class Speakers {
 
     public static function setBandwidth($id, $bandwith) {
         $db = new Database();
-        $query = "UPDATE speaker SET bandwith = ? WHERE id = ?";
+        $query = "UPDATE speaker SET bandwidth = ? WHERE id = ?";
         $db->query($query, $bandwith, $id);
     }
 
