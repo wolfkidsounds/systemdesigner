@@ -30,3 +30,10 @@ table {
     transition:all .5s ease;
     background:rgba(255,255,255,.8);
 }
+
+.disabled {
+    background:rgba(255,255,255,.4);
+    opacity:.5;
+    padding:10px;
+    border-radius:3px;
+}

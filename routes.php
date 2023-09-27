@@ -114,6 +114,8 @@ if (Modules::Features()->getAPIFeature()) {
   post('/api/get/limiter/calc', function () { Modules::API()->calcLimiter(); });
 }
 
+get('/test', 'app/views/test.php');
+
 //Modal Routes
 get('/app/modal/open/$type/$action/$rack_id', function ($type, $action, $rack_id) { Modules::Modals()->OpenModal($type, $action, $rack_id); });
 
