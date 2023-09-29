@@ -76,20 +76,16 @@ class Amplifiers {
         $db->query($query, $file_attachment, $id);
     }
 
-    public static function setPower($id, $amp_power, $amp_vpeak, $amp_vgain, $ohm, $bridge) {
+    public static function setPower($id, $amp_power, $ohm, $bridge) {
         $db = new Database();
         if ($bridge) {
             $amp_power_column = "amp_power_bridge_" . $ohm;
-            $amp_vpeak_column = "amp_vpeak_bridge_" . $ohm;
-            $amp_vgain_column = "amp_vgain_bridge_" . $ohm;
         } else {
             $amp_power_column = "amp_power_" . $ohm;
-            $amp_vpeak_column = "amp_vpeak_" . $ohm;
-            $amp_vgain_column = "amp_vgain_" . $ohm;
         }
     
-        $query = "UPDATE amplifier SET $amp_power_column = ?, $amp_vpeak_column = ?, $amp_vgain_column = ?, date_edited = NOW() WHERE id = ?";
-        $db->query($query, $amp_power, $amp_vpeak, $amp_vgain, $id);
+        $query = "UPDATE amplifier SET $amp_power_column = ?, date_edited = NOW() WHERE id = ?";
+        $db->query($query, $amp_power, $id);
         $db->close();
     }
 

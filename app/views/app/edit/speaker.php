@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/includes/assets/css/speaker.css">
 <link rel="stylesheet" href="/includes/assets/css/new_item.css">
 
-<?php //new/amplifer.php
+<?php //edit/speaker.php
 
 require_once VIEWSPATH . "partials/inc_partials.php";
 Partials::Open();
@@ -12,11 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $name = $_POST['name'];
     $bandwidth = $_POST['bandwidth'];
     $power_rms = $_POST['power_rms'];
-    $power_program = $_POST['power_program'];
-    $power_peak = $_POST['power_peak'];
     $impedance = $_POST['impedance'];
-    $vpeak = $_POST['vpeak'];
-    $vrms = $_POST['vrms'];
     $sens_spl = $_POST['sens_spl'];
     $max_spl = $_POST['max_spl'];
 
@@ -29,13 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     Functions::Speakers()->setName($id, $name);
     Functions::Speakers()->setBandwidth($id, $type);
     Functions::Speakers()->setPower_RMS($id, $power_rms);
-    Functions::Speakers()->setPower_Program($id, $power_program);
-    Functions::Speakers()->setPower_Peak($id, $power_peak);
     Functions::Speakers()->setImpedance($id, $impedance);
-    Functions::Speakers()->setVpeak($id, $vpeak);
-    Functions::Speakers()->setVrms($id, $vrms);
-    Functions::Speakers()->setSens($id, $sens_spl);
-    Functions::Speakers()->setSPL($id, $max_spl);
+    Functions::Speakers()->setSPL($id, $sens_spl);
+    Functions::Speakers()->setMaxSPL($id, $max_spl);
 
     header("Location: /app/edit/speaker/" . $speaker_id);
 
@@ -50,11 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $name = $speaker['name'];
     $bandwidth = $speaker['bandwidth'];
     $power_rms = $speaker['power_rms'];
-    $power_program = $speaker['power_program'];
-    $power_peak = $speaker['power_peak'];
     $impedance = $speaker['impedance'];
-    $vpeak = $speaker['vpeak'];
-    $vrms = $speaker['vrms'];
     $sens_spl = $speaker['sensitivity'];
     $max_spl = $speaker['max_spl'];
 
@@ -122,48 +110,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             <h3>Electrical Specification</h3>          
             <div class="form-divider">
                 <div style="grid-column:1/2;" class="form-element-tooltip">
-                    <div class="tooltip tooltip-right" data-tooltip="Enter RMS/AES Power (W)">
-                        <i class="fa-solid fa-question"></i>
-                    </div>
                     <div class="input-group">
-                        <input class="form-input" type="number" id="power_rms" name="power_rms" value="<?php out($power_rms); ?>" oninput="calculatePower(); calculateVoltage();" placeholder="RMS/AES Power (W)...">
+                        <input class="form-input" type="number" id="power_rms" name="power_rms" value="<?php out($power_rms); ?>" oninput="calculateMaxSPL('sens_spl', 'power_rms', 'max_spl')" placeholder="RMS/AES Power (W)...">
                         <span class="input-group-addon addon-sm">Watt</span>
-                    </div>
-                </div>
-                <div style="grid-column:1/2;" class="form-element-tooltip">
-                    <div class="tooltip tooltip-right" data-tooltip="Program Power (W)">
-                        <i class="fa-solid fa-question"></i>
-                    </div>
-                    <div class="input-group">
-                        <input class="form-input" type="number" id="power_program" step="0" name="power_program" value="<?php out($power_program); ?>" placeholder="Program Power (W)...">
-                        <span class="input-group-addon addon-sm">Watt</span>
-                    </div>
-                </div>
-                <div style="grid-column:2/3;" class="form-element-tooltip">
-                    <div class="tooltip tooltip-right" data-tooltip="Peak Power (W)">
-                        <i class="fa-solid fa-question"></i>
-                    </div>
-                    <div class="input-group">
-                        <input class="form-input" type="number" id="power_peak" step="0" name="power_peak" value="<?php out($power_peak); ?>" placeholder="Peak Power (W)...">
-                        <span class="input-group-addon addon-sm">Watt</span>
-                    </div>
-                </div>
-                <div style="grid-column:3/4;" class="form-element-tooltip">
-                    <div class="tooltip tooltip-left" data-tooltip="Vpeak (V)">
-                        <i class="fa-solid fa-question"></i>
-                    </div>
-                    <div class="input-group">
-                        <input class="form-input" type="number" id="vpeak" step="0.01" name="vpeak" value="<?php out($vpeak); ?>" placeholder="Vpeak (V)...">
-                        <span class="input-group-addon addon-sm">V</span>
-                    </div>
-                </div>
-                <div style="grid-column:4/5;" class="form-element-tooltip">
-                    <div class="tooltip tooltip-left" data-tooltip="Vrms (V)">
-                        <i class="fa-solid fa-question"></i>
-                    </div>
-                    <div class="input-group">
-                        <input class="form-input" type="number" id="vrms" step="0.01" name="vrms" value="<?php out($vrms); ?>" placeholder="Vrms (V)...">
-                        <span class="input-group-addon addon-sm">V</span>
                     </div>
                 </div>
             </div>
@@ -199,34 +148,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     <script src="/includes\assets\js\select2.js"></script>
 
     <script>
-    function calculatePower() {
-        // Get input values
-        const powerRMS = parseFloat(document.getElementById('power_rms').value);
-        const impedance = parseFloat(document.getElementById('impedance').value);
-
-        // Calculate power_program and power_peak
-        const powerProgram = powerRMS * 2;
-        const powerPeak = powerRMS * 4;
-
-        // Update the input fields
-        document.getElementById('power_program').value = powerProgram;
-        document.getElementById('power_peak').value = powerPeak;
-    }
-
-    function calculateVoltage() {
-        // Get input values
-        const powerRMS = parseFloat(document.getElementById('power_rms').value);
-        const impedance = parseFloat(document.getElementById('impedance').value);
-
-        // Calculate Vpeak and Vrms
-        const vpeak = Math.sqrt(2) * Math.sqrt(powerRMS * impedance);
-        const vrms = Math.sqrt(powerRMS * impedance);
-
-        // Update the input fields
-        document.getElementById('vpeak').value = vpeak.toFixed(2);
-        document.getElementById('vrms').value = vrms.toFixed(2);
-    }
-
     function calculateMaxSPL() {
         // Get input values
         const powerRMS = parseFloat(document.getElementById('power_rms').value);

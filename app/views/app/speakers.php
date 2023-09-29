@@ -24,7 +24,6 @@ Partials::Header(true, true);
             <th><?php Translator::translate("speakers.type"); ?></th>
             <th>AES/RMS <?php Translator::translate("speakers.power"); ?> (W)</th>
             <th>Z nom. (Ω)</th>
-            <th>Vrms (V)</th>
             <th>1W @ 1m (dB SPL)</th>
             <th><?php Translator::translate("speakers.contributors"); ?></th>
             <th><?php Translator::translate("speakers.actions"); ?></th>
@@ -58,7 +57,6 @@ Partials::Header(true, true);
                     <td><?php out(Translator::translateReturn("speakers.bandwidth_" . $speaker["bandwidth"])); ?></td>
                     <td><?php out($speaker["power_rms"]); ?></td>
                     <td><?php out($speaker["impedance"]); ?></td>
-                    <td><?php out($speaker["vrms"]); ?></td>
                     <td><?php out($speaker["sensitivity"]); ?></td>
                     <td>
                         <?php

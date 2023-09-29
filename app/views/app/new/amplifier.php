@@ -50,35 +50,27 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     foreach ($power_specifications as $ohm) {
         $amp_power = $_POST["amp_power_{$ohm}"];
-        $amp_vpeak = $_POST["amp_vpeak_{$ohm}"];
-        $amp_vgain = $_POST["amp_vgain_{$ohm}"];
 
         // Set default values if empty
-        if (empty($amp_power) || empty($amp_vpeak) || empty($amp_vgain)) {
+        if (empty($amp_power)) {
             $amp_power = 0;
-            $amp_vpeak = 0;
-            $amp_vgain = 0;
         }
 
         // Register the amplifier power for the current specification
-        Functions::Amplifiers()->setPower($id, $amp_power, $amp_vpeak, $amp_vgain, $ohm, false);
+        Functions::Amplifiers()->setPower($id, $amp_power, $ohm, false);
     }
 
     foreach ($bridge_power_specifications as $ohm) {
         // Handle bridge variant
         $amp_power_bridge = $_POST["amp_power_bridge_{$ohm}"];
-        $amp_vpeak_bridge = $_POST["amp_vpeak_bridge_{$ohm}"];
-        $amp_vgain_bridge = $_POST["amp_vgain_bridge_{$ohm}"];
 
         // Set default values if empty
-        if (empty($amp_power_bridge) || empty($amp_vpeak_bridge) || empty($amp_vgain_bridge)) {
+        if (empty($amp_power_bridge)) {
             $amp_power_bridge = 0;
-            $amp_vpeak_bridge = 0;
-            $amp_vgain_bridge = 0;
         }
 
         // Register the amplifier power for the current specification (bridge)
-        Functions::Amplifiers()->setPower($id, $amp_power_bridge, $amp_vpeak_bridge, $amp_vgain_bridge, $ohm, true);
+        Functions::Amplifiers()->setPower($id, $amp_power_bridge, $ohm, true);
     }
 
     header("Location: /app/amplifiers");
@@ -155,141 +147,57 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             </div>
 
             <h3>Amplifier Power</h3>
-            <h6>@ 16 Ω</h6>            
-            <div class="form-divider">
-                <div style="grid-column:1/3;" class="form-element-tooltip">
-                    <div class="tooltip tooltip-right" data-tooltip="Enter the Power the amplifier supplies">
-                        <i class="fa-solid fa-question"></i>
-                    </div>
+            <div class="form-divider">            
+                <div style="grid-column:1/2;" class="form-element-tooltip">
+                    <h6>@ 16 Ω</h6>
                     <div class="input-group">
-                        <input class="form-input" type="number" id="amp_power_16" name="amp_power_16" oninput="calculateVpeakAndVgain('amp_power_16', 'amp_vpeak_16', 'amp_vgain_16', 16)" placeholder="Power (W)...">
+                        <input class="form-input" type="number" id="amp_power_16" name="amp_power_16" placeholder="Power (W)...">
+                        <span class="input-group-addon addon-sm">Watt</span>
+                    </div>
+                </div>   
+
+                <div style="grid-column:2/3;" class="form-element-tooltip">
+                    <h6>@ 8 Ω</h6>
+                    <div class="input-group">
+                        <input class="form-input" type="number" id="amp_power_8" name="amp_power_8" placeholder="Power (W)...">
+                        <span class="input-group-addon addon-sm">Watt</span>
+                    </div>
+                </div>       
+                
+                <div style="grid-column:3/4;" class="form-element-tooltip">
+                    <h6>@ 4 Ω</h6>
+                    <div class="input-group">
+                        <input class="form-input" type="number" id="amp_power_4" name="amp_power_4" placeholder="Power (W)...">
                         <span class="input-group-addon addon-sm">Watt</span>
                     </div>
                 </div>
-                <div class="form-element-tooltip">
-                    <div class="tooltip tooltip-right" data-tooltip="Vpeak (V)">
-                        <i class="fa-solid fa-question"></i>
-                    </div>
+
+                <div style="grid-column:4/5;" class="form-element-tooltip">
+                    <h6>@ 2 Ω</h6>  
                     <div class="input-group">
-                        <input class="form-input" type="number" step="0.01" id="amp_vpeak_16" name="amp_vpeak_16" placeholder="Vpeak (V)">
-                        <span class="input-group-addon addon-sm">Volt</span>
-                    </div>
-                </div>
-                <div class="form-element-tooltip">
-                    <div class="tooltip tooltip-left" data-tooltip="Vgain (dB)">
-                        <i class="fa-solid fa-question"></i>
-                    </div>
-                    <div class="input-group">
-                        <input class="form-input" type="number" step="0.01" id="amp_vgain_16" name="amp_vgain_16" placeholder="Vgain (dB)">
-                        <span class="input-group-addon addon-sm">dB</span>
-                    </div>
-                </div>
-            </div>
-            <h6>@ 8 Ω</h6>            
-            <div class="form-divider">
-                <div style="grid-column:1/3;" class="form-element-tooltip">
-                    <div class="input-group">
-                        <input class="form-input" type="number" id="amp_power_8" name="amp_power_8" oninput="calculateVpeakAndVgain('amp_power_8', 'amp_vpeak_8', 'amp_vgain_8', 8)" placeholder="Power (W)...">
+                        <input class="form-input" type="number" id="amp_power_2" name="amp_power_2" placeholder="Power (W)...">
                         <span class="input-group-addon addon-sm">Watt</span>
                     </div>
                 </div>
-                <div class="form-element-tooltip">
-                    <div class="input-group">
-                        <input class="form-input" type="number" step="0.01" id="amp_vpeak_8" name="amp_vpeak_8" placeholder="Vpeak (V)...">
-                        <span class="input-group-addon addon-sm">Volt</span>
-                    </div>
-                </div>
-                <div class="form-element-tooltip">
-                    <div class="input-group">
-                        <input class="form-input" type="number" step="0.01" id="amp_vgain_8" name="amp_vgain_8" placeholder="Vgain (dB)...">
-                        <span class="input-group-addon addon-sm">dB</span>
-                    </div>
-                </div>
             </div>
-            <h6>@ 4 Ω</h6>            
+                       
             <div class="form-divider">
                 <div style="grid-column:1/3;" class="form-element-tooltip">
+                    <h6>Bridged @ 8 Ω</h6> 
                     <div class="input-group">
-                        <input class="form-input" type="number" id="amp_power_4" name="amp_power_4" oninput="calculateVpeakAndVgain('amp_power_4', 'amp_vpeak_4', 'amp_vgain_4', 4)" placeholder="Power (W)...">
+                        <input class="form-input" type="number" id="amp_power_bridge_8" name="amp_power_bridge_8" placeholder="Power Brdiged (W)...">
+                        <span class="input-group-addon addon-sm">Watt</span>
+                    </div>
+                </div>        
+                <div style="grid-column:3/5;" class="form-element-tooltip">
+                    <h6>Bridged @ 4 Ω</h6>    
+                    <div class="input-group">
+                        <input class="form-input" type="number" id="amp_power_bridge_4" name="amp_power_bridge_4" placeholder="Power Bridged (W)...">
                         <span class="input-group-addon addon-sm">Watt</span>
                     </div>
                 </div>
-                <div class="form-element-tooltip">
-                    <div class="input-group">
-                        <input class="form-input" type="number" step="0.01" id="amp_vpeak_4" name="amp_vpeak_4" placeholder="Vpeak (V)...">
-                        <span class="input-group-addon addon-sm">Volt</span>
-                    </div>
-                </div>
-                <div class="form-element-tooltip">
-                    <div class="input-group">
-                        <input class="form-input" type="number" step="0.01" id="amp_vgain_4" name="amp_vgain_4" placeholder="Vgain (dB)...">
-                        <span class="input-group-addon addon-sm">dB</span>
-                    </div>
-                </div>
             </div>
-            <h6>@ 2 Ω</h6>            
-            <div class="form-divider">
-                <div style="grid-column:1/3;" class="form-element-tooltip">
-                    <div class="input-group">
-                        <input class="form-input" type="number" id="amp_power_2" name="amp_power_2" oninput="calculateVpeakAndVgain('amp_power_2', 'amp_vpeak_2', 'amp_vgain_2', 2)" placeholder="Power (W)...">
-                        <span class="input-group-addon addon-sm">Watt</span>
-                    </div>
-                </div>
-                <div class="form-element-tooltip">
-                    <div class="input-group">
-                        <input class="form-input" type="number" step="0.01" id="amp_vpeak_2" name="amp_vpeak_2" placeholder="Vpeak (V)...">
-                        <span class="input-group-addon addon-sm">Volt</span>
-                    </div>
-                </div>
-                <div class="form-element-tooltip">
-                    <div class="input-group">
-                        <input class="form-input" type="number" step="0.01" id="amp_vgain_2" name="amp_vgain_2" placeholder="Vgain (dB)...">
-                        <span class="input-group-addon addon-sm">dB</span>
-                    </div>
-                </div>
-            </div>
-            <h6>Bridged @ 8 Ω</h6>            
-            <div class="form-divider">
-                <div style="grid-column:1/3;" class="form-element-tooltip">
-                    <div class="input-group">
-                        <input class="form-input" type="number" id="amp_power_bridge_8" name="amp_power_bridge_8" oninput="calculateVpeakAndVgain('amp_power_bridge_8', 'amp_vpeak_bridge_8', 'amp_vgain_bridge_8', 8)" placeholder="Power Brdiged (W)...">
-                        <span class="input-group-addon addon-sm">Watt</span>
-                    </div>
-                </div>
-                <div class="form-element-tooltip">
-                    <div class="input-group">
-                        <input class="form-input" type="number" step="0.01" id="amp_vpeak_bridge_8" name="amp_vpeak_bridge_8" placeholder="Vpeak (V)...">
-                        <span class="input-group-addon addon-sm">Volt</span>
-                    </div>
-                </div>
-                <div class="form-element-tooltip">
-                    <div class="input-group">
-                        <input class="form-input" type="number" step="0.01" id="amp_vgain_bridge_8" name="amp_vgain_bridge_8" placeholder="Vgain (dB)...">
-                        <span class="input-group-addon addon-sm">dB</span>
-                    </div>
-                </div>
-            </div>
-            <h6>Bridged @ 4 Ω</h6>            
-            <div class="form-divider">
-                <div style="grid-column:1/3;" class="form-element-tooltip">
-                    <div class="input-group">
-                        <input class="form-input" type="number" id="amp_power_bridge_4" name="amp_power_bridge_4" oninput="calculateVpeakAndVgain('amp_power_bridge_4', 'amp_vpeak_bridge_4', 'amp_vgain_bridge_4', 4)" placeholder="Power Bridged (W)...">
-                        <span class="input-group-addon addon-sm">Watt</span>
-                    </div>
-                </div>
-                <div class="form-element-tooltip">
-                    <div class="input-group">
-                        <input class="form-input" type="number" step="0.01" id="amp_vpeak_bridge_4" name="amp_vpeak_bridge_4" placeholder="Vpeak (V)...">
-                        <span class="input-group-addon addon-sm">Volt</span>
-                    </div>
-                </div>
-                <div class="form-element-tooltip">
-                    <div class="input-group">
-                        <input class="form-input" type="number" step="0.01" id="amp_vgain_bridge_4" name="amp_vgain_bridge_4" placeholder="Vgain (dB)...">
-                        <span class="input-group-addon addon-sm">dB</span>
-                    </div>
-                </div>
-            </div>
+            
 
             <h6>Documents/Manual</h6>
             <div class="form-divider">
@@ -308,25 +216,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     <script src="/node_modules\jquery\dist\jquery.min.js"></script>
     <script src="/node_modules\select2\dist\js\select2.min.js"></script>
     <script src="/includes\assets\js\select2.js"></script>
-
-    <script>
-        function calculateVpeakAndVgain(powerInputId, vpeakInputId, vgainInputId, ohms) {
-            const powerInput = document.getElementById(powerInputId);
-            const vpeakInput = document.getElementById(vpeakInputId);
-            const vgainInput = document.getElementById(vgainInputId);
-
-            // Get the entered power value
-            const power = parseFloat(powerInput.value);
-
-            // Calculate Vpeak and Vgain
-            const vpeak = Math.sqrt(power * ohms);
-            const vgain = 20 * Math.log10(vpeak);
-
-            // Update the Vpeak and Vgain fields
-            vpeakInput.value = vpeak.toFixed(2);
-            vgainInput.value = vgain.toFixed(2);
-        }
-    </script>
 
     <?php 
 } 

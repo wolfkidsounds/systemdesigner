@@ -35,7 +35,7 @@ class Brands {
         return $count;
     }
 
-    public static function set($name) {
+    public static function set($name, $type) {
 
         if (Functions::Brands()->check($name)) {
             header("Location: /app/brands");
@@ -43,8 +43,8 @@ class Brands {
         }
 
         $db = new Database();
-        $query = "INSERT INTO brand (name, user_id) VALUES (?, ?)";
-        $result = $db->query($query, $name, $_SESSION["user_id"]);
+        $query = "INSERT INTO brand (name, user_id, brand_type) VALUES (?, ?, ?)";
+        $result = $db->query($query, $name, $_SESSION["user_id"], $type);
         return $result;
     }
 

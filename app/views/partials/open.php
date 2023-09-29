@@ -13,7 +13,13 @@
     <link rel="stylesheet" href="/includes/assets/css/toolbar.css">
     <link rel="stylesheet" href="/includes\assets\css\chips.css">
     <link rel="stylesheet" href="/includes\assets\css\toast.css">
-    <link rel="stylesheet" href="/node_modules\select2\dist\css\select2.min.css">    
+    <link rel="stylesheet" href="/node_modules\select2\dist\css\select2.min.css">
+    <?php 
+    require_once ABSPATH . 'app/modules/modules.php';
+    if (Modules::UserAgent()->checkMobile()) {
+      ?> <link rel="stylesheet" href="/includes\assets\css\toast.css">
+
+    <?php } ?>    
   </head>
 
   <body>

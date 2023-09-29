@@ -28,6 +28,9 @@ VERSION 0.0.6-alpha
 - new api endpoint : calc/limiter
 - new translations for the new settings
 - new limiter checks
+- Implemented Configuration Modules for Limiters (more future options to come)
+- Added Translations for all features
+- Reworked Amplifiers and Speakers as well as Database Tables
 
 VERSION 0.0.5-alpha
 - Implement security measures

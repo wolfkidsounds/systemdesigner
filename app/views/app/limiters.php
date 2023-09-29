@@ -22,8 +22,8 @@ Partials::Header(true, true);
             <th><?php Translator::translate("limiters.processor"); ?></th>
             <th><?php Translator::translate("limiters.amplifier"); ?></th>
             <th><?php Translator::translate("limiters.speaker"); ?></th>
-            <th><?php Translator::translate("limiters.setting"); ?></th>
-            <th><?php Translator::translate("limiters.contributor"); ?></th>
+            <th><?php Translator::translate("limiters.peak_value"); ?></th>
+            <th><?php Translator::translate("limiters.rms_value"); ?></th>
             <th><?php Translator::translate("limiters.actions"); ?></th>
         </tr>
     </thead>
@@ -67,15 +67,8 @@ Partials::Header(true, true);
                             else { out(Translator::translate("speakers.not_found")); }
                         ?>
                     </td>
-                    <td><?php out($limiter["lim_value"]); ?></td>
-                    <td>
-                        <?php
-                            $user_id = $limiter["user_id"];
-                            $user = Functions::Users()->getUser($user_id);
-                            $user_name = $user["user_name"];
-                            out($user_name); 
-                        ?>
-                    </td>
+                    <td><?php out($limiter["lim_peak_val"]); ?></td>
+                    <td><?php out($limiter["lim_rms_val"]); ?></td>
                     <td>
                         <?php if (Functions::Users()->getUserID() == $user_id = $limiter["user_id"]) { ?>
                             <a class="edit action-button tooltip" data-id="<?php out($limiter["id"]); ?>" data-tooltip="<?php Translator::translate("limiters.edit"); ?>" href="/app/edit/limiter/<?php out($limiter["id"]); ?>"><i class="fa-solid fa-pen"></i></a>

@@ -81,6 +81,17 @@ $lang = array(
     'speakers.bandwidth_LF' => 'Low Frequency',
     'speakers.bandwidth_FR' => 'Full Range',
 
+    'limiters.new_limiter' => 'New Limiter',
+    'limiters.limiters' => 'Limiters',
+    'limiters.name' => 'Name',
+    'limiters.processor' => 'Processor',
+    'limiters.amplifier' => 'Amplifier',
+    'limiters.speaker' => 'Speaker',
+    'limiters.peak_value' => 'Peak',
+    'limiters.rms_value' => 'Rms',
+    'limiters.actions' => 'Actions',
+    'limiters.search' => 'Search',
+
     'account.account' => 'Account Information',
     'account.logout' => 'Logout',
     'account.name' => 'Name',

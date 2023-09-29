@@ -65,10 +65,16 @@ class Limiters {
         $db->query($query, $speaker_id, $id);
     }
 
-    public static function setValue($id, $lim_value) {
+    public static function setPeakValue($id, $lim_peak_value) {
         $db = new Database();
-        $query = "UPDATE limiter SET lim_value = ? WHERE id = ?";
-        $db->query($query, $lim_value, $id);
+        $query = "UPDATE limiter SET lim_peak_val = ? WHERE id = ?";
+        $db->query($query, $lim_peak_value, $id);
+    }
+
+    public static function setRmsValue($id, $lim_rms_value) {
+        $db = new Database();
+        $query = "UPDATE limiter SET lim_rms_val = ? WHERE id = ?";
+        $db->query($query, $lim_rms_value, $id);
     }
 
     public static function delete($limiter_id) {

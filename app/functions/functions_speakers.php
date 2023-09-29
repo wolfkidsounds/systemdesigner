@@ -71,43 +71,19 @@ class Speakers {
         $db->query($query, $power_rms, $id);
     }
 
-    public static function setPower_Program($id, $power_program) {
-        $db = new Database();
-        $query = "UPDATE speaker SET power_program = ? WHERE id = ?";
-        $db->query($query, $power_program, $id);
-    }
-
-    public static function setPower_Peak($id, $power_peak) {
-        $db = new Database();
-        $query = "UPDATE speaker SET power_peak = ? WHERE id = ?";
-        $db->query($query, $power_peak, $id);
-    }
-
     public static function setImpedance($id, $impedance) {
         $db = new Database();
         $query = "UPDATE speaker SET impedance = ? WHERE id = ?";
         $db->query($query, $impedance, $id);
     }
 
-    public static function setVpeak($id, $vpeak) {
+    public static function setSPL($id, $spl) {
         $db = new Database();
-        $query = "UPDATE speaker SET vpeak = ? WHERE id = ?";
-        $db->query($query, $vpeak, $id);
+        $query = "UPDATE speaker SET spl = ? WHERE id = ?";
+        $db->query($query, $spl, $id);
     }
 
-    public static function setVrms($id, $vrms) {
-        $db = new Database();
-        $query = "UPDATE speaker SET vrms = ? WHERE id = ?";
-        $db->query($query, $vrms, $id);
-    }
-
-    public static function setSens($id, $sensitivity) {
-        $db = new Database();
-        $query = "UPDATE speaker SET sensitivity = ? WHERE id = ?";
-        $db->query($query, $sensitivity, $id);
-    }
-
-    public static function setSPL($id, $max_spl) {
+    public static function setMaxSPL($id, $max_spl) {
         $db = new Database();
         $query = "UPDATE speaker SET max_spl = ? WHERE id = ?";
         $db->query($query, $max_spl, $id);
