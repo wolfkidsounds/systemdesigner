@@ -1,0 +1,40 @@
+:root {
+    --padding-general:10px;
+}
+
+html,
+body {
+    width:100%;
+    height:100%;
+    overflow-x:hidden;
+}
+
+body {
+    background:rgba(0,0,0,.9);
+}
+
+.container {
+    margin-top:calc(var(--navbar-height) + 20px);
+    margin-bottom:20px;
+    margin-left:calc(15vw + 20px);
+    width:calc(100vw - 15vw - 50px - 8px);
+    padding:var(--padding-general);
+    background:rgba(255,255,255,.1);
+    border-radius:6px;
+
+    color:#fff;
+}
+
+.horizontal-divider {
+    padding:0px;
+    height:1px;
+    margin:0px;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+.language-selector {
+    position:fixed;
+    right:20px;
+    bottom:20px;
+}
