@@ -22,7 +22,7 @@ jobs:
         image: mariadb:11.1.2
         env:
           MYSQL_ROOT_PASSWORD: symfony
-          MYSQL_DATABASE: main
+          MYSQL_DATABASE: app
         ports:
           - 3306:3306
     steps:
@@ -44,6 +44,6 @@ jobs:
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
-        DATABASE_URL: mysql://root:symfony@127.0.0.1:3306/main?serverVersion=11.1.2-MariaDB&charset=utf8mb4
+        DATABASE_URL: mysql://root:symfony@127.0.0.1:3306/app?serverVersion=11.1.2-MariaDB&charset=utf8mb4
       run: vendor/bin/phpunit
 
