@@ -17,21 +17,21 @@ permissions:
 jobs:
   symfony-tests:
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:10.6
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: app
+        ports:
+          - 3306:3306
     steps:
-    #  To automatically get bug fixes and new Php versions for shivammathur/setup-php,
-    # change this to (see https://github.com/shivammathur/setup-php#bookmark-versioning):
-    # uses: shivammathur/setup-php@v2
     - uses: shivammathur/setup-php@2cb9b829437ee246e9b3cac53555a39208ca6d28
       with:
         php-version: '8.1'
     - uses: actions/checkout@v3
     - name: Copy .env.test.local
       run: php -r "file_exists('.env.test.local') || copy('.env.test', '.env.test.local');"
-    - name: Set up MariaDB
-      uses: montudor/setup-mariadb@v2
-      with:
-        mariadb-version: '10.6'
-        mysql-root-password: symfony
     - name: Cache Composer packages
       id: composer-cache
       uses: actions/cache@v3
@@ -42,10 +42,8 @@ jobs:
           ${{ runner.os }}-php-
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-    - name: Create Database
-      run: |
-        mysql -u root -psymfony -e "CREATE DATABASE IF NOT EXISTS app;"
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
-        DATABASE_URL: mysql://app:symfony@127.0.0.1:3306/app?charset=utf8mb4
+        DATABASE_URL: mysql://root:password@127.0.0.1:3306/app?charset=utf8mb4
       run: vendor/bin/phpunit
+
