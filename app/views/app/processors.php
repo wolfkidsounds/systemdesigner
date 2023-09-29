@@ -31,6 +31,11 @@ Partials::Header(true, true);
     <tbody>
         <?php 
             $processors = Functions::Processors()->getAll();
+
+            if (!$processors) {
+                out("No Processors were found.");
+            }
+
             foreach ($processors as $processor) { ?>
                 <tr data-id="<?php out($processor["id"]); ?>">
                     <td>
@@ -59,8 +64,10 @@ Partials::Header(true, true);
                         ?>
                     </td>
                     <td>
-                        <a class="edit action-button tooltip" data-tooltip="<?php Translator::translate("processors.edit"); ?>" href="/app/edit/processor/<?php out($processor["id"]); ?>"><i class="fa-solid fa-pen"></i></a>
-                        <a class="del action-button tooltip" data-id="<?php out($processor["id"]); ?>" data-tooltip="<?php Translator::translate("processors.delete"); ?>" href="javascript:void(0);" onclick="deleteItem('processor', <?php out($processor['id']); ?>);"><i class="fas fa-trash"></i></a>
+                        <?php if (Functions::Users()->getUserID() == $user_id = $processor["user_id"]) { ?>
+                            <a class="edit action-button tooltip" data-tooltip="<?php Translator::translate("processors.edit"); ?>" href="/app/edit/processor/<?php out($processor["id"]); ?>"><i class="fa-solid fa-pen"></i></a>
+                            <a class="del action-button tooltip" data-id="<?php out($processor["id"]); ?>" data-tooltip="<?php Translator::translate("processors.delete"); ?>" href="javascript:void(0);" onclick="deleteItem('processor', <?php out($processor['id']); ?>);"><i class="fas fa-trash"></i></a>
+                        <?php } ?>
                         <?php if ($processor["file_attachment"]) { ?> <a download class="download action-button tooltip" data-tooltip="<?php Translator::translate("processors.download_manual"); ?>" href="/uploads/<?php echo $processor["file_attachment"]; ?>"><i class="fas fa-file-download"></i></a><?php } ?>
                     </td>
                 </tr>

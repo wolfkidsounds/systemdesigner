@@ -37,7 +37,7 @@ $settings = Functions::Users()->getAllSettings($user_id);
                             id="<?php out($setting["setting_key"]); ?>" 
                             name="<?php out($setting["setting_key"]); ?>"
                             type="checkbox" 
-                            <?php if ($setting["setting_value"] == true) { out("checked"); } ?>>
+                            <?php if ($setting["setting_value"] === "true") { out("checked"); } ?>>
                             <i class="form-icon"></i>
                     </label>                     
                 </td>

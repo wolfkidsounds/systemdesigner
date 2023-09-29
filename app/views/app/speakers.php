@@ -24,7 +24,6 @@ Partials::Header(true, true);
             <th><?php Translator::translate("speakers.type"); ?></th>
             <th>AES/RMS <?php Translator::translate("speakers.power"); ?> (W)</th>
             <th>Z nom. (Ω)</th>
-            <th>Vrms (V)</th>
             <th>1W @ 1m (dB SPL)</th>
             <th><?php Translator::translate("speakers.contributors"); ?></th>
             <th><?php Translator::translate("speakers.actions"); ?></th>
@@ -34,6 +33,10 @@ Partials::Header(true, true);
         <?php 
             
             $speakers = Functions::Speakers()->getAll();
+
+            if (!$speakers) {
+                out("No Speakers were found.");
+            }
 
             foreach ($speakers as $speaker) { ?>
                 <tr data-id="<?php out($speaker["id"]); ?>">
@@ -51,10 +54,9 @@ Partials::Header(true, true);
                         ?>
                     </td>
                     <td><?php out($speaker["name"]); ?></td>
-                    <td><?php out(Translator::translateReturn("speakers.type_" . $speaker["sp_type"])); ?></td>
+                    <td><?php out(Translator::translateReturn("speakers.bandwidth_" . $speaker["bandwidth"])); ?></td>
                     <td><?php out($speaker["power_rms"]); ?></td>
                     <td><?php out($speaker["impedance"]); ?></td>
-                    <td><?php out($speaker["vrms"]); ?></td>
                     <td><?php out($speaker["sensitivity"]); ?></td>
                     <td>
                         <?php
@@ -65,8 +67,10 @@ Partials::Header(true, true);
                         ?>
                     </td>
                     <td>
-                        <a class="edit action-button tooltip" data-tooltip="<?php Translator::translate("speakers.edit"); ?>" href="/app/edit/speaker/<?php out($speaker["id"]); ?>"><i class="fa-solid fa-pen"></i></a>
-                        <a class="del action-button tooltip" data-id="<?php out($speaker["id"]); ?>" data-tooltip="<?php Translator::translate("speakers.delete"); ?>" href="javascript:void(0);" onclick="deleteItem('speaker', <?php out($speaker['id']); ?>);"><i class="fas fa-trash"></i></a>
+                        <?php if (Functions::Users()->getUserID() == $user_id = $speaker["user_id"]) { ?>
+                            <a class="edit action-button tooltip" data-tooltip="<?php Translator::translate("speakers.edit"); ?>" href="/app/edit/speaker/<?php out($speaker["id"]); ?>"><i class="fa-solid fa-pen"></i></a>
+                            <a class="del action-button tooltip" data-id="<?php out($speaker["id"]); ?>" data-tooltip="<?php Translator::translate("speakers.delete"); ?>" href="javascript:void(0);" onclick="deleteItem('speaker', <?php out($speaker['id']); ?>);"><i class="fas fa-trash"></i></a>
+                        <?php } ?>
                     </td>
                 </tr>
 

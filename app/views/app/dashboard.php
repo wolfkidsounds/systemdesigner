@@ -9,6 +9,7 @@ $amplifier_count = Functions::Amplifiers()->count();
 $speaker_count = Functions::Speakers()->count();
 $processor_count = Functions::Processors()->count();
 $brand_count = Functions::Brands()->count();
+$limiter_count = Functions::Limiters()->count();
 
 ?>
 <h3><?php Translator::translate("dashboard.dashboard"); ?></h3>
@@ -17,6 +18,7 @@ $brand_count = Functions::Brands()->count();
 <div class="chart speakers"><p>You have currently registered <?php out($speaker_count); ?> Speakers.</p></div>
 <div class="chart processor"><p>You have currently registered <?php out($processor_count); ?> Processors.</p></div>
 <div class="chart brands"><p>You have currently registered <?php out($brand_count); ?> Brands.</p></div>
+<div class="chart limiters"><p>You have currently registered <?php out($limiter_count); ?> Limiters.</p></div>
 
 <?php 
 Partials::Close();

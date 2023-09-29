@@ -2,20 +2,18 @@
 
 class Brands {
     public static function getAll() {
-        Functions::startSession();
 
-        $load_all = Functions::Users()->getSetting("show_registered_brands");
+        $load_all = filter_var(Functions::Users()->getSetting("show_registered_brands"), FILTER_VALIDATE_BOOLEAN);
         $main_user = 1;
         $current_user = Functions::Users()->getUserID();
         $db = new Database();
 
-        if (isset($load_all) && $load_all == true) { $brands = $db->query("SELECT * FROM brand WHERE user_id = ? OR user_id = ?", array($main_user, $current_user))->fetchAll(); }
+        if ($load_all === true) { $brands = $db->query("SELECT * FROM brand WHERE user_id = ? OR user_id = ?", array($main_user, $current_user))->fetchAll(); }
         else { $brands = $db->query("SELECT * FROM brand WHERE user_id = ?", array($current_user))->fetchAll(); }
         return $brands;
     }
 
     public static function count() {
-        Functions::startSession();
         $current_user = Functions::Users()->getUserID();
         $db = new Database();
         $brands = $db->query("SELECT * FROM brand WHERE user_id = ?", array($current_user));
@@ -30,21 +28,14 @@ class Brands {
     }
 
     public static function check($name) {
+        $user_id = Functions::Users()->getUserID();
         $db = new Database();
-        $query = "SELECT COUNT(*) AS count FROM brand WHERE name = ?";
-        $exists = $db->query($query, $name)->fetchArray()['count'] > 0;
-        
-        if ($exists) {
-            $db->close();
-            return true;
-        }
-        
-        $db->close();
-        return false;
+        $query = "SELECT COUNT(*) AS count FROM brand WHERE name = ? AND user_id =?";
+        $count = $db->query($query, $name, $user_id)->fetchArray()['count'] > 0;
+        return $count;
     }
 
-    public static function set($name) {
-        Functions::startSession();
+    public static function set($name, $type) {
 
         if (Functions::Brands()->check($name)) {
             header("Location: /app/brands");
@@ -52,8 +43,8 @@ class Brands {
         }
 
         $db = new Database();
-        $query = "INSERT INTO brand (name, user_id) VALUES (?, ?)";
-        $result = $db->query($query, $name, $_SESSION["user_id"]);
+        $query = "INSERT INTO brand (name, user_id, brand_type) VALUES (?, ?, ?)";
+        $result = $db->query($query, $name, $_SESSION["user_id"], $type);
         return $result;
     }
 

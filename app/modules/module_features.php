@@ -47,7 +47,11 @@ class Features {
     }
     public static function getUserRegisterFeature() {
         //out("User Registration are currently a disabled feature");
-        return false;
+        return true;
+    }
+    public static function getAPIFeature() {
+        //out("User API requests are currently a disabled feature");
+        return true;
     }
 
 }

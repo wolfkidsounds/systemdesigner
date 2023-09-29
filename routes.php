@@ -18,8 +18,6 @@ require_once ABSPATH . 'app/modules/modules.php';
 require_once ABSPATH . 'app/functions/functions.php';
 Modules::Translator();
 
-Functions::startSession();
-
 // DEFINE ROUTES
 
 // Standard Route
@@ -82,6 +80,16 @@ if (Modules::Features()->getSpeakerFeature()) {
   post('/app/del/speaker/$speaker_id', function ($speaker_id) { Functions::Speakers()->delete($speaker_id); });
 }
 
+//Limiter Routes
+if (Modules::Features()->getLimiterFeature()) {
+  get('/app/limiters', function () { Modules::Views()->App_Limiters(); });
+  get('/app/new/limiter', function () { Modules::Views()->App_New_Limiter(); });
+  post('/app/new/limiter', function () { Modules::Views()->App_New_Limiter(); });
+  get('/app/edit/limiter/$limiter_id', function ($limiter_id) { Modules::Views()->App_Edit_Limiter($limiter_id); });
+  post('/app/edit/limiter/$limiter_id', function ($limiter_id) { Modules::Views()->App_Edit_Limiter($limiter_id); });
+  post('/app/del/limiter/$limiter_id', function ($limiter_id) { Functions::Limiters()->delete($limiter_id); });
+}
+
 //Racks Routes
 if (Modules::Features()->getRackFeature()) {
   get('/app/racks', function () { Modules::Views()->App_Racks(); });
@@ -97,6 +105,16 @@ if (Modules::Features()->getUserAccountFeature()) {
   post('/user/account/update', function () { Functions::Users()->setSetting(); });
   get('/user/settings', function () { Modules::Views()->User_Settings(); });
 }
+
+// API Routes
+if (Modules::Features()->getAPIFeature()) {
+  post('/api/get/processor', function () { Modules::API()->getProcessor(); });
+  post('/api/get/amplifier', function () { Modules::API()->getAmplifier(); });
+  post('/api/get/speaker', function () { Modules::API()->getSpeaker(); });
+  post('/api/get/limiter/calc', function () { Modules::API()->calcLimiter(); });
+}
+
+get('/test', 'app/views/test.php');
 
 //Modal Routes
 get('/app/modal/open/$type/$action/$rack_id', function ($type, $action, $rack_id) { Modules::Modals()->OpenModal($type, $action, $rack_id); });

@@ -27,25 +27,12 @@ class Functions {
         require_once __DIR__ . "/functions_processors.php";
         return new Processors();
     }
+    public static function Limiters() {
+        require_once __DIR__ . "/functions_limiters.php";
+        return new Limiters();
+    }
     public static function Func_Modals() {
         require_once __DIR__ . "/functions_modals.php";
         return new Func_Modals();
-    }
-    public static function Toasts() {
-        require_once __DIR__ . "/functions_toasts.php";
-        return new Toasts();
-    }
-
-    /**
-     * Starts a session safely
-     *
-     * @return void
-     */
-    public static function startSession() {
-
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-    }
-    
+    }    
 }

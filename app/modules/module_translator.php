@@ -61,8 +61,6 @@ class Translator {
     }
 
     public static function setLanguage() {
-        Functions::startSession();
-
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($_POST['selected_language'])) {
                 $selectedLanguage = $_POST['selected_language'];

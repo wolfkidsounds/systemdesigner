@@ -36,6 +36,10 @@ Partials::Header(true, true);
             
             $amplifiers = Functions::Amplifiers()->getAll();
 
+            if (!$amplifiers) {
+                out("No Amplifiers were found.");
+            }
+
             foreach ($amplifiers as $amplifier) { ?>
                 <tr data-id="<?php out($amplifier["id"]); ?>">
                     <td>
@@ -67,9 +71,12 @@ Partials::Header(true, true);
                         ?>
                     </td>
                     <td>
-                        <a class="edit action-button tooltip" data-tooltip="<?php Translator::translate("amplifiers.edit"); ?>" href="/app/edit/amplifier/<?php out($amplifier["id"]); ?>"><i class="fa-solid fa-pen"></i></a>
-                        <a class="del action-button tooltip" data-id="<?php out($amplifier["id"]); ?>" data-tooltip="<?php Translator::translate("amplifiers.delete"); ?>" href="javascript:void(0);" onclick="deleteItem('amplifier', <?php out($amplifier['id']); ?>);"><i class="fas fa-trash"></i></a>
-                        <?php if ($amplifier["file_attachment"]) { ?> <a download class="download action-button tooltip" data-tooltip="<?php Translator::translate("amplifier.download_manual"); ?>" href="/uploads/<?php echo $amplifier["file_attachment"]; ?>"><i class="fas fa-file-download"></i></a><?php } ?>
+                        <?php if (Functions::Users()->getUserID() == $user_id = $amplifier["user_id"]) {
+                            ?>
+                            <a class="edit action-button tooltip" data-tooltip="<?php Translator::translate("amplifiers.edit"); ?>" href="/app/edit/amplifier/<?php out($amplifier["id"]); ?>"><i class="fa-solid fa-pen"></i></a>
+                            <a class="del action-button tooltip" data-id="<?php out($amplifier["id"]); ?>" data-tooltip="<?php Translator::translate("amplifiers.delete"); ?>" href="javascript:void(0);" onclick="deleteItem('amplifier', <?php out($amplifier['id']); ?>);"><i class="fas fa-trash"></i></a>
+                        <?php } ?>
+                        <?php if ($amplifier["file_attachment"]) { ?> <a download class="download action-button tooltip" data-tooltip="<?php Translator::translate("amplifiers.download_manual"); ?>" href="/uploads/<?php echo $amplifier["file_attachment"]; ?>"><i class="fas fa-file-download"></i></a><?php } ?>
                     </td>
                 </tr>
 

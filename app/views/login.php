@@ -46,12 +46,13 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
             <button class="btn btn-primary input-group-btn"><?php Translator::translate("login.login"); ?></button>
         </div>
-
+        <!-- Register
         <div class="horizontal-divider"></div>
         <div class="form-group">
             <p><?php Translator::translate("login.no_account"); ?></p>
             <a class="input-sm" href="/register"><?php Translator::translate("login.register"); ?></a>
         </div>
+        -->
 
     </div>
 
@@ -76,11 +77,14 @@ else {
             </label>
             <button class="btn btn-primary input-group-btn"><?php Translator::translate("login.login"); ?></button>
         </div>
+
+        <!-- Register 
         <div class="horizontal-divider"></div>
         <div class="form-group">
             <p><?php Translator::translate("login.no_account"); ?></p>
             <a class="input-sm" href="/register"><?php Translator::translate("login.register"); ?></a>
         </div>
+        -->
     </div>
 
     </form>
