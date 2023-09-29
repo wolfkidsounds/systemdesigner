@@ -26,15 +26,15 @@ jobs:
         ports:
           - 3306:3306
     steps:
+    - name: Create Test Database
+      run: |
+        mysql -u root -psymfony -e "CREATE DATABASE IF NOT EXISTS app_test;"
     - uses: shivammathur/setup-php@2cb9b829437ee246e9b3cac53555a39208ca6d28
       with:
         php-version: '8.1'
     - uses: actions/checkout@v3
     - name: Copy .env.test.local
       run: php -r "file_exists('.env.test.local') || copy('.env.test', '.env.test.local');"
-    - name: Create Test Database
-      run: |
-        mysql -u root -psymfony -e "CREATE DATABASE IF NOT EXISTS app_test;"
     - name: Cache Composer packages
       id: composer-cache
       uses: actions/cache@v3
