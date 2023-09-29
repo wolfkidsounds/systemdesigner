@@ -44,7 +44,7 @@ jobs:
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
     - name: Create Database
       run: |
-      mysql -u root -p symfony -e "CREATE DATABASE IF NOT EXISTS app;"
+        mysql -u root -psymfony -e "CREATE DATABASE IF NOT EXISTS app;"
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
         DATABASE_URL: mysql://app:symfony@127.0.0.1:3306/app?charset=utf8mb4
