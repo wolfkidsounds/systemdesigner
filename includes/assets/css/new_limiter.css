@@ -1,0 +1,39 @@
+td.table-term {
+    width: 50%;
+    text-align:left;
+}
+
+td.table-symbol {
+    width: 10%;
+    text-align:right;
+}
+
+td.table-value {
+    text-align:right;
+}
+
+table {
+    font-size:14px;
+}
+
+.form-divider {
+    grid-template-columns:1fr 1fr 1fr;
+    gap:40px;
+}
+
+.form-input-hint {
+    margin:0px;
+    margin-bottom:2px;
+}
+
+.loading {
+    transition:all .5s ease;
+    background:rgba(255,255,255,.8);
+}
+
+.disabled {
+    background:rgba(255,255,255,.4);
+    opacity:.5;
+    padding:10px;
+    border-radius:3px;
+}

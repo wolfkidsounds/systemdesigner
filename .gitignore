@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
@@ -25,3 +26,6 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+=======
+.ddos
+>>>>>>> a1b7ad74bcb854ea558412fe6113dfd488fbb346
