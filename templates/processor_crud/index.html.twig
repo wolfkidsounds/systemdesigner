@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Processor index{% endblock %}
+
+{% block body %}
+    <h1>Processor index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>BrandId</th>
+                <th>UserId</th>
+                <th>Name</th>
+                <th>Inputs</th>
+                <th>Outputs</th>
+                <th>ProcessorOffset</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for processor in processors %}
+            <tr>
+                <td>{{ processor.id }}</td>
+                <td>{{ processor.BrandId }}</td>
+                <td>{{ processor.UserId }}</td>
+                <td>{{ processor.Name }}</td>
+                <td>{{ processor.Inputs }}</td>
+                <td>{{ processor.Outputs }}</td>
+                <td>{{ processor.ProcessorOffset }}</td>
+                <td>
+                    <a href="{{ path('app_processor_crud_show', {'id': processor.id}) }}">show</a>
+                    <a href="{{ path('app_processor_crud_edit', {'id': processor.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_processor_crud_new') }}">Create new</a>
+{% endblock %}
