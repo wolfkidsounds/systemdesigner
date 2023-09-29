@@ -32,6 +32,9 @@ jobs:
     - uses: actions/checkout@v3
     - name: Copy .env.test.local
       run: php -r "file_exists('.env.test.local') || copy('.env.test', '.env.test.local');"
+    - name: Create Test Database
+      run: |
+        mysql -u root -psymfony -e "CREATE DATABASE IF NOT EXISTS app_test;"
     - name: Cache Composer packages
       id: composer-cache
       uses: actions/cache@v3
@@ -46,4 +49,3 @@ jobs:
       env:
         DATABASE_URL: mysql://root:symfony@127.0.0.1:3306/app?serverVersion=11.1.2-MariaDB&charset=utf8mb4
       run: vendor/bin/phpunit
-
