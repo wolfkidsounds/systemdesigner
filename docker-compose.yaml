@@ -1,29 +1,30 @@
 version: '3.7'
 services:
+    phpmyadmin:
+            image: phpmyadmin/phpmyadmin
+            container_name: phpmyadmin
+            links:
+                - database
+            environment:
+                PMA_HOST: database
+                PMA_PORT: 3306
+                PMA_ARBITRARY: 1
+                PMA_USER: symfony_user
+                PMA_PASSWORD: symfony_pass
+            restart: always
+            ports:
+            - 8081:80
+
     database:
         image: 'mariadb:11.1.2'
         environment:
             MYSQL_ROOT_PASSWORD: symfony_root_pass
             MYSQL_DATABASE: main
             MYSQL_USER: symfony_user
-            MYSQL_PASSWORD: symfony_user_pass
+            MYSQL_PASSWORD: symfony_pass
         ports:
             # To allow the host machine to access the ports below, modify the lines below.
             # For example, to allow the host to connect to port 3306 on the container, you would change
             # "3306" to "3306:3306". Where the first port is exposed to the host and the second is the container port.
             # See https://docs.docker.com/compose/compose-file/compose-file-v3/#ports for more information.
             - '3306'
-    phpmyadmin:
-        image: phpmyadmin/phpmyadmin
-        container_name: pma
-        links:
-            - database
-        environment:
-            PMA_HOST: database
-            PMA_PORT: 3306
-            PMA_ARBITRARY: 1
-            PMA_USER: symfony_user
-            PMA_PASSWORD: symfony_user_pass
-        restart: always
-        ports:
-        - 8081:80
