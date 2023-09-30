@@ -46,10 +46,14 @@ jobs:
 
     - name: Wait for MariaDB to start
       run: |
+        sleep 15
         until mysqladmin ping -h mariadb --silent; do
           echo 'Waiting for MariaDB to become available...'
           sleep 5
         done
+
+    - name: Check MariaDB Container Logs
+      run: docker logs mariadb
 
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
