@@ -13,16 +13,6 @@ jobs:
   symfony-tests:
     runs-on: ubuntu-latest
 
-    services:
-      mariadb:
-        image: mariadb:11.1.2
-        env:
-          MYSQL_ROOT_PASSWORD: root_password
-          MYSQL_DATABASE: test_database
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-
     steps:
     - uses: shivammathur/setup-php@2cb9b829437ee246e9b3cac53555a39208ca6d28
       with:
@@ -44,20 +34,21 @@ jobs:
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
-    - name: Wait for MariaDB to start
-      run: |
-        sleep 15
-        until mysqladmin ping -h mariadb --silent; do
-          echo 'Waiting for MariaDB to become available...'
-          sleep 5
-        done
+    - name: Shutdown Ubuntu MySQL (SUDO)
+      run: sudo service mysql stop # Shutdown the Default MySQL, "sudo" is necessary, please not remove it
 
-    - name: Check MariaDB Container Logs
-      run: docker logs mariadb
+    - name: Start MariaDB
+      uses: getong/mariadb-action@v1.1
+      with:
+        mariadb version: '11.1.2' # Optional, default value is "latest". The version of the MariaDB
+        mysql database: 'app_test' # Optional, default value is "test". The specified database which will be create
+        mysql root password: symfony # Required if "mysql user" is empty, default is empty. The root superuser password
+        mysql user: 'symfony' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
+        mysql password: symfony # Required if "mysql user" exists. The password for the "mysql user"
 
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
-        DATABASE_URL: mysql://root:root_password@mariadb/test_database
+        DATABASE_URL: mysql://symfony:symfony@mariadb/app_test
       run: |
         bin/console doctrine:database:create --env=test
         bin/console doctrine:schema:create --env=test
