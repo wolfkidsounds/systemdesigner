@@ -142,6 +142,11 @@ class ComposerStaticInit3e18eeb4217f3b3a6a450d6200a4341e
             'Monolog\\' => 8,
             'Masterminds\\' => 12,
         ),
+        'K' => 
+        array (
+            'Knp\\Menu\\' => 9,
+            'Knp\\Bundle\\MenuBundle\\' => 22,
+        ),
         'E' => 
         array (
             'Egulias\\EmailValidator\\' => 23,
@@ -549,6 +554,14 @@ class ComposerStaticInit3e18eeb4217f3b3a6a450d6200a4341e
         'Masterminds\\' => 
         array (
             0 => __DIR__ . '/..' . '/masterminds/html5/src',
+        ),
+        'Knp\\Menu\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/knplabs/knp-menu/src/Knp/Menu',
+        ),
+        'Knp\\Bundle\\MenuBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/knplabs/knp-menu-bundle/src',
         ),
         'Egulias\\EmailValidator\\' => 
         array (
