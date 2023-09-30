@@ -1,0 +1,27 @@
+{
+    "recommendations": [
+        "equinusocio.vsc-community-material-theme",
+        "devsense.composer-php-vscode",
+        "ms-azuretools.vscode-docker",
+        "mikestead.dotenv",
+        "ecmel.vscode-html-css",
+        "visualstudioexptteam.vscodeintellicode",
+        "visualstudioexptteam.intellicode-api-usage-examples",
+        "xabikos.javascriptsnippets",
+        "donjayamanne.jquerysnippets",
+        "zainchen.json",
+        "ziyasal.vscode-open-in-github",
+        "devsense.phptools-vscode",
+        "xdebug.php-pack",
+        "bmewburn.vscode-intelephense-client",
+        "mehedidracula.php-namespace-resolver",
+        "thenouillet.symfony-vscode",
+        "duboiss.sf-pack",
+        "whatwedo.twig",
+        "mblode.twig-language-2",
+        "bajdzis.vscode-twig-pack",
+        "emmanuelbeziat.vscode-great-icons",
+        "redhat.vscode-yaml",
+        "cweijan.vscode-mysql-client2"
+    ]
+}
