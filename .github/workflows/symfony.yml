@@ -46,18 +46,21 @@ jobs:
         mysql user: 'symfony' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
         mysql password: symfony # Required if "mysql user" exists. The password for the "mysql user"
 
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Determine Symfony Project Path
+      id: project-path
+      run: echo "::set-output name=path::$(pwd)/path/to/your/symfony/project"
+
     - name: Make bin/console executable
-      run: chmod +x bin/console
-    
+      run: chmod +x ${{ steps.project-path.outputs.path }}/bin/console
+
     - name: Create Test Database
-      run: bin/console doctrine:database:create --env=test
-      working-directory: /path/to/your/symfony/project
-    
+      run: ${{ steps.project-path.outputs.path }}/bin/console doctrine:database:create --env=test
+
     - name: Create Test Schema
-      run: bin/console doctrine:schema:create --env=test
-      working-directory: /path/to/your/symfony/project
-    
+      run: ${{ steps.project-path.outputs.path }}/bin/console doctrine:schema:create --env=test
+
     - name: Run PHPUnit Tests
-      run: vendor/bin/phpunit
-      working-directory: /path/to/your/symfony/project
-      
+      run: ${{ steps.project-path.outputs.path }}/vendor/bin/phpunit
