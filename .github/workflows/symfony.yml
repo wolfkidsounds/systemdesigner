@@ -46,10 +46,18 @@ jobs:
         mysql user: 'symfony' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
         mysql password: symfony # Required if "mysql user" exists. The password for the "mysql user"
 
-    - name: Execute tests (Unit and Feature tests) via PHPUnit
-      env:
-        DATABASE_URL: mysql://symfony:symfony@mariadb/app_test
-      run: |
-        bin/console doctrine:database:create --env=test
-        bin/console doctrine:schema:create --env=test
-        vendor/bin/phpunit
+    - name: Make bin/console executable
+      run: chmod +x bin/console
+    
+    - name: Create Test Database
+      run: bin/console doctrine:database:create --env=test
+      working-directory: /path/to/your/symfony/project
+    
+    - name: Create Test Schema
+      run: bin/console doctrine:schema:create --env=test
+      working-directory: /path/to/your/symfony/project
+    
+    - name: Run PHPUnit Tests
+      run: vendor/bin/phpunit
+      working-directory: /path/to/your/symfony/project
+      
