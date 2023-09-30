@@ -46,17 +46,17 @@ class AmplifierControllerTest extends WebTestCase
         self::assertResponseStatusCodeSame(200);
 
         $this->client->submitForm('Save', [
-            'amplifier[BrandId]' => 'Testing',
-            'amplifier[UserId]' => 'Testing',
-            'amplifier[Name]' => 'Testing',
-            'amplifier[Height]' => 'Testing',
-            'amplifier[OutputChannels]' => 'Testing',
-            'amplifier[Power16]' => 'Testing',
-            'amplifier[Power8]' => 'Testing',
-            'amplifier[Power4]' => 'Testing',
-            'amplifier[Power2]' => 'Testing',
-            'amplifier[PowerBridge8]' => 'Testing',
-            'amplifier[PowerBridge4]' => 'Testing',
+            'amplifier[BrandId]' => 1,
+            'amplifier[UserId]' => 1,
+            'amplifier[Name]' => 'Test',
+            'amplifier[Height]' => 1,
+            'amplifier[OutputChannels]' => 1,
+            'amplifier[Power16]' => 1,
+            'amplifier[Power8]' => 1,
+            'amplifier[Power4]' => 1,
+            'amplifier[Power2]' => 1,
+            'amplifier[PowerBridge8]' => 1,
+            'amplifier[PowerBridge4]' => 1,
         ]);
 
         self::assertResponseRedirects('/amplifier/crud/');
@@ -68,17 +68,17 @@ class AmplifierControllerTest extends WebTestCase
     {
         $this->markTestIncomplete();
         $fixture = new Amplifier();
-        $fixture->setBrandId('My Title');
-        $fixture->setUserId('My Title');
-        $fixture->setName('My Title');
-        $fixture->setHeight('My Title');
-        $fixture->setOutputChannels('My Title');
-        $fixture->setPower16('My Title');
-        $fixture->setPower8('My Title');
-        $fixture->setPower4('My Title');
-        $fixture->setPower2('My Title');
-        $fixture->setPowerBridge8('My Title');
-        $fixture->setPowerBridge4('My Title');
+        $fixture->setBrandId(1);
+        $fixture->setUserId(1);
+        $fixture->setName('Test');
+        $fixture->setHeight(1);
+        $fixture->setOutputChannels(1);
+        $fixture->setPower16(1);
+        $fixture->setPower8(1);
+        $fixture->setPower4(1);
+        $fixture->setPower2(1);
+        $fixture->setPowerBridge8(1);
+        $fixture->setPowerBridge4(1);
 
         $this->manager->persist($fixture);
         $this->manager->flush();
@@ -95,17 +95,17 @@ class AmplifierControllerTest extends WebTestCase
     {
         $this->markTestIncomplete();
         $fixture = new Amplifier();
-        $fixture->setBrandId('My Title');
-        $fixture->setUserId('My Title');
-        $fixture->setName('My Title');
-        $fixture->setHeight('My Title');
-        $fixture->setOutputChannels('My Title');
-        $fixture->setPower16('My Title');
-        $fixture->setPower8('My Title');
-        $fixture->setPower4('My Title');
-        $fixture->setPower2('My Title');
-        $fixture->setPowerBridge8('My Title');
-        $fixture->setPowerBridge4('My Title');
+        $fixture->setBrandId(1);
+        $fixture->setUserId(1);
+        $fixture->setName('Test');
+        $fixture->setHeight(1);
+        $fixture->setOutputChannels(1);
+        $fixture->setPower16(1);
+        $fixture->setPower8(1);
+        $fixture->setPower4(1);
+        $fixture->setPower2(1);
+        $fixture->setPowerBridge8(1);
+        $fixture->setPowerBridge4(1);
 
         $this->manager->persist($fixture);
         $this->manager->flush();
@@ -113,17 +113,17 @@ class AmplifierControllerTest extends WebTestCase
         $this->client->request('GET', sprintf('%s%s/edit', $this->path, $fixture->getId()));
 
         $this->client->submitForm('Update', [
-            'amplifier[BrandId]' => 'Something New',
-            'amplifier[UserId]' => 'Something New',
-            'amplifier[Name]' => 'Something New',
-            'amplifier[Height]' => 'Something New',
-            'amplifier[OutputChannels]' => 'Something New',
-            'amplifier[Power16]' => 'Something New',
-            'amplifier[Power8]' => 'Something New',
-            'amplifier[Power4]' => 'Something New',
-            'amplifier[Power2]' => 'Something New',
-            'amplifier[PowerBridge8]' => 'Something New',
-            'amplifier[PowerBridge4]' => 'Something New',
+            'amplifier[BrandId]' => 99,
+            'amplifier[UserId]' => 99,
+            'amplifier[Name]' => 'Test New',
+            'amplifier[Height]' => 99,
+            'amplifier[OutputChannels]' => 99,
+            'amplifier[Power16]' => 99,
+            'amplifier[Power8]' => 99,
+            'amplifier[Power4]' => 99,
+            'amplifier[Power2]' => 99,
+            'amplifier[PowerBridge8]' => 99,
+            'amplifier[PowerBridge4]' => 99,
         ]);
 
         self::assertResponseRedirects('/amplifier/crud/');
@@ -150,17 +150,17 @@ class AmplifierControllerTest extends WebTestCase
         $originalNumObjectsInRepository = count($this->repository->findAll());
 
         $fixture = new Amplifier();
-        $fixture->setBrandId('My Title');
-        $fixture->setUserId('My Title');
-        $fixture->setName('My Title');
-        $fixture->setHeight('My Title');
-        $fixture->setOutputChannels('My Title');
-        $fixture->setPower16('My Title');
-        $fixture->setPower8('My Title');
-        $fixture->setPower4('My Title');
-        $fixture->setPower2('My Title');
-        $fixture->setPowerBridge8('My Title');
-        $fixture->setPowerBridge4('My Title');
+        $fixture->setBrandId(1);
+        $fixture->setUserId(1);
+        $fixture->setName('Remove');
+        $fixture->setHeight(1);
+        $fixture->setOutputChannels(1);
+        $fixture->setPower16(1);
+        $fixture->setPower8(1);
+        $fixture->setPower4(1);
+        $fixture->setPower2(1);
+        $fixture->setPowerBridge8(1);
+        $fixture->setPowerBridge4(1);
 
         $this->manager->persist($fixture);
         $this->manager->flush();
