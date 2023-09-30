@@ -49,18 +49,14 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Determine Symfony Project Path
-      id: project-path
-      run: echo "::set-output name=path::$(pwd)/path/to/your/symfony/project"
-
     - name: Make bin/console executable
-      run: chmod +x ${{ steps.project-path.outputs.path }}/bin/console
+      run: chmod +x $GITHUB_WORKSPACE/bin/console
 
     - name: Create Test Database
-      run: ${{ steps.project-path.outputs.path }}/bin/console doctrine:database:create --env=test
+      run: $GITHUB_WORKSPACE/bin/console doctrine:database:create --env=test
 
     - name: Create Test Schema
-      run: ${{ steps.project-path.outputs.path }}/bin/console doctrine:schema:create --env=test
+      run: $GITHUB_WORKSPACE/bin/console doctrine:schema:create --env=test
 
     - name: Run PHPUnit Tests
-      run: ${{ steps.project-path.outputs.path }}/vendor/bin/phpunit
+      run: $GITHUB_WORKSPACE/vendor/bin/phpunit
