@@ -115,8 +115,6 @@ class ComposerStaticInit3e18eeb4217f3b3a6a450d6200a4341e
             'Symfony\\Bridge\\PhpUnit\\' => 23,
             'Symfony\\Bridge\\Monolog\\' => 23,
             'Symfony\\Bridge\\Doctrine\\' => 24,
-            'SymfonyCasts\\Bundle\\VerifyEmail\\' => 32,
-            'SymfonyCasts\\Bundle\\ResetPassword\\' => 34,
         ),
         'P' => 
         array (
@@ -141,11 +139,6 @@ class ComposerStaticInit3e18eeb4217f3b3a6a450d6200a4341e
         array (
             'Monolog\\' => 8,
             'Masterminds\\' => 12,
-        ),
-        'K' => 
-        array (
-            'Knp\\Menu\\' => 9,
-            'Knp\\Bundle\\MenuBundle\\' => 22,
         ),
         'E' => 
         array (
@@ -499,14 +492,6 @@ class ComposerStaticInit3e18eeb4217f3b3a6a450d6200a4341e
         array (
             0 => __DIR__ . '/..' . '/symfony/doctrine-bridge',
         ),
-        'SymfonyCasts\\Bundle\\VerifyEmail\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfonycasts/verify-email-bundle/src',
-        ),
-        'SymfonyCasts\\Bundle\\ResetPassword\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfonycasts/reset-password-bundle/src',
-        ),
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/src',
@@ -554,14 +539,6 @@ class ComposerStaticInit3e18eeb4217f3b3a6a450d6200a4341e
         'Masterminds\\' => 
         array (
             0 => __DIR__ . '/..' . '/masterminds/html5/src',
-        ),
-        'Knp\\Menu\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/knplabs/knp-menu/src/Knp/Menu',
-        ),
-        'Knp\\Bundle\\MenuBundle\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/knplabs/knp-menu-bundle/src',
         ),
         'Egulias\\EmailValidator\\' => 
         array (
