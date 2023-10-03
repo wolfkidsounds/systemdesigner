@@ -1,14 +1,11 @@
 {
     "recommendations": [
-        "equinusocio.vsc-community-material-theme",
         "devsense.composer-php-vscode",
         "ms-azuretools.vscode-docker",
         "mikestead.dotenv",
         "ecmel.vscode-html-css",
         "visualstudioexptteam.vscodeintellicode",
         "visualstudioexptteam.intellicode-api-usage-examples",
-        "xabikos.javascriptsnippets",
-        "donjayamanne.jquerysnippets",
         "zainchen.json",
         "ziyasal.vscode-open-in-github",
         "devsense.phptools-vscode",
