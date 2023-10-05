@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html>
-    {% embed 'partials/head.html.twig' %}{% endembed %}
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}System Designer{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
     
     <body data-bs-theme="dark">
 
@@ -8,7 +19,7 @@
 
             <div class="layout-wrapper d-lg-flex">
                 
-            {{ include('partials/sidebar.html.twig') }}
+                {{ include('partials/sidebar.html.twig') }}
         
                 <div class="media-content w-100 overflow-hidden">
                     <div class="d-lg-flex">
@@ -20,7 +31,11 @@
                 
                                     <div class="col-sm-8 col-4">
                 
-                                        {% embed 'partials/toolbar_menu.html.twig' %}{% endembed %}
+                                        {% embed 'partials/toolbar_menu.html.twig' %}
+                                        {% block toolbar_button_new %}
+                                                {{ toolbar_button }}
+                                        {% endblock %}
+                                        {% endembed %}
                 
                                     </div>
                                 </div>
