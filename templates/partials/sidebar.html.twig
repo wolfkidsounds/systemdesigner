@@ -1,0 +1,40 @@
+<!-- Sidebar -->
+<div class="side-menu flex-lg-column me-lg-1 ms-lg-0">
+    <!-- LOGO -->
+    <div class="navbar-brand-box">
+        <a href="/" class="logo logo-dark">
+            <span class="logo-sm">
+                <img src="/images/logo.svg" alt="" height="30">
+            </span>
+        </a>
+    </div>
+
+    <!-- Sidebar-Menu -->
+    <div class="flex-lg-column my-auto">
+        {% set sidebar = knp_menu_get('main', ['Sidebar']) %}
+        {{ knp_menu_render(sidebar, {'template': 'menu/menu_sidebar.html.twig'}) }}
+    </div>
+
+    <!-- Sidebar-Profile -->
+    <div class="flex-lg-column d-none d-lg-block">
+        <ul class="nav side-menu-nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link settings" href="#" data-balloon-pos="right" aria-label="Settings">
+                    <i class="fa-solid fa-gear"></i>
+                </a>
+            </li>
+
+            <li class="nav-item btn-group dropup profile-user-dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="{{ asset('images/user-solid.svg') }}" class="profile-user rounded-circle">
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Profile <i class="ri-profile-line float-end text-muted"></i></a>
+                    <a class="dropdown-item" href="#">Setting <i class="ri-settings-3-line float-end text-muted"></i></a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="auth-login.html">Log out <i class="ri-logout-circle-r-line float-end text-muted"></i></a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Edit Processor{% endblock %}
+
+{% block body %}
+    <h1>Edit Processor</h1>
+
+    {{ include('processor/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_processor_index') }}">back to list</a>
+
+    {{ include('processor/_delete_form.html.twig') }}
+{% endblock %}
