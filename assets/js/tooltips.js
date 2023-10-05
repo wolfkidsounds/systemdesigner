@@ -1,0 +1,1 @@
+[].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]')).map(function(tooltip) { return new bootstrap.Tooltip(tooltip) });

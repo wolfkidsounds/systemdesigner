@@ -1,0 +1,14 @@
+[aria-label][data-balloon-pos]:after {
+    pointer-events: none;
+    transition: all 0.18s ease-out 0.18s;
+    text-indent: 0;
+    font-family: "Montserrat";
+    font-weight: normal;
+    font-style: normal;
+    text-shadow: none;
+    border-radius: 2px;
+    content: attr(aria-label);
+    position: absolute;
+    line-height: 2;
+    border-radius:var(--bs-border-radius);
+}

@@ -1,1 +1,8 @@
+@import "./sass/colors.scss";
+@import "./sass/_caret.scss";
+
+// Import Bootstrap Sass
 @import "~bootstrap/scss/bootstrap";
+
+/* Your main.scss file, etc. */
+@import "~balloon-css/src/balloon";
