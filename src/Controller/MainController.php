@@ -17,6 +17,9 @@ class MainController extends AbstractController
             'controller_name' => 'MainController',
             'title' => 'Dashboard',
             'iconclass' => 'icon-chassis',
+            'amplifiers' => 1,
+            'processors' => 1,
+            'speakers' => 1,
         ]);        
     }
 
