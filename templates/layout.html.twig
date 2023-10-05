@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block layout %}
+
+    {% use 'partials/sidebar/sidebar.html.twig' %}
+    <div id="sidebar_wrapper" class="flex-lg-column me-lg-1 ms-lg-0">
+        {% block sidebar %}
+            {{ parent() }}
+        {% endblock %}
+    </div>
+
+    <div id="content_wrapper" class="w-100 overflow-hidden">
+        <div id="content">
+            {# page_content can also be overwritten #}
+            {% block page_content %}
+            {% endblock %}
+        </div>
+
+        {% use 'partials/footer/footer.html.twig' %}
+        <footer class="p-3 p-lg-4 border-top mb-0">
+            {% block footer %}
+                {{ parent() }}
+            {% endblock %}
+        </footer>
+    </div>
+
+    {% use 'partials/inspector/inspector.html.twig' %}
+        <div id="inspector_wrapper" class=" me-lg-1 ms-lg-0">
+            {% block inspector %}
+                {{ parent() }}
+            {% endblock %}
+        </div>
+
+{% endblock %}

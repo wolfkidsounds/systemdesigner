@@ -1,0 +1,8 @@
+{% block inspector %}
+    {% use 'partials/toolbar/toolbar.html.twig' %}
+        <div id="toolbar">
+            {% block toolbar %}
+                {{ parent() }}
+            {% endblock %}
+        </div>
+{% endblock %}

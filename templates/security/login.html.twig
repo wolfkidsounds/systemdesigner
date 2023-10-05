@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block body_replacer %}
+{% block body_replace %}
 
 {% if error %}
     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -11,48 +11,47 @@
         You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
     </div>
 {% endif %}
-<div class="account-pages my-5 pt-sm-5">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6 col-xl-5">
-                <div class="text-center mb-4">
-                    <h4>Sign in</h4>
-                    <p class="text-muted mb-4">Sign in to continue to SystemDesigner.</p>
-                </div>
 
-                <div class="card" style="background:rgba(0,0,0,.1);">
-                    <div class="card-body p-4">
-                        <div class="p-3">
-                            <form method="post">
-                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+<div id="login_form" class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6 col-xl-5">
+            <div class="text-center mb-4">
+                <h4>Sign in</h4>
+                <p class="text-muted mb-4">Sign in to continue to SystemDesigner.</p>
+            </div>
 
-                                <div class="mb-3">
-                                    <label class="form-label" for="inputEmail">Email</label>
-                                    <input type="email" name="_username" id="inputEmail" class="form-control form-control-lg border-light bg-light-subtle rounded-1" value="{{ last_username }}" autocomplete="email" placeholder="Enter Email" aria-label="Enter Email" required autofocus>
-                                </div>
+            <div class="card" style="background:rgba(0,0,0,.2);">
+                <div class="card-body p-4">
+                    <div class="p-3">
+                        <form method="post">
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-                                <div class="mb-4">
-                                    <label class="form-label" for="inputPassword">Password</label>
-                                    <input type="password" name="_password" id="inputPassword" class="form-control form-control-lg border-light bg-light-subtle rounded-1" autocomplete="current-password" placeholder="Enter Password" aria-label="Enter Password" required>
-                                </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="inputEmail">Email</label>
+                                <input type="email" name="_username" id="inputEmail" class="form-control form-control-lg border-light bg-light-subtle rounded-1" value="{{ last_username }}" autocomplete="email" placeholder="Enter Email" aria-label="Enter Email" required autofocus>
+                            </div>
 
-                                <div class="form-check mb-4">
-                                    <input type="checkbox" class="form-check-input" id="remember-check">
-                                    <label class="form-check-label" for="remember-check">Remember me</label>
-                                </div>
+                            <div class="mb-4">
+                                <label class="form-label" for="inputPassword">Password</label>
+                                <input type="password" name="_password" id="inputPassword" class="form-control form-control-lg border-light bg-light-subtle rounded-1" autocomplete="current-password" placeholder="Enter Password" aria-label="Enter Password" required>
+                            </div>
 
-                                <div class="d-grid">
-                                    <button class="btn btn-primary rounded-1" type="submit">Sign in</button>
-                                </div>
-                            </form>
-                        </div>
+                            <div class="form-check mb-4">
+                                <input type="checkbox" class="form-check-input" id="remember-check">
+                                <label class="form-check-label" for="remember-check">Remember me</label>
+                            </div>
+
+                            <div class="d-grid">
+                                <button class="btn btn-primary rounded-1" type="submit">Sign in</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
+            </div>
 
-                <div class="mt-5 text-center">
-                    <p>Don't have an account yet? <a href="/register" class="fw-medium text-primary">Signup</a></p>
-                    <p>© 2023 Pulsation Audio</p>
-                </div>
+            <div class="mt-5 text-center">
+                <p>Don't have an account yet? <a href="/register" class="fw-medium text-primary">Signup</a></p>
+                <p>© 2023 Pulsation Audio</p>
             </div>
         </div>
     </div>

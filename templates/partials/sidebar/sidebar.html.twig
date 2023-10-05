@@ -1,0 +1,7 @@
+{% use 'partials/sidebar/menu.html.twig' %}
+{% block sidebar %}
+    <p> I am the sidebar.</p>
+    {% block sidebar_menu %}
+        {{ parent() }}
+    {% endblock %}
+{% endblock %}
