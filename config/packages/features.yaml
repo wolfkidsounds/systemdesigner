@@ -1,0 +1,17 @@
+novaway_feature_flag:
+    features:
+        api:
+            enabled: true
+            description: API Features
+        processor:
+            enabled: true
+            description: Processor Features
+        amplifier:
+            enabled: true
+            description: Amplifier Features
+        speaker:
+            enabled: true
+            description: Speaker Features
+        chassis:
+            enabled: false
+            description: Chassis Features
