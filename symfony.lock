@@ -72,6 +72,9 @@
             "./config/routes/nelmio_api_doc.yaml"
         ]
     },
+    "novaway/feature-flag-bundle": {
+        "version": "2.3.0"
+    },
     "phpunit/phpunit": {
         "version": "9.6",
         "recipe": {
