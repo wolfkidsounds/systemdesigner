@@ -24,14 +24,16 @@ class MenuBuilder extends AbstractController
     public function main(): ItemInterface
     {
         $menu = $this->factory->createItem('sidebar');
-        
-        // Sidebar
-        $menu->addChild('Sidebar', [
-            'route' => 'app_main',
-        ]);
 
+        $menu->addChild('Profile', [
+            'route' => 'app_main',
+            'extras' => [
+                'icon' => 'fa-solid fa-user',
+            ]
+        ]);
+        
         if ($this->featureManager->isEnabled('processor')) {
-            $menu['Sidebar']->addChild('Processor', [
+            $menu->addChild('Processor', [
                 'route' => 'app_processor_index',
                 'extras' => [
                     'icon' => 'icon icon-processor',
@@ -40,7 +42,7 @@ class MenuBuilder extends AbstractController
         }
 
         if ($this->featureManager->isEnabled('amplifier')) {
-            $menu['Sidebar']->addChild('Amplifier', [
+            $menu->addChild('Amplifier', [
                 'route' => 'app_main',
                 'extras' => [
                     'icon' => 'icon icon-amplifier',
@@ -49,7 +51,7 @@ class MenuBuilder extends AbstractController
         }
 
         if ($this->featureManager->isEnabled('speaker')) {
-            $menu['Sidebar']->addChild('Speaker', [
+            $menu->addChild('Speaker', [
                 'route' => 'app_main',
                 'extras' => [
                     'icon' => 'icon icon-speaker',
@@ -58,7 +60,7 @@ class MenuBuilder extends AbstractController
         }
 
         if ($this->featureManager->isEnabled('chassis')) {
-            $menu['Sidebar']->addChild('Chassis', [
+            $menu->addChild('Chassis', [
                 'route' => 'app_main',
                 'extras' => [
                     'icon' => 'icon icon-chassis',
