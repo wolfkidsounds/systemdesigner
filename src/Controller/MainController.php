@@ -16,7 +16,6 @@ class MainController extends AbstractController
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
             'title' => 'Dashboard',
-            'iconclass' => 'icon-chassis',
             'amplifiers' => 1,
             'processors' => 1,
             'speakers' => 1,
