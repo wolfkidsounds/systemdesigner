@@ -1,0 +1,22 @@
+@media (max-width: 991.98px) {
+    #sidebar_wrapper {
+        display:block;
+        position: fixed;
+        bottom: 0;
+        min-width: 100%;
+        min-height: auto;
+        height:70px;
+    }
+
+    .sidebar_menu {
+        height:70px;
+        display:block;
+    }
+
+    .sidebar_menu ul,
+    .sidebar_menu li {
+        display:flex;
+        height:70px;
+        align-items: center;
+    }
+}

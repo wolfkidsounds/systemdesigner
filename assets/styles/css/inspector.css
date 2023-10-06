@@ -1,0 +1,16 @@
+
+@media (min-width: 992px) {
+    #inspector_wrapper {
+        min-width: 380px;
+        max-width: 380px;
+    }
+}
+
+#inspector_wrapper {
+    height: 100vh;
+    background-color: #303841;
+}
+
+#toolbar {
+        border-bottom: var(--bs-border-width) var(--bs-border-style) rgba(0,0,0, .1) !important;
+}

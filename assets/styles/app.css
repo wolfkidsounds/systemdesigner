@@ -1,6 +1,14 @@
+@import "./css/root.css";
+
 @import "./css/fonts.css";
 @import "./css/balloon.css";
 
+@import "./css/header.css";
+@import "./css/footer.css";
+@import "./css/content.css";
+
 @import "./css/login_form.css";
+@import "./css/inspector.css";
+@import "./css/sidebar.css";
 
 @import "./css/media.css";
