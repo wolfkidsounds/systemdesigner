@@ -1,3 +1,4 @@
 {% block sidebar_menu %}
-    <p> I am the sidebar menu.</p>
+    {% set sidebar = knp_menu_get('main') %}
+    {{ knp_menu_render(sidebar, {'template': 'menu/menu_sidebar.html.twig'}) }}
 {% endblock %}

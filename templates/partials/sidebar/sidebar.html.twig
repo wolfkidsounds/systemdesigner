@@ -1,7 +1,32 @@
 {% use 'partials/sidebar/menu.html.twig' %}
 {% block sidebar %}
-    <p> I am the sidebar.</p>
-    {% block sidebar_menu %}
-        {{ parent() }}
-    {% endblock %}
+    <!-- PROFILE -->
+    <div class="sidebar_profile d-none flex-lg-column d-lg-block">
+        <ul class="nav justify-content-center">
+            <li class="btn-group dropdown">
+                <a href="{{ path('app_main') }}" class="nav-link logo d-flex">
+                    <img src="{{ asset('images/logo.svg') }}" alt="" height="30">
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- NAV -->
+    <div class="sidebar_menu flex-lg-column my-auto">
+        {% block sidebar_menu %}
+            {{ parent() }}
+        {% endblock %}
+    </div>
+
+    <!-- SETTINGS / LOGO -->
+    <div class="sidebar_logo d-none flex-lg-column d-lg-block">
+        <ul class="nav justify-content-center">
+            <li class="btn-group dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa-solid fa-gear rounded-circle"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    
 {% endblock %}
