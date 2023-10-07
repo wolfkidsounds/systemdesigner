@@ -18,7 +18,7 @@
                                     </li>
                                     <li class="list-inline-item d-none d-lg-inline-block ms-0 m-0">
                                         <div {{ stimulus_controller('modal-form') }}>
-                                            <button type="button" class="btn nav-btn" data-bs-toggle="modal" data-bs-target="#new_processor_modal">
+                                            <button type="button" class="btn nav-btn" data-bs-toggle="modal" data-bs-target="#new_processor_modal" data-action="modal-form#openModal">
                                                 <i class="fa-solid fa-plus"></i>
                                             </button>
                                         </div>
@@ -88,30 +88,7 @@
         </div>
     </div>
     
-    <div {{ stimulus_controller('say-hello') }}>
-        <input type="text" {{ stimulus_target('say-hello', 'name') }}>
-
-        <button {{ stimulus_action('say-hello', 'greet') }}>
-            Greet
-        </button>
-
-        <div {{ stimulus_target('say-hello', 'output') }}></div>
-    </div>
-
-    <div class="modal fade" id="new_processor_modal" tabindex="-1" aria-modal="true" role="dialog" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5">New Processor</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                </div>
-                <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div data-controller="hello"></div>
+    
+    {{ include('partials/modal/_modal.html.twig') }}
 {% endblock %}
