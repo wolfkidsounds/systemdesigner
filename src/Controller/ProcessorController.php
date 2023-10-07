@@ -25,7 +25,7 @@ class ProcessorController extends AbstractController
             'processors' => $processorRepository->findAll(),
             'controller_name' => 'ProcessorController',
             'title' => 'Processor',
-            'iconclass' => 'icon-processor',
+            'crud_title' => 'All Processors',
         ]);
     }
 
@@ -48,7 +48,7 @@ class ProcessorController extends AbstractController
             'form' => $form,
             'controller_name' => 'ProcessorController',
             'title' => 'Processor',
-            'iconclass' => 'icon-processor',
+            'crud_title' => 'New Processor',
         ]);
     }
 
