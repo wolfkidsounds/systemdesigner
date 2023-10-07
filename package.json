@@ -3,25 +3,12 @@
         "@babel/core": "^7.17.0",
         "@babel/preset-env": "^7.16.0",
         "@hotwired/stimulus": "^3.0.0",
-        "@hotwired/turbo": "^7.0.1",
         "@symfony/stimulus-bridge": "^3.2.0",
-        "@symfony/ux-translator": "file:vendor/symfony/ux-translator/assets",
-        "@symfony/ux-turbo": "file:vendor/symfony/ux-turbo/assets",
         "@symfony/webpack-encore": "^4.0.0",
-        "autoprefixer": "^10.4.16",
-        "bootstrap": "^5.3.2",
         "core-js": "^3.23.0",
-        "css-loader": "^6.8.1",
-        "html-webpack-plugin": "^5.5.3",
-        "intl-messageformat": "^10.2.5",
-        "postcss-loader": "^7.3.3",
         "regenerator-runtime": "^0.13.9",
-        "sass": "^1.68.0",
-        "sass-loader": "^13.3.2",
-        "style-loader": "^3.3.3",
-        "webpack": "^5.88.2",
+        "webpack": "^5.74.0",
         "webpack-cli": "^4.10.0",
-        "webpack-dev-server": "^4.15.1",
         "webpack-notifier": "^1.15.0"
     },
     "license": "UNLICENSED",
@@ -35,11 +22,12 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.4.2",
         "@popperjs/core": "^2.11.8",
-        "apexcharts": "^3.43.0",
         "balloon-css": "^1.2.0",
+        "bootstrap": "^5.3.2",
         "jquery": "^3.7.1",
-        "resize-observer-polyfill": "^1.5.1",
+        "sass": "^1.69.0",
+        "sass-loader": "^13.3.2",
         "select2": "^4.1.0-rc.0",
-        "simplebar": "^6.2.5"
+        "style-loader": "^3.3.3"
     }
 }
