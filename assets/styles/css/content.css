@@ -39,3 +39,8 @@
 .card {
     margin-bottom:1.5rem;
 }
+
+.search-box .form-control,
+.search-box .input-group-text {
+    border: 0;
+}
