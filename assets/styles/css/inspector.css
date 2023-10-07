@@ -12,5 +12,12 @@
 }
 
 #toolbar {
-        border-bottom: var(--bs-border-width) var(--bs-border-style) rgba(0,0,0, .1) !important;
+    border-bottom: var(--bs-border-width) var(--bs-border-style) rgba(0,0,0, .1) !important;
+    height:var(--sd-header-height);
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+    justify-content: flex-end;
 }
