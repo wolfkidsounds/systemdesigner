@@ -1,0 +1,14 @@
+.card-body thead,
+.card-body tbody,
+.card-body table,
+.card-body th,
+.card-body tr,
+.card-body td {
+    background:none;
+    color:var(--bs-body-color);
+}
+
+.card {
+    border-radius: var(--bs-card-border-radius);
+    background:#36404a;
+}
