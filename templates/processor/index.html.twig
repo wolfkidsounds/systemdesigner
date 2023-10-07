@@ -11,7 +11,12 @@
                         <div class="flex-shrink-0">
                             <div class="d-flex flex-wrap gap-2">
                                 <ul class="list-inline text-end mb-0">                                        
-                                    <li class="list-inline-item d-none d-lg-inline-block me-2 ms-0">
+                                    <li class="list-inline-item d-none d-lg-inline-block ms-0 m-0">
+                                        <button type="button" class="btn nav-btn" data-bs-toggle="modal" data-bs-target="#new_processor_modal">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </button>
+                                    </li>
+                                    <li class="list-inline-item d-none d-lg-inline-block ms-0 m-0">
                                         <button type="button" class="btn nav-btn" data-bs-toggle="modal" data-bs-target="#new_processor_modal">
                                             <i class="fa-solid fa-plus"></i>
                                         </button>
@@ -22,35 +27,18 @@
                     </div>
                 </div>
 
-                <div class="card-body border border-dashed border-end-0 border-start-0">
-                    <form>
-                        <div class="row g-3">
-                            <div class="search-box">            
-                                <div class="input-group mb-3 rounded-3">
-                                    <span class="input-group-text text-muted bg-light pe-1 ps-3">
-                                        <i class="fa-solid fa-magnifying-glass font-size-18"></i>
-                                    </span>
-                                    <input type="text" class="form-control bg-light" placeholder="Search..." aria-label="Search...">
-                                </div> 
-                            </div>
-
-                        </div>
-                        <!--end row-->
-                    </form>
-                </div>
-                <!--end card-body-->
                 <div class="card-body">
                     <div class="table-responsive table-card mb-4">
-                        <table class="table align-middle table-nowrap mb-0" id="tasksTable">
-                            <thead class="table-light text-muted">
+                        <table class="table align-middle table-nowrap mb-0">
+                            <thead class="">
                                 <tr>
-                                    <th class="sort align-middle" data-sort="id">ID</th>
-                                    <th class="sort align-middle" data-sort="brand">Brand</th>
-                                    <th class="sort align-middle" data-sort="name">Name</th>
-                                    <th class="sort align-middle" data-sort="inputs">Inputs</th>
-                                    <th class="sort align-middle" data-sort="outputs">Outputs</th>
-                                    <th class="sort align-middle" data-sort="offset">Offset</th>
-                                    <th class="sort align-middle" data-sort="actions">Actions</th>
+                                    <th class="sort text-uppercase align-middle" data-sort="id">ID</th>
+                                    <th class="sort text-uppercase align-middle" data-sort="brand">Brand</th>
+                                    <th class="sort text-uppercase align-middle" data-sort="name">Name</th>
+                                    <th class="sort text-uppercase align-middle" data-sort="inputs">Inputs</th>
+                                    <th class="sort text-uppercase align-middle" data-sort="outputs">Outputs</th>
+                                    <th class="sort text-uppercase align-middle" data-sort="offset">Offset</th>
+                                    <th class="sort text-uppercase align-middle" data-sort="actions">Actions</th>
                                 </tr>
                             </thead>
                             <tbody class="list form-check-all"><tr>
@@ -94,16 +82,8 @@
                         </div>
                     </div>
                 </div>
-                <!--end card-body-->
             </div>
-            <!--end card-->
         </div>
-        <!--end col-->
     </div>
 {% endblock %}
-
-{% set toolbar_button %}
-    <a href="{{ path('app_processor_new') }}" class="btn nav-btn">
-        <i class="fa-solid fa-plus"></i>
-    </a>
-{% endset %}
+{% use 'processor/new.html.twig'%}
