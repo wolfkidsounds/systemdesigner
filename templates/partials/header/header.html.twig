@@ -1,11 +1,41 @@
 {% block header %}
     <div class="row align-items-center">
-        <div class="d-flex align-items-center">
-            <div class="flex-grow-1 overflow-hidden">
-                <h5 class="font-size-16 mb-0 text-truncate">
-                    <a href="#" class="text-reset user-profile-show">{{ title }}</a>
-                </h5>
+        <div class="col">
+            <div class="d-flex justify-content-start">
+                <div class="flex-grow-1 overflow-hidden">
+                    <h5 class="font-size-16 mb-0 text-truncate"><a href="#" class="text-reset user-profile-show">{{ title }}</a> <i class="ri-record-circle-fill font-size-10 text-success d-inline-block ms-1"></i></h5>
+                </div>
             </div>
         </div>
+        <!-- Toolbar -->
+        <!--
+        <div class="col">
+            <div class="d-flex justify-content-end">
+                <ul class="list-inline user-chat-nav text-end mb-0">                                        
+                    <li class="list-inline-item d-none d-lg-inline-block me-2 ms-0">
+                        <button type="button" class="btn nav-btn" data-bs-toggle="modal" data-bs-target="#audiocallModal">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </li>
+
+                    <li class="list-inline-item">
+                        <div class="dropdown">
+                            <button class="btn nav-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item d-block d-lg-none user-profile-show" href="#">View profile <i class="ri-user-2-line float-end text-muted"></i></a>
+                                <a class="dropdown-item d-block d-lg-none" href="#" data-bs-toggle="modal" data-bs-target="#audiocallModal">Audio <i class="ri-phone-line float-end text-muted"></i></a>
+                                <a class="dropdown-item d-block d-lg-none" href="#" data-bs-toggle="modal" data-bs-target="#videocallModal">Video <i class="ri-vidicon-line float-end text-muted"></i></a>
+                                <a class="dropdown-item" href="#">Archive <i class="ri-archive-line float-end text-muted"></i></a>
+                                <a class="dropdown-item" href="#">Muted <i class="ri-volume-mute-line float-end text-muted"></i></a>
+                                <a class="dropdown-item" href="#">Delete <i class="ri-delete-bin-line float-end text-muted"></i></a>
+                            </div>
+                        </div>
+                    </li>                                        
+                </ul>
+            </div>                               
+        </div>
+        -->
     </div>
 {% endblock %}
