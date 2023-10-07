@@ -1,3 +1,5 @@
+import './bootstrap.js';
+
 import '@popperjs/core';
 import 'bootstrap';
 import 'simplebar';
