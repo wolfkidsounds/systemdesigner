@@ -30,6 +30,9 @@ class Processor
     #[ORM\Column]
     private ?int $OutputOffset = null;
 
+    #[ORM\Column]
+    private ?int $UserId = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -91,6 +94,18 @@ class Processor
     public function setOutputOffset(int $OutputOffset): static
     {
         $this->OutputOffset = $OutputOffset;
+
+        return $this;
+    }
+
+    public function getUserId(): ?int
+    {
+        return $this->UserId;
+    }
+
+    public function setUserId(int $UserId): static
+    {
+        $this->UserId = $UserId;
 
         return $this;
     }
