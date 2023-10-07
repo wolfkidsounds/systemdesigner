@@ -1,14 +1,11 @@
-{% extends 'content.html.twig' %}
+{% extends 'modal/modal.html.twig' %}
 
-{% block title %}New Processor{% endblock %}
+{% block modal_title %}New Processor{% endblock %}
 
-{% block page_content %}
+{% block modal_content %}
     <h1>Create new Processor</h1>
 
     {{ include('processor/_form.html.twig') }}
 
     <a href="{{ path('app_processor_index') }}">back to list</a>
 {% endblock %}
-
-{% set toolbar_button %}
-{% endset %}
