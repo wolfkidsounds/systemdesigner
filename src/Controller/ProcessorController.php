@@ -59,11 +59,11 @@ class ProcessorController extends AbstractController
             'processor' => $processor,
             'controller_name' => 'ProcessorController',
             'title' => 'Processor',
-            'iconclass' => 'icon-processor',
+            'crud_title' => 'View Processor',
         ]);
     }
 
-    #[Route('/edit/{id}', name: 'app_processor_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_processor_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Processor $processor, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ProcessorType::class, $processor);
@@ -80,7 +80,7 @@ class ProcessorController extends AbstractController
             'form' => $form,
             'controller_name' => 'ProcessorController',
             'title' => 'Processor',
-            'iconclass' => 'icon-processor',
+            'crud_title' => 'Edit Processor',
         ]);
     }
 
