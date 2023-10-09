@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -29,6 +31,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $username = null;
+
+    #[ORM\OneToMany(mappedBy: 'User', targetEntity: Manufacturer::class)]
+    private Collection $manufacturers;
+
+    #[ORM\OneToMany(mappedBy: 'User', targetEntity: Processor::class)]
+    private Collection $processors;
+
+    public function __construct()
+    {
+        $this->manufacturers = new ArrayCollection();
+        $this->processors = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -108,6 +122,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUsername(string $username): static
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Manufacturer>
+     */
+    public function getManufacturers(): Collection
+    {
+        return $this->manufacturers;
+    }
+
+    public function addManufacturer(Manufacturer $manufacturer): static
+    {
+        if (!$this->manufacturers->contains($manufacturer)) {
+            $this->manufacturers->add($manufacturer);
+            $manufacturer->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeManufacturer(Manufacturer $manufacturer): static
+    {
+        if ($this->manufacturers->removeElement($manufacturer)) {
+            // set the owning side to null (unless already changed)
+            if ($manufacturer->getUser() === $this) {
+                $manufacturer->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Processor>
+     */
+    public function getProcessors(): Collection
+    {
+        return $this->processors;
+    }
+
+    public function addProcessor(Processor $processor): static
+    {
+        if (!$this->processors->contains($processor)) {
+            $this->processors->add($processor);
+            $processor->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProcessor(Processor $processor): static
+    {
+        if ($this->processors->removeElement($processor)) {
+            // set the owning side to null (unless already changed)
+            if ($processor->getUser() === $this) {
+                $processor->setUser(null);
+            }
+        }
 
         return $this;
     }
