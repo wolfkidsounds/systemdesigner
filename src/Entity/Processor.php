@@ -16,9 +16,6 @@ class Processor
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Brand = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $Name = null;
 
     #[ORM\Column]
@@ -30,24 +27,17 @@ class Processor
     #[ORM\Column]
     private ?int $OutputOffset = null;
 
-    #[ORM\Column]
-    private ?int $UserId = null;
+    #[ORM\ManyToOne(inversedBy: 'processors')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $User = null;
+
+    #[ORM\ManyToOne(inversedBy: 'processors')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Manufacturer $Manufacturer = null;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getBrand(): ?string
-    {
-        return $this->Brand;
-    }
-
-    public function setBrand(string $Brand): static
-    {
-        $this->Brand = $Brand;
-
-        return $this;
     }
 
     public function getName(): ?string
@@ -98,14 +88,26 @@ class Processor
         return $this;
     }
 
-    public function getUserId(): ?int
+    public function getUser(): ?User
     {
-        return $this->UserId;
+        return $this->User;
     }
 
-    public function setUserId(int $UserId): static
+    public function setUser(?User $User): static
     {
-        $this->UserId = $UserId;
+        $this->User = $User;
+
+        return $this;
+    }
+
+    public function getManufacturer(): ?Manufacturer
+    {
+        return $this->Manufacturer;
+    }
+
+    public function setManufacturer(?Manufacturer $Manufacturer): static
+    {
+        $this->Manufacturer = $Manufacturer;
 
         return $this;
     }
