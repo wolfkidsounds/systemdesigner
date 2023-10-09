@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MainController extends AbstractController
 {
@@ -13,13 +13,14 @@ class MainController extends AbstractController
     #[Route('/app', name: 'app_main')]
     public function main(): Response
     {
+        $processor_count = $this->getUser()->getProcessors()->count();
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
             'title' => 'Dashboard',
             'amplifiers' => 1,
-            'processors' => 1,
+            'processors' => $processor_count,
             'speakers' => 1,
-        ]);        
+        ]);
     }
 
     #[Route('/', name: 'app_index')]
