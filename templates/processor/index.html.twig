@@ -18,7 +18,7 @@
     <thead class="">
         <tr>
             <th class="sort text-uppercase align-middle" data-sort="id">ID</th>
-            <th class="sort text-uppercase align-middle" data-sort="brand">Brand</th>
+            <th class="sort text-uppercase align-middle" data-sort="manufacturer">Manufacturer</th>
             <th class="sort text-uppercase align-middle" data-sort="name">Name</th>
             <th class="sort text-uppercase align-middle" data-sort="inputs">Inputs</th>
             <th class="sort text-uppercase align-middle" data-sort="outputs">Outputs</th>
@@ -30,7 +30,7 @@
         {% for processor in processors %}
         <tr>
             <td class="id"><a class="text-body fw-bold" href="{{ path('app_processor_show', {'id': processor.id}) }}">{{ processor.id }}</a></td>
-            <td class="brand">{{ processor.Brand }}</td>
+            <td class="brand">{{ processor.Manufacturer }}</td>
             <td class="name">{{ processor.Name }}</td>
             <td class="inputs">{{ processor.ChannelsInput }}</td>
             <td class="outputs">{{ processor.ChannelsOutput }}</td>
