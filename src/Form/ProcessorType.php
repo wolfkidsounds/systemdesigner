@@ -12,8 +12,8 @@ class ProcessorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Brand')
             ->add('Name')
+            ->add('Manufacturer')
             ->add('ChannelsInput')
             ->add('ChannelsOutput')
             ->add('OutputOffset')
