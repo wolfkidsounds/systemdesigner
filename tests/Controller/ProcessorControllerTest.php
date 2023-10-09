@@ -12,7 +12,7 @@ class ProcessorControllerTest extends WebTestCase
 {
     private KernelBrowser $client;
     private ProcessorRepository $repository;
-    private string $path = '/processor';
+    private string $path = '/processor/';
     private EntityManagerInterface $manager;
 
     protected function setUp(): void
@@ -46,14 +46,15 @@ class ProcessorControllerTest extends WebTestCase
         self::assertResponseStatusCodeSame(200);
 
         $this->client->submitForm('Save', [
-            'processor[Brand]' => 'Brand Name',
-            'processor[Name]' => 'Controller Name',
-            'processor[ChannelsInput]' => rand(1,8),
-            'processor[ChannelsOutput]' => rand(1,16),
-            'processor[OutputOffset]' => rand(1,30),
+            'processor[Name]' => 'Testing',
+            'processor[ChannelsInput]' => 'Testing',
+            'processor[ChannelsOutput]' => 'Testing',
+            'processor[OutputOffset]' => 'Testing',
+            'processor[User]' => 'Testing',
+            'processor[Manufacturer]' => 'Testing',
         ]);
 
-        self::assertResponseRedirects('/processor');
+        self::assertResponseRedirects('/processor/');
 
         self::assertSame($originalNumObjectsInRepository + 1, count($this->repository->findAll()));
     }
@@ -62,11 +63,12 @@ class ProcessorControllerTest extends WebTestCase
     {
         $this->markTestIncomplete();
         $fixture = new Processor();
-        $fixture->setBrand('Brand Name');
-        $fixture->setName('Controller Name');
-        $fixture->setChannelsInput(rand(1,8));
-        $fixture->setChannelsOutput(rand(1,16));
-        $fixture->setOutputOffset(rand(1,30));
+        $fixture->setName('My Title');
+        $fixture->setChannelsInput('My Title');
+        $fixture->setChannelsOutput('My Title');
+        $fixture->setOutputOffset('My Title');
+        $fixture->setUser('My Title');
+        $fixture->setManufacturer('My Title');
 
         $this->manager->persist($fixture);
         $this->manager->flush();
@@ -83,11 +85,12 @@ class ProcessorControllerTest extends WebTestCase
     {
         $this->markTestIncomplete();
         $fixture = new Processor();
-        $fixture->setBrand('Brand Name');
-        $fixture->setName('Brand Controller');
-        $fixture->setChannelsInput(rand(1,8));
-        $fixture->setChannelsOutput(rand(1,8));
-        $fixture->setOutputOffset(rand(1,20));
+        $fixture->setName('My Title');
+        $fixture->setChannelsInput('My Title');
+        $fixture->setChannelsOutput('My Title');
+        $fixture->setOutputOffset('My Title');
+        $fixture->setUser('My Title');
+        $fixture->setManufacturer('My Title');
 
         $this->manager->persist($fixture);
         $this->manager->flush();
@@ -95,22 +98,24 @@ class ProcessorControllerTest extends WebTestCase
         $this->client->request('GET', sprintf('%s%s/edit', $this->path, $fixture->getId()));
 
         $this->client->submitForm('Update', [
-            'processor[Brand]' => 'Another Brand',
-            'processor[Name]' => 'Another Controller',
-            'processor[ChannelsInput]' => 1,
-            'processor[ChannelsOutput]' => 2,
-            'processor[OutputOffset]' => 3,
+            'processor[Name]' => 'Something New',
+            'processor[ChannelsInput]' => 'Something New',
+            'processor[ChannelsOutput]' => 'Something New',
+            'processor[OutputOffset]' => 'Something New',
+            'processor[User]' => 'Something New',
+            'processor[Manufacturer]' => 'Something New',
         ]);
 
-        self::assertResponseRedirects('/processor');
+        self::assertResponseRedirects('/processor/');
 
         $fixture = $this->repository->findAll();
 
-        self::assertSame('Another Brand', $fixture[0]->getBrand());
-        self::assertSame('Another Controller', $fixture[0]->getName());
-        self::assertSame(1, $fixture[0]->getChannelsInput());
-        self::assertSame(2, $fixture[0]->getChannelsOutput());
-        self::assertSame(3, $fixture[0]->getOutputOffset());
+        self::assertSame('Something New', $fixture[0]->getName());
+        self::assertSame('Something New', $fixture[0]->getChannelsInput());
+        self::assertSame('Something New', $fixture[0]->getChannelsOutput());
+        self::assertSame('Something New', $fixture[0]->getOutputOffset());
+        self::assertSame('Something New', $fixture[0]->getUser());
+        self::assertSame('Something New', $fixture[0]->getManufacturer());
     }
 
     public function testRemove(): void
@@ -120,11 +125,12 @@ class ProcessorControllerTest extends WebTestCase
         $originalNumObjectsInRepository = count($this->repository->findAll());
 
         $fixture = new Processor();
-        $fixture->setBrand('My Title');
         $fixture->setName('My Title');
-        $fixture->setChannelsInput(99);
-        $fixture->setChannelsOutput(99);
-        $fixture->setOutputOffset(99);
+        $fixture->setChannelsInput('My Title');
+        $fixture->setChannelsOutput('My Title');
+        $fixture->setOutputOffset('My Title');
+        $fixture->setUser('My Title');
+        $fixture->setManufacturer('My Title');
 
         $this->manager->persist($fixture);
         $this->manager->flush();
@@ -135,6 +141,6 @@ class ProcessorControllerTest extends WebTestCase
         $this->client->submitForm('Delete');
 
         self::assertSame($originalNumObjectsInRepository, count($this->repository->findAll()));
-        self::assertResponseRedirects('/processor');
+        self::assertResponseRedirects('/processor/');
     }
 }
