@@ -1,11 +1,14 @@
-{% extends 'base.html.twig' %}
+{% extends 'crud.html.twig' %}
 
-{% block title %}New Manufacturer{% endblock %}
+{% block title %}{{ parent() }} | New Manufacturer{% endblock %}
 
-{% block body %}
-    <h1>Create new Manufacturer</h1>
-
+{% block crud_body %}
     {{ include('manufacturer/_form.html.twig') }}
-
-    <a href="{{ path('app_manufacturer_index') }}">back to list</a>
+{% endblock %}
+{% block crud_toolbar %}
+    <li class="list-inline-item d-lg-inline-block ms-0 m-0">
+        <a type="button" href="{{ path('app_manufacturer_index') }}" class="btn nav-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+    </li>
 {% endblock %}
