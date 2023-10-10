@@ -18,5 +18,14 @@ class UserFixtures extends Fixture
 
         $manager->persist($user);
         $manager->flush();
+
+        $user = new User();
+        $user->setEmail('admin@pulsationaudio.com');
+        $user->setUsername('Pulsation Audio 2');
+        $user->setRoles(['ROLE_USER']);
+        $user->setPassword('$2y$13$/UvTDWJOKuW4StGkRm5me.URelOL.OxRd3wweuqg4iEaAFiiaNP0.');
+
+        $manager->persist($user);
+        $manager->flush();
     }
 }
