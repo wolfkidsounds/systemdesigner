@@ -35,6 +35,9 @@ class Processor
     #[ORM\JoinColumn(nullable: false)]
     private ?Manufacturer $Manufacturer = null;
 
+    #[ORM\Column]
+    private ?bool $Validated = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -108,6 +111,18 @@ class Processor
     public function setManufacturer(?Manufacturer $Manufacturer): static
     {
         $this->Manufacturer = $Manufacturer;
+
+        return $this;
+    }
+
+    public function isValidated(): ?bool
+    {
+        return $this->Validated;
+    }
+
+    public function setValidated(bool $Validated): static
+    {
+        $this->Validated = $Validated;
 
         return $this;
     }
