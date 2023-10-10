@@ -2,30 +2,60 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Entity\Setting;
 use App\Entity\Manufacturer;
 use App\Form\ManufacturerType;
-use App\Repository\ManufacturerRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\ManufacturerRepository;
+use App\Repository\SettingRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Novaway\Bundle\FeatureFlagBundle\Annotation\Feature;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/manufacturer')]
+#[Feature(name: "manufacturers")]
+#[IsGranted('ROLE_USER')]
+#[Route('/app/manufacturer')]
 class ManufacturerController extends AbstractController
 {
     #[Route('/', name: 'app_manufacturer_index', methods: ['GET'])]
-    public function index(ManufacturerRepository $manufacturerRepository): Response
+    public function index(ManufacturerRepository $manufacturerRepository, SettingRepository $settingRepository): Response
     {
-        return $this->render('manufacturer/index.html.twig', [
-            'manufacturers' => $manufacturerRepository->findAll(),
-        ]);
+        /** @var User $user */
+        $user = $this->getUser();
+        $key = 'allow_database';
+
+        $setting = $settingRepository->findByUserAndKey($user, $key)->isSettingValue();
+
+        if (!$setting) {
+
+            return $this->render('manufacturer/index.html.twig', [
+                'manufacturers' => $manufacturerRepository->findBy(),
+                'title' => 'Manufacturer',
+                'crud_title' => 'All Manufacturers',
+            ]);
+
+        } else {
+
+            return $this->render('manufacturer/index.html.twig', [
+                'manufacturers' => $manufacturerRepository->findAll(),
+                'title' => 'Manufacturer',
+                'crud_title' => 'All Manufacturers',
+            ]);
+        }
+        
     }
 
     #[Route('/new', name: 'app_manufacturer_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $manufacturer = new Manufacturer();
+        $user = $this->getUser();
+        $manufacturer->setUser($user);
+
         $form = $this->createForm(ManufacturerType::class, $manufacturer);
         $form->handleRequest($request);
 
@@ -39,6 +69,8 @@ class ManufacturerController extends AbstractController
         return $this->render('manufacturer/new.html.twig', [
             'manufacturer' => $manufacturer,
             'form' => $form,
+            'title' => 'Manufacturer',
+            'crud_title' => 'New Manufacturer',
         ]);
     }
 
@@ -47,6 +79,8 @@ class ManufacturerController extends AbstractController
     {
         return $this->render('manufacturer/show.html.twig', [
             'manufacturer' => $manufacturer,
+            'title' => 'Manufacturer',
+            'crud_title' => 'View Manufacturer',
         ]);
     }
 
@@ -65,6 +99,8 @@ class ManufacturerController extends AbstractController
         return $this->render('manufacturer/edit.html.twig', [
             'manufacturer' => $manufacturer,
             'form' => $form,
+            'title' => 'Manufacturer',
+            'crud_title' => 'Edit Manufacturer',
         ]);
     }
 
