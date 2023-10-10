@@ -27,6 +27,9 @@ class Manufacturer
     #[ORM\OneToMany(mappedBy: 'Manufacturer', targetEntity: Processor::class)]
     private Collection $processors;
 
+    #[ORM\Column]
+    private ?bool $Validated = false;
+
     public function __construct()
     {
         $this->processors = new ArrayCollection();
@@ -87,6 +90,18 @@ class Manufacturer
                 $processor->setManufacturer(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isValidated(): ?bool
+    {
+        return $this->Validated;
+    }
+
+    public function setValidated(bool $Validated): static
+    {
+        $this->Validated = $Validated;
 
         return $this;
     }
