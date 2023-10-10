@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
@@ -13,7 +14,10 @@ class MainController extends AbstractController
     #[Route('/app', name: 'app_main')]
     public function main(): Response
     {
-        $processor_count = $this->getUser()->getProcessors()->count();
+        $user = $this->getUser();
+
+        /** @var User $user */
+        $processor_count = $user->getProcessors()->count();
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
             'title' => 'Dashboard',
