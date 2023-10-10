@@ -15,3 +15,6 @@ novaway_feature_flag:
         chassis:
             enabled: false
             description: Chassis Features
+        manufacturers:
+            enabled: true
+            description: Manufacturer Features
