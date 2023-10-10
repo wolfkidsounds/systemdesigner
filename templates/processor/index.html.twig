@@ -1,13 +1,13 @@
 {% extends 'crud.html.twig' %}
 
-{% block title %}Processor{% endblock %}
+{% block title %}{{ parent() }} | Processors{% endblock %}
 {% block crud_toolbar %}
-    <li class="list-inline-item d-none d-lg-inline-block ms-0 m-0">
+    <li class="list-inline-item d-lg-inline-block ms-0 m-0">
         <button type="button" class="btn nav-btn" data-bs-toggle="modal" data-bs-target="#new_processor_modal">
             <i class="fa-solid fa-magnifying-glass"></i>
         </button>
     </li>
-    <li class="list-inline-item d-none d-lg-inline-block ms-0 m-0">
+    <li class="list-inline-item d-lg-inline-block ms-0 m-0">
         <a type="button" href="{{ path('app_processor_new') }}" class="btn nav-btn">
             <i class="fa-solid fa-plus"></i>
         </a>
@@ -30,7 +30,7 @@
         {% for processor in processors %}
         <tr>
             <td class="id"><a class="text-body fw-bold" href="{{ path('app_processor_show', {'id': processor.id}) }}">{{ processor.id }}</a></td>
-            <td class="brand">{{ processor.Manufacturer }}</td>
+            <td class="brand">{{ processor.Manufacturer.name }}</td>
             <td class="name">{{ processor.Name }}</td>
             <td class="inputs">{{ processor.ChannelsInput }}</td>
             <td class="outputs">{{ processor.ChannelsOutput }}</td>
