@@ -33,6 +33,9 @@ class ProcessorController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $processor = new Processor();
+        $user = $this->getUser();
+        $processor->setUser($user);
+
         $form = $this->createForm(ProcessorType::class, $processor);
         $form->handleRequest($request);
 
