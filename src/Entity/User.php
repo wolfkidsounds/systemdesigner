@@ -38,10 +38,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'User', targetEntity: Processor::class)]
     private Collection $processors;
 
+    #[ORM\OneToMany(mappedBy: 'User', targetEntity: Setting::class)]
+    private Collection $settings;
+
     public function __construct()
     {
         $this->manufacturers = new ArrayCollection();
         $this->processors = new ArrayCollection();
+        $this->settings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -180,6 +184,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($processor->getUser() === $this) {
                 $processor->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Setting>
+     */
+    public function getSettings(): Collection
+    {
+        return $this->settings;
+    }
+
+    public function addSetting(Setting $setting): static
+    {
+        if (!$this->settings->contains($setting)) {
+            $this->settings->add($setting);
+            $setting->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSetting(Setting $setting): static
+    {
+        if ($this->settings->removeElement($setting)) {
+            // set the owning side to null (unless already changed)
+            if ($setting->getUser() === $this) {
+                $setting->setUser(null);
             }
         }
 
