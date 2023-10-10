@@ -1,35 +1,43 @@
-{% extends 'base.html.twig' %}
+{% extends 'crud.html.twig' %}
 
 {% block title %}Manufacturer index{% endblock %}
 
-{% block body %}
-    <h1>Manufacturer index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+{% block crud_toolbar %}
+    <li class="list-inline-item d-lg-inline-block ms-0 m-0">
+        <button type="button" class="btn nav-btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    </li>
+    <li class="list-inline-item d-lg-inline-block ms-0 m-0">
+        <a type="button" href="{{ path('app_manufacturer_new') }}" class="btn nav-btn">
+            <i class="fa-solid fa-plus"></i>
+        </a>
+    </li>
+{% endblock %}
+{% block crud_body %}
+<table class="table align-middle table-nowrap mb-0">
+    <thead class="">
+        <tr>
+            <th class="sort text-uppercase align-middle" data-sort="id">ID</th>
+            <th class="sort text-uppercase align-middle" data-sort="name">Name</th>
+            <th class="sort text-uppercase align-middle" data-sort="actions">Actions</th>
+        </tr>
+    </thead>
+    <tbody class="list form-check-all"><tr>
         {% for manufacturer in manufacturers %}
-            <tr>
-                <td>{{ manufacturer.id }}</td>
-                <td>{{ manufacturer.Name }}</td>
-                <td>
-                    <a href="{{ path('app_manufacturer_show', {'id': manufacturer.id}) }}">show</a>
-                    <a href="{{ path('app_manufacturer_edit', {'id': manufacturer.id}) }}">edit</a>
-                </td>
-            </tr>
+        <tr>
+            <td class="id"><a class="text-body fw-bold" href="{{ path('app_manufacturer_show', {'id': manufacturer.id}) }}">{{ manufacturer.id }}</a></td>
+            <td class="name">{{ manufacturer.Name }}</td>
+            <td class="actions d-flex gap-2">
+                <a href="{{ path('app_manufacturer_show', {'id': manufacturer.id}) }}"><i class="fa-solid fa-eye"></i></a>
+                <a href="{{ path('app_manufacturer_edit', {'id': manufacturer.id}) }}"><i class="fa-solid fa-pen"></i></a>
+            </td>
+        </tr>
         {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
+        <tr>
+            <td colspan="7">We could not find any manufacturers.</td>
+        </tr>
         {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_manufacturer_new') }}">Create new</a>
+    </tbody>
+</table>
 {% endblock %}
