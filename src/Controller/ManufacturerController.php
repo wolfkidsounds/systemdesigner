@@ -26,14 +26,11 @@ class ManufacturerController extends AbstractController
     {
         /** @var User $user */
         $user = $this->getUser();
-        $key = 'allow_database';
 
-        $setting = $settingRepository->findByUserAndKey($user, $key)->isSettingValue();
-
-        if (!$setting) {
+        if (true) {
 
             return $this->render('manufacturer/index.html.twig', [
-                'manufacturers' => $manufacturerRepository->findBy(),
+                'manufacturers' => $manufacturerRepository->findBy(['User' => $user]),
                 'title' => 'Manufacturer',
                 'crud_title' => 'All Manufacturers',
             ]);
