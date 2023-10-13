@@ -19,9 +19,6 @@ class ManufacturerType extends AbstractType
     }
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        /** @var \App\Entity\User $user */
-        $user = $this->security->getUser();
-
         $builder
             ->add('Name', TextType::class, [
                 'constraints' => [new NotBlank()]
