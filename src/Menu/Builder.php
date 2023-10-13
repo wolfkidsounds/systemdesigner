@@ -25,6 +25,15 @@ class MenuBuilder extends AbstractController
     {
         $menu = $this->factory->createItem('sidebar');
 
+        if ($this->isGranted('ROLE_ADMIN')) {
+            $menu->addChild('Admin', [
+                'route' => 'admin',
+                'extras' => [
+                    'icon' => 'fa-solid fa-dashboard',
+                ]
+            ]);
+        }
+
         $menu->addChild('Profile', [
             'route' => 'app_main',
             'extras' => [
