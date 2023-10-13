@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -40,17 +41,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'User', targetEntity: Processor::class)]
     private Collection $processors;
 
-    #[ORM\OneToMany(mappedBy: 'User', targetEntity: Setting::class)]
-    private Collection $settings;
-
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
+    #[ORM\Column]
+    private array $settings = [];
     public function __construct()
     {
         $this->manufacturers = new ArrayCollection();
         $this->processors = new ArrayCollection();
-        $this->settings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -195,36 +194,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Setting>
-     */
-    public function getSettings(): Collection
-    {
-        return $this->settings;
-    }
-
-    public function addSetting(Setting $setting): static
-    {
-        if (!$this->settings->contains($setting)) {
-            $this->settings->add($setting);
-            $setting->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSetting(Setting $setting): static
-    {
-        if ($this->settings->removeElement($setting)) {
-            // set the owning side to null (unless already changed)
-            if ($setting->getUser() === $this) {
-                $setting->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function isVerified(): bool
     {
         return $this->isVerified;
@@ -233,6 +202,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): static
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getSettings(): array
+    {
+        $settings = $this->settings;
+
+        return array_unique($settings);
+    }
+
+    public function setSettings(array $settings): static
+    {
+        $this->settings = $settings;
 
         return $this;
     }
