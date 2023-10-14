@@ -46,10 +46,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private array $settings = [];
+
+    #[ORM\OneToMany(mappedBy: 'User', targetEntity: Amplifier::class)]
+    private Collection $amplifiers;
     public function __construct()
     {
         $this->manufacturers = new ArrayCollection();
         $this->processors = new ArrayCollection();
+        $this->amplifiers = new ArrayCollection();
+    }
+
+    public function __toString() {
+        return $this->username;
     }
 
     public function getId(): ?int
@@ -216,6 +224,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setSettings(array $settings): static
     {
         $this->settings = $settings;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Amplifier>
+     */
+    public function getAmplifiers(): Collection
+    {
+        return $this->amplifiers;
+    }
+
+    public function addAmplifier(Amplifier $amplifier): static
+    {
+        if (!$this->amplifiers->contains($amplifier)) {
+            $this->amplifiers->add($amplifier);
+            $amplifier->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAmplifier(Amplifier $amplifier): static
+    {
+        if ($this->amplifiers->removeElement($amplifier)) {
+            // set the owning side to null (unless already changed)
+            if ($amplifier->getUser() === $this) {
+                $amplifier->setUser(null);
+            }
+        }
 
         return $this;
     }
