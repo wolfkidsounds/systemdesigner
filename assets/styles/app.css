@@ -1,15 +1,16 @@
-@import "./css/root.css";
+@import "./css/app/root.css";
 
-@import "./css/fonts.css";
-@import "./css/balloon.css";
+@import "./css/app/fonts.css";
+@import "./css/app/balloon.css";
 
-@import "./css/header.css";
-@import "./css/footer.css";
-@import "./css/content.css";
-@import "./css/card.css";
+@import "./css/app/header.css";
+@import "./css/app/footer.css";
+@import "./css/app/content.css";
+@import "./css/app/card.css";
 
-@import "./css/login_form.css";
-@import "./css/sidebar.css";
-@import "./css/button.css";
+@import "./css/app/login_form.css";
+@import "./css/app/sidebar.css";
+@import "./css/app/button.css";
+@import "./css/app/progress-circular.css";
 
-@import "./css/media.css";
+@import "./css/app/media.css";
