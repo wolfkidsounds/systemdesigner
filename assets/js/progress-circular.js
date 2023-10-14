@@ -9,5 +9,5 @@ circularProgressBars.forEach(progressBar => {
     const angle = (progress / max) * 360;
 
     // Update the background of the circular progress bar
-    progressBar.style.background = `conic-gradient(var(--bs-primary) ${angle}deg, #fff 0deg)`;
+    progressBar.style.background = `conic-gradient(var(--bs-primary) ${angle}deg, rgba(255,255,255,.1) 0deg)`;
 });
