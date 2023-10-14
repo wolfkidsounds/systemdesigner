@@ -2,17 +2,19 @@
 <div class="col-xl-3 col-md-6">
     <div class="card card-h-100">
         <div class="card-body">
-            <div class="d-flex align-items-center">
+            <div class="d-flex">
                 <div class="flex-grow-1">
                     <p class="text-muted fw-medium">Amplifiers</p>
-                    <h4 class="mb-0">12</h4>
+                    <h4 class="mb-0">{{ amplifiers }} / 10</h4>
                 </div>
 
                 <div class="flex-shrink-0 align-self-center card-badge">
-                    <div class="avatar-sm rounded-circle bg-primary mini-stat-icon">
-                        <span class="icon rounded-circle bg-primary">
-                            <i class="icon-amplifier"></i>
-                        </span>
+                    <div class="progress-bar-circular" data-progress="{{ amplifiers }}">
+                        <div class="progress-bar-content avatar-sm rounded-circle mini-stat-icon">
+                            <span class="icon rounded-circle">
+                                <i class="icon-amplifier"></i>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
