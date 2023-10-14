@@ -1,0 +1,65 @@
+{% extends 'crud.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ amplifier.Manufacturer.name }} - {{ amplifier.Name }}{% endblock %}
+{% block crud_toolbar %}
+<li class="list-inline-item d-lg-inline-block ms-0 m-0">
+    <a type="button" href="{{ path('app_amplifier_index') }}" class="btn nav-btn">
+        <i class="fa-solid fa-arrow-left"></i>
+    </a>
+</li>
+<li class="list-inline-item d-lg-inline-block ms-0 m-0">
+    <a type="button" href="{{ path('app_amplifier_edit', {'id': amplifier.id}) }}" class="btn nav-btn">
+        <i class="fa-solid fa-pen"></i>
+    </a>
+</li>
+<li class="list-inline-item d-lg-inline-block ms-0 m-0">
+    {{ include('amplifier/_delete_form.html.twig') }}
+</li>
+{% endblock %}
+
+{% block crud_body %}
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ amplifier.id }}</td>
+            </tr>
+            <tr>
+                <th>User</th>
+                <td>{{ amplifier.User.username }}</td>
+            </tr>
+            <tr>
+                <th>Manufacturer</th>
+                <td>{{ amplifier.Manufacturer.name }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ amplifier.Name }}</td>
+            </tr>
+            <tr>
+                <th>Power @ 16 Ω</th>
+                <td>{{ amplifier.Power16 }}</td>
+            </tr>
+            <tr>
+                <th>Power @ 8 Ω</th>
+                <td>{{ amplifier.Power8 }}</td>
+            </tr>
+            <tr>
+                <th>Power @ 4 Ω</th>
+                <td>{{ amplifier.Power4 }}</td>
+            </tr>
+            <tr>
+                <th>Power @ 2 Ω</th>
+                <td>{{ amplifier.Power2 }}</td>
+            </tr>
+            <tr>
+                <th>Power Bridge @ 8 Ω</th>
+                <td>{{ amplifier.PowerBridge8 }}</td>
+            </tr>
+            <tr>
+                <th>Power Bridge @ 4 Ω</th>
+                <td>{{ amplifier.PowerBridge4 }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

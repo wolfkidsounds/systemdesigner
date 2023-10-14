@@ -1,0 +1,18 @@
+{% extends 'crud.html.twig' %}
+
+{% block title %}{{ parent() }} | Edit: {{ amplifier.Manufacturer.name }} - {{ amplifier.Name }}{% endblock %}
+
+{% block crud_body %}
+    {{ include('amplifier/_form.html.twig', {'button_label': 'Update'}) }}
+{% endblock %}
+
+{% block crud_toolbar %}
+<li class="list-inline-item d-lg-inline-block ms-0 m-0">
+    <a type="button" href="{{ path('app_amplifier_index') }}" class="btn nav-btn">
+        <i class="fa-solid fa-arrow-left"></i>
+    </a>
+</li>
+<li class="list-inline-item d-lg-inline-block ms-0 m-0">
+    {{ include('amplifier/_delete_form.html.twig') }}
+</li>
+{% endblock %}

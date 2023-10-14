@@ -1,0 +1,76 @@
+{% extends 'crud.html.twig' %}
+
+{% block title %}{{ parent() }} | Amplifiers{% endblock %}
+{% block crud_toolbar %}
+    <li class="list-inline-item d-lg-inline-block ms-0 m-0">
+        <button type="button" class="btn nav-btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    </li>
+    <li class="list-inline-item d-lg-inline-block ms-0 m-0">
+        <a type="button" href="{{ path('app_amplifier_new') }}" class="btn nav-btn">
+            <i class="fa-solid fa-plus"></i>
+        </a>
+    </li>
+{% endblock %}
+{% block crud_body %}
+<table class="table align-middle table-nowrap mb-0">
+    <thead class="">
+        <tr>
+            <th class="sort text-uppercase align-middle" data-sort="id">ID</th>
+            <th class="sort text-uppercase align-middle" data-sort="manufacturer">Manufacturer</th>
+            <th class="sort text-uppercase align-middle" data-sort="name">Name</th>
+            <th class="sort text-uppercase align-middle" data-sort="power16">Power @ 16Ω</th>
+            <th class="sort text-uppercase align-middle" data-sort="power8">Power @ 8Ω</th>
+            <th class="sort text-uppercase align-middle" data-sort="power4">Power @ 4Ω</th>
+            <th class="sort text-uppercase align-middle" data-sort="power2">Power @ 2Ω</th>
+            <th class="sort text-uppercase align-middle" data-sort="powerbridge8">Power Bridge @ 8Ω</th>
+            <th class="sort text-uppercase align-middle" data-sort="powerbridge4">Power Bridge @ 4Ω</th>
+            <th class="sort text-uppercase align-middle" data-sort="id">Actions</th>
+        </tr>
+    </thead>
+    <tbody class="list form-check-all"><tr>
+        {% for amplifier in amplifiers %}
+        <tr>
+            <td class="id">{{ amplifier.id }}</td>
+            <td class="manufacturer">{{ processor.Manufacturer.name }}</td>
+            <td class="name">{{ amplifier.Name }}</td>
+            <td class="power16">{{ amplifier.Power16 }}</td>
+            <td class="power8">{{ amplifier.Power8 }}</td>
+            <td class="power4">{{ amplifier.Power4 }}</td>
+            <td class="power2">{{ amplifier.Power2 }}</td>
+            <td class="powerbridge8">{{ amplifier.PowerBridge8 }}</td>
+            <td class="powerbridge4">{{ amplifier.PowerBridge4 }}</td>
+            <td class="actions d-flex gap-2">
+                <a href="{{ path('app_amplifier_show', {'id': amplifier.id}) }}"><i class="fa-solid fa-eye"></i></a>
+                <a href="{{ path('app_amplifier_edit', {'id': amplifier.id}) }}"><i class="fa-solid fa-pen"></i></a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="7">We could not find any amplifiers.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+{% block crud_pagination %}
+<div class="d-flex justify-content-end mt-2">
+    <div class="pagination-wrap hstack gap-2" style="display: flex;">
+        <a class="page-item pagination-prev disabled" href="#">
+            Previous
+        </a>
+        <ul class="pagination listjs-pagination mb-0">
+            <li class="active">
+                <a class="page" href="#" data-i="1" data-page="8">1</a>
+            </li>
+            <li>
+                <a class="page" href="#" data-i="2" data-page="8">2</a>
+            </li>
+        </ul>
+        <a class="page-item pagination-next" href="#">
+            Next
+        </a>
+    </div>
+</div>
+{% endblock %}
