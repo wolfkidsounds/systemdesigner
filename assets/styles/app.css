@@ -1,16 +1,22 @@
+/** Import Roots */
 @import "./css/app/root.css";
 
+/* Import Fonts and Addons */
 @import "./css/app/fonts.css";
 @import "./css/app/balloon.css";
 
+/* Import Page Contents */
 @import "./css/app/header.css";
 @import "./css/app/footer.css";
 @import "./css/app/content.css";
+@import "./css/app/sidebar.css";
 @import "./css/app/card.css";
 
+/* Import Customizations */
 @import "./css/app/login_form.css";
-@import "./css/app/sidebar.css";
 @import "./css/app/button.css";
 @import "./css/app/progress-circular.css";
+@import "./css/app/simplebar.css";
 
+/* Import Media Queries */
 @import "./css/app/media.css";
