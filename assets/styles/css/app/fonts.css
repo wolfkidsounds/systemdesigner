@@ -1,0 +1,44 @@
+/* Custom Icons */
+@font-face {
+    font-display: swap;
+    font-family: 'icons';
+    font-style: normal;
+    font-weight: 500;
+    src: url('../../../fonts/icomoon.woff') format('woff');
+}
+
+[class^="icon-"], 
+[class*=" icon-"],
+.icon {
+    font-family: 'icons' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size:32px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-processor:before {
+    content: "\e900";
+}
+  
+.icon-speaker:before {
+    content: "\e901";
+}
+  
+.icon-amplifier:before {
+    content: "\e902";
+}
+
+.icon-chassis:before {
+    content: "\e903";
+  }

@@ -4,7 +4,7 @@
     font-family: 'icons';
     font-style: normal;
     font-weight: 500;
-    src: url('../../fonts/icomoon.woff') format('woff');
+    src: url('../../../fonts/icomoon.woff') format('woff');
 }
 
 [class^="icon-"], 
@@ -41,4 +41,4 @@
 
 .icon-chassis:before {
     content: "\e903";
-  }
+}

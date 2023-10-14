@@ -1,0 +1,24 @@
+.progress-bar-circular {
+    position:relative;
+    height:calc(var(--icon-size) + (var(--bar-size) / 2));
+    width:calc(var(--icon-size) + (var(--bar-size) / 2));
+    border-radius:50%;
+    background: conic-gradient(var(--bs-primary) 3.6deg, #fff 0deg);
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-bar-circular::before {
+    content: '';
+    position:absolute;
+    height:calc(var(--icon-size) - (var(--bar-size) / 2));
+    width:calc(var(--icon-size) - (var(--bar-size) / 2));
+    background:var(--bs-light);
+    border-radius:50%;
+}
+
+.progress-bar-content {
+    position:relative;
+    color:var(--bs-primary);
+}
