@@ -3,10 +3,11 @@
     height:calc(var(--icon-size) + (var(--bar-size) / 2));
     width:calc(var(--icon-size) + (var(--bar-size) / 2));
     border-radius:50%;
-    background: conic-gradient(var(--bs-primary) 3.6deg, #fff 0deg);
+    background: conic-gradient(var(--bs-primary) 3.6deg, rgba(255,255,255,.1) 0deg);
     display:flex;
     align-items: center;
     justify-content: center;
+    transition:all .3s ease;
 }
 
 .progress-bar-circular::before {
