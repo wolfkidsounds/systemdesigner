@@ -30,9 +30,17 @@ class Manufacturer
     #[ORM\Column]
     private ?bool $Validated = false;
 
+    #[ORM\OneToMany(mappedBy: 'Manufacturer', targetEntity: Amplifier::class)]
+    private Collection $amplifiers;
+
     public function __construct()
     {
         $this->processors = new ArrayCollection();
+        $this->amplifiers = new ArrayCollection();
+    }
+
+    public function __toString() {
+        return $this->Name;
     }
 
     public function getId(): ?int
@@ -102,6 +110,36 @@ class Manufacturer
     public function setValidated(bool $Validated): static
     {
         $this->Validated = $Validated;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Amplifier>
+     */
+    public function getAmplifiers(): Collection
+    {
+        return $this->amplifiers;
+    }
+
+    public function addAmplifier(Amplifier $amplifier): static
+    {
+        if (!$this->amplifiers->contains($amplifier)) {
+            $this->amplifiers->add($amplifier);
+            $amplifier->setManufacturer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAmplifier(Amplifier $amplifier): static
+    {
+        if ($this->amplifiers->removeElement($amplifier)) {
+            // set the owning side to null (unless already changed)
+            if ($amplifier->getManufacturer() === $this) {
+                $amplifier->setManufacturer(null);
+            }
+        }
 
         return $this;
     }
