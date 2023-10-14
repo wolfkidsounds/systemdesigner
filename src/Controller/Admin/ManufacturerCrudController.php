@@ -2,8 +2,13 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\User;
 use App\Entity\Manufacturer;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 
 class ManufacturerCrudController extends AbstractCrudController
 {
@@ -12,14 +17,16 @@ class ManufacturerCrudController extends AbstractCrudController
         return Manufacturer::class;
     }
 
-    /*
-    public function configureFields(string $pageName): iterable
+    public function configureFields(string $manufacturer): iterable
     {
+        /** @var User $user */
+        $user = $this->getUser();
+
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            AssociationField::new('User')->setValue($user),
+            TextField::new('Name'),
+            BooleanField::new('validated')
+
         ];
     }
-    */
 }
