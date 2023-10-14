@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use App\Entity\Amplifier;
 use App\Entity\Processor;
 use App\Entity\Manufacturer;
 use Symfony\Component\HttpFoundation\Response;
@@ -53,7 +54,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Users', 'fa fa-user', User::class);
         yield MenuItem::section('App');
         yield MenuItem::linkToCrud('Processors', 'icon icon-processor', Processor::class);
-        //yield MenuItem::linkToCrud('Amplifiers', 'icon-amplifier', Amplifier::class);
+        yield MenuItem::linkToCrud('Amplifiers', 'icon-amplifier', Amplifier::class);
         //yield MenuItem::linkToCrud('Speaker', 'icon-speaker', Speaker::class);
         //yield MenuItem::linkToCrud('Chassis', 'icon-chassis', Chassis::class);
         yield MenuItem::section('Extra');
