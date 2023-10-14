@@ -38,6 +38,10 @@ class Processor
     #[ORM\Column]
     private ?bool $Validated = false;
 
+    public function __toString() {
+        return $this->Manufacturer . ' - ' . $this->Name;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
