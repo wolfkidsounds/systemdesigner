@@ -4,7 +4,9 @@
 
 #content {
     padding:24px;
-    height: calc(100vh - (var(--sd-header-height) * 2));
+    height: calc(100vh - (var(--sd-header-height)));
+    overflow-y:auto;
+    overflow-x:hidden;
 }
 
 .card-badge {
