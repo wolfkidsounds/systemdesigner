@@ -44,6 +44,13 @@ class Amplifier
     #[ORM\Column(nullable: true)]
     private ?int $PowerBridge4 = null;
 
+    #[ORM\Column]
+    private ?bool $Validated = null;
+
+    public function __toString() {
+        return $this->Manufacturer . ' - ' . $this->Name;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -153,6 +160,18 @@ class Amplifier
     public function setPowerBridge4(?int $PowerBridge4): static
     {
         $this->PowerBridge4 = $PowerBridge4;
+
+        return $this;
+    }
+
+    public function isValidated(): ?bool
+    {
+        return $this->Validated;
+    }
+
+    public function setValidated(bool $Validated): static
+    {
+        $this->Validated = $Validated;
 
         return $this;
     }
