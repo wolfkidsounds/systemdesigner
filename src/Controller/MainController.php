@@ -18,10 +18,11 @@ class MainController extends AbstractController
 
         /** @var User $user */
         $processor_count = $user->getProcessors()->count();
+        $amplifier_count = $user->getAmplifiers()->count();
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
             'title' => 'Dashboard',
-            'amplifiers' => 1,
+            'amplifiers' => $amplifier_count,
             'processors' => $processor_count,
             'speakers' => 1,
         ]);
