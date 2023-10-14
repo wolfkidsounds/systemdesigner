@@ -30,6 +30,7 @@
         "sass": "^1.69.0",
         "sass-loader": "^13.3.2",
         "select2": "^4.1.0-rc.0",
+        "simplebar": "^6.2.5",
         "style-loader": "^3.3.3"
     }
 }
