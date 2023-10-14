@@ -52,7 +52,7 @@ class MenuBuilder extends AbstractController
 
         if ($this->featureManager->isEnabled('amplifier')) {
             $menu->addChild('Amplifier', [
-                'route' => 'app_main',
+                'route' => 'app_amplifier_index',
                 'extras' => [
                     'icon' => 'icon icon-amplifier',
                 ]
