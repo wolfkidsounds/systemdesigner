@@ -3,9 +3,11 @@ import './bootstrap.js';
 import '@popperjs/core';
 import 'bootstrap';
 import 'simplebar';
+import 'select2';
 
 // Import Custom JS
 import './js/progress-circular.js';
+//import './js/select2.js';
 
 // Import SASS
 import './styles/app.scss';
