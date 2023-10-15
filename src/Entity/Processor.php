@@ -38,6 +38,9 @@ class Processor
     #[ORM\Column]
     private ?bool $Validated = false;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Manual = null;
+
     public function __toString() {
         return $this->Manufacturer . ' - ' . $this->Name;
     }
@@ -127,6 +130,18 @@ class Processor
     public function setValidated(bool $Validated): static
     {
         $this->Validated = $Validated;
+
+        return $this;
+    }
+
+    public function getManual(): ?string
+    {
+        return $this->Manual;
+    }
+
+    public function setManual(?string $Manual): static
+    {
+        $this->Manual = $Manual;
 
         return $this;
     }
