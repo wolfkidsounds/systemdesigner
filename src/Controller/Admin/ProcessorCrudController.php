@@ -28,7 +28,7 @@ class ProcessorCrudController extends AbstractCrudController
         return [
             AssociationField::new('User')->setValue($user),
             AssociationField::new('Manufacturer'),
-            TextField::new('name'),
+            TextField::new('Name'),
             IntegerField::new('channels_input'),
             IntegerField::new('channels_output'),
             IntegerField::new('output_offset'),
