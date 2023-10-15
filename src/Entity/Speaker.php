@@ -57,6 +57,10 @@ class Speaker
         $this->limiters = new ArrayCollection();
     }
 
+    public function __toString() {
+        return $this->Manufacturer . ' - ' . $this->Name;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
