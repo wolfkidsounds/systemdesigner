@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Amplifier;
 use App\Form\AmplifierType;
+use App\Service\ManualUploader;
 use App\Repository\AmplifierRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Novaway\Bundle\FeatureFlagBundle\Annotation\Feature;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,7 +32,7 @@ class AmplifierController extends AbstractController
     }
 
     #[Route('/new', name: 'app_amplifier_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, ManualUploader $manualUploader): Response
     {
         $amplifier = new Amplifier();
         $user = $this->getUser();
@@ -40,6 +42,18 @@ class AmplifierController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            /** @var UploadedFile $manual */
+            $manual = $form->get('Manual')->getData();
+
+            $manufacturer = $form->get('Manufacturer')->getData();
+            $name = $form->get('Name')->getData();
+
+            if ($manual) {
+                $manualName = $manualUploader->upload($manual, $manufacturer, $name);
+                $amplifier->setManual($manualName);
+            }
+
             $entityManager->persist($amplifier);
             $entityManager->flush();
 
