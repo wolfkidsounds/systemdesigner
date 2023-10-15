@@ -1,11 +1,15 @@
-{% extends 'base.html.twig' %}
+{% extends 'crud.html.twig' %}
 
-{% block title %}New Limiter{% endblock %}
+{% block title %}{{ parent() }} | New Limiter{% endblock %}
 
-{% block body %}
-    <h1>Create new Limiter</h1>
-
+{% block crud_body %}
     {{ include('limiter/_form.html.twig') }}
+{% endblock %}
 
-    <a href="{{ path('app_limiter_index') }}">back to list</a>
+{% block crud_toolbar %}
+    <li class="list-inline-item d-lg-inline-block ms-0 m-0">
+        <a type="button" href="{{ path('app_limiter_index') }}" class="btn nav-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+    </li>
 {% endblock %}
