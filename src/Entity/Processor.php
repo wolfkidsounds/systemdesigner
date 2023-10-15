@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProcessorRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\UX\Turbo\Attribute\Broadcast;
 
@@ -35,11 +37,19 @@ class Processor
     #[ORM\JoinColumn(nullable: false)]
     private ?Manufacturer $Manufacturer = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'boolean')]
     private ?bool $Validated = false;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Manual = null;
+
+    #[ORM\OneToMany(mappedBy: 'Processor', targetEntity: Limiter::class)]
+    private Collection $limiters;
+
+    public function __construct()
+    {
+        $this->limiters = new ArrayCollection();
+    }
 
     public function __toString() {
         return $this->Manufacturer . ' - ' . $this->Name;
@@ -142,6 +152,36 @@ class Processor
     public function setManual(?string $Manual): static
     {
         $this->Manual = $Manual;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Limiter>
+     */
+    public function getLimiters(): Collection
+    {
+        return $this->limiters;
+    }
+
+    public function addLimiter(Limiter $limiter): static
+    {
+        if (!$this->limiters->contains($limiter)) {
+            $this->limiters->add($limiter);
+            $limiter->setProcessor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLimiter(Limiter $limiter): static
+    {
+        if ($this->limiters->removeElement($limiter)) {
+            // set the owning side to null (unless already changed)
+            if ($limiter->getProcessor() === $this) {
+                $limiter->setProcessor(null);
+            }
+        }
 
         return $this;
     }
