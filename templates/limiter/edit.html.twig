@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Limiter{% endblock %}
+
+{% block body %}
+    <h1>Edit Limiter</h1>
+
+    {{ include('limiter/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_limiter_index') }}">back to list</a>
+
+    {{ include('limiter/_delete_form.html.twig') }}
+{% endblock %}

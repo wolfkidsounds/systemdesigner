@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Limiter{% endblock %}
+
+{% block body %}
+    <h1>Limiter</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ limiter.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_limiter_index') }}">back to list</a>
+
+    <a href="{{ path('app_limiter_edit', {'id': limiter.id}) }}">edit</a>
+
+    {{ include('limiter/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Limiter index{% endblock %}
+
+{% block body %}
+    <h1>Limiter index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for limiter in limiters %}
+            <tr>
+                <td>{{ limiter.id }}</td>
+                <td>
+                    <a href="{{ path('app_limiter_show', {'id': limiter.id}) }}">show</a>
+                    <a href="{{ path('app_limiter_edit', {'id': limiter.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_limiter_new') }}">Create new</a>
+{% endblock %}
