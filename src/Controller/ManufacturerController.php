@@ -27,22 +27,11 @@ class ManufacturerController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
-        if (true) {
-
-            return $this->render('manufacturer/index.html.twig', [
-                'manufacturers' => $manufacturerRepository->findBy(['User' => $user]),
-                'title' => 'Manufacturer',
-                'crud_title' => 'All Manufacturers',
-            ]);
-
-        } else {
-
-            return $this->render('manufacturer/index.html.twig', [
-                'manufacturers' => $manufacturerRepository->findAll(),
-                'title' => 'Manufacturer',
-                'crud_title' => 'All Manufacturers',
-            ]);
-        }
+        return $this->render('manufacturer/index.html.twig', [
+            'manufacturers' => $manufacturerRepository->findBy(['User' => $user]),
+            'title' => 'Manufacturer',
+            'crud_title' => 'All Manufacturers',
+        ]);
         
     }
 
