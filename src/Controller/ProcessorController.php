@@ -5,13 +5,17 @@ namespace App\Controller;
 use App\Entity\Processor;
 use App\Form\ProcessorType;
 use App\Repository\ProcessorRepository;
+use App\Service\ManualUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Novaway\Bundle\FeatureFlagBundle\Annotation\Feature;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 #[Feature(name: "processor")]
 #[IsGranted('ROLE_USER')]
@@ -30,7 +34,7 @@ class ProcessorController extends AbstractController
     }
 
     #[Route('/new', name: 'app_processor_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, ManualUploader $manualUploader): Response
     {
         $processor = new Processor();
         $user = $this->getUser();
@@ -40,6 +44,18 @@ class ProcessorController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            /** @var UploadedFile $manual */
+            $manual = $form->get('Manual')->getData();
+
+            $manufacturer = $form->get('Manufacturer')->getData();
+            $name = $form->get('Name')->getData();
+
+            if ($manual) {
+                $manualName = $manualUploader->upload($manual, $manufacturer, $name);
+                $processor->setManual($manualName);
+            }
+            
             $entityManager->persist($processor);
             $entityManager->flush();
 
