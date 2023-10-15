@@ -32,14 +32,14 @@ class MenuBuilder extends AbstractController
                     'icon' => 'fa-solid fa-dashboard',
                 ]
             ]);
-        }
 
-        $menu->addChild('Profile', [
-            'route' => 'app_main',
-            'extras' => [
-                'icon' => 'fa-solid fa-user',
-            ]
-        ]);
+            $menu->addChild('divider_1', [
+                'divider' => true,
+                'extras' => [
+                    'divider' => true,
+                ]
+            ]);
+        }
         
         if ($this->featureManager->isEnabled('processor')) {
             $menu->addChild('Processor', [
@@ -61,7 +61,7 @@ class MenuBuilder extends AbstractController
 
         if ($this->featureManager->isEnabled('speaker')) {
             $menu->addChild('Speaker', [
-                'route' => 'app_main',
+                'route' => 'app_speaker_index',
                 'extras' => [
                     'icon' => 'icon icon-speaker',
                 ]
@@ -73,6 +73,22 @@ class MenuBuilder extends AbstractController
                 'route' => 'app_main',
                 'extras' => [
                     'icon' => 'icon icon-chassis',
+                ]
+            ]);
+        }
+
+        if ($this->featureManager->isEnabled('limiter')) {
+            $menu->addChild('divider_2', [
+                'divider' => true,
+                'extras' => [
+                    'divider' => true,
+                ]
+            ]);
+
+            $menu->addChild('Limiter', [
+                'route' => 'app_limiter_index',
+                'extras' => [
+                    'icon' => 'fa-solid fa-wave-square',
                 ]
             ]);
         }
