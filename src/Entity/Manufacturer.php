@@ -27,16 +27,20 @@ class Manufacturer
     #[ORM\OneToMany(mappedBy: 'Manufacturer', targetEntity: Processor::class)]
     private Collection $processors;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'boolean')]
     private ?bool $Validated = false;
 
     #[ORM\OneToMany(mappedBy: 'Manufacturer', targetEntity: Amplifier::class)]
     private Collection $amplifiers;
 
+    #[ORM\OneToMany(mappedBy: 'Manufacturer', targetEntity: Speaker::class)]
+    private Collection $speakers;
+
     public function __construct()
     {
         $this->processors = new ArrayCollection();
         $this->amplifiers = new ArrayCollection();
+        $this->speakers = new ArrayCollection();
     }
 
     public function __toString() {
@@ -138,6 +142,36 @@ class Manufacturer
             // set the owning side to null (unless already changed)
             if ($amplifier->getManufacturer() === $this) {
                 $amplifier->setManufacturer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Speaker>
+     */
+    public function getSpeakers(): Collection
+    {
+        return $this->speakers;
+    }
+
+    public function addSpeaker(Speaker $speaker): static
+    {
+        if (!$this->speakers->contains($speaker)) {
+            $this->speakers->add($speaker);
+            $speaker->setManufacturer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSpeaker(Speaker $speaker): static
+    {
+        if ($this->speakers->removeElement($speaker)) {
+            // set the owning side to null (unless already changed)
+            if ($speaker->getManufacturer() === $this) {
+                $speaker->setManufacturer(null);
             }
         }
 
