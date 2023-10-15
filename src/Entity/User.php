@@ -49,11 +49,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'User', targetEntity: Amplifier::class)]
     private Collection $amplifiers;
+
+    #[ORM\OneToMany(mappedBy: 'User', targetEntity: Speaker::class)]
+    private Collection $speakers;
+
+    #[ORM\OneToMany(mappedBy: 'User', targetEntity: Limiter::class)]
+    private Collection $limiters;
     public function __construct()
     {
         $this->manufacturers = new ArrayCollection();
         $this->processors = new ArrayCollection();
         $this->amplifiers = new ArrayCollection();
+        $this->speakers = new ArrayCollection();
+        $this->limiters = new ArrayCollection();
     }
 
     public function __toString() {
@@ -252,6 +260,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($amplifier->getUser() === $this) {
                 $amplifier->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Speaker>
+     */
+    public function getSpeakers(): Collection
+    {
+        return $this->speakers;
+    }
+
+    public function addSpeaker(Speaker $speaker): static
+    {
+        if (!$this->speakers->contains($speaker)) {
+            $this->speakers->add($speaker);
+            $speaker->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSpeaker(Speaker $speaker): static
+    {
+        if ($this->speakers->removeElement($speaker)) {
+            // set the owning side to null (unless already changed)
+            if ($speaker->getUser() === $this) {
+                $speaker->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Limiter>
+     */
+    public function getLimiters(): Collection
+    {
+        return $this->limiters;
+    }
+
+    public function addLimiter(Limiter $limiter): static
+    {
+        if (!$this->limiters->contains($limiter)) {
+            $this->limiters->add($limiter);
+            $limiter->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLimiter(Limiter $limiter): static
+    {
+        if ($this->limiters->removeElement($limiter)) {
+            // set the owning side to null (unless already changed)
+            if ($limiter->getUser() === $this) {
+                $limiter->setUser(null);
             }
         }
 
