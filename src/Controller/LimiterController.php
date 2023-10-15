@@ -19,6 +19,8 @@ class LimiterController extends AbstractController
     {
         return $this->render('limiter/index.html.twig', [
             'limiters' => $limiterRepository->findAll(),
+            'title' => 'Limiter',
+            'crud_title' => 'All Limiters',
         ]);
     }
 
@@ -39,6 +41,8 @@ class LimiterController extends AbstractController
         return $this->render('limiter/new.html.twig', [
             'limiter' => $limiter,
             'form' => $form,
+            'title' => 'Limiter',
+            'crud_title' => 'New Limiter',
         ]);
     }
 
@@ -47,6 +51,8 @@ class LimiterController extends AbstractController
     {
         return $this->render('limiter/show.html.twig', [
             'limiter' => $limiter,
+            'title' => 'Limiter',
+            'crud_title' => 'Show Limiter',
         ]);
     }
 
@@ -65,6 +71,8 @@ class LimiterController extends AbstractController
         return $this->render('limiter/edit.html.twig', [
             'limiter' => $limiter,
             'form' => $form,
+            'title' => 'Limiter',
+            'crud_title' => 'Edit Limiter',
         ]);
     }
 
