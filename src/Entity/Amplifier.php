@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AmplifierRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\UX\Turbo\Attribute\Broadcast;
 
@@ -44,8 +46,19 @@ class Amplifier
     #[ORM\Column(nullable: true)]
     private ?int $PowerBridge4 = null;
 
-    #[ORM\Column]
-    private ?bool $Validated = null;
+    #[ORM\Column(type: 'boolean')]
+    private ?bool $Validated = false;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Manual = null;
+
+    #[ORM\OneToMany(mappedBy: 'Amplifier', targetEntity: Limiter::class)]
+    private Collection $limiters;
+
+    public function __construct()
+    {
+        $this->limiters = new ArrayCollection();
+    }
 
     public function __toString() {
         return $this->Manufacturer . ' - ' . $this->Name;
@@ -172,6 +185,48 @@ class Amplifier
     public function setValidated(bool $Validated): static
     {
         $this->Validated = $Validated;
+
+        return $this;
+    }
+
+    public function getManual(): ?string
+    {
+        return $this->Manual;
+    }
+
+    public function setManual(?string $Manual): static
+    {
+        $this->Manual = $Manual;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Limiter>
+     */
+    public function getLimiters(): Collection
+    {
+        return $this->limiters;
+    }
+
+    public function addLimiter(Limiter $limiter): static
+    {
+        if (!$this->limiters->contains($limiter)) {
+            $this->limiters->add($limiter);
+            $limiter->setAmplifier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLimiter(Limiter $limiter): static
+    {
+        if ($this->limiters->removeElement($limiter)) {
+            // set the owning side to null (unless already changed)
+            if ($limiter->getAmplifier() === $this) {
+                $limiter->setAmplifier(null);
+            }
+        }
 
         return $this;
     }
