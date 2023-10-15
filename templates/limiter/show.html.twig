@@ -1,22 +1,45 @@
-{% extends 'base.html.twig' %}
+{% extends 'crud.html.twig' %}
 
-{% block title %}Limiter{% endblock %}
+{% block title %}{{ parent() }} | {{ limiter.Name }}{% endblock %}
+{% block crud_toolbar %}
+<li class="list-inline-item d-lg-inline-block ms-0 m-0">
+    <a type="button" href="{{ path('app_limiter_index') }}" class="btn nav-btn">
+        <i class="fa-solid fa-arrow-left"></i>
+    </a>
+</li>
+<li class="list-inline-item d-lg-inline-block ms-0 m-0">
+    <a type="button" href="{{ path('app_limiter_edit', {'id': limiter.id}) }}" class="btn nav-btn">
+        <i class="fa-solid fa-pen"></i>
+    </a>
+</li>
+<li class="list-inline-item d-lg-inline-block ms-0 m-0">
+    {{ include('limiter/_delete_form.html.twig') }}
+</li>
+{% endblock %}
 
-{% block body %}
-    <h1>Limiter</h1>
-
+{% block crud_body %}
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
+                <th>ID</th>
                 <td>{{ limiter.id }}</td>
+            </tr>
+            <tr>
+                <th>User</th>
+                <td>{{ limiter.User.username }}</td>
+            </tr>
+            <tr>
+                <th>Processor</th>
+                <td>{{ limiter.Processor.Manufacturer.name }} - {{ limiter.Processor.name }}</td>
+            </tr>
+            <tr>
+                <th>Amplifier</th>
+                <td>{{ limiter.Amplifier.Manufacturer.name }} - {{ limiter.Amplifier.name }}</td>
+            </tr>
+            <tr>
+                <th>Speaker</th>
+                <td>{{ limiter.Speaker.Manufacturer.name }} - {{ limiter.Speaker.name }}</td>
             </tr>
         </tbody>
     </table>
-
-    <a href="{{ path('app_limiter_index') }}">back to list</a>
-
-    <a href="{{ path('app_limiter_edit', {'id': limiter.id}) }}">edit</a>
-
-    {{ include('limiter/_delete_form.html.twig') }}
 {% endblock %}
