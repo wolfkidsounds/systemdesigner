@@ -83,12 +83,24 @@ class ProcessorController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_processor_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Processor $processor, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Processor $processor, EntityManagerInterface $entityManager, ManualUploader $manualUploader): Response
     {
         $form = $this->createForm(ProcessorType::class, $processor);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            /** @var UploadedFile $manual */
+            $manual = $form->get('Manual')->getData();
+
+            $manufacturer = $form->get('Manufacturer')->getData();
+            $name = $form->get('Name')->getData();
+
+            if ($manual) {
+                $manualName = $manualUploader->upload($manual, $manufacturer, $name);
+                $processor->setManual($manualName);
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_processor_index', [], Response::HTTP_SEE_OTHER);
