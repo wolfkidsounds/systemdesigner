@@ -55,6 +55,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'User', targetEntity: Limiter::class)]
     private Collection $limiters;
+
+    #[ORM\Column(type: 'boolean')]
+    private ?bool $Subscriber = false;
     public function __construct()
     {
         $this->manufacturers = new ArrayCollection();
@@ -322,6 +325,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $limiter->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isSubscriber(): ?bool
+    {
+        return $this->Subscriber;
+    }
+
+    public function setSubscriber(bool $Subscriber): static
+    {
+        $this->Subscriber = $Subscriber;
 
         return $this;
     }
