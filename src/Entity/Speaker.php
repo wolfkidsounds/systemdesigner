@@ -49,14 +49,6 @@ class Speaker
     #[ORM\Column(length: 255)]
     private ?string $Bandwidth = null;
 
-    #[ORM\OneToMany(mappedBy: 'Speaker', targetEntity: Limiter::class)]
-    private Collection $limiters;
-
-    public function __construct()
-    {
-        $this->limiters = new ArrayCollection();
-    }
-
     public function __toString() {
         return $this->Manufacturer . ' - ' . $this->Name;
     }
@@ -182,36 +174,6 @@ class Speaker
     public function setBandwidth(string $Bandwidth): static
     {
         $this->Bandwidth = $Bandwidth;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Limiter>
-     */
-    public function getLimiters(): Collection
-    {
-        return $this->limiters;
-    }
-
-    public function addLimiter(Limiter $limiter): static
-    {
-        if (!$this->limiters->contains($limiter)) {
-            $this->limiters->add($limiter);
-            $limiter->setSpeaker($this);
-        }
-
-        return $this;
-    }
-
-    public function removeLimiter(Limiter $limiter): static
-    {
-        if ($this->limiters->removeElement($limiter)) {
-            // set the owning side to null (unless already changed)
-            if ($limiter->getSpeaker() === $this) {
-                $limiter->setSpeaker(null);
-            }
-        }
 
         return $this;
     }
