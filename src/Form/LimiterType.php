@@ -11,6 +11,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class LimiterType extends AbstractType
 {
@@ -31,6 +33,38 @@ class LimiterType extends AbstractType
                 'class' => Speaker::class,
                 'constraints' => [new NotBlank()],
                 'attr' => ['data-select' => 'true']
+            ])
+            ->add('Vrms', NumberType::class, [
+                'constraints' => [new NotBlank()],
+                'attr' => ['readonly' => true]
+            ])
+            ->add('VrmsValue', NumberType::class, [
+                'constraints' => [new NotBlank()],
+                'attr' => ['readonly' => true]
+            ])
+            ->add('VrmsAttack', TextType::class, [
+                'constraints' => [new NotBlank()],
+                'attr' => ['readonly' => true]
+            ])
+            ->add('VrmsRelease', TextType::class, [
+                'constraints' => [new NotBlank()],
+                'attr' => ['readonly' => true]
+            ])
+            ->add('Vpeak', NumberType::class, [
+                'constraints' => [new NotBlank()],
+                'attr' => ['readonly' => true]
+            ])
+            ->add('VpeakValue', NumberType::class, [
+                'constraints' => [new NotBlank()],
+                'attr' => ['readonly' => true]
+            ])
+            ->add('VpeakAttack', TextType::class, [
+                'constraints' => [new NotBlank()],
+                'attr' => ['readonly' => true]
+            ])
+            ->add('VpeakRelease', TextType::class, [
+                'constraints' => [new NotBlank()],
+                'attr' => ['readonly' => true]
             ])
         ;
     }
