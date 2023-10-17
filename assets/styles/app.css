@@ -4,6 +4,7 @@
 /* Import Fonts and Addons */
 @import "./css/app/fonts.css";
 @import "./css/app/balloon.css";
+@import "./css/app/loader.css";
 
 /* Import Page Contents */
 @import "./css/app/header.css";
