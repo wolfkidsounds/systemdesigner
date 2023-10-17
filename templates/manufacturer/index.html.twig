@@ -4,9 +4,16 @@
 
 {% block crud_toolbar %}
     <li class="list-inline-item d-lg-inline-block ms-0 m-0">
-        <button type="button" class="btn nav-btn">
-            <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
+        <div class="dropdown dropstart">
+            <button class="btn nav-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            <div class="dropdown-menu p-0 dropdown-menu-md">
+                <div class="search-box p-1">
+                    <input type="text" class="form-control bg-light border-0" id="search-input" placeholder="Search..">
+                </div>
+            </div>
+        </div>
     </li>
     <li class="list-inline-item d-lg-inline-block ms-0 m-0">
         <a type="button" href="{{ path('app_manufacturer_new') }}" class="btn nav-btn">
@@ -23,7 +30,7 @@
             <th class="sort text-uppercase align-middle" data-sort="actions">Actions</th>
         </tr>
     </thead>
-    <tbody class="list form-check-all"><tr>
+    <tbody id="search-table" class="list form-check-all"><tr>
         {% for manufacturer in manufacturers %}
         <tr>
             <td class="id"><a class="text-body fw-bold" href="{{ path('app_manufacturer_show', {'id': manufacturer.id}) }}">{{ manufacturer.id }}</a></td>

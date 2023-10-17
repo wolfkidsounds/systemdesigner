@@ -8,6 +8,7 @@ import 'select2';
 // Import Custom JS
 import './js/progress-circular.js';
 //import './js/select2.js';
+import './js/search.js';
 
 // Import SASS
 import './styles/app.scss';

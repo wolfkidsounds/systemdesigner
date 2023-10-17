@@ -3,9 +3,16 @@
 {% block title %}{{ parent() }} | Amplifiers{% endblock %}
 {% block crud_toolbar %}
     <li class="list-inline-item d-lg-inline-block ms-0 m-0">
-        <button type="button" class="btn nav-btn">
-            <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
+        <div class="dropdown dropstart">
+            <button class="btn nav-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            <div class="dropdown-menu p-0 dropdown-menu-md">
+                <div class="search-box p-1">
+                    <input type="text" class="form-control bg-light border-0" id="search-input" placeholder="Search..">
+                </div>
+            </div>
+        </div>
     </li>
     <li class="list-inline-item d-lg-inline-block ms-0 m-0">
         <a type="button" href="{{ path('app_amplifier_new') }}" class="btn nav-btn">
@@ -29,7 +36,7 @@
             <th class="sort text-uppercase align-middle" data-sort="id">Actions</th>
         </tr>
     </thead>
-    <tbody class="list form-check-all"><tr>
+    <tbody id="search-table" class="list form-check-all"><tr>
         {% for amplifier in amplifiers %}
         <tr>
             <td class="id">{{ amplifier.id }}</td>
@@ -44,7 +51,9 @@
             <td class="actions d-flex gap-2">
                 <a href="{{ path('app_amplifier_show', {'id': amplifier.id}) }}"><i class="fa-solid fa-eye"></i></a>
                 <a href="{{ path('app_amplifier_edit', {'id': amplifier.id}) }}"><i class="fa-solid fa-pen"></i></a>
-                <a href="{{ asset('uploads/manuals/' ~ amplifier.Manual) }}" download><i class="fa-solid fa-file-pdf"></i></a>
+                {% if amplifier.Manual is not null and amplifier.Manual is not empty %}
+                    <a href="{{ asset('uploads/manuals/' ~ amplifier.Manual) }}" download><i class="fa-solid fa-file-pdf"></i></a>
+                {% endif %}
             </td>
         </tr>
         {% else %}
