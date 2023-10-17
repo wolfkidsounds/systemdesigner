@@ -40,6 +40,39 @@
                 <th>Speaker</th>
                 <td>{{ limiter.Speaker.Manufacturer.name }} - {{ limiter.Speaker.name }}</td>
             </tr>
+            <hr>
+            <tr>
+                <th>Vrms</th>
+                <td>{{ limiter.Vrms }}</td>
+            </tr>
+            <tr>
+                <th>Limiter Value</th>
+                <td>{{ limiter.VrmsValue }}</td>
+            </tr>
+            <tr>
+                <th>Attack Time</th>
+                <td>{{ limiter.VrmsAttack }}</td>
+            </tr>
+            <tr>
+                <th>Release Time</th>
+                <td>{{ limiter.VrmsRelease }}</td>
+            </tr>
+            <tr>
+                <th>Vpeak</th>
+                <td>{{ limiter.Vpeak }}</td>
+            </tr>
+            <tr>
+                <th>Limiter Value</th>
+                <td>{{ limiter.VpeakValue }}</td>
+            </tr>
+            <tr>
+                <th>Attack Time</th>
+                <td>{{ limiter.VpeakAttack }}</td>
+            </tr>
+            <tr>
+                <th>Release Time</th>
+                <td>{{ limiter.VpeakRelease }}</td>
+            </tr>
         </tbody>
     </table>
 {% endblock %}
