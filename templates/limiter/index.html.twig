@@ -21,6 +21,10 @@
             <th class="sort text-uppercase align-middle" data-sort="processor">Processor</th>
             <th class="sort text-uppercase align-middle" data-sort="amplifier">Amplifier</th>
             <th class="sort text-uppercase align-middle" data-sort="speaker">Speaker</th>
+            <th class="sort text-uppercase align-middle" data-sort="vrms">Vrms</th>
+            <th class="sort text-uppercase align-middle" data-sort="vrms_value">Value</th>
+            <th class="sort text-uppercase align-middle" data-sort="vpeak">Vpeak</th>
+            <th class="sort text-uppercase align-middle" data-sort="vpeak_value">Value</th>
             <th class="sort text-uppercase align-middle" data-sort="actions">Actions</th>
         </tr>
     </thead>
@@ -31,6 +35,10 @@
             <td class="processor">{{ limiter.Processor.Manufacturer }} - {{ limiter.Processor.Name }}</td>
             <td class="amplifier">{{ limiter.Amplifier.Manufacturer }} - {{ limiter.Amplifier.Name }}</td>
             <td class="speaker">{{ limiter.Speaker.Manufacturer }} - {{ limiter.Speaker.Name }}</td>
+            <td class="vrms">{{ limiter.Vrms }}</td>
+            <td class="vrms_value">{{ limiter.VrmsValue }}</td>
+            <td class="vpeak">{{ limiter.Vpeak }}</td>
+            <td class="vpeak_value">{{ limiter.VpeakValue }}</td>
             <td class="actions d-flex gap-2">
                 <a href="{{ path('app_limiter_show', {'id': limiter.id}) }}"><i class="fa-solid fa-eye"></i></a>
                 <a href="{{ path('app_limiter_edit', {'id': limiter.id}) }}"><i class="fa-solid fa-pen"></i></a>
