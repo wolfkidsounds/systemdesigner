@@ -2,22 +2,27 @@ novaway_feature_flag:
     features:
         api:
             enabled: true
-            description: API Features
+
+        subscription:
+            enabled: true
+
+        admin:
+            enabled: false
+
         processor:
             enabled: true
-            description: Processor Features
+
         amplifier:
             enabled: true
-            description: Amplifier Features
+
         speaker:
             enabled: true
-            description: Speaker Features
+
         chassis:
             enabled: false
-            description: Chassis Features
+
         manufacturers:
             enabled: true
-            description: Manufacturer Features
+
         limiter:
             enabled: true
-            description: Limiter Features
