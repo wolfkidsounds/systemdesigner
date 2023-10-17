@@ -25,7 +25,7 @@ class MenuBuilder extends AbstractController
     {
         $menu = $this->factory->createItem('sidebar');
 
-        if ($this->isGranted('ROLE_ADMIN')) {
+        if ($this->isGranted('ROLE_ADMIN') && $this->featureManager->isEnabled('admin')) {
             $menu->addChild('Admin', [
                 'route' => 'admin',
                 'extras' => [
@@ -37,6 +37,15 @@ class MenuBuilder extends AbstractController
                 'divider' => true,
                 'extras' => [
                     'divider' => true,
+                ]
+            ]);
+        }
+
+        if ($this->featureManager->isEnabled('manufacturers')) {
+            $menu->addChild('Manufacturer', [
+                'route' => 'app_manufacturer_index',
+                'extras' => [
+                    'icon' => 'fa-solid fa-industry',
                 ]
             ]);
         }
