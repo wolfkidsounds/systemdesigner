@@ -5,17 +5,29 @@
             <div class="d-flex">
                 <div class="flex-grow-1">
                     <p class="text-muted fw-medium">Processors</p>
-                    <h4 class="mb-0">{{ processors }} / 10</h4>
+                    {% if not isSubscriber %}
+                        <h4 class="mb-0">{{ processorsCount }} / {{ maxCount }}</h4>
+                    {% else %}
+                        <h4 class="mb-0">{{ processorsCount }}</h4>
+                    {% endif %}
                 </div>
 
                 <div class="flex-shrink-0 align-self-center card-badge">
-                    <div class="progress-bar-circular" data-progress="{{ processors }}">
+                    {% if not isSubscriber %}
+                    <div class="progress-bar-circular" data-progress="{{ processorsCount }}">
                         <div class="progress-bar-content avatar-sm rounded-circle mini-stat-icon">
                             <span class="icon rounded-circle">
                                 <i class="icon-processor"></i>
                             </span>
                         </div>
                     </div>
+                    {% else %}
+                    <div class="bg-primary avatar-sm rounded-circle mini-stat-icon">
+                        <span class="icon rounded-circle">
+                            <i class="icon-processor"></i>
+                        </span>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

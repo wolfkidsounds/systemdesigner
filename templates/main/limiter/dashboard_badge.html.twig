@@ -4,27 +4,27 @@
         <div class="card-body">
             <div class="d-flex">
                 <div class="flex-grow-1">
-                    <p class="text-muted fw-medium">Speakers</p>
+                    <p class="text-muted fw-medium">Limiters</p>
                     {% if not isSubscriber %}
-                        <h4 class="mb-0">{{ speakersCount }} / {{ maxCount }}</h4>
+                        <h4 class="mb-0">{{ limitersCount }} / {{ maxCount }}</h4>
                     {% else %}
-                        <h4 class="mb-0">{{ speakersCount }}</h4>
+                        <h4 class="mb-0">{{ limitersCount }}</h4>
                     {% endif %}
                 </div>
 
                 <div class="flex-shrink-0 align-self-center card-badge">
                     {% if not isSubscriber %}
-                    <div class="progress-bar-circular" data-progress="{{ speakersCount }}">
+                    <div class="progress-bar-circular" data-progress="{{ limitersCount }}">
                         <div class="progress-bar-content avatar-sm rounded-circle mini-stat-icon">
                             <span class="icon rounded-circle">
-                                <i class="icon-speaker"></i>
+                                <i class="fa-solid fa-wave-square"></i>
                             </span>
                         </div>
                     </div>
                     {% else %}
                     <div class="bg-primary avatar-sm rounded-circle mini-stat-icon">
                         <span class="icon rounded-circle">
-                            <i class="icon-speaker"></i>
+                            <i class="fa-solid fa-wave-square"></i>
                         </span>
                     </div>
                     {% endif %}
