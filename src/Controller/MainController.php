@@ -14,17 +14,19 @@ class MainController extends AbstractController
     #[Route('/app', name: 'app_main')]
     public function main(): Response
     {
+        /** @var User $user */
         $user = $this->getUser();
 
-        /** @var User $user */
-        $processor_count = $user->getProcessors()->count();
-        $amplifier_count = $user->getAmplifiers()->count();
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
             'title' => 'Dashboard',
-            'amplifiers' => $amplifier_count,
-            'processors' => $processor_count,
-            'speakers' => 1,
+            'isSubscriber' => $user->isSubscriber(),
+            'amplifiersCount' => $user->getAmplifiers()->count(),
+            'processorsCount' => $user->getProcessors()->count(),
+            'speakersCount' => $user->getSpeakers()->count(),
+            'manufacturersCount' => $user->getManufacturers()->count(),
+            'limitersCount' => $user->getLimiters()->count(),
+            'maxCount' => 10,
         ]);
     }
 
