@@ -1,4 +1,67 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+<div class="d-flex flex-column overflow-hidden">
+    <div class="row">
+        {{ form_row(form.Processor, {
+            'attr': {
+                'class': 'form-select',
+                'data-controller': 'calcVrms',
+                'data-action': 'change->calcVrms#calc'
+            },
+            'placeholder': 'Select Processor',
+        }) }}
+        {{ form_row(form.Amplifier, {
+            'attr': {
+                'class': 'form-select',
+                'data-controller': 'calcVrms',
+                'data-action': 'change->calcVrms#calc'
+            },
+            'placeholder': 'Select Amplifier',
+        })  }}
+        {{ form_row(form.Speaker, {
+            'attr': {
+                'class': 'form-select',
+                'data-controller': 'calcVrms',
+                'data-action': 'change->calcVrms#calc'
+            },
+            'placeholder': 'Select Speaker',
+        }) }}
+    </div>
+
+    <div class="divider seperator mb-3"><hr></div>
+
+    <div class="loading">
+        <div class="row calculated-fields">
+            <div class="col">
+                {{ form_row(form.Vrms) }}
+                {{ form_row(form.VrmsValue) }}
+            </div>
+            <div class="col">
+                {{ form_row(form.VrmsAttack) }}
+                {{ form_row(form.VrmsRelease) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="divider seperator mb-3"><hr></div> {# Add a separator here #}
+
+    <div class="loading">
+        <div class="row calculated-fields">
+            <div class="col">
+                {{ form_row(form.Vpeak) }}
+                {{ form_row(form.VpeakValue) }}
+            </div>
+            <div class="col">
+                {{ form_row(form.VpeakAttack) }}
+                {{ form_row(form.VpeakRelease) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="divider seperator mb-3"><hr></div> {# Add a separator here #}
+
+    <div class="row">
+        <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+    </div>
+
+</div>
 {{ form_end(form) }}
