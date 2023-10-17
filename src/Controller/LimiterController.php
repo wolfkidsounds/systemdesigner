@@ -6,11 +6,15 @@ use App\Entity\Limiter;
 use App\Form\LimiterType;
 use App\Repository\LimiterRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Novaway\Bundle\FeatureFlagBundle\Annotation\Feature;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+#[Feature(name: "limiter")]
+#[IsGranted('ROLE_USER')]
 #[Route('/limiter')]
 class LimiterController extends AbstractController
 {
