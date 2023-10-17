@@ -46,6 +46,14 @@ class LimiterControllerTest extends WebTestCase
         self::assertResponseStatusCodeSame(200);
 
         $this->client->submitForm('Save', [
+            'limiter[Vrms]' => 'Testing',
+            'limiter[Vpeak]' => 'Testing',
+            'limiter[VrmsValue]' => 'Testing',
+            'limiter[VpeakValue]' => 'Testing',
+            'limiter[VrmsAttack]' => 'Testing',
+            'limiter[VrmsRelease]' => 'Testing',
+            'limiter[VpeakAttack]' => 'Testing',
+            'limiter[VpeakRelease]' => 'Testing',
             'limiter[User]' => 'Testing',
             'limiter[Processor]' => 'Testing',
             'limiter[Amplifier]' => 'Testing',
@@ -61,6 +69,14 @@ class LimiterControllerTest extends WebTestCase
     {
         $this->markTestIncomplete();
         $fixture = new Limiter();
+        $fixture->setVrms('My Title');
+        $fixture->setVpeak('My Title');
+        $fixture->setVrmsValue('My Title');
+        $fixture->setVpeakValue('My Title');
+        $fixture->setVrmsAttack('My Title');
+        $fixture->setVrmsRelease('My Title');
+        $fixture->setVpeakAttack('My Title');
+        $fixture->setVpeakRelease('My Title');
         $fixture->setUser('My Title');
         $fixture->setProcessor('My Title');
         $fixture->setAmplifier('My Title');
@@ -81,6 +97,14 @@ class LimiterControllerTest extends WebTestCase
     {
         $this->markTestIncomplete();
         $fixture = new Limiter();
+        $fixture->setVrms('My Title');
+        $fixture->setVpeak('My Title');
+        $fixture->setVrmsValue('My Title');
+        $fixture->setVpeakValue('My Title');
+        $fixture->setVrmsAttack('My Title');
+        $fixture->setVrmsRelease('My Title');
+        $fixture->setVpeakAttack('My Title');
+        $fixture->setVpeakRelease('My Title');
         $fixture->setUser('My Title');
         $fixture->setProcessor('My Title');
         $fixture->setAmplifier('My Title');
@@ -92,6 +116,14 @@ class LimiterControllerTest extends WebTestCase
         $this->client->request('GET', sprintf('%s%s/edit', $this->path, $fixture->getId()));
 
         $this->client->submitForm('Update', [
+            'limiter[Vrms]' => 'Something New',
+            'limiter[Vpeak]' => 'Something New',
+            'limiter[VrmsValue]' => 'Something New',
+            'limiter[VpeakValue]' => 'Something New',
+            'limiter[VrmsAttack]' => 'Something New',
+            'limiter[VrmsRelease]' => 'Something New',
+            'limiter[VpeakAttack]' => 'Something New',
+            'limiter[VpeakRelease]' => 'Something New',
             'limiter[User]' => 'Something New',
             'limiter[Processor]' => 'Something New',
             'limiter[Amplifier]' => 'Something New',
@@ -102,6 +134,14 @@ class LimiterControllerTest extends WebTestCase
 
         $fixture = $this->repository->findAll();
 
+        self::assertSame('Something New', $fixture[0]->getVrms());
+        self::assertSame('Something New', $fixture[0]->getVpeak());
+        self::assertSame('Something New', $fixture[0]->getVrmsValue());
+        self::assertSame('Something New', $fixture[0]->getVpeakValue());
+        self::assertSame('Something New', $fixture[0]->getVrmsAttack());
+        self::assertSame('Something New', $fixture[0]->getVrmsRelease());
+        self::assertSame('Something New', $fixture[0]->getVpeakAttack());
+        self::assertSame('Something New', $fixture[0]->getVpeakRelease());
         self::assertSame('Something New', $fixture[0]->getUser());
         self::assertSame('Something New', $fixture[0]->getProcessor());
         self::assertSame('Something New', $fixture[0]->getAmplifier());
@@ -115,6 +155,14 @@ class LimiterControllerTest extends WebTestCase
         $originalNumObjectsInRepository = count($this->repository->findAll());
 
         $fixture = new Limiter();
+        $fixture->setVrms('My Title');
+        $fixture->setVpeak('My Title');
+        $fixture->setVrmsValue('My Title');
+        $fixture->setVpeakValue('My Title');
+        $fixture->setVrmsAttack('My Title');
+        $fixture->setVrmsRelease('My Title');
+        $fixture->setVpeakAttack('My Title');
+        $fixture->setVpeakRelease('My Title');
         $fixture->setUser('My Title');
         $fixture->setProcessor('My Title');
         $fixture->setAmplifier('My Title');
