@@ -7,6 +7,7 @@ use App\Form\AmplifierType;
 use App\Service\ManualUploader;
 use App\Repository\AmplifierRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Pagerfanta\Doctrine\ORM\QueryAdapter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,6 +24,7 @@ class AmplifierController extends AbstractController
     #[Route('/', name: 'app_amplifier_index', methods: ['GET'])]
     public function index(AmplifierRepository $amplifierRepository): Response
     {
+        //$adapter = new QueryAdapter($queryBuilder);
         return $this->render('amplifier/index.html.twig', [
             'amplifiers' => $amplifierRepository->findAll(),
             'controller_name' => 'AmplifierController',
