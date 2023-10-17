@@ -81,12 +81,23 @@ class AmplifierController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_amplifier_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Amplifier $amplifier, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Amplifier $amplifier, EntityManagerInterface $entityManager, ManualUploader $manualUploader): Response
     {
         $form = $this->createForm(AmplifierType::class, $amplifier);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $manual */
+            $manual = $form->get('Manual')->getData();
+
+            $manufacturer = $form->get('Manufacturer')->getData();
+            $name = $form->get('Name')->getData();
+
+            if ($manual) {
+                $manualName = $manualUploader->upload($manual, $manufacturer, $name);
+                $amplifier->setManual($manualName);
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_amplifier_index', [], Response::HTTP_SEE_OTHER);
