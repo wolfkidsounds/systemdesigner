@@ -52,14 +52,6 @@ class Amplifier
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Manual = null;
 
-    #[ORM\OneToMany(mappedBy: 'Amplifier', targetEntity: Limiter::class)]
-    private Collection $limiters;
-
-    public function __construct()
-    {
-        $this->limiters = new ArrayCollection();
-    }
-
     public function __toString() {
         return $this->Manufacturer . ' - ' . $this->Name;
     }
@@ -103,6 +95,42 @@ class Amplifier
         $this->Name = $Name;
 
         return $this;
+    }
+
+    public function getPower($matchingImpedance) {
+
+        switch ($matchingImpedance) {
+            case 0:
+                return 0;
+            case 2:
+                return $this->getPower2();
+            case 4:
+                return $this->getPower4();
+            case 8:
+                return $this->getPower8();
+            case 16:
+                return $this->getPower16();
+            default:
+                return 0;
+        }
+    }
+
+    public function getBridgePower($matchingImpedance) {
+        
+        switch ($matchingImpedance) {
+            case 0:
+                return 0;
+            case 2:
+                return 0;
+            case 4:
+                return $this->getPowerBridge4();
+            case 8:
+                return $this->getPowerBridge8();
+            case 16:
+                return 0;
+            default:
+                return 0;
+        }
     }
 
     public function getPower16(): ?int
@@ -197,36 +225,6 @@ class Amplifier
     public function setManual(?string $Manual): static
     {
         $this->Manual = $Manual;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Limiter>
-     */
-    public function getLimiters(): Collection
-    {
-        return $this->limiters;
-    }
-
-    public function addLimiter(Limiter $limiter): static
-    {
-        if (!$this->limiters->contains($limiter)) {
-            $this->limiters->add($limiter);
-            $limiter->setAmplifier($this);
-        }
-
-        return $this;
-    }
-
-    public function removeLimiter(Limiter $limiter): static
-    {
-        if ($this->limiters->removeElement($limiter)) {
-            // set the owning side to null (unless already changed)
-            if ($limiter->getAmplifier() === $this) {
-                $limiter->setAmplifier(null);
-            }
-        }
 
         return $this;
     }
