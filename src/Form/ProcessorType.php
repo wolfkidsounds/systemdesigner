@@ -42,7 +42,7 @@ class ProcessorType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '10m',
+                        'maxSize' => '25m',
                         'mimeTypes' => [
                             'application/pdf',
                             'application/x-pdf',
