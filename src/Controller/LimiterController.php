@@ -28,13 +28,16 @@ class LimiterController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $limiter = new Limiter();
+        $user = $this->getUser();
+        $limiter->setUser($user);
+
         $form = $this->createForm(LimiterType::class, $limiter);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($limiter);
             $entityManager->flush();
-
+            
             return $this->redirectToRoute('app_limiter_index', [], Response::HTTP_SEE_OTHER);
         }
 
