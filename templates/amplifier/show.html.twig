@@ -60,6 +60,14 @@
                 <th>Power Bridge @ 4 Ω</th>
                 <td>{{ amplifier.PowerBridge4 }}</td>
             </tr>
+            {% if amplifier.Manual is not null and amplifier.Manual is not empty %}
+                <tr>
+                    <th>Manual</th>
+                    <td><a class="button btn btn-primary" href="{{ asset('uploads/manuals/' ~ amplifier.Manual) }}" download>Download Manual</i></a></td>
+                </tr>
+                
+            {% endif %}
+            
         </tbody>
     </table>
 {% endblock %}
