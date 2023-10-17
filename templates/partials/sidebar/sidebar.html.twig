@@ -1,6 +1,6 @@
 {% use 'partials/sidebar/menu.html.twig' %}
 {% block sidebar %}
-    <!-- PROFILE -->
+    <!-- LOGO -->
     <div class="sidebar_profile d-none flex-lg-column d-lg-block">
         <ul class="nav justify-content-center">
             <li class="btn-group dropdown">
@@ -18,7 +18,7 @@
         {% endblock %}
     </div>
 
-    <!-- SETTINGS / LOGO -->
+    <!-- SETTINGS -->
     <div class="sidebar_logo d-none flex-lg-column d-lg-block">
         <ul class="nav justify-content-center">
             <li class="btn-group dropup">
@@ -26,8 +26,10 @@
                     <i class="fa-solid fa-gear rounded-circle"></i>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="{{ path('app_manufacturer_index') }}">Manufacturers</a></li>
+                    <li><a class="dropdown-item" href="#">Subscription</a></li>
                     <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-danger" href="{{ path('app_logout') }}">Logout</a></li>
                 </ul>
             </li>
         </ul>
