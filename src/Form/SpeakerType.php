@@ -24,7 +24,8 @@ class SpeakerType extends AbstractType
             ->add('Manufacturer', EntityType::class, [
                 'class' => Manufacturer::class,
                 'choice_label' => 'name',
-                'constraints' => [new NotBlank()]
+                'constraints' => [new NotBlank()],
+                'attr' => ['data-select' => 'true']
             ])
             ->add('Bandwidth', ChoiceType::class, [
                 'choices'  => [
