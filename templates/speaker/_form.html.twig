@@ -1,4 +1,48 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+<div class="d-flex flex-column overflow-hidden">
+    <div class="row">
+        <div class="col">
+            {{ form_row(form.Manufacturer, {
+                'attr': {
+                    'class': 'form-select',
+                },
+                'placeholder': 'Select Manufacturer',
+            }) }}
+        </div>
+        <div class="col">
+            {{ form_row(form.Name) }}
+        </div>
+    </div>
+    <div class="row">
+        {{ form_row(form.Bandwidth) }}
+    </div>
+    <div class="divider seperator mb-3"><hr></div>
+    <div class="row">
+        <div class="col">
+            {{ form_row(form.PowerRMS) }}
+        </div>
+        <div class="col">
+            {{ form_row(form.PowerPeak) }}
+        </div>
+    </div>
+    <div class="divider seperator mb-3"><hr></div>
+    <div class="row">
+        <div class="col">
+            {{ form_row(form.Impedance) }}
+        </div>
+        <div class="col">
+            {{ form_row(form.SPL) }}
+        </div>
+    </div>
+
+    <div class="divider seperator mb-3"><hr></div>
+    <div class="row">
+        {{ form_row(form.Manual) }}
+    </div>
+    <div class="divider seperator mb-3"><hr></div>
+
+    <div class="row">
+        <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+    </div>
+</div>
 {{ form_end(form) }}
