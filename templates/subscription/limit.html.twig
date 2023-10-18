@@ -1,0 +1,17 @@
+{% extends 'crud.html.twig' %}
+
+{% block title %}{{ parent() }} | Reached Limit{% endblock %}
+
+{% block crud_body %}
+    <div class="row align-items-center d-flex justify-content-center ">
+        <p> You have reached the limit of your free account.</p>
+        <a class="btn btn-primary" href="{{ path('app_main') }}">Upgrade Account</a>
+    </div>
+{% endblock %}
+{% block crud_toolbar %}
+    <li class="list-inline-item d-lg-inline-block ms-0 m-0">
+        <a type="button" href="{{ path('app_main') }}" class="btn nav-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+    </li>
+{% endblock %}
