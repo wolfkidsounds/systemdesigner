@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Limiter;
 use App\Form\LimiterType;
 use App\Repository\LimiterRepository;
@@ -31,14 +32,31 @@ class LimiterController extends AbstractController
     #[Route('/new', name: 'app_limiter_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $limiter = new Limiter();
+        /** @var User $user */
         $user = $this->getUser();
+
+        if (!($user->isSubscriber()) && ($user->getAmplifiers()->count() >= 10)) {
+            return $this->render('subscription/limit.html.twig', [
+                'title' => 'Limit Reached',
+                'crud_title' => 'Limit Reached',
+            ]);
+        }
+
+        $limiter = new Limiter();
         $limiter->setUser($user);
 
         $form = $this->createForm(LimiterType::class, $limiter);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if (!($user->isSubscriber()) && ($user->getAmplifiers()->count() >= 10)) {
+                return $this->render('subscription/limit.html.twig', [
+                    'title' => 'Limit Reached',
+                    'crud_title' => 'Limit Reached',
+                ]);
+            }
+            
             $entityManager->persist($limiter);
             $entityManager->flush();
             

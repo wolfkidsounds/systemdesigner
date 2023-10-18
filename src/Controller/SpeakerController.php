@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Speaker;
 use App\Form\SpeakerType;
 use App\Service\ManualUploader;
@@ -29,14 +30,30 @@ class SpeakerController extends AbstractController
     #[Route('/new', name: 'app_speaker_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, ManualUploader $manualUploader): Response
     {
-        $speaker = new Speaker();
+        /** @var User $user */
         $user = $this->getUser();
+
+        if (!($user->isSubscriber()) && ($user->getAmplifiers()->count() >= 10)) {
+            return $this->render('subscription/limit.html.twig', [
+                'title' => 'Limit Reached',
+                'crud_title' => 'Limit Reached',
+            ]);
+        }
+
+        $speaker = new Speaker();
         $speaker->setUser($user);
 
         $form = $this->createForm(SpeakerType::class, $speaker);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if (!($user->isSubscriber()) && ($user->getAmplifiers()->count() >= 10)) {
+                return $this->render('subscription/limit.html.twig', [
+                    'title' => 'Limit Reached',
+                    'crud_title' => 'Limit Reached',
+                ]);
+            }
             
             /** @var UploadedFile $manual */
             $manual = $form->get('Manual')->getData();

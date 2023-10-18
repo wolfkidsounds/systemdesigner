@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Processor;
 use App\Form\ProcessorType;
-use App\Repository\ProcessorRepository;
 use App\Service\ManualUploader;
+use App\Repository\ProcessorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,14 +37,30 @@ class ProcessorController extends AbstractController
     #[Route('/new', name: 'app_processor_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, ManualUploader $manualUploader): Response
     {
-        $processor = new Processor();
+        /** @var User $user */
         $user = $this->getUser();
+
+        if (!($user->isSubscriber()) && ($user->getAmplifiers()->count() >= 10)) {
+            return $this->render('subscription/limit.html.twig', [
+                'title' => 'Limit Reached',
+                'crud_title' => 'Limit Reached',
+            ]);
+        }
+
+        $processor = new Processor();
         $processor->setUser($user);
 
         $form = $this->createForm(ProcessorType::class, $processor);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if (!($user->isSubscriber()) && ($user->getAmplifiers()->count() >= 10)) {
+                return $this->render('subscription/limit.html.twig', [
+                    'title' => 'Limit Reached',
+                    'crud_title' => 'Limit Reached',
+                ]);
+            }
 
             /** @var UploadedFile $manual */
             $manual = $form->get('Manual')->getData();
@@ -84,7 +101,7 @@ class ProcessorController extends AbstractController
 
     #[Route('/{id}/edit', name: 'app_processor_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Processor $processor, EntityManagerInterface $entityManager, ManualUploader $manualUploader): Response
-    {
+    {     
         $form = $this->createForm(ProcessorType::class, $processor);
         $form->handleRequest($request);
 

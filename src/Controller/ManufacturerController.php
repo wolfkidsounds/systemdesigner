@@ -31,6 +31,9 @@ class ManufacturerController extends AbstractController
             'manufacturers' => $manufacturerRepository->findBy(['User' => $user]),
             'title' => 'Manufacturer',
             'crud_title' => 'All Manufacturers',
+            'isSubscriber' => $user->isSubscriber(),
+            'manufacturersCount' => $user->getManufacturers()->count(),
+            'maxCount' => 10,
         ]);
         
     }
@@ -38,14 +41,31 @@ class ManufacturerController extends AbstractController
     #[Route('/new', name: 'app_manufacturer_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $manufacturer = new Manufacturer();
+        /** @var User $user */
         $user = $this->getUser();
+
+        if (!($user->isSubscriber()) && ($user->getAmplifiers()->count() >= 10)) {
+            return $this->render('subscription/limit.html.twig', [
+                'title' => 'Limit Reached',
+                'crud_title' => 'Limit Reached',
+            ]);
+        }
+
+        $manufacturer = new Manufacturer();
         $manufacturer->setUser($user);
 
         $form = $this->createForm(ManufacturerType::class, $manufacturer);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if (!($user->isSubscriber()) && ($user->getAmplifiers()->count() >= 10)) {
+                return $this->render('subscription/limit.html.twig', [
+                    'title' => 'Limit Reached',
+                    'crud_title' => 'Limit Reached',
+                ]);
+            }
+
             $entityManager->persist($manufacturer);
             $entityManager->flush();
 
@@ -57,6 +77,7 @@ class ManufacturerController extends AbstractController
             'form' => $form,
             'title' => 'Manufacturer',
             'crud_title' => 'New Manufacturer',
+            'reachedMaxCount' => false,
         ]);
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Amplifier;
 use App\Form\AmplifierType;
 use App\Service\ManualUploader;
@@ -36,14 +37,30 @@ class AmplifierController extends AbstractController
     #[Route('/new', name: 'app_amplifier_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, ManualUploader $manualUploader): Response
     {
-        $amplifier = new Amplifier();
+        /** @var User $user */
         $user = $this->getUser();
+
+        if (!($user->isSubscriber()) && ($user->getAmplifiers()->count() >= 10)) {
+            return $this->render('subscription/limit.html.twig', [
+                'title' => 'Limit Reached',
+                'crud_title' => 'Limit Reached',
+            ]);
+        }
+
+        $amplifier = new Amplifier();
         $amplifier->setUser($user);
 
         $form = $this->createForm(AmplifierType::class, $amplifier);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if (!($user->isSubscriber()) && ($user->getAmplifiers()->count() >= 10)) {
+                return $this->render('subscription/limit.html.twig', [
+                    'title' => 'Limit Reached',
+                    'crud_title' => 'Limit Reached',
+                ]);
+            }
 
             /** @var UploadedFile $manual */
             $manual = $form->get('Manual')->getData();
