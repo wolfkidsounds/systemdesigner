@@ -1,6 +1,6 @@
 {% extends 'crud.html.twig' %}
 
-{% block title %}{{ parent() }} | {{ limiter.Name }}{% endblock %}
+{% block title %}{{ parent() }} | Limiter{% endblock %}
 {% block crud_toolbar %}
 <li class="list-inline-item d-lg-inline-block ms-0 m-0">
     <a type="button" href="{{ path('app_limiter_index') }}" class="btn nav-btn">
@@ -73,6 +73,13 @@
                 <th>Release Time</th>
                 <td>{{ limiter.VpeakRelease }}</td>
             </tr>
+            {% if amplifier.Manual is not null and amplifier.Manual is not empty %}
+                <tr>
+                    <th>Manual</th>
+                    <td><a class="button btn btn-primary" href="{{ asset('uploads/manuals/' ~ amplifier.Manual) }}" download>Download Manual</i></a></td>
+                </tr>
+                
+            {% endif %}
         </tbody>
     </table>
 {% endblock %}
