@@ -1,4 +1,38 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+<div class="d-flex flex-column overflow-hidden">
+    <div class="row">
+        <div class="col">
+            {{ form_row(form.Manufacturer, {
+                'attr': {
+                    'class': 'form-select',
+                },
+                'placeholder': 'Select Manufacturer',
+            }) }}
+        </div>
+        <div class="col">
+            {{ form_row(form.Name) }}
+        </div>
+    </div>
+    <div class="divider seperator mb-3"><hr></div>
+    <div class="row">
+        <div class="col">
+            {{ form_row(form.ChannelsInput) }}
+        </div>
+        <div class="col">
+            {{ form_row(form.ChannelsOutput) }}
+        </div>
+    </div>
+    <div class="divider seperator mb-3"><hr></div>
+    <div class="row">
+        {{ form_row(form.OutputOffset) }}
+    </div>
+    <div class="divider seperator mb-3"><hr></div>
+    <div class="row">
+        {{ form_row(form.Manual) }}
+    </div>
+    <div class="divider seperator mb-3"><hr></div>
+    <div class="row">
+        <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+    </div>
+</div>
 {{ form_end(form) }}
