@@ -28,6 +28,7 @@ class SpeakerType extends AbstractType
             ])
             ->add('Bandwidth', ChoiceType::class, [
                 'choices'  => [
+                    'Select Bandwidth' => 'NONE',
                     'Full Range' => 'FR',
                     'Subwoofer' => 'SUB',
                     'Low Fequency' => 'LF',
@@ -49,7 +50,8 @@ class SpeakerType extends AbstractType
                 'constraints' => [new NotBlank()]
             ])
             ->add('SPL', NumberType::class, [
-                'label' => 'Sensitivity (SPL @ 1W 1m)'
+                'label' => 'Sensitivity (SPL @ 1W 1m)',
+                'required' => false,
             ])
             ->add('Manual', FileType::class, [
                 'label' => 'Manual (PDF)',
