@@ -55,6 +55,18 @@ class Limiter
     #[ORM\Column(length: 255)]
     private ?string $VpeakRelease = null;
 
+    #[ORM\Column]
+    private ?bool $BridgeModeEnabled = false;
+
+    #[ORM\Column]
+    private ?float $InputSensitivity = 0.775;
+
+    #[ORM\Column]
+    private ?int $SpeakersInParallel = 1;
+
+    #[ORM\Column]
+    private ?float $Scaling = 1.0;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -200,6 +212,54 @@ class Limiter
     public function setVpeakRelease(string $VpeakRelease): static
     {
         $this->VpeakRelease = $VpeakRelease;
+
+        return $this;
+    }
+
+    public function isBridgeModeEnabled(): ?bool
+    {
+        return $this->BridgeModeEnabled;
+    }
+
+    public function setBridgeModeEnabled(bool $BridgeModeEnabled): static
+    {
+        $this->BridgeModeEnabled = $BridgeModeEnabled;
+
+        return $this;
+    }
+
+    public function getInputSensitivity(): ?float
+    {
+        return $this->InputSensitivity;
+    }
+
+    public function setInputSensitivity(float $InputSensitivity): static
+    {
+        $this->InputSensitivity = $InputSensitivity;
+
+        return $this;
+    }
+
+    public function getSpeakersInParallel(): ?int
+    {
+        return $this->SpeakersInParallel;
+    }
+
+    public function setSpeakersInParallel(int $SpeakersInParallel): static
+    {
+        $this->SpeakersInParallel = $SpeakersInParallel;
+
+        return $this;
+    }
+
+    public function getScaling(): ?float
+    {
+        return $this->Scaling;
+    }
+
+    public function setScaling(float $Scaling): static
+    {
+        $this->Scaling = $Scaling;
 
         return $this;
     }
