@@ -18,14 +18,14 @@ class SubscriptionController extends AbstractController
         return $this->render('subscription/index.html.twig', [
             'controller_name' => 'SubscriptionController',
             'title' => 'Subscription',
-            'subscriber_status' => $user->isSubscriber(),
-            'verification_status' => $user->isVerified(),
-            'amplifier_count' => $user->getAmplifiers()->count(),
-            'processor_count' => $user->getProcessors()->count(),
-            'speaker_count' => $user->getSpeakers()->count(),
-            'manufacturer_count' => $user->getManufacturers()->count(),
-            'limiter_count' => $user->getLimiters()->count(),
-            'count_limit' => 10,
+            'isSubscriber' => $user->isSubscriber(),
+            'amplifiersCount' => $user->getAmplifiers()->count(),
+            'processorsCount' => $user->getProcessors()->count(),
+            'speakersCount' => $user->getSpeakers()->count(),
+            'manufacturersCount' => $user->getManufacturers()->count(),
+            'limitersCount' => $user->getLimiters()->count(),
+            'maxCount' => 10,
+            'beta' => false,
         ]);
     }
 }
