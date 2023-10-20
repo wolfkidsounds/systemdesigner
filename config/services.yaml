@@ -30,3 +30,5 @@ services:
     App\Service\ManualUploader:
         arguments:
             $targetDirectory: '%manuals_dir%'
+
+    App\Service\InfoGenerator:
