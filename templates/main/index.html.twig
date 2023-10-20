@@ -1,7 +1,7 @@
 {% extends 'content.html.twig' %}
 
 {% block page_content %}
-    <div class="row">
+    <div class="row" data-turbo="false">
         {% if isFeatureEnabled('manufacturers') %}
             {% include 'main/manufacturer/dashboard_badge.html.twig' %}
         {% endif %}
