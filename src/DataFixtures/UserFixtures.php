@@ -10,24 +10,29 @@ class UserFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $user = new User();
-        $user->setEmail('eric@pulsationaudio.com');
-        $user->setUsername('Pulsation Audio');
-        $user->setRoles(['ROLE_ADMIN', 'ROLE_USER']);
-        $user->setPassword('$2y$13$/UvTDWJOKuW4StGkRm5me.URelOL.OxRd3wweuqg4iEaAFiiaNP0.');
-        $user->setSubscriber(true);
+        $user1 = new User();
+        $user1->setEmail('eric@pulsationaudio.com');
+        $user1->setUsername('Pulsation Audio');
+        $user1->setRoles(['ROLE_ADMIN', 'ROLE_USER']);
+        $user1->setPassword('$2y$13$/UvTDWJOKuW4StGkRm5me.URelOL.OxRd3wweuqg4iEaAFiiaNP0.');
+        $user1->setSubscriber(true);
 
-        $manager->persist($user);
+        $manager->persist($user1);
         $manager->flush();
 
-        $user = new User();
-        $user->setEmail('test@pulsationaudio.com');
-        $user->setUsername('Test User');
-        $user->setRoles(['ROLE_USER']);
-        $user->setPassword('$2y$13$/UvTDWJOKuW4StGkRm5me.URelOL.OxRd3wweuqg4iEaAFiiaNP0.');
-        $user->setSubscriber(false);
+        $user2 = new User();
+        $user2->setEmail('test@pulsationaudio.com');
+        $user2->setUsername('Test User');
+        $user2->setRoles(['ROLE_USER']);
+        $user2->setPassword('$2y$13$/UvTDWJOKuW4StGkRm5me.URelOL.OxRd3wweuqg4iEaAFiiaNP0.');
+        $user2->setSubscriber(false);
 
-        $manager->persist($user);
+        $manager->persist($user2);
+
+        // Define references to these users
+        $this->addReference('user_1', $user1);
+        $this->addReference('user_2', $user2);
+
         $manager->flush();
     }
 }
