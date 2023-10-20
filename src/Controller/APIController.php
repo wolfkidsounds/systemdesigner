@@ -93,22 +93,23 @@ class APIController extends AbstractController
     {
         $requestData = json_decode($request->getContent(), true);
 
+        dump($requestData);
+
         // Ensure that the properties you are trying to access are present in the $requestData array
         $speakerId = $requestData['speaker_id'];
         $amplifierId = $requestData['amplifier_id'];
         $processorId = $requestData['processor_id'];
-        $speakerCount = 1;
-        $inputSensitiviy = 0.775;
-        $scaling = 100 / 100;
+        $speakerCount = $requestData['speakers_in_parallel'];
+        $inputSensitiviy = $requestData['input_sensitivity'];
+        $scaling = $requestData['scaling'] / 100;
+        $bridge_mode_enabled = $requestData['bridge_mode_enabled'];
 
         $speaker = $entityManager->getRepository(Speaker::class)->find($speakerId);
         $amplifier = $entityManager->getRepository(Amplifier::class)->find($amplifierId);
         $processor = $entityManager->getRepository(Processor::class)->find($processorId);
 
-        $matching_impedance = $this->matchImpedance($speaker->getImpedance());
-        $impedance_request = $speaker->getImpedance() * $speakerCount;
-
-        $bridge_mode_enabled = false;
+        $impedance_request = $speaker->getImpedance() / $speakerCount;
+        $matching_impedance = $this->matchImpedance($impedance_request);
 
         if ($bridge_mode_enabled) {
             $amplifier_power = $amplifier->getBridgePower($matching_impedance);
@@ -145,6 +146,7 @@ class APIController extends AbstractController
             'vrms_release' => $this->getVrmsRelease($speaker->getBandwidth()),
             'vpeak_attack' => $this->getVpeakAttack($speaker->getBandwidth()),
             'vpeak_release' => $this->getVpeakRelease($speaker->getBandwidth()),
+            'matching_impedance' => $matching_impedance,
         ];
 
         return $this->json($data);
