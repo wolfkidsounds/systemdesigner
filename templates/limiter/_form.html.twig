@@ -1,6 +1,6 @@
 {{ form_start(form) }}
 <div class="d-flex flex-column overflow-hidden">
-    <div class="row">
+    <div class="row item-selector">
         {{ form_row(form.Processor, {
             'attr': {
                 'class': 'form-select',
@@ -29,15 +29,75 @@
 
     <div class="divider seperator mb-3"><hr></div>
 
+    <div class="setings">
+        <div class="row">
+            <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSettings" aria-expanded="false" aria-controls="collapseSettings">
+                Show Settings
+            </button>
+            <div class="collapse mt-3" id="collapseSettings">
+                <div class="card card-body border-dark">
+                    <div class="col">
+                        <div class="info-container mb-3">
+                            {{ infoButton('The Input sensitivity can be set on the back of most amplifiers. Increasing the Input Sensitivity Results in the limiter kicking in earlier therefore for some controllers, setting the input sensitivity to a higher value can result in better control. (Default is 0.775 V)') }}
+                            {{ form_row(form.InputSensitivity, {
+                                'params': {
+                                    'after': [
+                                    {
+                                        'type': 'markup',
+                                        'content': '<span class="input-group-text">Volts</span>'
+                                    }
+                                    ]
+                                }
+                                }) 
+                            }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="info-container mb-3">
+                            {{ infoButton('Enabling Bridge Mode on an Amplifier results in combining at least two of the modules into one module, resulting in a higher power output at the cost of the load that the amplifier can handle. (Default is Disabled)') }}
+                            {{ form_row(form.BridgeModeEnabled) }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="info-container mb-3">
+                            {{ infoButton('This sets how many speakers are chained together in parallel. This results in the Resistance being lower and higher powerdraw. 0 means no speakers are connected at all. (Default is 1)') }}
+                            {{ form_row(form.SpeakersInParallel) }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="info-container mb-3">
+                            {{ infoButton('Scaling is applied to the voltage (since voltage is linear). This means you can scale down the limiter for better control and adjust to your needs. (Default is 100 %)') }}
+                            {{ form_row(form.Scaling) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider seperator mb-3"><hr></div> {# Add a separator here #}
+
     <div class="loading">
         <div class="row calculated-fields">
             <div class="col">
-                {{ form_row(form.Vrms) }}
-                {{ form_row(form.VrmsValue) }}
+                <div class="info-container mb-3">
+                    {{ infoButton('If your controller only supports one limiter, we suggest using the RMS Voltage. - However, keep in mind that this can increase the crest-faktor and therfore the power-compression significantly.') }}
+                    {{ form_row(form.Vrms) }}
+                </div>
+                <div class="info-container mb-3">
+                    {{ infoButton('This is the value in dBu/dB/dBFS (according to the processor) that needs to be set in order to keep the limit at the given Vrms Voltage.') }}
+                    {{ form_row(form.VrmsValue) }}
+                </div>
             </div>
             <div class="col">
-                {{ form_row(form.VrmsAttack) }}
-                {{ form_row(form.VrmsRelease) }}
+                <div class="info-container mb-3">
+                    {{ infoButton('This is a suggested value based on the speaker bandwidth.') }}
+                    {{ form_row(form.VrmsAttack) }}
+                </div>
+                <div class="info-container mb-3">
+                    {{ infoButton('This is a suggested value based on the speaker bandwidth.') }}
+                    {{ form_row(form.VrmsRelease) }}
+                </div>
             </div>
         </div>
     </div>
@@ -48,11 +108,20 @@
         <div class="row calculated-fields">
             <div class="col">
                 {{ form_row(form.Vpeak) }}
-                {{ form_row(form.VpeakValue) }}
+                <div class="info-container mb-3">
+                    {{ infoButton('This is the value in dBu/dB/dBFS (according to the processor) that needs to be set in order to keep the limit at the given Vpeak Voltage.') }}
+                    {{ form_row(form.VpeakValue) }}
+                </div>
             </div>
             <div class="col">
-                {{ form_row(form.VpeakAttack) }}
-                {{ form_row(form.VpeakRelease) }}
+                <div class="info-container mb-3">
+                    {{ infoButton('This is a suggested value based on the speaker bandwidth.') }}
+                    {{ form_row(form.VpeakAttack) }}
+                </div>
+                <div class="info-container mb-3">
+                    {{ infoButton('This is a suggested value based on the speaker bandwidth.') }}
+                    {{ form_row(form.VpeakRelease) }}
+                </div>
             </div>
         </div>
     </div>

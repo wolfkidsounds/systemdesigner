@@ -1,0 +1,8 @@
+.info-button {
+    display:inline;
+    margin-right:.25rem;
+}
+
+.info-container > div {
+    display:inline;
+}

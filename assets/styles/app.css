@@ -12,6 +12,7 @@
 @import "./css/app/content.css";
 @import "./css/app/sidebar.css";
 @import "./css/app/card.css";
+@import "./css/app/info.css";
 
 /* Import Customizations */
 @import "./css/app/login_form.css";
