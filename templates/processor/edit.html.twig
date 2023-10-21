@@ -3,7 +3,8 @@
 {% block title %}{{ parent() }} | Edit: {{ processor.Manufacturer.name }} - {{ processor.Name }}{% endblock %}
 
 {% block crud_body %}
-    {{ include('processor/_form.html.twig', {'button_label': 'Update'}) }}
+    {% set buttonLabel = {{ 'Update'|trans }}%}
+    {{ include('processor/_form.html.twig', {'button_label': buttonLabel}) }}
 {% endblock %}
 
 {% block crud_toolbar %}
