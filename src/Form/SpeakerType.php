@@ -30,11 +30,11 @@ class SpeakerType extends AbstractType
             ->add('Bandwidth', ChoiceType::class, [
                 'choices'  => [
                     'Select Bandwidth' => 'NONE',
-                    'Full Range' => 'FR',
-                    'Subwoofer' => 'SUB',
-                    'Low Fequency' => 'LF',
-                    'Mid Fequency' => 'MF',
-                    'High Fequency' => 'HF',
+                    'Full Range (20Hz - 20kHz)' => 'FR',
+                    'Subwoofer (< 200Hz)' => 'SUB',
+                    'Low Fequency (< 300Hz' => 'LF',
+                    'Mid Fequency (300Hz - 2kHz)' => 'MF',
+                    'High Fequency (> 2kHz)' => 'HF',
                 ],
             ])
             ->add('Name', TextType::class, [
