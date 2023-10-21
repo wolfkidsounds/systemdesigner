@@ -12,6 +12,7 @@ use Pagerfanta\Doctrine\ORM\QueryAdapter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Translation\TranslatableMessage;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Novaway\Bundle\FeatureFlagBundle\Annotation\Feature;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
@@ -29,8 +30,8 @@ class AmplifierController extends AbstractController
         return $this->render('amplifier/index.html.twig', [
             'amplifiers' => $amplifierRepository->findAll(),
             'controller_name' => 'AmplifierController',
-            'title' => 'Amplifier',
-            'crud_title' => 'All Amplifiers',
+            'title' => new TranslatableMessage('Amplifier'),
+            'crud_title' => new TranslatableMessage('All Amplifiers'),
         ]);
     }
 
@@ -42,8 +43,8 @@ class AmplifierController extends AbstractController
 
         if (!($user->isSubscriber()) && ($user->getAmplifiers()->count() >= 10)) {
             return $this->render('subscription/limit.html.twig', [
-                'title' => 'Limit Reached',
-                'crud_title' => 'Limit Reached',
+                'title' => new TranslatableMessage('Limit Reached'),
+                'crud_title' => new TranslatableMessage('Limit Reached'),
             ]);
         }
 
@@ -57,8 +58,8 @@ class AmplifierController extends AbstractController
 
             if (!($user->isSubscriber()) && ($user->getAmplifiers()->count() >= 10)) {
                 return $this->render('subscription/limit.html.twig', [
-                    'title' => 'Limit Reached',
-                    'crud_title' => 'Limit Reached',
+                    'title' => new TranslatableMessage('Limit Reached'),
+                    'crud_title' => new TranslatableMessage('Limit Reached'),
                 ]);
             }
 
@@ -83,8 +84,8 @@ class AmplifierController extends AbstractController
             'amplifier' => $amplifier,
             'form' => $form,
             'controller_name' => 'AmplifierController',
-            'title' => 'Amplifier',
-            'crud_title' => 'New Amplifier',
+            'title' => new TranslatableMessage('Amplifier'),
+            'crud_title' => new TranslatableMessage('New Amplifier'),
         ]);
     }
 
@@ -94,8 +95,8 @@ class AmplifierController extends AbstractController
         return $this->render('amplifier/show.html.twig', [
             'amplifier' => $amplifier,
             'controller_name' => 'AmplifierController',
-            'title' => 'Amplifier',
-            'crud_title' => 'Show Amplifier',
+            'title' => new TranslatableMessage('Amplifier'),
+            'crud_title' => new TranslatableMessage('Show Amplifier'),
         ]);
     }
 
@@ -126,8 +127,8 @@ class AmplifierController extends AbstractController
             'amplifier' => $amplifier,
             'form' => $form,
             'controller_name' => 'AmplifierController',
-            'title' => 'Amplifier',
-            'crud_title' => 'Edit Amplifier',
+            'title' => new TranslatableMessage('Amplifier'),
+            'crud_title' => new TranslatableMessage('Edit Amplifier'),
         ]);
     }
 

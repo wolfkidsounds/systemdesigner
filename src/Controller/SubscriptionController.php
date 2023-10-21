@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Translation\TranslatableMessage;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SubscriptionController extends AbstractController
@@ -17,7 +18,7 @@ class SubscriptionController extends AbstractController
 
         return $this->render('subscription/index.html.twig', [
             'controller_name' => 'SubscriptionController',
-            'title' => 'Subscription',
+            'title' => new TranslatableMessage('Subscription'),
             'isSubscriber' => $user->isSubscriber(),
             'amplifiersCount' => $user->getAmplifiers()->count(),
             'processorsCount' => $user->getProcessors()->count(),

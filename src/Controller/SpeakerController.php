@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Translation\TranslatableMessage;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -22,8 +23,8 @@ class SpeakerController extends AbstractController
     {
         return $this->render('speaker/index.html.twig', [
             'speakers' => $speakerRepository->findAll(),
-            'title' => 'Speaker',
-            'crud_title' => 'All Speakers',
+            'title' => new TranslatableMessage('Speaker'),
+            'crud_title' => new TranslatableMessage('All Speakers'),
         ]);
     }
 
@@ -35,8 +36,8 @@ class SpeakerController extends AbstractController
 
         if (!($user->isSubscriber()) && ($user->getAmplifiers()->count() >= 10)) {
             return $this->render('subscription/limit.html.twig', [
-                'title' => 'Limit Reached',
-                'crud_title' => 'Limit Reached',
+                'title' => new TranslatableMessage('Limit Reached'),
+                'crud_title' => new TranslatableMessage('Limit Reached'),
             ]);
         }
 
@@ -50,8 +51,8 @@ class SpeakerController extends AbstractController
 
             if (!($user->isSubscriber()) && ($user->getAmplifiers()->count() >= 10)) {
                 return $this->render('subscription/limit.html.twig', [
-                    'title' => 'Limit Reached',
-                    'crud_title' => 'Limit Reached',
+                    'title' => new TranslatableMessage('Limit Reached'),
+                    'crud_title' => new TranslatableMessage('Limit Reached'),
                 ]);
             }
             
@@ -75,8 +76,8 @@ class SpeakerController extends AbstractController
         return $this->render('speaker/new.html.twig', [
             'speaker' => $speaker,
             'form' => $form,
-            'title' => 'Speaker',
-            'crud_title' => 'New Speaker',
+            'title' => new TranslatableMessage('Speaker'),
+            'crud_title' => new TranslatableMessage('New Speaker'),
         ]);
     }
 
@@ -85,8 +86,8 @@ class SpeakerController extends AbstractController
     {
         return $this->render('speaker/show.html.twig', [
             'speaker' => $speaker,
-            'title' => 'Speaker',
-            'crud_title' => 'View Speaker',
+            'title' => new TranslatableMessage('Speaker'),
+            'crud_title' => new TranslatableMessage('View Speaker'),
         ]);
     }
 
@@ -105,8 +106,8 @@ class SpeakerController extends AbstractController
         return $this->render('speaker/edit.html.twig', [
             'speaker' => $speaker,
             'form' => $form,
-            'title' => 'Speaker',
-            'crud_title' => 'Edit Speaker',
+            'title' => new TranslatableMessage('Speaker'),
+            'crud_title' => new TranslatableMessage('Edit Speaker'),
         ]);
     }
 

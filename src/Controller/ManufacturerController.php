@@ -6,12 +6,13 @@ use App\Entity\User;
 use App\Entity\Setting;
 use App\Entity\Manufacturer;
 use App\Form\ManufacturerType;
+use App\Repository\SettingRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ManufacturerRepository;
-use App\Repository\SettingRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Translation\TranslatableMessage;
 use Novaway\Bundle\FeatureFlagBundle\Annotation\Feature;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,8 +30,8 @@ class ManufacturerController extends AbstractController
 
         return $this->render('manufacturer/index.html.twig', [
             'manufacturers' => $manufacturerRepository->findBy(['User' => $user]),
-            'title' => 'Manufacturer',
-            'crud_title' => 'All Manufacturers',
+            'title' => new TranslatableMessage('Manufacturer'),
+            'crud_title' => new TranslatableMessage('All Manufacturers'),
             'isSubscriber' => $user->isSubscriber(),
             'manufacturersCount' => $user->getManufacturers()->count(),
             'maxCount' => 10,
@@ -46,8 +47,8 @@ class ManufacturerController extends AbstractController
 
         if (!($user->isSubscriber()) && ($user->getAmplifiers()->count() >= 10)) {
             return $this->render('subscription/limit.html.twig', [
-                'title' => 'Limit Reached',
-                'crud_title' => 'Limit Reached',
+                'title' => new TranslatableMessage('Limit Reached'),
+                'crud_title' => new TranslatableMessage('Limit Reached'),
             ]);
         }
 
@@ -61,8 +62,8 @@ class ManufacturerController extends AbstractController
 
             if (!($user->isSubscriber()) && ($user->getAmplifiers()->count() >= 10)) {
                 return $this->render('subscription/limit.html.twig', [
-                    'title' => 'Limit Reached',
-                    'crud_title' => 'Limit Reached',
+                    'title' => new TranslatableMessage('Limit Reached'),
+                    'crud_title' => new TranslatableMessage('Limit Reached'),
                 ]);
             }
 
@@ -75,8 +76,8 @@ class ManufacturerController extends AbstractController
         return $this->render('manufacturer/new.html.twig', [
             'manufacturer' => $manufacturer,
             'form' => $form,
-            'title' => 'Manufacturer',
-            'crud_title' => 'New Manufacturer',
+            'title' => new TranslatableMessage('Manufacturer'),
+            'crud_title' => new TranslatableMessage('New Manufacturer'),
             'reachedMaxCount' => false,
         ]);
     }
@@ -86,8 +87,8 @@ class ManufacturerController extends AbstractController
     {
         return $this->render('manufacturer/show.html.twig', [
             'manufacturer' => $manufacturer,
-            'title' => 'Manufacturer',
-            'crud_title' => 'View Manufacturer',
+            'title' => new TranslatableMessage('Manufacturer'),
+            'crud_title' => new TranslatableMessage('View Manufacturer'),
         ]);
     }
 
@@ -106,8 +107,8 @@ class ManufacturerController extends AbstractController
         return $this->render('manufacturer/edit.html.twig', [
             'manufacturer' => $manufacturer,
             'form' => $form,
-            'title' => 'Manufacturer',
-            'crud_title' => 'Edit Manufacturer',
+            'title' => new TranslatableMessage('Manufacturer'),
+            'crud_title' => new TranslatableMessage('Edit Manufacturer'),
         ]);
     }
 

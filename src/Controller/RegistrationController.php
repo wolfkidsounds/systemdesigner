@@ -12,6 +12,7 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Translation\TranslatableMessage;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -30,7 +31,6 @@ class RegistrationController extends AbstractController
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
-        $setting = new Setting();
 
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -44,12 +44,7 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            $setting->setUser($user);
-            $setting->setSettingKey('allow_database_access');
-            $setting->setSettingValue(false);
-
             $entityManager->persist($user);
-            $entityManager->persist($setting);
             $entityManager->flush();
 
             // generate a signed url and email it to the user
@@ -57,7 +52,7 @@ class RegistrationController extends AbstractController
                 (new TemplatedEmail())
                     ->from(new Address('account@pulsationaudio.com', 'Pulsation Audio - Customer Service'))
                     ->to($user->getEmail())
-                    ->subject('Confirm Your Email Address')
+                    ->subject(new TranslatableMessage('Confirm Your Email Address'),)
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
             // do anything else you need here, like send an email
@@ -85,7 +80,7 @@ class RegistrationController extends AbstractController
         }
 
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
-        $this->addFlash('success', 'Your email address has been verified.');
+        $this->addFlash('success', new TranslatableMessage('Your E-Mail has been verified.'),);
 
         return $this->redirectToRoute('app_main');
     }

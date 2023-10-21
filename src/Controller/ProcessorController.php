@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\Translation\TranslatableMessage;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Novaway\Bundle\FeatureFlagBundle\Annotation\Feature;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
@@ -29,8 +30,8 @@ class ProcessorController extends AbstractController
         return $this->render('processor/index.html.twig', [
             'processors' => $processorRepository->findAll(),
             'controller_name' => 'ProcessorController',
-            'title' => 'Processor',
-            'crud_title' => 'All Processors',
+            'title' => new TranslatableMessage('Processor'),
+            'crud_title' => new TranslatableMessage('All Processors'),
         ]);
     }
 
@@ -42,8 +43,8 @@ class ProcessorController extends AbstractController
 
         if (!($user->isSubscriber()) && ($user->getAmplifiers()->count() >= 10)) {
             return $this->render('subscription/limit.html.twig', [
-                'title' => 'Limit Reached',
-                'crud_title' => 'Limit Reached',
+                'title' => new TranslatableMessage('Limit Reached'),
+                'crud_title' => new TranslatableMessage('Limit Reached'),
             ]);
         }
 
@@ -57,8 +58,8 @@ class ProcessorController extends AbstractController
 
             if (!($user->isSubscriber()) && ($user->getAmplifiers()->count() >= 10)) {
                 return $this->render('subscription/limit.html.twig', [
-                    'title' => 'Limit Reached',
-                    'crud_title' => 'Limit Reached',
+                    'title' => new TranslatableMessage('Limit Reached'),
+                    'crud_title' => new TranslatableMessage('Limit Reached'),
                 ]);
             }
 
@@ -83,8 +84,8 @@ class ProcessorController extends AbstractController
             'processor' => $processor,
             'form' => $form,
             'controller_name' => 'ProcessorController',
-            'title' => 'Processor',
-            'crud_title' => 'New Processor',
+            'title' => new TranslatableMessage('Processor'),
+            'crud_title' => new TranslatableMessage('New Processor'),
         ]);
     }
 
@@ -94,8 +95,8 @@ class ProcessorController extends AbstractController
         return $this->render('processor/show.html.twig', [
             'processor' => $processor,
             'controller_name' => 'ProcessorController',
-            'title' => 'Processor',
-            'crud_title' => 'View Processor',
+            'title' => new TranslatableMessage('Processor'),
+            'crud_title' => new TranslatableMessage('View Processor'),
         ]);
     }
 
@@ -127,8 +128,8 @@ class ProcessorController extends AbstractController
             'processor' => $processor,
             'form' => $form,
             'controller_name' => 'ProcessorController',
-            'title' => 'Processor',
-            'crud_title' => 'Edit Processor',
+            'title' => new TranslatableMessage('Processor'),
+            'crud_title' => new TranslatableMessage('Edit Processor'),
         ]);
     }
 

@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Translation\TranslatableMessage;
 use Novaway\Bundle\FeatureFlagBundle\Annotation\Feature;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,8 +25,8 @@ class LimiterController extends AbstractController
     {
         return $this->render('limiter/index.html.twig', [
             'limiters' => $limiterRepository->findAll(),
-            'title' => 'Limiter',
-            'crud_title' => 'All Limiters',
+            'title' => new TranslatableMessage('Limiter'),
+            'crud_title' => new TranslatableMessage('All Limiters'),
         ]);
     }
 
@@ -37,8 +38,8 @@ class LimiterController extends AbstractController
 
         if (!($user->isSubscriber()) && ($user->getAmplifiers()->count() >= 10)) {
             return $this->render('subscription/limit.html.twig', [
-                'title' => 'Limit Reached',
-                'crud_title' => 'Limit Reached',
+                'title' => new TranslatableMessage('Limit Reached'),
+                'crud_title' => new TranslatableMessage('Limit Reached'),
             ]);
         }
 
@@ -52,8 +53,8 @@ class LimiterController extends AbstractController
 
             if (!($user->isSubscriber()) && ($user->getAmplifiers()->count() >= 10)) {
                 return $this->render('subscription/limit.html.twig', [
-                    'title' => 'Limit Reached',
-                    'crud_title' => 'Limit Reached',
+                    'title' => new TranslatableMessage('Limit Reached'),
+                    'crud_title' => new TranslatableMessage('Limit Reached'),
                 ]);
             }
             
@@ -66,8 +67,8 @@ class LimiterController extends AbstractController
         return $this->render('limiter/new.html.twig', [
             'limiter' => $limiter,
             'form' => $form,
-            'title' => 'Limiter',
-            'crud_title' => 'New Limiter',
+            'title' => new TranslatableMessage('Limiter'),
+            'crud_title' => new TranslatableMessage('New Limiter'),
         ]);
     }
 
@@ -76,8 +77,8 @@ class LimiterController extends AbstractController
     {
         return $this->render('limiter/show.html.twig', [
             'limiter' => $limiter,
-            'title' => 'Limiter',
-            'crud_title' => 'Show Limiter',
+            'title' => new TranslatableMessage('Limiter'),
+            'crud_title' => new TranslatableMessage('Show Limiter'),
         ]);
     }
 
@@ -96,8 +97,8 @@ class LimiterController extends AbstractController
         return $this->render('limiter/edit.html.twig', [
             'limiter' => $limiter,
             'form' => $form,
-            'title' => 'Limiter',
-            'crud_title' => 'Edit Limiter',
+            'title' => new TranslatableMessage('Limiter'),
+            'crud_title' => new TranslatableMessage('Edit Limiter'),
         ]);
     }
 
