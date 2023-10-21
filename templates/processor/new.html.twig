@@ -1,6 +1,6 @@
 {% extends 'crud.html.twig' %}
 
-{% block title %}{{ parent() }} | New Processor{% endblock %}
+{% block title %}{{ parent() }} | {{ 'New Processor'|trans }}{% endblock %}
 
 {% block crud_body %}
     {{ include('processor/_form.html.twig') }}

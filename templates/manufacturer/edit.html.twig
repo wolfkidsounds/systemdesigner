@@ -1,9 +1,10 @@
 {% extends 'crud.html.twig' %}
 
-{% block title %}{{ parent() }} | Edit: {{ manufacturer.name }}{% endblock %}
+{% block title %}{{ parent() }} | {{ 'Edit'|trans }}: {{ manufacturer.name }}{% endblock %}
 
 {% block crud_body %}
-    {{ include('manufacturer/_form.html.twig', {'button_label': 'Update'}) }}
+    {% set buttonLabel = {{ 'Update'|trans }}%}
+    {{ include('manufacturer/_form.html.twig', {'button_label': buttonLabel}) }}
 {% endblock %}
 
 {% block crud_toolbar %}

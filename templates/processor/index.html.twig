@@ -1,6 +1,6 @@
 {% extends 'crud.html.twig' %}
 
-{% block title %}{{ parent() }} | Processors{% endblock %}
+{% block title %}{{ parent() }} | {{ 'Processor'|trans }}{% endblock %}
 {% block crud_toolbar %}
     <li class="list-inline-item d-lg-inline-block ms-0 m-0">
         <div class="dropdown dropstart">
@@ -9,7 +9,7 @@
             </button>
             <div class="dropdown-menu p-0 dropdown-menu-md">
                 <div class="search-box p-1">
-                    <input type="text" class="form-control bg-light border-0" id="search-input" placeholder="Search..">
+                    <input type="text" class="form-control bg-light border-0" id="search-input" placeholder="{{ 'Search'|trans }}..">
                 </div>
             </div>
         </div>
@@ -25,12 +25,12 @@
     <thead class="">
         <tr>
             <th class="sort text-uppercase align-middle" data-sort="id">ID</th>
-            <th class="sort text-uppercase align-middle" data-sort="manufacturer">Manufacturer</th>
-            <th class="sort text-uppercase align-middle" data-sort="name">Name</th>
-            <th class="sort text-uppercase align-middle" data-sort="inputs">Inputs</th>
-            <th class="sort text-uppercase align-middle" data-sort="outputs">Outputs</th>
-            <th class="sort text-uppercase align-middle" data-sort="offset">Offset</th>
-            <th class="sort text-uppercase align-middle" data-sort="actions">Actions</th>
+            <th class="sort text-uppercase align-middle" data-sort="manufacturer">{{ 'Manufacturer'|trans }}</th>
+            <th class="sort text-uppercase align-middle" data-sort="name">{{ 'Name'|trans }}</th>
+            <th class="sort text-uppercase align-middle" data-sort="inputs">{{ 'Inputs'|trans }}</th>
+            <th class="sort text-uppercase align-middle" data-sort="outputs">{{ 'Outputs'|trans }}</th>
+            <th class="sort text-uppercase align-middle" data-sort="offset">{{ 'Offset'|trans }}</th>
+            <th class="sort text-uppercase align-middle" data-sort="actions">{{ 'Actions'|trans }}</th>
         </tr>
     </thead>
     <tbody id="search-table" class="list form-check-all"><tr>
@@ -53,7 +53,7 @@
         </tr>
         {% else %}
         <tr>
-            <td colspan="7">We could not find any processors.</td>
+            <td colspan="7">{{ 'We could not find any processors.'|trans }}</td>
         </tr>
         {% endfor %}
     </tbody>
