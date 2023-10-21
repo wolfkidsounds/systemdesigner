@@ -1,5 +1,5 @@
-{{ form_start(locale_form) }}
-    {{ form_widget(locale_form) }}
+{{ form_start(form) }}
+    {{ form_widget(form) }}
     {% set buttonLabelDefault = 'Save'|trans %}
     <button class="btn btn-primary">{{ button_label|default(buttonLabelDefault) }}</button>
-{{ form_end(locale_form) }}
+{{ form_end(form) }}

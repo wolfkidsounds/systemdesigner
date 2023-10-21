@@ -19,14 +19,17 @@ class SettingsController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
-        $locale_form = $this->createForm(LanguageType::class);
-        $locale_form->handleRequest($request);
+        $form = $this->createForm(SettingsType::class);
+        $form->handleRequest($request);
 
-        if ($locale_form->isSubmitted() && $locale_form->isValid()) {
-            $locale = $locale_form->get('Locale')->getData();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $locale = $form->get('Locale')->getData();
             $user->setLocale($locale);
             $request->setLocale($locale);
             $request->getSession()->set('_locale', $locale);
+
+            $dbAccess = $form->get('DatabaseAccess')->getData();
+            $user->setDatabaseAccessEnabled($dbAccess);
             
             $entityManager->flush();
 
@@ -35,7 +38,7 @@ class SettingsController extends AbstractController
 
         return $this->render('settings/index.html.twig', [
             'controller_name' => 'SettingsController',
-            'locale_form' => $locale_form,
+            'form' => $form,
             'title' => new TranslatableMessage('Settings'),
         ]);
     }

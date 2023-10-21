@@ -9,7 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Translation\TranslatableMessage;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-class LanguageType extends AbstractType
+class SettingsType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -20,6 +20,14 @@ class LanguageType extends AbstractType
                 'choices' => [
                     'English' => 'en',
                     'German' => 'de',
+                ]
+            ])
+
+            ->add('DatabaseAccess', ChoiceType::class, [
+                'label' => new TranslatableMessage('Show All Items'),
+                'choices' => [
+                    'Enabled' => true,
+                    'Disabled' => false,
                 ]
             ])
         ;
