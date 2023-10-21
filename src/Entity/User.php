@@ -58,6 +58,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'boolean')]
     private ?bool $Subscriber = false;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Locale = null;
     public function __construct()
     {
         $this->manufacturers = new ArrayCollection();
@@ -337,6 +340,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setSubscriber(bool $Subscriber): static
     {
         $this->Subscriber = $Subscriber;
+
+        return $this;
+    }
+
+    public function getLocale(): ?string
+    {
+        return $this->Locale;
+    }
+
+    public function setLocale(?string $Locale): static
+    {
+        $this->Locale = $Locale;
 
         return $this;
     }
