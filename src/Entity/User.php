@@ -44,9 +44,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
-    #[ORM\Column]
-    private array $settings = [];
-
     #[ORM\OneToMany(mappedBy: 'User', targetEntity: Amplifier::class)]
     private Collection $amplifiers;
 
@@ -61,6 +58,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Locale = null;
+
+    #[ORM\Column(type: 'boolean')]
+    private ?bool $DatabaseAccess = false;
     public function __construct()
     {
         $this->manufacturers = new ArrayCollection();
@@ -228,20 +228,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getSettings(): array
-    {
-        $settings = $this->settings;
-
-        return array_unique($settings);
-    }
-
-    public function setSettings(array $settings): static
-    {
-        $this->settings = $settings;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Amplifier>
      */
@@ -352,6 +338,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLocale(?string $Locale): static
     {
         $this->Locale = $Locale;
+
+        return $this;
+    }
+
+    public function isDatabaseAccessEnabled(): ?bool
+    {
+        return $this->DatabaseAccess;
+    }
+
+    public function setDatabaseAccessEnabled(bool $DatabaseAccess): static
+    {
+        $this->DatabaseAccess = $DatabaseAccess;
 
         return $this;
     }
