@@ -32,7 +32,8 @@
     </div>
     <div class="divider seperator mb-3"><hr></div>
     <div class="row">
-        <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+        {% set buttonLabelDefault = 'Save'|trans %}
+        <button class="btn btn-primary">{{ button_label|default(buttonLabelDefault) }}</button>
     </div>
 </div>
 {{ form_end(form) }}
