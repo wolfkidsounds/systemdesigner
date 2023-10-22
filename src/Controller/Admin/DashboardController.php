@@ -40,7 +40,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Processors', 'icon icon-processor', Processor::class);
         yield MenuItem::linkToCrud('Amplifiers', 'icon-amplifier', Amplifier::class);
         yield MenuItem::linkToCrud('Speaker', 'icon-speaker', Speaker::class);
-        yield MenuItem::linkToCrud('Limiter', 'fa-solid fa-wave-square', Limiter::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 
