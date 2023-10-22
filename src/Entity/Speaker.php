@@ -28,6 +28,9 @@ class Speaker
     #[ORM\Column(length: 255)]
     private ?string $Name = null;
 
+    #[ORM\Column(type: 'boolean')]
+    private ?bool $Validated = false;
+
     #[ORM\Column]
     private ?int $PowerRMS = null;
 
@@ -42,9 +45,6 @@ class Speaker
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Manual = null;
-
-    #[ORM\Column(type: 'boolean')]
-    private ?bool $Validated = false;
 
     #[ORM\Column(length: 255)]
     private ?string $Bandwidth = null;

@@ -28,6 +28,9 @@ class Amplifier
     #[ORM\Column(length: 255)]
     private ?string $Name = null;
 
+    #[ORM\Column(type: 'boolean')]
+    private ?bool $Validated = false;
+
     #[ORM\Column(nullable: true)]
     private ?int $Power16 = null;
 
@@ -45,9 +48,6 @@ class Amplifier
 
     #[ORM\Column(nullable: true)]
     private ?int $PowerBridge4 = null;
-
-    #[ORM\Column(type: 'boolean')]
-    private ?bool $Validated = false;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Manual = null;

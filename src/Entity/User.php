@@ -34,14 +34,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $username = null;
 
+    #[ORM\Column(type: 'boolean')]
+    private $isVerified = false;
+
+    #[ORM\Column(type: 'boolean')]
+    private ?bool $Subscriber = false;
+
+    #[ORM\Column(type: 'boolean')]
+    private ?bool $BetaAccessEnabled = false;
+
+    #[ORM\Column(type: 'boolean')]
+    private ?bool $DatabaseAccessEnabled = false;
+
+    #[ORM\Column(type: 'boolean')]
+    private ?bool $ShowBetaFeaturesEnabled = false;
+
     #[ORM\OneToMany(mappedBy: 'User', targetEntity: Manufacturer::class)]
     private Collection $manufacturers;
 
     #[ORM\OneToMany(mappedBy: 'User', targetEntity: Processor::class)]
     private Collection $processors;
-
-    #[ORM\Column(type: 'boolean')]
-    private $isVerified = false;
 
     #[ORM\OneToMany(mappedBy: 'User', targetEntity: Amplifier::class)]
     private Collection $amplifiers;
@@ -52,20 +64,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'User', targetEntity: Limiter::class)]
     private Collection $limiters;
 
-    #[ORM\Column(type: 'boolean')]
-    private ?bool $Subscriber = false;
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Locale = null;
 
-    #[ORM\Column(type: 'boolean')]
-    private ?bool $DatabaseAccessEnabled = false;
-
-    #[ORM\Column(type: 'boolean')]
-    private ?bool $BetaAccessEnabled = false;
-
-    #[ORM\Column(type: 'boolean')]
-    private ?bool $ShowBetaFeaturesEnabled = false;
     public function __construct()
     {
         $this->manufacturers = new ArrayCollection();

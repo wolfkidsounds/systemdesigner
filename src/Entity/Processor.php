@@ -20,6 +20,9 @@ class Processor
     #[ORM\Column(length: 255)]
     private ?string $Name = null;
 
+    #[ORM\Column(type: 'boolean')]
+    private ?bool $Validated = false;
+
     #[ORM\Column]
     private ?int $ChannelsInput = null;
 
@@ -36,9 +39,6 @@ class Processor
     #[ORM\ManyToOne(inversedBy: 'processors')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Manufacturer $Manufacturer = null;
-
-    #[ORM\Column(type: 'boolean')]
-    private ?bool $Validated = false;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Manual = null;
