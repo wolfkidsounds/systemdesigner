@@ -67,6 +67,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Locale = null;
 
+    #[ORM\OneToMany(mappedBy: 'User', targetEntity: Chassis::class)]
+    private Collection $chassis;
+
     public function __construct()
     {
         $this->manufacturers = new ArrayCollection();
@@ -74,6 +77,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->amplifiers = new ArrayCollection();
         $this->speakers = new ArrayCollection();
         $this->limiters = new ArrayCollection();
+        $this->chassis = new ArrayCollection();
     }
 
     public function __toString() {
@@ -380,6 +384,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setShowBetaFeaturesEnabled(bool $ShowBetaFeaturesEnabled): static
     {
         $this->ShowBetaFeaturesEnabled = $ShowBetaFeaturesEnabled;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Chassis>
+     */
+    public function getChassis(): Collection
+    {
+        return $this->chassis;
+    }
+
+    public function addChassis(Chassis $chassis): static
+    {
+        if (!$this->chassis->contains($chassis)) {
+            $this->chassis->add($chassis);
+            $chassis->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChassis(Chassis $chassis): static
+    {
+        if ($this->chassis->removeElement($chassis)) {
+            // set the owning side to null (unless already changed)
+            if ($chassis->getUser() === $this) {
+                $chassis->setUser(null);
+            }
+        }
 
         return $this;
     }

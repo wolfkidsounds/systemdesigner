@@ -2,10 +2,11 @@
 
 namespace App\Menu;
 
+use App\Entity\User;
 use Knp\Menu\ItemInterface;
 use Knp\Menu\FactoryInterface;
-use Novaway\Bundle\FeatureFlagBundle\Manager\DefaultFeatureManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Novaway\Bundle\FeatureFlagBundle\Manager\DefaultFeatureManager;
 
 class MenuBuilder extends AbstractController
 {
@@ -23,6 +24,9 @@ class MenuBuilder extends AbstractController
 
     public function main(): ItemInterface
     {
+        /** @var User $user */
+        $user = $this->getUser();
+
         $menu = $this->factory->createItem('sidebar');
 
         if ($this->isGranted('ROLE_ADMIN') && $this->featureManager->isEnabled('admin')) {
@@ -77,9 +81,9 @@ class MenuBuilder extends AbstractController
             ]);
         }
 
-        if ($this->featureManager->isEnabled('chassis')) {
+        if ($this->featureManager->isEnabled('chassis') && $user->isSubscriber()) {
             $menu->addChild('Chassis', [
-                'route' => 'app_main',
+                'route' => 'app_chassis_index',
                 'extras' => [
                     'icon' => 'icon icon-chassis',
                 ]

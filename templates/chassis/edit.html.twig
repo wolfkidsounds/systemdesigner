@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Chassis{% endblock %}
+
+{% block body %}
+    <h1>Edit Chassis</h1>
+
+    {{ include('chassis/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_chassis_index') }}">back to list</a>
+
+    {{ include('chassis/_delete_form.html.twig') }}
+{% endblock %}

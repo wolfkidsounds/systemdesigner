@@ -36,11 +36,15 @@ class Manufacturer
     #[ORM\OneToMany(mappedBy: 'Manufacturer', targetEntity: Speaker::class)]
     private Collection $speakers;
 
+    #[ORM\OneToMany(mappedBy: 'Manufacturer', targetEntity: Chassis::class)]
+    private Collection $chassis;
+
     public function __construct()
     {
         $this->processors = new ArrayCollection();
         $this->amplifiers = new ArrayCollection();
         $this->speakers = new ArrayCollection();
+        $this->chassis = new ArrayCollection();
     }
 
     public function __toString() {
@@ -172,6 +176,36 @@ class Manufacturer
             // set the owning side to null (unless already changed)
             if ($speaker->getManufacturer() === $this) {
                 $speaker->setManufacturer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Chassis>
+     */
+    public function getChassis(): Collection
+    {
+        return $this->chassis;
+    }
+
+    public function addChassis(Chassis $chassis): static
+    {
+        if (!$this->chassis->contains($chassis)) {
+            $this->chassis->add($chassis);
+            $chassis->setManufacturer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChassis(Chassis $chassis): static
+    {
+        if ($this->chassis->removeElement($chassis)) {
+            // set the owning side to null (unless already changed)
+            if ($chassis->getManufacturer() === $this) {
+                $chassis->setManufacturer(null);
             }
         }
 

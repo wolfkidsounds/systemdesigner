@@ -49,6 +49,14 @@ class Speaker
     #[ORM\Column(length: 255)]
     private ?string $Bandwidth = null;
 
+    #[ORM\ManyToMany(targetEntity: Chassis::class, inversedBy: 'speakers')]
+    private Collection $Chassis;
+
+    public function __construct()
+    {
+        $this->Chassis = new ArrayCollection();
+    }
+
     public function __toString() {
         return $this->Manufacturer . ' - ' . $this->Name;
     }
@@ -174,6 +182,30 @@ class Speaker
     public function setBandwidth(string $Bandwidth): static
     {
         $this->Bandwidth = $Bandwidth;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Chassis>
+     */
+    public function getChassis(): Collection
+    {
+        return $this->Chassis;
+    }
+
+    public function addChassis(Chassis $chassis): static
+    {
+        if (!$this->Chassis->contains($chassis)) {
+            $this->Chassis->add($chassis);
+        }
+
+        return $this;
+    }
+
+    public function removeChassis(Chassis $chassis): static
+    {
+        $this->Chassis->removeElement($chassis);
 
         return $this;
     }
