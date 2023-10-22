@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -60,7 +59,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $Locale = null;
 
     #[ORM\Column(type: 'boolean')]
-    private ?bool $DatabaseAccess = false;
+    private ?bool $DatabaseAccessEnabled = false;
+
+    #[ORM\Column(type: 'boolean')]
+    private ?bool $BetaAccessEnabled = false;
+
+    #[ORM\Column(type: 'boolean')]
+    private ?bool $ShowBetaFeaturesEnabled = false;
     public function __construct()
     {
         $this->manufacturers = new ArrayCollection();
@@ -344,12 +349,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function isDatabaseAccessEnabled(): ?bool
     {
-        return $this->DatabaseAccess;
+        return $this->DatabaseAccessEnabled;
     }
 
-    public function setDatabaseAccessEnabled(bool $DatabaseAccess): static
+    public function setDatabaseAccessEnabled(bool $DatabaseAccessEnabled): static
     {
-        $this->DatabaseAccess = $DatabaseAccess;
+        $this->DatabaseAccessEnabled = $DatabaseAccessEnabled;
+
+        return $this;
+    }
+
+    public function isBetaAccessEnabled(): ?bool
+    {
+        return $this->BetaAccessEnabled;
+    }
+
+    public function setBetaAccessEnabled(bool $BetaAccessEnabled): static
+    {
+        $this->BetaAccessEnabled = $BetaAccessEnabled;
+
+        return $this;
+    }
+
+    public function isShowBetaFeaturesEnabled(): ?bool
+    {
+        return $this->ShowBetaFeaturesEnabled;
+    }
+
+    public function setShowBetaFeaturesEnabled(bool $ShowBetaFeaturesEnabled): static
+    {
+        $this->ShowBetaFeaturesEnabled = $ShowBetaFeaturesEnabled;
 
         return $this;
     }
