@@ -17,7 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Feature(name: "limiter")]
 #[IsGranted('ROLE_USER')]
-#[Route('/limiter')]
+#[Route('/app/limiter')]
 class LimiterController extends AbstractController
 {
     #[Route('/', name: 'app_limiter_index', methods: ['GET'])]
