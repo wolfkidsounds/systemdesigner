@@ -26,12 +26,21 @@ class AmplifierController extends AbstractController
     #[Route('/', name: 'app_amplifier_index', methods: ['GET'])]
     public function index(AmplifierRepository $amplifierRepository): Response
     {
-        //$adapter = new QueryAdapter($queryBuilder);
+        /** @var User $user */
+        $user = $this->getUser();
+
+        if ($user->isDatabaseAccessEnabled()) {
+            $amplifiers = $amplifierRepository->findByUserOrValidated($user);
+        } else {
+            $amplifiers = $amplifierRepository->findBy(['User' => $user]);
+        }
+
         return $this->render('amplifier/index.html.twig', [
-            'amplifiers' => $amplifierRepository->findAll(),
+            'amplifiers' => $amplifiers,
             'controller_name' => 'AmplifierController',
             'title' => new TranslatableMessage('Amplifier'),
             'crud_title' => new TranslatableMessage('All Amplifiers'),
+            'user' => $user,
         ]);
     }
 
@@ -92,11 +101,15 @@ class AmplifierController extends AbstractController
     #[Route('/{id}', name: 'app_amplifier_show', methods: ['GET'])]
     public function show(Amplifier $amplifier): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
+        
         return $this->render('amplifier/show.html.twig', [
             'amplifier' => $amplifier,
             'controller_name' => 'AmplifierController',
             'title' => new TranslatableMessage('Amplifier'),
             'crud_title' => new TranslatableMessage('Show Amplifier'),
+            'user' => $user,
         ]);
     }
 

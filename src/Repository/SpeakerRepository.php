@@ -21,6 +21,21 @@ class SpeakerRepository extends ServiceEntityRepository
         parent::__construct($registry, Speaker::class);
     }
 
+    /**
+     * @return Speaker[] Returns an array of Speaker objects
+     */
+    public function findByUserOrValidated($User): array
+    {
+        return $this->createQueryBuilder('speaker')
+            ->andWhere('speaker.User = :User')
+            ->orWhere('speaker.Validated = :Validated')
+            ->setParameter('User', $User)
+            ->setParameter('Validated', true)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Speaker[] Returns an array of Speaker objects
 //     */

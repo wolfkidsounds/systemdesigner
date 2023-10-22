@@ -37,7 +37,9 @@
             <td class="name">{{ manufacturer.Name }}</td>
             <td class="actions d-flex gap-2">
                 <a href="{{ path('app_manufacturer_show', {'id': manufacturer.id}) }}"><i class="fa-solid fa-eye"></i></a>
-                <a href="{{ path('app_manufacturer_edit', {'id': manufacturer.id}) }}"><i class="fa-solid fa-pen"></i></a>
+                {% if manufacturer.user == user %}
+                    <a href="{{ path('app_manufacturer_edit', {'id': manufacturer.id}) }}"><i class="fa-solid fa-pen"></i></a>                    
+                {% endif %}
             </td>
         </tr>
         {% else %}

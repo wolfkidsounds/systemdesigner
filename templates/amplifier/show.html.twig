@@ -7,14 +7,16 @@
         <i class="fa-solid fa-arrow-left"></i>
     </a>
 </li>
-<li class="list-inline-item d-lg-inline-block ms-0 m-0">
-    <a type="button" href="{{ path('app_amplifier_edit', {'id': amplifier.id}) }}" class="btn nav-btn">
-        <i class="fa-solid fa-pen"></i>
-    </a>
-</li>
-<li class="list-inline-item d-lg-inline-block ms-0 m-0">
-    {{ include('amplifier/_delete_form.html.twig') }}
-</li>
+{% if amplifier.user == user %}
+    <li class="list-inline-item d-lg-inline-block ms-0 m-0">
+        <a type="button" href="{{ path('app_amplifier_edit', {'id': amplifier.id}) }}" class="btn nav-btn">
+            <i class="fa-solid fa-pen"></i>
+        </a>
+    </li>
+    <li class="list-inline-item d-lg-inline-block ms-0 m-0">
+        {{ include('amplifier/_delete_form.html.twig') }}
+    </li>
+{% endif %}
 {% endblock %}
 
 {% block crud_body %}

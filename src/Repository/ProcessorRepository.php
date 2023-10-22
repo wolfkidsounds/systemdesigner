@@ -21,6 +21,21 @@ class ProcessorRepository extends ServiceEntityRepository
         parent::__construct($registry, Processor::class);
     }
 
+    /**
+     * @return Processor[] Returns an array of Manufacturer objects
+     */
+    public function findByUserOrValidated($User): array
+    {
+        return $this->createQueryBuilder('processor')
+            ->andWhere('processor.User = :User')
+            ->orWhere('processor.Validated = :Validated')
+            ->setParameter('User', $User)
+            ->setParameter('Validated', true)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Processor[] Returns an array of Processor objects
 //     */

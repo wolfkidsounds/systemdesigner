@@ -28,13 +28,20 @@ class ManufacturerController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
+        if ($user->isDatabaseAccessEnabled()) {
+            $manufacturers = $manufacturerRepository->findByUserOrValidated($user);
+        } else {
+            $manufacturers = $manufacturerRepository->findBy(['User' => $user]);
+        }
+
         return $this->render('manufacturer/index.html.twig', [
-            'manufacturers' => $manufacturerRepository->findBy(['User' => $user]),
+            'manufacturers' => $manufacturers,
             'title' => new TranslatableMessage('Manufacturer'),
             'crud_title' => new TranslatableMessage('All Manufacturers'),
             'isSubscriber' => $user->isSubscriber(),
             'manufacturersCount' => $user->getManufacturers()->count(),
             'maxCount' => 10,
+            'user' => $user,
         ]);
         
     }
@@ -85,10 +92,14 @@ class ManufacturerController extends AbstractController
     #[Route('/{id}', name: 'app_manufacturer_show', methods: ['GET'])]
     public function show(Manufacturer $manufacturer): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
+
         return $this->render('manufacturer/show.html.twig', [
             'manufacturer' => $manufacturer,
             'title' => new TranslatableMessage('Manufacturer'),
             'crud_title' => new TranslatableMessage('View Manufacturer'),
+            'user' => $user,
         ]);
     }
 

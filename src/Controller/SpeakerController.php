@@ -21,10 +21,20 @@ class SpeakerController extends AbstractController
     #[Route('/', name: 'app_speaker_index', methods: ['GET'])]
     public function index(SpeakerRepository $speakerRepository): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        if ($user->isDatabaseAccessEnabled()) {
+            $speakers = $speakerRepository->findByUserOrValidated($user);
+        } else {
+            $speakers = $speakerRepository->findBy(['User' => $user]);
+        }
+
         return $this->render('speaker/index.html.twig', [
-            'speakers' => $speakerRepository->findAll(),
+            'speakers' => $speakers,
             'title' => new TranslatableMessage('Speaker'),
             'crud_title' => new TranslatableMessage('All Speakers'),
+            'user' => $user,
         ]);
     }
 
@@ -84,10 +94,14 @@ class SpeakerController extends AbstractController
     #[Route('/{id}', name: 'app_speaker_show', methods: ['GET'])]
     public function show(Speaker $speaker): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
+        
         return $this->render('speaker/show.html.twig', [
             'speaker' => $speaker,
             'title' => new TranslatableMessage('Speaker'),
             'crud_title' => new TranslatableMessage('View Speaker'),
+            'user' => $user,
         ]);
     }
 

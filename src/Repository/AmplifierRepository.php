@@ -21,6 +21,21 @@ class AmplifierRepository extends ServiceEntityRepository
         parent::__construct($registry, Amplifier::class);
     }
 
+    /**
+     * @return Amplifier[] Returns an array of Amplifier objects
+     */
+    public function findByUserOrValidated($User): array
+    {
+        return $this->createQueryBuilder('amplifier')
+            ->andWhere('amplifier.User = :User')
+            ->orWhere('amplifier.Validated = :Validated')
+            ->setParameter('User', $User)
+            ->setParameter('Validated', true)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Amplifier[] Returns an array of Amplifier objects
 //     */

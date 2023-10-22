@@ -27,11 +27,21 @@ class ProcessorController extends AbstractController
     #[Route('/', name: 'app_processor_index', methods: ['GET'])]
     public function index(ProcessorRepository $processorRepository): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        if ($user->isDatabaseAccessEnabled()) {
+            $processors = $processorRepository->findByUserOrValidated($user);
+        } else {
+            $processors = $processorRepository->findBy(['User' => $user]);
+        }
+
         return $this->render('processor/index.html.twig', [
-            'processors' => $processorRepository->findAll(),
+            'processors' => $processors,
             'controller_name' => 'ProcessorController',
             'title' => new TranslatableMessage('Processor'),
             'crud_title' => new TranslatableMessage('All Processors'),
+            'user' => $user,
         ]);
     }
 
@@ -92,11 +102,15 @@ class ProcessorController extends AbstractController
     #[Route('/{id}', name: 'app_processor_show', methods: ['GET'])]
     public function show(Processor $processor): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
+        
         return $this->render('processor/show.html.twig', [
             'processor' => $processor,
             'controller_name' => 'ProcessorController',
             'title' => new TranslatableMessage('Processor'),
             'crud_title' => new TranslatableMessage('View Processor'),
+            'user' => $user,
         ]);
     }
 

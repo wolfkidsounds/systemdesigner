@@ -23,10 +23,14 @@ class LimiterController extends AbstractController
     #[Route('/', name: 'app_limiter_index', methods: ['GET'])]
     public function index(LimiterRepository $limiterRepository): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
+
         return $this->render('limiter/index.html.twig', [
-            'limiters' => $limiterRepository->findAll(),
+            'limiters' => $limiterRepository->findBy(['User'=> $user]),
             'title' => new TranslatableMessage('Limiter'),
             'crud_title' => new TranslatableMessage('All Limiters'),
+            'user' => $user,
         ]);
     }
 

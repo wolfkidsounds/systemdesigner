@@ -21,6 +21,21 @@ class ManufacturerRepository extends ServiceEntityRepository
         parent::__construct($registry, Manufacturer::class);
     }
 
+    /**
+     * @return Manufacturer[] Returns an array of Manufacturer objects
+     */
+    public function findByUserOrValidated($User): array
+    {
+        return $this->createQueryBuilder('manufacturer')
+            ->andWhere('manufacturer.User = :User')
+            ->orWhere('manufacturer.Validated = :Validated')
+            ->setParameter('User', $User)
+            ->setParameter('Validated', true)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Manufacturer[] Returns an array of Manufacturer objects
 //     */
