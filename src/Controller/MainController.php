@@ -21,12 +21,14 @@ class MainController extends AbstractController
             'controller_name' => 'MainController',
             'title' => 'Dashboard',
             'isSubscriber' => $user->isSubscriber(),
-            'amplifiersCount' => $user->getAmplifiers()->count(),
-            'processorsCount' => $user->getProcessors()->count(),
-            'speakersCount' => $user->getSpeakers()->count(),
             'manufacturersCount' => $user->getManufacturers()->count(),
+            'processorsCount' => $user->getProcessors()->count(),
+            'amplifiersCount' => $user->getAmplifiers()->count(),
+            'speakersCount' => $user->getSpeakers()->count(),
+            'chassisCount' => $user->getChassis()->count(),            
             'limitersCount' => $user->getLimiters()->count(),
             'maxCount' => 10,
+            'user' => $user,
         ]);
     }
 
