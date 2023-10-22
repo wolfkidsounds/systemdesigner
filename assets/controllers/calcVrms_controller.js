@@ -63,6 +63,12 @@ export default class extends Controller {
 
     async calc() {
 
+        const $loader = $('.custom-loader');
+        const $loaderItem = $('.custom-loader-item');
+        
+        $loader.addClass('loading');
+        $loaderItem.addClass('loading');
+
         const processorId = document.querySelector('#limiter_Processor').value;
         console.log('Processor: ' + processorId);
 
@@ -121,6 +127,9 @@ export default class extends Controller {
                 vpeak_value.setAttribute('value', response.vpeak_value);
                 vpeak_attack.setAttribute('value', response.vpeak_attack);
                 vpeak_release.setAttribute('value', response.vpeak_release);
+
+                $loader.removeClass('loading');
+                $loaderItem.removeClass('loading');
             } catch (error) {
                 console.error(error);
             }
