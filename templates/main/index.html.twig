@@ -18,7 +18,7 @@
             {% include 'main/speaker/dashboard_badge.html.twig' %}
         {% endif %}
 
-        {% if isFeatureEnabled('chassis') %}
+        {% if isFeatureEnabled('chassis') and user.isSubscriber %}
             {% include 'main/chassis/dashboard_badge.html.twig' %}
         {% endif %}
 
