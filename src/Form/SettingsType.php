@@ -26,8 +26,16 @@ class SettingsType extends AbstractType
             ->add('DatabaseAccess', ChoiceType::class, [
                 'label' => new TranslatableMessage('Show All Items'),
                 'choices' => [
-                    'Enabled' => true,
                     'Disabled' => false,
+                    'Enabled' => true,
+                ]
+            ])
+
+            ->add('ShowBetaFeatures', ChoiceType::class, [
+                'label' => new TranslatableMessage('Show Beta Features'),
+                'choices' => [
+                    'Disabled' => false,
+                    'Enabled' => true,
                 ]
             ])
         ;
