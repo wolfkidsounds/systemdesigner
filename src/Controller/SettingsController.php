@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\LanguageType;
+use App\Form\SettingsType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,13 +23,30 @@ class SettingsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $locale = $form->get('Locale')->getData();
-            $user->setLocale($locale);
-            $request->setLocale($locale);
-            $request->getSession()->set('_locale', $locale);
 
+            // LOCALE
+            $locale = $form->get('Locale')->getData();
+
+            if ($locale) {
+                $user->setLocale($locale);
+                $request->setLocale($locale);
+                $request->getSession()->set('_locale', $locale);
+            }
+            
+
+            // DATABASE ACCESS
             $dbAccess = $form->get('DatabaseAccess')->getData();
-            $user->setDatabaseAccessEnabled($dbAccess);
+            if ($dbAccess) {
+                $user->setDatabaseAccessEnabled($dbAccess);
+            }
+            
+
+            //BETA FEATURES
+            $betaFeatures = $form->get('ShowBetaFeatures')->getData();
+
+            if ($betaFeatures) {
+                $user->setDatabaseAccessEnabled($betaFeatures);
+            }
             
             $entityManager->flush();
 
