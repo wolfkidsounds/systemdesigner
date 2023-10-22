@@ -22,7 +22,7 @@ class ProcessorRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Processor[] Returns an array of Manufacturer objects
+     * @return Processor[] Returns an array of Processor objects
      */
     public function findByUserOrValidated($User): array
     {
