@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use App\Entity\Chassis;
 use App\Entity\Limiter;
 use App\Entity\Speaker;
 use App\Entity\Amplifier;
@@ -40,6 +41,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Processors', 'icon icon-processor', Processor::class);
         yield MenuItem::linkToCrud('Amplifiers', 'icon-amplifier', Amplifier::class);
         yield MenuItem::linkToCrud('Speaker', 'icon-speaker', Speaker::class);
+        yield MenuItem::linkToCrud('Chassis', 'icon-chassis', Chassis::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 
