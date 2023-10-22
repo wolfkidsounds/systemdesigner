@@ -4,7 +4,6 @@
 /* Import Fonts and Addons */
 @import "./css/app/fonts.css";
 @import "./css/app/balloon.css";
-@import "./css/app/loader.css";
 
 /* Import Page Contents */
 @import "./css/app/header.css";
@@ -13,6 +12,7 @@
 @import "./css/app/sidebar.css";
 @import "./css/app/card.css";
 @import "./css/app/info.css";
+@import "./css/app/loader.css";
 
 /* Import Customizations */
 @import "./css/app/login_form.css";
