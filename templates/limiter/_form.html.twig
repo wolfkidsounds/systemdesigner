@@ -77,54 +77,59 @@
 
     <div class="divider seperator mb-3"><hr></div> {# Add a separator here #}
 
-    <div class="loading">
-        <div class="row calculated-fields">
-            <div class="col">
-                <div class="info-container mb-3">
-                    {{ infoButton('If your controller only supports one limiter, we suggest using the RMS Voltage. - However, keep in mind that this can increase the crest-faktor and therfore the power-compression significantly.') }}
-                    {{ form_row(form.Vrms) }}
+    <div class="loading-container-wrapper">
+        <div class="loader-container">
+            <div class="custom-loader"></div>
+        </div>
+        <div class="custom-loader-item unloaded">
+            <div class="row calculated-fields">
+                <div class="col">
+                    <div class="info-container mb-3">
+                        {{ infoButton('If your controller only supports one limiter, we suggest using the RMS Voltage. - However, keep in mind that this can increase the crest-faktor and therfore the power-compression significantly.') }}
+                        {{ form_row(form.Vrms) }}
+                    </div>
+                    <div class="info-container mb-3">
+                        {{ infoButton('This is the value in dBu/dB/dBFS (according to the processor) that needs to be set in order to keep the limit at the given Vrms Voltage.') }}
+                        {{ form_row(form.VrmsValue) }}
+                    </div>
                 </div>
-                <div class="info-container mb-3">
-                    {{ infoButton('This is the value in dBu/dB/dBFS (according to the processor) that needs to be set in order to keep the limit at the given Vrms Voltage.') }}
-                    {{ form_row(form.VrmsValue) }}
+                <div class="col">
+                    <div class="info-container mb-3">
+                        {{ infoButton('This is a suggested value based on the speaker bandwidth.') }}
+                        {{ form_row(form.VrmsAttack) }}
+                    </div>
+                    <div class="info-container mb-3">
+                        {{ infoButton('This is a suggested value based on the speaker bandwidth.') }}
+                        {{ form_row(form.VrmsRelease) }}
+                    </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="info-container mb-3">
-                    {{ infoButton('This is a suggested value based on the speaker bandwidth.') }}
-                    {{ form_row(form.VrmsAttack) }}
+            <div class="divider seperator mb-3"><hr></div> {# Add a separator here #}
+            <div class="row calculated-fields">
+                <div class="col">
+                    {{ form_row(form.Vpeak) }}
+                    <div class="info-container mb-3">
+                        {{ infoButton('This is the value in dBu/dB/dBFS (according to the processor) that needs to be set in order to keep the limit at the given Vpeak Voltage.') }}
+                        {{ form_row(form.VpeakValue) }}
+                    </div>
                 </div>
-                <div class="info-container mb-3">
-                    {{ infoButton('This is a suggested value based on the speaker bandwidth.') }}
-                    {{ form_row(form.VrmsRelease) }}
+                <div class="col">
+                    <div class="info-container mb-3">
+                        {{ infoButton('This is a suggested value based on the speaker bandwidth.') }}
+                        {{ form_row(form.VpeakAttack) }}
+                    </div>
+                    <div class="info-container mb-3">
+                        {{ infoButton('This is a suggested value based on the speaker bandwidth.') }}
+                        {{ form_row(form.VpeakRelease) }}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="divider seperator mb-3"><hr></div> {# Add a separator here #}
+    
 
-    <div class="loading">
-        <div class="row calculated-fields">
-            <div class="col">
-                {{ form_row(form.Vpeak) }}
-                <div class="info-container mb-3">
-                    {{ infoButton('This is the value in dBu/dB/dBFS (according to the processor) that needs to be set in order to keep the limit at the given Vpeak Voltage.') }}
-                    {{ form_row(form.VpeakValue) }}
-                </div>
-            </div>
-            <div class="col">
-                <div class="info-container mb-3">
-                    {{ infoButton('This is a suggested value based on the speaker bandwidth.') }}
-                    {{ form_row(form.VpeakAttack) }}
-                </div>
-                <div class="info-container mb-3">
-                    {{ infoButton('This is a suggested value based on the speaker bandwidth.') }}
-                    {{ form_row(form.VpeakRelease) }}
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
     <div class="divider seperator mb-3"><hr></div> {# Add a separator here #}
 
