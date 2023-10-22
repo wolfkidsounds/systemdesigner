@@ -7,7 +7,7 @@ novaway_feature_flag:
             enabled: true
 
         admin:
-            enabled: false
+            enabled: true
 
         processor:
             enabled: true
