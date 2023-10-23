@@ -43,6 +43,14 @@ class Processor
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Manual = null;
 
+    #[ORM\OneToMany(mappedBy: 'Processor', targetEntity: ValidationRequest::class)]
+    private Collection $validationRequests;
+
+    public function __construct()
+    {
+        $this->validationRequests = new ArrayCollection();
+    }
+
     public function __toString() {
         return $this->Manufacturer . ' - ' . $this->Name;
     }
@@ -144,6 +152,36 @@ class Processor
     public function setManual(?string $Manual): static
     {
         $this->Manual = $Manual;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ValidationRequest>
+     */
+    public function getValidationRequests(): Collection
+    {
+        return $this->validationRequests;
+    }
+
+    public function addValidationRequest(ValidationRequest $validationRequest): static
+    {
+        if (!$this->validationRequests->contains($validationRequest)) {
+            $this->validationRequests->add($validationRequest);
+            $validationRequest->setProcessor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeValidationRequest(ValidationRequest $validationRequest): static
+    {
+        if ($this->validationRequests->removeElement($validationRequest)) {
+            // set the owning side to null (unless already changed)
+            if ($validationRequest->getProcessor() === $this) {
+                $validationRequest->setProcessor(null);
+            }
+        }
 
         return $this;
     }
