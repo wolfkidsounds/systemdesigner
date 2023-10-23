@@ -70,6 +70,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'User', targetEntity: Chassis::class)]
     private Collection $chassis;
 
+    #[ORM\OneToMany(mappedBy: 'User', targetEntity: ValidationRequest::class)]
+    private Collection $validationRequests;
+
+    #[ORM\ManyToMany(targetEntity: Notification::class, mappedBy: 'User')]
+    private Collection $notifications;
+
     public function __construct()
     {
         $this->manufacturers = new ArrayCollection();
@@ -78,6 +84,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->speakers = new ArrayCollection();
         $this->limiters = new ArrayCollection();
         $this->chassis = new ArrayCollection();
+        $this->validationRequests = new ArrayCollection();
+        $this->notifications = new ArrayCollection();
     }
 
     public function __toString() {
@@ -413,6 +421,63 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             if ($chassis->getUser() === $this) {
                 $chassis->setUser(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ValidationRequest>
+     */
+    public function getValidationRequests(): Collection
+    {
+        return $this->validationRequests;
+    }
+
+    public function addValidationRequest(ValidationRequest $validationRequest): static
+    {
+        if (!$this->validationRequests->contains($validationRequest)) {
+            $this->validationRequests->add($validationRequest);
+            $validationRequest->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeValidationRequest(ValidationRequest $validationRequest): static
+    {
+        if ($this->validationRequests->removeElement($validationRequest)) {
+            // set the owning side to null (unless already changed)
+            if ($validationRequest->getUser() === $this) {
+                $validationRequest->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Notification>
+     */
+    public function getNotifications(): Collection
+    {
+        return $this->notifications;
+    }
+
+    public function addNotification(Notification $notification): static
+    {
+        if (!$this->notifications->contains($notification)) {
+            $this->notifications->add($notification);
+            $notification->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNotification(Notification $notification): static
+    {
+        if ($this->notifications->removeElement($notification)) {
+            $notification->removeUser($this);
         }
 
         return $this;
