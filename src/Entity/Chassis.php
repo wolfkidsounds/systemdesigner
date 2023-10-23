@@ -85,9 +85,13 @@ class Chassis
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $WindingMaterial = null;
 
+    #[ORM\OneToMany(mappedBy: 'Chassis', targetEntity: ValidationRequest::class)]
+    private Collection $validationRequests;
+
     public function __construct()
     {
         $this->speakers = new ArrayCollection();
+        $this->validationRequests = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -131,12 +135,12 @@ class Chassis
         return $this;
     }
 
-    public function isValid(): ?bool
+    public function isValidated(): ?bool
     {
         return $this->Validated;
     }
 
-    public function setValid(bool $Validated): static
+    public function setValidated(bool $Validated): static
     {
         $this->Validated = $Validated;
 
@@ -370,6 +374,36 @@ class Chassis
     public function setWindingMaterial(?string $WindingMaterial): static
     {
         $this->WindingMaterial = $WindingMaterial;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ValidationRequest>
+     */
+    public function getValidationRequests(): Collection
+    {
+        return $this->validationRequests;
+    }
+
+    public function addValidationRequest(ValidationRequest $validationRequest): static
+    {
+        if (!$this->validationRequests->contains($validationRequest)) {
+            $this->validationRequests->add($validationRequest);
+            $validationRequest->setChassis($this);
+        }
+
+        return $this;
+    }
+
+    public function removeValidationRequest(ValidationRequest $validationRequest): static
+    {
+        if ($this->validationRequests->removeElement($validationRequest)) {
+            // set the owning side to null (unless already changed)
+            if ($validationRequest->getChassis() === $this) {
+                $validationRequest->setChassis(null);
+            }
+        }
 
         return $this;
     }
