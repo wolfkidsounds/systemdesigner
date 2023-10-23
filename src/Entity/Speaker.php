@@ -52,9 +52,13 @@ class Speaker
     #[ORM\ManyToMany(targetEntity: Chassis::class, inversedBy: 'speakers')]
     private Collection $Chassis;
 
+    #[ORM\OneToMany(mappedBy: 'Speaker', targetEntity: ValidationRequest::class)]
+    private Collection $validationRequests;
+
     public function __construct()
     {
         $this->Chassis = new ArrayCollection();
+        $this->validationRequests = new ArrayCollection();
     }
 
     public function __toString() {
@@ -206,6 +210,36 @@ class Speaker
     public function removeChassis(Chassis $chassis): static
     {
         $this->Chassis->removeElement($chassis);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ValidationRequest>
+     */
+    public function getValidationRequests(): Collection
+    {
+        return $this->validationRequests;
+    }
+
+    public function addValidationRequest(ValidationRequest $validationRequest): static
+    {
+        if (!$this->validationRequests->contains($validationRequest)) {
+            $this->validationRequests->add($validationRequest);
+            $validationRequest->setSpeaker($this);
+        }
+
+        return $this;
+    }
+
+    public function removeValidationRequest(ValidationRequest $validationRequest): static
+    {
+        if ($this->validationRequests->removeElement($validationRequest)) {
+            // set the owning side to null (unless already changed)
+            if ($validationRequest->getSpeaker() === $this) {
+                $validationRequest->setSpeaker(null);
+            }
+        }
 
         return $this;
     }
