@@ -6,6 +6,8 @@ use App\Entity\User;
 use App\Entity\Setting;
 use App\Entity\Manufacturer;
 use App\Form\ManufacturerType;
+use App\Entity\ValidationRequest;
+use App\Form\ValidationRequestType;
 use App\Repository\SettingRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ManufacturerRepository;
@@ -89,17 +91,40 @@ class ManufacturerController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_manufacturer_show', methods: ['GET'])]
-    public function show(Manufacturer $manufacturer): Response
+    #[Route('/{id}', name: 'app_manufacturer_show', methods: ['GET', 'POST'])]
+    public function show(Manufacturer $manufacturer, Request $request, EntityManagerInterface $entityManager): Response
     {
         /** @var User $user */
         $user = $this->getUser();
 
+        $validationRequest = new ValidationRequest();
+        $validationRequest->setUser($user);
+        $validationRequest->setManufacturer($manufacturer);
+
+        $form = $this->createForm(ValidationRequestType::class, $validationRequest);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $validationRequest->setStatus('requested');
+            $entityManager->persist($validationRequest);
+            $entityManager->flush();
+        }
+
+        if ($manufacturer->getValidationRequests()->count() > 0) {
+            $validationRequested = true;
+
+        } else {
+            $validationRequested = false;
+        }
+
         return $this->render('manufacturer/show.html.twig', [
             'manufacturer' => $manufacturer,
+            'form' => $form,
+            'user' => $user,
+            'validationRequested' => $validationRequested,
             'title' => new TranslatableMessage('Manufacturer'),
             'crud_title' => new TranslatableMessage('View Manufacturer'),
-            'user' => $user,
         ]);
     }
 
