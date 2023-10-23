@@ -34,6 +34,23 @@
                 <th>{{ 'Name'|trans }}</th>
                 <td>{{ manufacturer.Name }}</td>
             </tr>
+            <tr>
+                <th>{{ 'Validation'|trans }}</th>
+                <td>
+                    {{ form_start(form) }}
+                    <button type="submit" name="submit" class="btn {% if manufacturer.validated %}btn-success text-body{% else %}btn-primary{% endif %}"
+                    {% if manufacturer.validated %}
+                        disabled
+                    {% elseif validationRequested %}
+                        disabled
+                    {% endif %}>
+                    {% if manufacturer.validated %} {{ 'Validated'|trans }}
+                    {% elseif validationRequested %} {{ 'Requested'|trans }}
+                    {% else %} {{ 'Request'|trans }}
+                    {% endif %}</button>
+                    {{ form_end(form) }}
+                </td>
+            </tr>
         </tbody>
     </table>
 {% endblock %}
