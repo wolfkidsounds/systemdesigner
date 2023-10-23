@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Chassis;
 use App\Form\ChassisType;
 use App\Repository\ChassisRepository;
