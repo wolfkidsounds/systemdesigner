@@ -6,6 +6,8 @@ use App\Entity\User;
 use App\Entity\Processor;
 use App\Form\ProcessorType;
 use App\Service\ManualUploader;
+use App\Entity\ValidationRequest;
+use App\Form\ValidationRequestType;
 use App\Repository\ProcessorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -99,18 +101,41 @@ class ProcessorController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_processor_show', methods: ['GET'])]
-    public function show(Processor $processor): Response
+    #[Route('/{id}', name: 'app_processor_show', methods: ['GET', 'POST'])]
+    public function show(Processor $processor, Request $request, EntityManagerInterface $entityManager): Response
     {
         /** @var User $user */
         $user = $this->getUser();
+
+        $validationRequest = new ValidationRequest();
+        $validationRequest->setUser($user);
+        $validationRequest->setProcessor($processor);
+
+        $form = $this->createForm(ValidationRequestType::class, $validationRequest);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $validationRequest->setStatus('requested');
+            $entityManager->persist($validationRequest);
+            $entityManager->flush();
+        }
+
+        if ($processor->getValidationRequests()->count() > 0) {
+            $validationRequested = true;
+
+        } else {
+            $validationRequested = false;
+        }
         
         return $this->render('processor/show.html.twig', [
             'processor' => $processor,
+            'form' => $form,
+            'user' => $user,
+            'validationRequested' => $validationRequested,
             'controller_name' => 'ProcessorController',
             'title' => new TranslatableMessage('Processor'),
             'crud_title' => new TranslatableMessage('View Processor'),
-            'user' => $user,
         ]);
     }
 
