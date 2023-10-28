@@ -6,8 +6,7 @@ call git status | findstr /C:"composer.lock" /C:"composer.json" /C:"symfony.lock
 
 if %errorlevel%==0 (
     set old_color=%color%
-    color 0C
-    echo Changes were found in Composer, Symfony, or NPM files. Please commit these changes before proceeding.
+    color 0C echo Changes were found in Composer, Symfony, or NPM files. Please commit these changes before proceeding.
     color %old_color%
     pause
     exit /b
