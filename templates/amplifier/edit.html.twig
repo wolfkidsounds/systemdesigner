@@ -3,7 +3,8 @@
 {% block title %}{{ parent() }} | Edit: {{ amplifier.Manufacturer.name }} - {{ amplifier.Name }}{% endblock %}
 
 {% block crud_body %}
-    {{ include('amplifier/_form.html.twig', {'button_label': 'Update'}) }}
+    {% set buttonLabel = 'Update'|trans %}
+    {{ include('amplifier/_form.html.twig', {'button_label': buttonLabel}) }}
 {% endblock %}
 
 {% block crud_toolbar %}
