@@ -3,9 +3,9 @@
 {% block title %}Edit Chassis{% endblock %}
 
 {% block body %}
-    <h1>Edit Chassis</h1>
 
-    {{ include('chassis/_form.html.twig', {'button_label': 'Update'}) }}
+    {% set buttonLabel = 'Update'|trans %}
+    {{ include('chassis/_form.html.twig', {'button_label': buttonLabel}) }}
 
     <a href="{{ path('app_chassis_index') }}">back to list</a>
 

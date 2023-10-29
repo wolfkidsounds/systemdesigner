@@ -3,7 +3,8 @@
 {% block title %}{{ parent() }} | Edit Limiter{% endblock %}
 
 {% block crud_body %}
-    {{ include('limiter/_form.html.twig', {'button_label': 'Update'}) }}
+    {% set buttonLabel = 'Update'|trans %}
+    {{ include('limiter/_form.html.twig', {'button_label': buttonLabel}) }}
 {% endblock %}
 
 {% block crud_toolbar %}
