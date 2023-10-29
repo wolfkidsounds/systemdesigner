@@ -101,7 +101,7 @@ class ProcessorController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_processor_show', methods: ['GET', 'POST'])]
+    #[Route('/show/{id}', name: 'app_processor_show', methods: ['GET', 'POST'])]
     public function show(Processor $processor, Request $request, EntityManagerInterface $entityManager): Response
     {
         /** @var User $user */
@@ -139,7 +139,7 @@ class ProcessorController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_processor_edit', methods: ['GET', 'POST'])]
+    #[Route('/edit/{id}', name: 'app_processor_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Processor $processor, EntityManagerInterface $entityManager, ManualUploader $manualUploader): Response
     {     
         $form = $this->createForm(ProcessorType::class, $processor);
@@ -172,7 +172,7 @@ class ProcessorController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_processor_delete', methods: ['POST'])]
+    #[Route('/delete/{id}', name: 'app_processor_delete', methods: ['POST'])]
     public function delete(Request $request, Processor $processor, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$processor->getId(), $request->request->get('_token'))) {

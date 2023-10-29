@@ -91,7 +91,7 @@ class SpeakerController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_speaker_show', methods: ['GET'])]
+    #[Route('/show/{id}', name: 'app_speaker_show', methods: ['GET'])]
     public function show(Speaker $speaker): Response
     {
         /** @var User $user */
@@ -105,7 +105,7 @@ class SpeakerController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_speaker_edit', methods: ['GET', 'POST'])]
+    #[Route('/edit/{id}', name: 'app_speaker_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Speaker $speaker, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(SpeakerType::class, $speaker);
@@ -125,7 +125,7 @@ class SpeakerController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_speaker_delete', methods: ['POST'])]
+    #[Route('/delete/{id}', name: 'app_speaker_delete', methods: ['POST'])]
     public function delete(Request $request, Speaker $speaker, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$speaker->getId(), $request->request->get('_token'))) {

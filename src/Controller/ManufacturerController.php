@@ -91,7 +91,7 @@ class ManufacturerController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_manufacturer_show', methods: ['GET', 'POST'])]
+    #[Route('/show/{id}', name: 'app_manufacturer_show', methods: ['GET', 'POST'])]
     public function show(Manufacturer $manufacturer, Request $request, EntityManagerInterface $entityManager): Response
     {
         /** @var User $user */
@@ -128,7 +128,7 @@ class ManufacturerController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_manufacturer_edit', methods: ['GET', 'POST'])]
+    #[Route('/edit/{id}', name: 'app_manufacturer_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Manufacturer $manufacturer, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ManufacturerType::class, $manufacturer);
@@ -148,7 +148,7 @@ class ManufacturerController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_manufacturer_delete', methods: ['POST'])]
+    #[Route('/delete/{id}', name: 'app_manufacturer_delete', methods: ['POST'])]
     public function delete(Request $request, Manufacturer $manufacturer, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$manufacturer->getId(), $request->request->get('_token'))) {

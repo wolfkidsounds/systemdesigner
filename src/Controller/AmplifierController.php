@@ -98,7 +98,7 @@ class AmplifierController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_amplifier_show', methods: ['GET'])]
+    #[Route('/show/{id}', name: 'app_amplifier_show', methods: ['GET'])]
     public function show(Amplifier $amplifier): Response
     {
         /** @var User $user */
@@ -113,7 +113,7 @@ class AmplifierController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_amplifier_edit', methods: ['GET', 'POST'])]
+    #[Route('/edit/{id}', name: 'app_amplifier_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Amplifier $amplifier, EntityManagerInterface $entityManager, ManualUploader $manualUploader): Response
     {
         $form = $this->createForm(AmplifierType::class, $amplifier);
@@ -145,7 +145,7 @@ class AmplifierController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_amplifier_delete', methods: ['POST'])]
+    #[Route('/delete/{id}', name: 'app_amplifier_delete', methods: ['POST'])]
     public function delete(Request $request, Amplifier $amplifier, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$amplifier->getId(), $request->request->get('_token'))) {
