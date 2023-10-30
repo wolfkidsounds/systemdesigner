@@ -13,6 +13,7 @@
 @import "./css/app/card.css";
 @import "./css/app/info.css";
 @import "./css/app/loader.css";
+@import "./css/app/badge.css";
 
 /* Import Customizations */
 @import "./css/app/login_form.css";
