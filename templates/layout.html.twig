@@ -1,4 +1,6 @@
 {% extends 'base.html.twig' %}
+
+{% set user = get_current_user() %}
 {% block layout %}
 
     {% use 'partials/sidebar/sidebar.html.twig' %}
