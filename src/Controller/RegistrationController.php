@@ -53,14 +53,14 @@ class RegistrationController extends AbstractController
                     ->from(new Address('account@pulsationaudio.com', 'Pulsation Audio - Customer Service'))
                     ->to($user->getEmail())
                     ->subject(new TranslatableMessage('Confirm Your Email Address'),)
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
+                    ->htmlTemplate('security/confirmation_email.html.twig')
             );
             // do anything else you need here, like send an email
 
             return $this->redirectToRoute('app_main');
         }
 
-        return $this->render('registration/register.html.twig', [
+        return $this->render('security/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }

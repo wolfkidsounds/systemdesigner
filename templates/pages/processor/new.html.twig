@@ -1,0 +1,15 @@
+{% extends 'crud.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ 'New Processor'|trans }}{% endblock %}
+
+{% block crud_body %}
+    {{ include('pages/processor/_form.html.twig') }}
+{% endblock %}
+
+{% block crud_toolbar %}
+    <li class="list-inline-item d-lg-inline-block ms-0 m-0">
+        <a type="button" href="{{ path('app_processor_index') }}" class="btn nav-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+    </li>
+{% endblock %}

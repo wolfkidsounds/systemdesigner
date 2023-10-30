@@ -17,18 +17,10 @@ class MainController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
-        return $this->render('main/index.html.twig', [
+        return $this->render('pages/main/index.html.twig', [
             'controller_name' => 'MainController',
             'title' => 'Dashboard',
-            'isSubscriber' => $user->isSubscriber(),
-            'manufacturersCount' => $user->getManufacturers()->count(),
-            'processorsCount' => $user->getProcessors()->count(),
-            'amplifiersCount' => $user->getAmplifiers()->count(),
-            'speakersCount' => $user->getSpeakers()->count(),
-            'chassisCount' => $user->getChassis()->count(),            
-            'limitersCount' => $user->getLimiters()->count(),
             'maxCount' => 10,
-            'user' => $user,
         ]);
     }
 

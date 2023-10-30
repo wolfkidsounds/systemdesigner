@@ -36,14 +36,11 @@ class ManufacturerController extends AbstractController
             $manufacturers = $manufacturerRepository->findBy(['User' => $user]);
         }
 
-        return $this->render('manufacturer/index.html.twig', [
+        return $this->render('pages/manufacturer/index.html.twig', [
             'manufacturers' => $manufacturers,
             'title' => new TranslatableMessage('Manufacturer'),
             'crud_title' => new TranslatableMessage('All Manufacturers'),
-            'isSubscriber' => $user->isSubscriber(),
-            'manufacturersCount' => $user->getManufacturers()->count(),
             'maxCount' => 10,
-            'user' => $user,
         ]);
         
     }
@@ -82,7 +79,7 @@ class ManufacturerController extends AbstractController
             return $this->redirectToRoute('app_manufacturer_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('manufacturer/new.html.twig', [
+        return $this->render('pages/manufacturer/new.html.twig', [
             'manufacturer' => $manufacturer,
             'form' => $form,
             'title' => new TranslatableMessage('Manufacturer'),
@@ -91,11 +88,7 @@ class ManufacturerController extends AbstractController
         ]);
     }
 
-<<<<<<< Updated upstream
     #[Route('/show/{id}', name: 'app_manufacturer_show', methods: ['GET', 'POST'])]
-=======
-    #[Route('/show/{id}', name: 'app_manufacturer_show', methods: ['GET', 'POST'])]
->>>>>>> Stashed changes
     public function show(Manufacturer $manufacturer, Request $request, EntityManagerInterface $entityManager): Response
     {
         /** @var User $user */
@@ -122,10 +115,9 @@ class ManufacturerController extends AbstractController
             $validationRequested = false;
         }
 
-        return $this->render('manufacturer/show.html.twig', [
+        return $this->render('pages/manufacturer/show.html.twig', [
             'manufacturer' => $manufacturer,
             'form' => $form,
-            'user' => $user,
             'validationRequested' => $validationRequested,
             'title' => new TranslatableMessage('Manufacturer'),
             'crud_title' => new TranslatableMessage('View Manufacturer'),
@@ -144,7 +136,7 @@ class ManufacturerController extends AbstractController
             return $this->redirectToRoute('app_manufacturer_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('manufacturer/edit.html.twig', [
+        return $this->render('pages/manufacturer/edit.html.twig', [
             'manufacturer' => $manufacturer,
             'form' => $form,
             'title' => new TranslatableMessage('Manufacturer'),

@@ -35,12 +35,11 @@ class AmplifierController extends AbstractController
             $amplifiers = $amplifierRepository->findBy(['User' => $user]);
         }
 
-        return $this->render('amplifier/index.html.twig', [
+        return $this->render('pages/amplifier/index.html.twig', [
             'amplifiers' => $amplifiers,
             'controller_name' => 'AmplifierController',
             'title' => new TranslatableMessage('Amplifier'),
             'crud_title' => new TranslatableMessage('All Amplifiers'),
-            'user' => $user,
         ]);
     }
 
@@ -51,7 +50,7 @@ class AmplifierController extends AbstractController
         $user = $this->getUser();
 
         if (!($user->isSubscriber()) && ($user->getAmplifiers()->count() >= 10)) {
-            return $this->render('subscription/limit.html.twig', [
+            return $this->render('pages/subscription/limit.html.twig', [
                 'title' => new TranslatableMessage('Limit Reached'),
                 'crud_title' => new TranslatableMessage('Limit Reached'),
             ]);
@@ -66,7 +65,7 @@ class AmplifierController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             if (!($user->isSubscriber()) && ($user->getAmplifiers()->count() >= 10)) {
-                return $this->render('subscription/limit.html.twig', [
+                return $this->render('pages/subscription/limit.html.twig', [
                     'title' => new TranslatableMessage('Limit Reached'),
                     'crud_title' => new TranslatableMessage('Limit Reached'),
                 ]);
@@ -89,7 +88,7 @@ class AmplifierController extends AbstractController
             return $this->redirectToRoute('app_amplifier_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('amplifier/new.html.twig', [
+        return $this->render('pages/amplifier/new.html.twig', [
             'amplifier' => $amplifier,
             'form' => $form,
             'controller_name' => 'AmplifierController',
@@ -104,12 +103,11 @@ class AmplifierController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
         
-        return $this->render('amplifier/show.html.twig', [
+        return $this->render('pages/amplifier/show.html.twig', [
             'amplifier' => $amplifier,
             'controller_name' => 'AmplifierController',
             'title' => new TranslatableMessage('Amplifier'),
             'crud_title' => new TranslatableMessage('Show Amplifier'),
-            'user' => $user,
         ]);
     }
 
@@ -136,7 +134,7 @@ class AmplifierController extends AbstractController
             return $this->redirectToRoute('app_amplifier_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('amplifier/edit.html.twig', [
+        return $this->render('pages/amplifier/edit.html.twig', [
             'amplifier' => $amplifier,
             'form' => $form,
             'controller_name' => 'AmplifierController',

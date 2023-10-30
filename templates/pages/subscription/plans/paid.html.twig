@@ -1,0 +1,33 @@
+<!-- CARD -->
+<div class="col">
+    <div class="card card-h-100">
+        <div class="card-body rounded {% if app.user.isSubscriber %} bg-primary {% endif %} ">
+            <div class="d-flex justify-content-center flex-column">
+                <div class="row card-header text-center m-0 p-3 rounded">
+                    <p class="fw-medium fs-3 mb-0">Paid</p>
+                    <p class="mb-0">$2 / Month</p>
+                </div>
+
+                <div class="row card-features text-center mt-3">
+                    <p class="text-muted">Unlimited Manufacturers</p>
+                    <p class="text-muted">Unlimited Processors</p>
+                    <p class="text-muted">Unlimited Amplifiers</p>
+                    <p class="text-muted">Unlimited Speakers</p>
+                    <p class="text-muted">Unlimited Limiters</p>
+                    <p class="text-muted">+ Unlimited Chassis</p>
+                    <p class="text-muted">+ Advanced Limiter Calculations & Settings</p>
+                    <p class="text-muted">+ Database Access</p>
+                    <p class="text-muted">+ Help Keep The Project Alive</p>
+                </div>
+
+                <div class="row card-footer m-0 mt-3 p-0 bg-transparent">
+                    {% if app.user.isSubscriber %}
+                        <a href="#" class="btn bg-light">Current Plan</a>
+                    {% else %}
+                        <a href="#" class="btn btn-primary">Get Plan</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

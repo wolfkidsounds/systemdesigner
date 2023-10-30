@@ -1,0 +1,29 @@
+{% extends 'content.html.twig' %}
+
+{% block page_content %}
+    <div class="row" data-turbo="false">
+        {% if isFeatureEnabled('manufacturers') %}
+            {% include 'main/manufacturer/dashboard_badge.html.twig' %}
+        {% endif %}
+
+        {% if isFeatureEnabled('processor') %}
+            {% include 'main/processor/dashboard_badge.html.twig' %}
+        {% endif %}
+
+        {% if isFeatureEnabled('amplifier') %}
+            {% include 'main/amplifier/dashboard_badge.html.twig' %}
+        {% endif %}
+
+        {% if isFeatureEnabled('speaker') %}
+            {% include 'main/speaker/dashboard_badge.html.twig' %}
+        {% endif %}
+
+        {% if isFeatureEnabled('chassis') and app.user.isSubscriber %}
+            {% include 'main/chassis/dashboard_badge.html.twig' %}
+        {% endif %}
+
+        {% if isFeatureEnabled('limiter') %}
+            {% include 'main/limiter/dashboard_badge.html.twig' %}
+        {% endif %}
+    </div>
+{% endblock %}

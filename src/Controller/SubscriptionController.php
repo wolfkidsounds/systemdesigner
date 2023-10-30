@@ -16,15 +16,9 @@ class SubscriptionController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
-        return $this->render('subscription/index.html.twig', [
+        return $this->render('pages/subscription/index.html.twig', [
             'controller_name' => 'SubscriptionController',
             'title' => new TranslatableMessage('Subscription'),
-            'isSubscriber' => $user->isSubscriber(),
-            'amplifiersCount' => $user->getAmplifiers()->count(),
-            'processorsCount' => $user->getProcessors()->count(),
-            'speakersCount' => $user->getSpeakers()->count(),
-            'manufacturersCount' => $user->getManufacturers()->count(),
-            'limitersCount' => $user->getLimiters()->count(),
             'maxCount' => 10,
             'beta' => false,
         ]);
