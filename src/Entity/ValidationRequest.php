@@ -2,9 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ValidationRequestRepository;
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Service\NotificationService;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\ValidationRequestRepository;
+use Symfony\Component\Translation\TranslatableMessage;
 
 #[ORM\Entity(repositoryClass: ValidationRequestRepository::class)]
 class ValidationRequest
@@ -38,12 +42,6 @@ class ValidationRequest
     #[ORM\ManyToOne(inversedBy: 'validationRequests')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $User = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $Type = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $Object = null;
 
     public function getId(): ?int
     {
@@ -132,22 +130,27 @@ class ValidationRequest
         if ($Status == 'validated') {
 
             if ($this->Manufacturer) {
+                $entity = $this->Manufacturer;
                 $this->Manufacturer->setValidated(true);
             }
     
             if ($this->Processor) {
+                $entity = $this->Processor;
                 $this->Processor->setValidated(true);
             }
     
             if ($this->Amplifier) {
+                $entity = $this->Amplifier;
                 $this->Amplifier->setValidated(true);
             }
     
             if ($this->Speaker) {
+                $entity = $this->Speaker;
                 $this->Speaker->setValidated(true);
             }
     
             if ($this->Chassis) {
+                $entity = $this->Chassis;
                 $this->Chassis->setValidated(true);
             }
 
@@ -156,22 +159,27 @@ class ValidationRequest
         if ($Status == 'rejected') {
 
             if ($this->Manufacturer) {
+                $entity = $this->Manufacturer;
                 $this->Manufacturer->setValidated(false);
             }
     
             if ($this->Processor) {
+                $entity = $this->Processor;
                 $this->Processor->setValidated(false);
             }
     
             if ($this->Amplifier) {
+                $entity = $this->Amplifier;
                 $this->Amplifier->setValidated(false);
             }
     
             if ($this->Speaker) {
+                $entity = $this->Speaker;
                 $this->Speaker->setValidated(false);
             }
     
             if ($this->Chassis) {
+                $entity = $this->Chassis;
                 $this->Chassis->setValidated(false);
             }
         }
@@ -196,70 +204,50 @@ class ValidationRequest
     public function getType(): ?string
     {
         if ($this->Manufacturer) {
-            return 'Manufacturer';
+            $type = 'Manufacturer';
         }
 
         if ($this->Processor) {
-            return 'Processor';
+            $type = 'Processor';
         }
 
         if ($this->Amplifier) {
-            return 'Amplifier';
+            $type = 'Amplifier';
         }
 
         if ($this->Speaker) {
-            return 'Speaker';
+            $type = 'Speaker';
         }
 
         if ($this->Chassis) {
-            return 'Chassis';
+            $type = 'Chassis';
         }
 
-        else {
-            return null;
-        }
-
-    }
-
-    public function setType(?string $Type): static
-    {
-        $this->Type = $Type;
-
-        return $this;
+        return $type;
     }
 
     public function getObject(): ?string
     {
         if ($this->Manufacturer) {
-            return $this->Manufacturer->getName();
+            $object = $this->Manufacturer->getName();
         }
 
         if ($this->Processor) {
-            return $this->Processor->getManufacturer()->getName() . ' - ' . $this->Processor->getName();
+            $object = $this->Processor->getManufacturer()->getName() . ' - ' .$this->Processor->getName();
         }
 
         if ($this->Amplifier) {
-            return $this->Amplifier->getManufacturer()->getName() . ' - ' . $this->Amplifier->getName();
+            $object = $this->Amplifier->getManufacturer()->getName() . ' - ' .$this->Amplifier->getName();
         }
 
         if ($this->Speaker) {
-            return $this->Speaker->getManufacturer()->getName() . ' - ' . $this->Speaker->getName();
+            $object = $this->Speaker->getManufacturer()->getName() . ' - ' .$this->Speaker->getName();
         }
 
         if ($this->Chassis) {
-            return $this->Chassis->getManufacturer()->getName() . ' - ' . $this->Chassis->getName();
+            $object = $this->Chassis->getManufacturer()->getName() . ' - ' .$this->Chassis->getName();
         }
 
-        else {
-            return null;
-        }
-
-    }
-
-    public function setObject(?string $Object): static
-    {
-        $this->Object = $Object;
-        return $this;
-        
+        return $object;
     }
 }
