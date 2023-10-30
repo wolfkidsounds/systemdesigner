@@ -21,7 +21,22 @@
     <!-- SETTINGS -->
     <div class="sidebar_logo d-none flex-lg-column d-lg-block">
         <ul class="nav justify-content-center">
-            <li class="btn-group dropup">
+            <li class="btn-group dropup dropend">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa-solid fa-bell">
+                        {% if user.notifications|length > 0 %}
+                        <span class="position-absolute top-1 start-99 translate-middle badge rounded-pill bg-primary text-body font-size-12">
+                            {{ user.notifications|length }}
+                            <span class="visually-hidden">Unread Notifications</span>
+                        </span>
+                        {% endif %}
+                    </i>
+                </a>
+                <ul class="dropdown-menu">
+                    {{ include('partials/sidebar/notification/_notifications.html.twig')}}
+                </ul>  
+            </li>
+            <li class="btn-group dropup dropend">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa-solid fa-gear rounded-circle"></i>
                 </a>
