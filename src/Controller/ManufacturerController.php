@@ -91,7 +91,11 @@ class ManufacturerController extends AbstractController
         ]);
     }
 
+<<<<<<< Updated upstream
     #[Route('/show/{id}', name: 'app_manufacturer_show', methods: ['GET', 'POST'])]
+=======
+    #[Route('/show/{id}', name: 'app_manufacturer_show', methods: ['GET', 'POST'])]
+>>>>>>> Stashed changes
     public function show(Manufacturer $manufacturer, Request $request, EntityManagerInterface $entityManager): Response
     {
         /** @var User $user */
@@ -151,6 +155,9 @@ class ManufacturerController extends AbstractController
     #[Route('/delete/{id}', name: 'app_manufacturer_delete', methods: ['POST'])]
     public function delete(Request $request, Manufacturer $manufacturer, EntityManagerInterface $entityManager): Response
     {
+        dump($request);
+        dump($manufacturer);
+
         if ($this->isCsrfTokenValid('delete'.$manufacturer->getId(), $request->request->get('_token'))) {
             $entityManager->remove($manufacturer);
             $entityManager->flush();
