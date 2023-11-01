@@ -11,5 +11,17 @@
         <a type="button" href="{{ path('app_limiter_index') }}" class="btn nav-btn">
             <i class="fa-solid fa-arrow-left"></i>
         </a>
+        <button class="btn bg-opacity-10 bg-dark rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSettings" aria-expanded="false" aria-controls="collapseSettings" aria-label="Show Settings" data-balloon-pos="down">
+            <i class="fa-solid fa-sliders"></i>
+        </button>
+        <button class="btn bg-opacity-10 bg-dark rounded-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTimes" aria-expanded="false" aria-controls="collapseTimes" aria-label="Show Time-Suggestions" data-balloon-pos="down">
+            <i class="fa-solid fa-align-center fa-rotate-90"></i>
+        </button>
+
+        {% if app.user.isSubscriber %}
+        <button class="btn bg-opacity-10 bg-dark rounded-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetails" aria-expanded="false" aria-controls="collapseDetails" aria-label="Show Details" data-balloon-pos="down">
+            <i class="fa-solid fa-asterisk"></i>
+        </button>
+        {% endif %}
     </li>
 {% endblock %}
