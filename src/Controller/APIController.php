@@ -92,6 +92,7 @@ class APIController extends AbstractController
     public function getLimiterCalculation(Request $request, EntityManagerInterface $entityManager): JsonResponse
     {
         $requestData = json_decode($request->getContent(), true);
+        $message = '';
 
         dump($requestData);
 
@@ -117,36 +118,100 @@ class APIController extends AbstractController
             $amplifier_power = $amplifier->getPower($matching_impedance);
         }
 
-        $rms_power_request = $speaker->getPowerRMS();
+        $rms_power_request = $speaker->getPowerRMS() * $speakerCount;
 
         if ($amplifier_power >= $rms_power_request) {
             //speaker needs to be protected
-
             $vrms = sqrt($rms_power_request * $impedance_request) * $scaling;
-            $vpeak = $vrms * sqrt(2);
 
         } else if ($amplifier_power < $rms_power_request) {
             //amplifer needs to be protected
-
             $vrms = sqrt($amplifier_power * $matching_impedance) * $scaling;
-            $vpeak = $vrms * sqrt(2);
         }
 
-        $vgain = 20 * LOG10( SQRT( $amplifier_power * $matching_impedance ) / 0.775 ) - 20 * LOG10( $inputSensitiviy / 0.775 );
+        $peak_power_request = $speaker->getPowerPeak() * $speakerCount;
+
+        if ($amplifier_power >= $peak_power_request) {
+            //speaker needs to be protected
+            $vpeak = sqrt($peak_power_request * $impedance_request) * $scaling;
+
+        } else if ($amplifier_power < $peak_power_request) {
+            //amplifer needs to be protected
+            $vpeak = sqrt($amplifier_power * $matching_impedance) * $scaling;
+        }
+
+        $vgain = (20 * LOG10( SQRT( $amplifier_power * $matching_impedance ) / 0.775 )) - (20 * LOG10( $inputSensitiviy / 0.775 ));
 
         $vrms_dBu = (( 20 * LOG10( $vrms / 0.775 )) - $vgain ) - $processor->getOutputOffset();
         $vpeak_dBu = (( 20 * LOG10( $vpeak / 0.775 )) - $vgain ) - $processor->getOutputOffset();
 
+        // Messages
+
+        if ($amplifier_power < $rms_power_request) {
+            $message .= '! Low Amplifier RMS Power \n';
+        }
+
+        if ($amplifier_power > ($peak_power_request * 1.5)) {
+            $message .= '! High Amplifier Power\n';
+        }
+
+        if ($vpeak_dBu > ($vrms_dBu + 3)) {
+            $message .= '! Voltage Mismatch please decrease load (High Vpeak) \n';
+        }
+
+        if ($vrms_dBu > ($vpeak_dBu - 3)) {
+            $message .= '! Voltage Mismatch please decrease load (High Vrms) \n';
+        }
+
+        if (!$bridge_mode_enabled && ($amplifier_power < $rms_power_request) && ($impedance_request > 4)) {
+            $message .= '? Consider enabling "Bridge Mode" for your Amplifier \n';
+        }
+
+        if (number_format($vpeak, 2) === number_format($vrms, 2)) {
+            $message .= '# Amplifier Power Mismatch (Vrms and Vpeak are Equal) \n';
+        }
+
+        if ($amplifier_power < $peak_power_request) {
+            $message .= '# Low Amplifier Peak Power \n';
+        }
+
+        if ($amplifier_power > ($rms_power_request * 2)) {
+            $message .= '# High Amplifier Power\n';
+        }
+
+        // Specials
+        if ($matching_impedance == 0) {
+            $message = '! Impedance Mismatch (Impedance could not be matched the the Amplifier) \n';
+        }
+
+        if (is_nan($vrms_dBu) || is_nan($vpeak_dBu)) {
+            $message = '! Impedance is unsupported by Amplifier \n';
+        }
+
         $data = [
+            'impedance_request' => $impedance_request,
+            'matching_impedance' => $matching_impedance,
+
+            'rms_power_supplied' => $amplifier_power,
+            'rms_power_request' => $rms_power_request,
+
+            'peak_power_supplied' => $amplifier_power,
+            'peak_power_request' => $peak_power_request,
+
+            'vgain' => number_format($vgain, 2),
+
             'vrms' => number_format($vrms, 2),
             'vpeak' => number_format($vpeak, 2),
+
             'vrms_value' => number_format($vrms_dBu, 2),
             'vpeak_value' => number_format($vpeak_dBu, 2),
+
             'vrms_attack' => $this->getVrmsAttack($speaker->getBandwidth()),
             'vrms_release' => $this->getVrmsRelease($speaker->getBandwidth()),
             'vpeak_attack' => $this->getVpeakAttack($speaker->getBandwidth()),
             'vpeak_release' => $this->getVpeakRelease($speaker->getBandwidth()),
-            'matching_impedance' => $matching_impedance,
+
+            'message' => $message,
         ];
 
         return $this->json($data);
