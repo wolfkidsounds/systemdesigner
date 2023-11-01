@@ -32,3 +32,10 @@ services:
             $targetDirectory: '%manuals_dir%'
 
     App\Service\InfoGenerator:
+
+    App\EventSubscriber\ValidationRequestSubscriber:
+        arguments:
+            $notificationService: '@App\Service\NotificationService'
+            $eventDispatcher: '@event_dispatcher'
+        tags:
+            - { name: doctrine.event_subscriber }
