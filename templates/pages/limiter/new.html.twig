@@ -19,9 +19,11 @@
         </button>
 
         {% if app.user.isSubscriber %}
+
         <button class="btn bg-opacity-10 bg-dark rounded-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetails" aria-expanded="false" aria-controls="collapseDetails" aria-label="Show Details" data-balloon-pos="down">
             <i class="fa-solid fa-asterisk"></i>
         </button>
+        
         {% endif %}
     </li>
 {% endblock %}
