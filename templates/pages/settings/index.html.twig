@@ -3,5 +3,9 @@
 {% block title %}{{ parent() }} | {{ 'Settings'|trans }}{% endblock %}
 
 {% block page_content %}
-    {{ include('pages/settings/_form.html.twig') }}
+    <div class="card">
+        <div class="card-body">
+        {{ include('pages/settings/_form.html.twig') }}
+        </div>
+    </div>
 {% endblock %}
