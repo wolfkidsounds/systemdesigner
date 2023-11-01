@@ -1,0 +1,35 @@
+<div class="times">
+    <div class="row">
+        {# 
+        <button class="btn bg-opacity-10 bg-dark rounded-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTimes" aria-expanded="false" aria-controls="collapseTimes">
+            Show Time Suggestions
+        </button>
+        #}
+        <div class="collapse mt-3" id="collapseTimes">
+            <div class="card card-body border-dark">
+                <div class="row">
+                    <div class="col">
+                        <div class="info-container mb-3">
+                            {{ infoButton('This is a suggested value based on the speaker bandwidth.') }}
+                            {{ form_row(form.VrmsAttack) }}
+                        </div>
+                        <div class="info-container mb-3">
+                            {{ infoButton('This is a suggested value based on the speaker bandwidth.') }}
+                            {{ form_row(form.VrmsRelease) }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="info-container mb-3">
+                            {{ infoButton('This is a suggested value based on the speaker bandwidth.') }}
+                            {{ form_row(form.VpeakAttack) }}
+                        </div>
+                        <div class="info-container mb-3">
+                            {{ infoButton('This is a suggested value based on the speaker bandwidth.') }}
+                            {{ form_row(form.VpeakRelease) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
