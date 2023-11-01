@@ -1,0 +1,22 @@
+<div class="row calculated-fields">
+    <div class="col">
+        <div class="info-container mb-3">
+            {{ infoButton('If your controller only supports one limiter, we suggest using the RMS Voltage. - However, keep in mind that this can increase the crest-faktor and therfore the power-compression significantly.') }}
+            {{ form_row(form.Vrms) }}
+        </div>
+        <div class="info-container mb-3">
+            {{ infoButton('This is the value in dBu/dB/dBFS (according to the processor) that needs to be set in order to keep the limit at the given Vrms Voltage.') }}
+            {{ form_row(form.VrmsValue) }}
+        </div>
+    </div>
+    <div class="col">
+        <div class="info-container mb-3">
+            {{ infoButton('If your controller only supports one limiter, we suggest using the RMS Voltage. - However, keep in mind that this can increase the crest-faktor and therfore the power-compression significantly.') }}
+            {{ form_row(form.Vpeak) }}
+        </div>
+        <div class="info-container mb-3">
+            {{ infoButton('This is the value in dBu/dB/dBFS (according to the processor) that needs to be set in order to keep the limit at the given Vpeak Voltage.') }}
+            {{ form_row(form.VpeakValue) }}
+        </div>
+    </div>
+</div>
