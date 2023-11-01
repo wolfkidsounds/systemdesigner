@@ -1,0 +1,47 @@
+<div class="settings">
+    <div class="row">
+        {#
+        <button class="btn bg-opacity-10 bg-dark rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSettings" aria-expanded="false" aria-controls="collapseSettings">
+            Show Settings
+        </button>
+        #}
+        <div class="collapse mt-3" id="collapseSettings">
+            <div class="card card-body border-dark">
+                <div class="col">
+                    <div class="info-container mb-3">
+                        {{ infoButton('The Input sensitivity can be set on the back of most amplifiers. Increasing the Input Sensitivity Results in the limiter kicking in earlier therefore for some controllers, setting the input sensitivity to a higher value can result in better control. (Default is 0.775 V)') }}
+                        {{ form_row(form.InputSensitivity, {
+                            'params': {
+                                'after': [
+                                {
+                                    'type': 'markup',
+                                    'content': '<span class="input-group-text">Volts</span>'
+                                }
+                                ]
+                            }
+                            }) 
+                        }}
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="info-container mb-3">
+                        {{ infoButton('Enabling Bridge Mode on an Amplifier results in combining at least two of the modules into one module, resulting in a higher power output at the cost of the load that the amplifier can handle. (Default is Disabled)') }}
+                        {{ form_row(form.BridgeModeEnabled) }}
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="info-container mb-3">
+                        {{ infoButton('This sets how many speakers are chained together in parallel. This results in the Resistance being lower and higher powerdraw. 0 means no speakers are connected at all. (Default is 1)') }}
+                        {{ form_row(form.SpeakersInParallel) }}
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="info-container mb-3">
+                        {{ infoButton('Scaling is applied to the voltage (since voltage is linear). This means you can scale down the limiter for better control and adjust to your needs. (Default is 100 %)') }}
+                        {{ form_row(form.Scaling) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
