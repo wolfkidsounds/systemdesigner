@@ -1,0 +1,26 @@
+<div class="row item-selector">
+    {{ form_row(form.Processor, {
+        'attr': {
+            'class': 'form-select',
+            'data-controller': 'calcVrms',
+            'data-action': 'change->calcVrms#calc'
+        },
+        'placeholder': 'Select Processor',
+    }) }}
+    {{ form_row(form.Amplifier, {
+        'attr': {
+            'class': 'form-select',
+            'data-controller': 'calcVrms',
+            'data-action': 'change->calcVrms#calc'
+        },
+        'placeholder': 'Select Amplifier',
+    })  }}
+    {{ form_row(form.Speaker, {
+        'attr': {
+            'class': 'form-select',
+            'data-controller': 'calcVrms',
+            'data-action': 'change->calcVrms#calc'
+        },
+        'placeholder': 'Select Speaker',
+    }) }}
+</div>
