@@ -65,7 +65,9 @@ export default class extends Controller {
 
         const $loader = $('.custom-loader');
         const $loaderItem = $('.custom-loader-item');
+        const $loaderContainer = $('.loader-container');
         
+        $loaderContainer.css('display', 'flex');
         $loader.addClass('loading');
         $loaderItem.addClass('loading');
 
@@ -109,27 +111,50 @@ export default class extends Controller {
         
                 // Uncomment and adapt these lines if you want to use the response data
                 const vrms = document.querySelector('#limiter_Vrms');
-                const vrms_value = document.querySelector('#limiter_VrmsValue');
-                const vrms_attack = document.querySelector('#limiter_VrmsAttack');
-                const vrms_release = document.querySelector('#limiter_VrmsRelease');
-
-                const vpeak = document.querySelector('#limiter_Vpeak');
-                const vpeak_value = document.querySelector('#limiter_VpeakValue');
-                const vpeak_attack = document.querySelector('#limiter_VpeakAttack');
-                const vpeak_release = document.querySelector('#limiter_VpeakRelease');
-                
                 vrms.setAttribute('value', response.vrms);
+
+                const vrms_value = document.querySelector('#limiter_VrmsValue');
                 vrms_value.setAttribute('value', response.vrms_value);
+
+                const vrms_attack = document.querySelector('#limiter_VrmsAttack');
                 vrms_attack.setAttribute('value', response.vrms_attack);
+
+                const vrms_release = document.querySelector('#limiter_VrmsRelease');
                 vrms_release.setAttribute('value', response.vrms_release);
 
+                const vpeak = document.querySelector('#limiter_Vpeak');
                 vpeak.setAttribute('value', response.vpeak);
+                
+                const vpeak_value = document.querySelector('#limiter_VpeakValue');
                 vpeak_value.setAttribute('value', response.vpeak_value);
+                
+                const vpeak_attack = document.querySelector('#limiter_VpeakAttack');
                 vpeak_attack.setAttribute('value', response.vpeak_attack);
+                
+                const vpeak_release = document.querySelector('#limiter_VpeakRelease');
                 vpeak_release.setAttribute('value', response.vpeak_release);
+
+                const vgain = document.querySelector('#details_Vgain');
+                vgain.setAttribute('value', response.vgain);
+
+                const prequest = document.querySelector('#details_PRequest');
+                prequest.setAttribute('value', response.peak_power_request);
+
+                const rmsrequest = document.querySelector('#details_RMSRequest');
+                rmsrequest.setAttribute('value', response.rms_power_request);
+
+                const psupply = document.querySelector('#details_PSupply');
+                psupply.setAttribute('value', response.peak_power_supplied);
+
+                const rmssupply = document.querySelector('#details_RMSSupply');
+                rmssupply.setAttribute('value', response.rms_power_supplied);
+
+                const respMessage = document.querySelector('#limiter_Message');
+                respMessage.value = response.message.replace(/\\n/g, '\n');
 
                 $loader.removeClass('loading');
                 $loaderItem.removeClass('loading');
+                $loaderContainer.css('display', 'none');
             } catch (error) {
                 console.error(error);
             }
