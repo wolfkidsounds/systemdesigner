@@ -1,0 +1,61 @@
+{% if app.user.isSubscriber %}
+
+    <div class="details">
+        <div class="row">
+            <div class="collapse mt-3" id="collapseDetails">
+                <div class="card card-body border-dark">
+                    <div class="col">
+                        <div class="info-container mb-3">
+                            {{ infoButton('The Vgain Value tells you how much dB the Amplifier tries to amplify until it runs out of power.') }}
+                            <div class="mb-3">
+                                <label for="details_Vgain" class="form-label">Vgain</label>
+                                <input type="text" id="details_Vgain" name="details_Vgain" readonly="readonly" disabled="disabled" inputmode="decimal" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="info-container mb-3">
+                                {{ infoButton('...') }}
+                                <div class="mb-3">
+                                    <label for="details_RMSRequest" class="form-label">RMS Power Request</label>
+                                    <input type="text" id="details_RMSRequest" name="details_RMSRequest" readonly="readonly" disabled="disabled" inputmode="decimal" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="info-container mb-3">
+                                {{ infoButton('...') }}
+                                <div class="mb-3">
+                                    <label for="details_PRequest" class="form-label">Peak Power Request</label>
+                                    <input type="text" id="details_PRequest" name="details_PRequest" readonly="readonly" disabled="disabled" inputmode="decimal" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="info-container mb-3">
+                                {{ infoButton('...') }}
+                                <div class="mb-3">
+                                    <label for="details_RMSSupply" class="form-label">RMS Power Supplied</label>
+                                    <input type="text" id="details_RMSSupply" name="details_RMSSupply" readonly="readonly" disabled="disabled" inputmode="decimal" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="info-container mb-3">
+                                {{ infoButton('...') }}
+                                <div class="mb-3">
+                                    <label for="details_PSupply" class="form-label">Peak Power Supplied</label>
+                                    <input type="text" id="details_PSupply" name="details_PSupply" readonly="readonly" disabled="disabled" inputmode="decimal" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endif %}
