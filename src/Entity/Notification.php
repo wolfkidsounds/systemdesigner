@@ -1,4 +1,4 @@
-<?php
+<?php // src/Entity/Notification.php
 
 namespace App\Entity;
 
