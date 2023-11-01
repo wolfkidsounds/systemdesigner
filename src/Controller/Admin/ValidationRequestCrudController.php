@@ -7,6 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
@@ -21,7 +22,6 @@ class ValidationRequestCrudController extends AbstractCrudController
     {
         return [
             AssociationField::new('User'),
-            TextField::new('Type'),
             TextField::new('Object'),
             ChoiceField::new('Status')
                 ->autocomplete()
