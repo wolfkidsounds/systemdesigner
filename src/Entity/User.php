@@ -76,6 +76,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Notification::class, mappedBy: 'User')]
     private Collection $notifications;
 
+    #[ORM\Column]
+    private ?bool $Beta = false;
+
     public function __construct()
     {
         $this->manufacturers = new ArrayCollection();
@@ -479,6 +482,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if ($this->notifications->removeElement($notification)) {
             $notification->removeUser($this);
         }
+
+        return $this;
+    }
+
+    public function isBeta(): ?bool
+    {
+        return $this->Beta;
+    }
+
+    public function setBeta(bool $Beta): static
+    {
+        $this->Beta = $Beta;
 
         return $this;
     }
