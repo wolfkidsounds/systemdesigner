@@ -1,7 +1,7 @@
 <!-- CARD -->
 <div class="col">
     <div class="card card-h-100">
-        <div class="card-body {% if app.user.isSubscriber and beta %} bg-primary {% endif %} rounded">
+        <div class="card-body {% if app.user.isSubscriber and app.user.isBeta %} bg-primary {% endif %} rounded">
             <div class="d-flex justify-content-center flex-column">
                 <div class="row card-header text-center m-0 p-3 rounded">
                     <p class="fw-medium fs-3 mb-0">Supporter</p>
@@ -18,7 +18,7 @@
                 </div>
 
                 <div class="row card-footer m-0 mt-3 p-0 bg-transparent">
-                    {% if app.user.isSubscriber and beta %}
+                    {% if app.user.isSubscriber and app.user.isBeta %}
                         <a href="#" class="btn">Current Plan</a>
                     {% else %}
                         <a href="#" class="btn btn-primary">Get Plan</a>
