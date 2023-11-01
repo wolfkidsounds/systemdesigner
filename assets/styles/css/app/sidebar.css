@@ -39,14 +39,3 @@
     justify-content: center;
     align-items: center;
 }
-
-.divider.seperator {
-    height:15px;
-    color:var(--bs-dark);
-}
-
-.divider.seperator hr {
-    height:1px;
-    color:var(--bs-dark);
-    border-top:1px solid var(--bs-dark);
-}
