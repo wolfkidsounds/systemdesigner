@@ -1,143 +1,37 @@
 {{ form_start(form) }}
 <div class="d-flex flex-column overflow-hidden">
-    <div class="row item-selector">
-        {{ form_row(form.Processor, {
-            'attr': {
-                'class': 'form-select',
-                'data-controller': 'calcVrms',
-                'data-action': 'change->calcVrms#calc'
-            },
-            'placeholder': 'Select Processor',
-        }) }}
-        {{ form_row(form.Amplifier, {
-            'attr': {
-                'class': 'form-select',
-                'data-controller': 'calcVrms',
-                'data-action': 'change->calcVrms#calc'
-            },
-            'placeholder': 'Select Amplifier',
-        })  }}
-        {{ form_row(form.Speaker, {
-            'attr': {
-                'class': 'form-select',
-                'data-controller': 'calcVrms',
-                'data-action': 'change->calcVrms#calc'
-            },
-            'placeholder': 'Select Speaker',
-        }) }}
-    </div>
+        
+    {{ include('pages/limiter/partials/_selector.html.twig') }}
 
     <div class="divider seperator mb-3"><hr></div>
 
-    <div class="setings">
-        <div class="row">
-            <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSettings" aria-expanded="false" aria-controls="collapseSettings">
-                Show Settings
-            </button>
-            <div class="collapse mt-3" id="collapseSettings">
-                <div class="card card-body border-dark">
-                    <div class="col">
-                        <div class="info-container mb-3">
-                            {{ infoButton('The Input sensitivity can be set on the back of most amplifiers. Increasing the Input Sensitivity Results in the limiter kicking in earlier therefore for some controllers, setting the input sensitivity to a higher value can result in better control. (Default is 0.775 V)') }}
-                            {{ form_row(form.InputSensitivity, {
-                                'params': {
-                                    'after': [
-                                    {
-                                        'type': 'markup',
-                                        'content': '<span class="input-group-text">Volts</span>'
-                                    }
-                                    ]
-                                }
-                                }) 
-                            }}
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="info-container mb-3">
-                            {{ infoButton('Enabling Bridge Mode on an Amplifier results in combining at least two of the modules into one module, resulting in a higher power output at the cost of the load that the amplifier can handle. (Default is Disabled)') }}
-                            {{ form_row(form.BridgeModeEnabled) }}
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="info-container mb-3">
-                            {{ infoButton('This sets how many speakers are chained together in parallel. This results in the Resistance being lower and higher powerdraw. 0 means no speakers are connected at all. (Default is 1)') }}
-                            {{ form_row(form.SpeakersInParallel) }}
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="info-container mb-3">
-                            {{ infoButton('Scaling is applied to the voltage (since voltage is linear). This means you can scale down the limiter for better control and adjust to your needs. (Default is 100 %)') }}
-                            {{ form_row(form.Scaling) }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{ include('pages/limiter/partials/_settings.html.twig') }}
 
-    <div class="divider seperator mb-3"><hr></div> {# Add a separator here #}
+    <div class="loading-container-wrapper p-3">
 
-    <div class="loading-container-wrapper">
-        <div class="loader-container">
+        <div class="loader-container" style="display:none;">
             <div class="custom-loader"></div>
         </div>
+
         <div class="custom-loader-item unloaded">
-            <div class="row calculated-fields">
-                <div class="col">
-                    <div class="info-container mb-3">
-                        {{ infoButton('If your controller only supports one limiter, we suggest using the RMS Voltage. - However, keep in mind that this can increase the crest-faktor and therfore the power-compression significantly.') }}
-                        {{ form_row(form.Vrms) }}
-                    </div>
-                    <div class="info-container mb-3">
-                        {{ infoButton('This is the value in dBu/dB/dBFS (according to the processor) that needs to be set in order to keep the limit at the given Vrms Voltage.') }}
-                        {{ form_row(form.VrmsValue) }}
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="info-container mb-3">
-                        {{ infoButton('This is a suggested value based on the speaker bandwidth.') }}
-                        {{ form_row(form.VrmsAttack) }}
-                    </div>
-                    <div class="info-container mb-3">
-                        {{ infoButton('This is a suggested value based on the speaker bandwidth.') }}
-                        {{ form_row(form.VrmsRelease) }}
-                    </div>
-                </div>
-            </div>
-            <div class="divider seperator mb-3"><hr></div> {# Add a separator here #}
-            <div class="row calculated-fields">
-                <div class="col">
-                    {{ form_row(form.Vpeak) }}
-                    <div class="info-container mb-3">
-                        {{ infoButton('This is the value in dBu/dB/dBFS (according to the processor) that needs to be set in order to keep the limit at the given Vpeak Voltage.') }}
-                        {{ form_row(form.VpeakValue) }}
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="info-container mb-3">
-                        {{ infoButton('This is a suggested value based on the speaker bandwidth.') }}
-                        {{ form_row(form.VpeakAttack) }}
-                    </div>
-                    <div class="info-container mb-3">
-                        {{ infoButton('This is a suggested value based on the speaker bandwidth.') }}
-                        {{ form_row(form.VpeakRelease) }}
-                    </div>
-                </div>
-            </div>
+
+            {{ include('pages/limiter/partials/_calc_fields.html.twig') }}
+            
+            {{ include('pages/limiter/partials/_lim_times.html.twig') }}
+            
+            {{ include('pages/limiter/partials/_details.html.twig') }}
+
+            <div class="divider seperator mb-3"><hr></div>
+
+            {{ include('pages/limiter/partials/_messagebox.html.twig') }}
         </div>
     </div>
-
-    
-
-    
 
     <div class="divider seperator mb-3"><hr></div> {# Add a separator here #}
 
     <div class="row">
-        <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+        <button class="btn btn-primary m-0 mb-0">{{ button_label|default('Save') }}</button>
     </div>
-
-    
 
 </div>
 {{ form_end(form) }}
