@@ -50,8 +50,11 @@
                 {% if speaker.user == app.user %}
                     <a href="{{ path('app_speaker_edit', {'id': speaker.id}) }}"><i class="fa-solid fa-pen"></i></a>
                 {% endif %}
-                
-                <a href="{{ asset('uploads/manuals/' ~ speaker.Manual) }}" download><i class="fa-solid fa-file-pdf"></i></a>
+
+                {% if speaker.Manual is not null and speaker.Manual is not empty and speaker.Manual is defined %}
+                    <a href="{{ asset('uploads/manuals/' ~ speaker.Manual) }}" download><i class="fa-solid fa-file-pdf"></i></a>
+                {% endif %}
+
             </td>
         </tr>
         {% else %}
