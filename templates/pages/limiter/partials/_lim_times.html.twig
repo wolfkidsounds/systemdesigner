@@ -1,31 +1,50 @@
 <div class="times">
     <div class="row">
-        {# 
-        <button class="btn bg-opacity-10 bg-dark rounded-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTimes" aria-expanded="false" aria-controls="collapseTimes">
-            Show Time Suggestions
-        </button>
-        #}
         <div class="collapse mt-3" id="collapseTimes">
             <div class="card card-body border-dark">
                 <div class="row">
                     <div class="col">
                         <div class="info-container mb-3">
-                            {{ infoButton('This is a suggested value based on the speaker bandwidth.') }}
-                            {{ form_row(form.VrmsAttack) }}
+                            {{ infoButton('These values are suggestions based on speaker bandwidth.') }}
+                            <div>
+                                {{ form_label(form.VrmsAttack, 'Vrms Attack', {'label_attr': {'class': 'form-label'}}) }}
+                                <div class="input-group">
+                                    {{ form_widget(form.VrmsAttack, {'attr': {'readonly': 'readonly', 'class': 'form-control'}}) }}
+                                    <span class="input-group-text">ms</span>
+                                </div>
+                            </div>
                         </div>
                         <div class="info-container mb-3">
-                            {{ infoButton('This is a suggested value based on the speaker bandwidth.') }}
-                            {{ form_row(form.VrmsRelease) }}
+                            {{ infoButton('These values are suggestions based on speaker bandwidth.') }}
+                            <div>
+                                {{ form_label(form.VrmsRelease, 'Vrms Release', {'label_attr': {'class': 'form-label'}}) }}
+                                <div class="input-group">
+                                    {{ form_widget(form.VrmsRelease, {'attr': {'readonly': 'readonly', 'class': 'form-control'}}) }}
+                                    <span class="input-group-text">ms</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col">
                         <div class="info-container mb-3">
-                            {{ infoButton('This is a suggested value based on the speaker bandwidth.') }}
-                            {{ form_row(form.VpeakAttack) }}
+                            {{ infoButton('These values are suggestions based on speaker bandwidth.') }}
+                            <div>
+                                {{ form_label(form.VpeakAttack, 'Vpeak Attack', {'label_attr': {'class': 'form-label'}}) }}
+                                <div class="input-group">
+                                    {{ form_widget(form.VpeakAttack, {'attr': {'readonly': 'readonly', 'class': 'form-control'}}) }}
+                                    <span class="input-group-text">ms</span>
+                                </div>
+                            </div>
                         </div>
                         <div class="info-container mb-3">
-                            {{ infoButton('This is a suggested value based on the speaker bandwidth.') }}
-                            {{ form_row(form.VpeakRelease) }}
+                            {{ infoButton('These values are suggestions based on speaker bandwidth.') }}
+                            <div>
+                                {{ form_label(form.VpeakRelease, 'Vpeak Release', {'label_attr': {'class': 'form-label'}}) }}
+                                <div class="input-group">
+                                    {{ form_widget(form.VpeakRelease, {'attr': {'readonly': 'readonly', 'class': 'form-control'}}) }}
+                                    <span class="input-group-text">ms</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
