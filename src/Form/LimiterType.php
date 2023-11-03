@@ -41,7 +41,7 @@ class LimiterType extends AbstractType
 
             ->add('Vrms', NumberType::class, [
                 'constraints' => [new NotBlank()],
-                'attr' => ['readonly' => true]
+                'attr' => ['readonly' => true],
             ])
 
             ->add('VrmsValue', NumberType::class, [
@@ -101,6 +101,15 @@ class LimiterType extends AbstractType
                     'min' => 1,
                     'max' => 100,
                 ]
+            ])
+
+            ->add('Algorithm', ChoiceType::class, [
+                'label' => 'Calculation Algorithm',
+                'choices'  => [
+                    'System Designer' => 'system_designer',
+                    'True Power' => 'true_power',
+                    'Power vs. RMS' => 'power_vs_rms',
+                ],
             ])
         ;
     }
