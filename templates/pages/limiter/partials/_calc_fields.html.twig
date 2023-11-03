@@ -1,22 +1,47 @@
-<div class="row calculated-fields">
+<div class="row calculated-fields mt-3 mb-3">
     <div class="col">
         <div class="info-container mb-3">
             {{ infoButton('If your controller only supports one limiter, we suggest using the RMS Voltage. - However, keep in mind that this can increase the crest-faktor and therfore the power-compression significantly.') }}
-            {{ form_row(form.Vrms) }}
+            <div>
+                {{ form_label(form.Vrms, 'Vrms', {'label_attr': {'class': 'form-label required'}}) }}
+                <div class="input-group">
+                    {{ form_widget(form.Vrms, {'attr': {'readonly': 'readonly', 'inputmode': 'decimal', 'class': 'form-control'}}) }}
+                    <span class="input-group-text">V</span>
+                </div>
+            </div>
         </div>
+
         <div class="info-container mb-3">
             {{ infoButton('This is the value in dBu/dB/dBFS (according to the processor) that needs to be set in order to keep the limit at the given Vrms Voltage.') }}
-            {{ form_row(form.VrmsValue) }}
+            <div>
+                {{ form_label(form.VrmsValue, 'VrmsValue', {'label_attr': {'class': 'form-label required'}}) }}
+                <div class="input-group">
+                    {{ form_widget(form.VrmsValue, {'attr': {'readonly': 'readonly', 'inputmode': 'decimal', 'class': 'form-control'}}) }}
+                    <span class="input-group-text">V</span>
+                </div>
+            </div>
         </div>
     </div>
     <div class="col">
         <div class="info-container mb-3">
             {{ infoButton('If your controller only supports one limiter, we suggest using the RMS Voltage. - However, keep in mind that this can increase the crest-faktor and therfore the power-compression significantly.') }}
-            {{ form_row(form.Vpeak) }}
+            <div>
+                {{ form_label(form.Vpeak, 'Vpeak', {'label_attr': {'class': 'form-label required'}}) }}
+                <div class="input-group">
+                    {{ form_widget(form.Vpeak, {'attr': {'readonly': 'readonly', 'inputmode': 'decimal', 'class': 'form-control'}}) }}
+                    <span class="input-group-text">V</span>
+                </div>
+            </div>
         </div>
         <div class="info-container mb-3">
             {{ infoButton('This is the value in dBu/dB/dBFS (according to the processor) that needs to be set in order to keep the limit at the given Vpeak Voltage.') }}
-            {{ form_row(form.VpeakValue) }}
+            <div>
+                {{ form_label(form.VpeakValue, 'VpeakValue', {'label_attr': {'class': 'form-label required'}}) }}
+                <div class="input-group">
+                    {{ form_widget(form.VpeakValue, {'attr': {'readonly': 'readonly', 'inputmode': 'decimal', 'class': 'form-control'}}) }}
+                    <span class="input-group-text">V</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>
