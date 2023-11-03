@@ -67,6 +67,9 @@ class Limiter
     #[ORM\Column]
     private ?float $Scaling = 1.0;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Algorithm = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -260,6 +263,18 @@ class Limiter
     public function setScaling(float $Scaling): static
     {
         $this->Scaling = $Scaling;
+
+        return $this;
+    }
+
+    public function getAlgorithm(): ?string
+    {
+        return $this->Algorithm;
+    }
+
+    public function setAlgorithm(?string $Algorithm): static
+    {
+        $this->Algorithm = $Algorithm;
 
         return $this;
     }
