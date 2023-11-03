@@ -112,6 +112,9 @@ class APIController extends AbstractController
         $impedance_request = $speaker->getImpedance() / $speakerCount;
         $matching_impedance = $this->matchImpedance($impedance_request);
 
+        $rms_scaling = $this->getRMSScaling($speaker->getBandwidth());
+        $peak_scaling = $this->getPeakScaling($speaker->getBandwidth());
+
         if ($bridge_mode_enabled) {
             $amplifier_power = $amplifier->getBridgePower($matching_impedance);
         } else {
@@ -122,22 +125,22 @@ class APIController extends AbstractController
 
         if ($amplifier_power >= $rms_power_request) {
             //speaker needs to be protected
-            $vrms = sqrt($rms_power_request * $impedance_request) * $scaling;
+            $vrms = sqrt($rms_power_request * $impedance_request) * ($rms_scaling) * ($scaling);
 
         } else if ($amplifier_power < $rms_power_request) {
             //amplifer needs to be protected
-            $vrms = sqrt($amplifier_power * $matching_impedance) * $scaling;
+            $vrms = sqrt($amplifier_power * $matching_impedance) * ($rms_scaling) * ($scaling);
         }
 
         $peak_power_request = $speaker->getPowerPeak() * $speakerCount;
 
         if ($amplifier_power >= $peak_power_request) {
             //speaker needs to be protected
-            $vpeak = sqrt($peak_power_request * $impedance_request) * $scaling;
+            $vpeak = sqrt($peak_power_request * $impedance_request) * ($peak_scaling) * ($scaling);
 
         } else if ($amplifier_power < $peak_power_request) {
             //amplifer needs to be protected
-            $vpeak = sqrt($amplifier_power * $matching_impedance) * $scaling;
+            $vpeak = sqrt($amplifier_power * $matching_impedance) * ($peak_scaling) * ($scaling);
         }
 
         $vgain = (20 * LOG10( SQRT( $amplifier_power * $matching_impedance ) / 0.775 )) - (20 * LOG10( $inputSensitiviy / 0.775 ));
@@ -148,44 +151,41 @@ class APIController extends AbstractController
         // Messages
 
         if ($amplifier_power < $rms_power_request) {
-            $message .= '! Low Amplifier RMS Power \n';
+            $message .= '! Amplifier: Insufficient Power \n';
         }
 
-        if ($amplifier_power > ($peak_power_request * 1.5)) {
-            $message .= '! High Amplifier Power\n';
+        if ($amplifier_power > ($peak_power_request * 2)) {
+            $message .= '! Amplifier: Very High Power \n';
+            $message .= '! Speaker: Speaker may get damaged \n';
         }
 
-        if ($vpeak_dBu > ($vrms_dBu + 3)) {
-            $message .= '! Voltage Mismatch please decrease load (High Vpeak) \n';
+        if ($vpeak_dBu > ($vrms_dBu + 6)) {
+            $message .= '! Voltage Mismatch: Please consider decreasing the load (High Vpeak) \n';
         }
 
-        if ($vrms_dBu > ($vpeak_dBu - 3)) {
-            $message .= '! Voltage Mismatch please decrease load (High Vrms) \n';
+        if ($vrms_dBu >= ($vpeak_dBu)) {
+            $message .= '! Voltage Mismatch: Please consider decreasing the load (High Vrms) \n';
         }
 
         if (!$bridge_mode_enabled && ($amplifier_power < $rms_power_request) && ($impedance_request > 4)) {
-            $message .= '? Consider enabling "Bridge Mode" for your Amplifier \n';
+            $message .= '? Amplifier: Consider enabling "Bridge Mode" for your Amplifier \n';
         }
 
         if (number_format($vpeak, 2) === number_format($vrms, 2)) {
-            $message .= '# Amplifier Power Mismatch (Vrms and Vpeak are Equal) \n';
+            $message .= '# Amplifier: Power Mismatch (Vrms and Vpeak are Equal) \n';
         }
 
         if ($amplifier_power < $peak_power_request) {
-            $message .= '# Low Amplifier Peak Power \n';
-        }
-
-        if ($amplifier_power > ($rms_power_request * 2)) {
-            $message .= '# High Amplifier Power\n';
+            $message .= '# Amplifier: Low Power \n';
         }
 
         // Specials
         if ($matching_impedance == 0) {
-            $message = '! Impedance Mismatch (Impedance could not be matched the the Amplifier) \n';
+            $message = '! Impedance Mismatch: Impedance could not be matched the the Amplifier \n';
         }
 
         if (is_nan($vrms_dBu) || is_nan($vpeak_dBu)) {
-            $message = '! Impedance is unsupported by Amplifier \n';
+            $message = '! Impedance Mismatch: Impedance seems to be unsupported by Amplifier \n';
         }
 
         $data = [
@@ -249,7 +249,7 @@ class APIController extends AbstractController
                 return '2 - 8';
             case 'HF':
                 return '0.5 - 2';
-            case 'Fr':
+            case 'FR':
                 return '2 - 8';
             default:
                 return 0;
@@ -266,7 +266,7 @@ class APIController extends AbstractController
                 return '16 - 64';
             case 'HF':
                 return '8 - 32';
-            case 'Fr':
+            case 'FR':
                 return '16 - 64';
             default:
                 return 0;
@@ -283,7 +283,7 @@ class APIController extends AbstractController
                 return '300 - 800';
             case 'HF':
                 return '150 - 300';
-            case 'Fr':
+            case 'FR':
                 return '300 - 800';
             default:
                 return 0;
@@ -300,8 +300,42 @@ class APIController extends AbstractController
                 return '500 - 2000';
             case 'HF':
                 return '300 - 800';
-            case 'Fr':
+            case 'FR':
                 return '500 - 2000';
+            default:
+                return 0;
+        }
+    }
+
+    function getPeakScaling($bandwidth) {
+        switch ($bandwidth) {
+            case 'SUB':
+                return '0.8';
+            case 'LF':
+                return '0.8';
+            case 'MF':
+                return '0.8';
+            case 'HF':
+                return '0.8';
+            case 'FR':
+                return '0.8';
+            default:
+                return 0;
+        }
+    }
+
+    function getRMSScaling($bandwidth) {
+        switch ($bandwidth) {
+            case 'SUB':
+                return '0.7';
+            case 'LF':
+                return '0.65';
+            case 'MF':
+                return '0.6';
+            case 'HF':
+                return '0.55';
+            case 'FR':
+                return '0.6';
             default:
                 return 0;
         }
