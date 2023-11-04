@@ -8,12 +8,30 @@
 {% endblock %}
 
 {% block crud_toolbar %}
-<li class="list-inline-item d-lg-inline-block ms-0 m-0">
-    <a type="button" href="{{ path('app_limiter_index') }}" class="btn nav-btn">
-        <i class="fa-solid fa-arrow-left"></i>
-    </a>
-</li>
-<li class="list-inline-item d-lg-inline-block ms-0 m-0">
-    {{ include('pages/limiter/_delete_form.html.twig') }}
-</li>
+    <li class="list-inline-item d-lg-inline-block ms-0 m-0">
+        <a type="button" href="{{ path('app_limiter_index') }}" class="btn nav-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+    </li>
+    <li class="list-inline-item d-lg-inline-block ms-0 m-0">
+        <button class="btn bg-opacity-10 bg-dark rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSettings" aria-expanded="false" aria-controls="collapseSettings" aria-label="Show Settings" data-balloon-pos="down">
+            <i class="fa-solid fa-sliders"></i>
+        </button>
+    </li>
+    <li class="list-inline-item d-lg-inline-block ms-0 m-0">
+        <button class="btn bg-opacity-10 bg-dark rounded-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTimes" aria-expanded="false" aria-controls="collapseTimes" aria-label="Show Time-Suggestions" data-balloon-pos="down">
+            <i class="fa-solid fa-align-center fa-rotate-90"></i>
+        </button>
+    </li>
+
+    {% if app.user.isSubscriber %}
+        <li class="list-inline-item d-lg-inline-block ms-0 m-0">
+            <button class="btn bg-opacity-10 bg-dark rounded-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetails" aria-expanded="false" aria-controls="collapseDetails" aria-label="Show Details" data-balloon-pos="down">
+                <i class="fa-solid fa-asterisk"></i>
+            </button>
+        </li>
+    {% endif %}
+    <li class="list-inline-item d-lg-inline-block ms-0 m-0">
+        {{ include('pages/limiter/_delete_form.html.twig') }}
+    </li>
 {% endblock %}
