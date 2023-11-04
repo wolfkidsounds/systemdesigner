@@ -24,7 +24,11 @@
     </div>
     <div class="divider seperator mb-3"><hr></div>
     <div class="row">
-        {{ form_row(form.OutputOffset) }}
+        {{ form_label(form.OutputOffset, 'Output Offset', {'label_attr': {'class': 'form-label required'}}) }}
+        <div class="input-group">
+            {{ form_widget(form.OutputOffset, {'attr': {'inputmode': 'decimal', 'class': 'form-control'}}) }}
+            <span class="input-group-text">dBu</span>
+        </div>
     </div>
     <div class="divider seperator mb-3"><hr></div>
     <div class="row">
