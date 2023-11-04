@@ -151,15 +151,15 @@ class APIController extends AbstractController
         // Messages
 
         if ($amplifier_power < $rms_power_request) {
-            $message .= '! Amplifier: Insufficient Power \n';
+            $message .= '! Amplifier: RMS Power is low \n';
         }
 
         if ($amplifier_power > ($peak_power_request * 2)) {
-            $message .= '! Amplifier: Very High Power \n';
+            $message .= '! Amplifier: Peak Power is very high \n';
             $message .= '! Speaker: Speaker may get damaged \n';
         }
 
-        if ($vpeak_dBu > ($vrms_dBu + 6)) {
+        if ($vpeak_dBu > ($vrms_dBu + 9)) {
             $message .= '! Voltage Mismatch: Please consider decreasing the load (High Vpeak) \n';
         }
 
@@ -176,7 +176,7 @@ class APIController extends AbstractController
         }
 
         if ($amplifier_power < $peak_power_request) {
-            $message .= '# Amplifier: Low Power \n';
+            $message .= '# Amplifier: Peak Power is low \n';
         }
 
         // Specials
