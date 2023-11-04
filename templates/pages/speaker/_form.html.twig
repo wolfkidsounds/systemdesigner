@@ -18,20 +18,36 @@
     </div>
     <div class="divider seperator mb-3"><hr></div>
     <div class="row">
-        <div class="col">
-            {{ form_row(form.PowerRMS) }}
+        <div class="col mb-3">
+            {{ form_label(form.PowerRMS, 'RMS Power', {'label_attr': {'class': 'form-label required'}}) }}
+            <div class="input-group">
+                {{ form_widget(form.PowerRMS, {'attr': {'inputmode': 'decimal', 'class': 'form-control'}}) }}
+                <span class="input-group-text">Watt</span>
+            </div>
         </div>
-        <div class="col">
-            {{ form_row(form.PowerPeak) }}
+        <div class="col mb-3">
+            {{ form_label(form.PowerPeak, 'Peak Power', {'label_attr': {'class': 'form-label required'}}) }}
+            <div class="input-group">
+                {{ form_widget(form.PowerPeak, {'attr': {'inputmode': 'decimal', 'class': 'form-control'}}) }}
+                <span class="input-group-text">Watt</span>
+            </div>
         </div>
     </div>
     <div class="divider seperator mb-3"><hr></div>
     <div class="row">
-        <div class="col">
-            {{ form_row(form.Impedance) }}
+        <div class="col mb-3">
+            {{ form_label(form.Impedance, 'Impedance', {'label_attr': {'class': 'form-label required'}}) }}
+            <div class="input-group">
+                {{ form_widget(form.Impedance, {'attr': {'inputmode': 'decimal', 'class': 'form-control'}}) }}
+                <span class="input-group-text">Ω</span>
+            </div>
         </div>
         <div class="col">
-            {{ form_row(form.SPL) }}
+            {{ form_label(form.SPL, 'Sensitivity (SPL @ 1W 1m)', {'label_attr': {'class': 'form-label required'}}) }}
+            <div class="input-group">
+                {{ form_widget(form.SPL, {'attr': {'inputmode': 'decimal', 'class': 'form-control'}}) }}
+                <span class="input-group-text">dB</span>
+            </div>
         </div>
     </div>
 
