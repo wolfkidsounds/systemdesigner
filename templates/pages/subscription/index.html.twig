@@ -10,9 +10,18 @@
         </div>
         <div class="row px-5 mt-0 g-5 ">
             {% if isFeatureEnabled('subscription') %}
+                <div class="stripe-sub">
+                    <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+                    <stripe-pricing-table 
+                        pricing-table-id="prctbl_1OBkNlA1uqdyzQYjaZtXcsQ8" 
+                        publishable-key="pk_test_51OBaqTA1uqdyzQYjZz5zg5wWaGPWBUMs64JEmc70FemcnJQVDNz2PbRXHepnubnVuIzccMgkMXw9By5J1qdp42qp00bDVKvTg1">
+                    </stripe-pricing-table>
+                </div>
+                {#
                 {% include 'pages/subscription/plans/free.html.twig' %}
                 {% include 'pages/subscription/plans/paid.html.twig' %}
                 {% include 'pages/subscription/plans/beta.html.twig' %}
+                #}
             {% endif %}
         </div>
     </div>
