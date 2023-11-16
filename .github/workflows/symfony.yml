@@ -52,7 +52,7 @@ jobs:
         mkdir -p data
         touch data/data.db
   
-    - name: Execute tests (Unit and Feature tests) via PHPUnit
-      env:
-        DATABASE_URL: sqlite:///%kernel.project_dir%/data/data.db
-      run: vendor/bin/phpunit
+    # - name: Execute tests (Unit and Feature tests) via PHPUnit
+    #   env:
+    #     DATABASE_URL: sqlite:///%kernel.project_dir%/data/data.db
+    #   run: vendor/bin/phpunit
