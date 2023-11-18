@@ -31,7 +31,7 @@ services:
         arguments:
             $targetDirectory: '%manuals_dir%'
 
-    App\Service\InfoGenerator:
+    App\Service\InfoService:
 
     App\EventSubscriber\ValidationRequestSubscriber:
         arguments:

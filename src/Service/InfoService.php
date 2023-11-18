@@ -1,7 +1,7 @@
 <?php // src/Service/MessageGenerator.php
 namespace App\Service;
 
-class InfoGenerator
+class InfoService
 {
     public function generateInfoButton(string $message): string
     {
