@@ -37,11 +37,11 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-php-
 
-    - name: Production Environment
-      run: composer dump-env prod
-
     - name: Install Composer
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --no-dev --optimize-autoloader
+
+    - name: Production Environment
+      run: composer dump-env prod
 
     - name: Database Migrations
       run: |
