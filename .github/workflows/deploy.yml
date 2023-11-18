@@ -72,4 +72,10 @@ jobs:
               **/assets*/**
               **/node_modules*/**
               **/test*/**
-              **/vendor*/**
+              **/.env.test*
+              **/docker-compose*
+              **/install.bat*
+              **/package*
+              **/phpunit*
+              **/README.md
+              **/Symfony.exe
