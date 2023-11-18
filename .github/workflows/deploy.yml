@@ -51,13 +51,21 @@ jobs:
     name: Deployment
     
     steps:
-      - name: Deploy via SFTP
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+      - name: Debug Local Files
+        run: |
+          ls -R ${{ secrets.LOCAL_PATH }}
+
+      - name: 📂 Deploy Files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          username: ${{ secrets.FTP_USERNAME }}
-          server: ${{ secrets.FTP_SERVER }}
-          port: ${{ secrets.FTP_PORT }}
-          local_path: ${{ secrets.LOCAL_PATH }}
-          remote_path: ${{ secrets.REMOTE_PATH }}
-          sftp_only: true
-          password: ${{ secrets.FTP_PASSWORD }}
+            server: ${{ secrets.FTP_SERVER }}
+            port: ${{ secrets.FTP_PORT }}
+            local-dir: ./
+            protocol: ftps
+            server-dir: ${{ secrets.REMOTE_PATH }}
+            username: ${{ secrets.FTP_USERNAME }}
+            password: ${{ secrets.FTP_PASSWORD }}
+          
+      - name: Debug Remote Files
+        run: | 
+          ssh ${{ secrets.FTP_USERNAME }}@${{ secrets.FTP_SERVER }} -p ${{ secrets.FTP_PORT }} ls -R ${{ secrets.REMOTE_PATH }}
