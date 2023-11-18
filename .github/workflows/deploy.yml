@@ -54,11 +54,11 @@ jobs:
     - name: 📂 Deploy Files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
-          timeout: 6000
+          timeout: 10000
           server: ${{ secrets.FTP_SERVER }}
           port: ${{ secrets.FTP_PORT }}
           local-dir: ./
-          protocol: ftps
+          protocol: ftp
           server-dir: ${{ secrets.REMOTE_PATH }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
