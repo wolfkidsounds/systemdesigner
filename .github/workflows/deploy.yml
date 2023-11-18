@@ -78,4 +78,4 @@ jobs:
               **/package*
               **/phpunit*
               **/README.md
-              **/Symfony.exe
+              **/symfony.exe
