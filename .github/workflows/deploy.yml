@@ -27,6 +27,7 @@ jobs:
       run: |
         echo "APP_ENV=prod" >> $GITHUB_ENV
         echo "APP_DEBUG=0" >> $GITHUB_ENV
+        echo 'DATABASE_URL="${{ secrets.DATABASE_URL }}"' >> $GITHUB_ENV
 
     - name: Cache Composer packages
       id: composer-cache
@@ -39,6 +40,9 @@ jobs:
 
     - name: Install Composer
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --no-dev --optimize-autoloader
+
+    - name: Generate Keys
+      run: APP_RUNTIME_ENV=prod php bin/console secrets:generate-keys
 
     - name: Production Environment
       run: composer dump-env prod
