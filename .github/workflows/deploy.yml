@@ -96,4 +96,3 @@ jobs:
               **/phpunit*
               **/README.md
               **/symfony.exe
-              **/.env.local.php*
