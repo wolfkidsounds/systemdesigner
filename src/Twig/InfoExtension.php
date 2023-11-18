@@ -1,17 +1,17 @@
 <?php // src/Twig/InfoExtension.php
 namespace App\Twig;
 
-use App\Service\InfoGenerator;
-use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
+use App\Service\InfoService;
+use Twig\Extension\AbstractExtension;
 
 class InfoExtension extends AbstractExtension
 {
-    private $infoGenerator;
+    private $InfoService;
 
-    public function __construct(InfoGenerator $infoGenerator)
+    public function __construct(InfoService $InfoService)
     {
-        $this->infoGenerator = $infoGenerator;
+        $this->InfoService = $InfoService;
     }
 
     public function getFunctions()
@@ -23,6 +23,6 @@ class InfoExtension extends AbstractExtension
 
     public function infoButton(string $infoText)
     {
-        return $this->infoGenerator->generateInfoButton($infoText);
+        return $this->InfoService->generateInfoButton($infoText);
     }
 }
