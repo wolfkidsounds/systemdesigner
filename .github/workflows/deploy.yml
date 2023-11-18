@@ -21,11 +21,16 @@ jobs:
         php-version: '8.1'
 
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
+
+    - name: Set Up Environment Variables
+      run: |
+        echo "APP_ENV=prod" >> $GITHUB_ENV
+        echo "APP_DEBUG=0" >> $GITHUB_ENV
 
     - name: Cache Composer packages
       id: composer-cache
-      uses: actions/cache@v3
+      uses: actions/cache@v2
       with:
         path: vendor
         key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
@@ -38,6 +43,15 @@ jobs:
     - name: Install Composer
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --no-dev --optimize-autoloader
 
+    - name: Database Migrations
+      run: |
+        php bin/console doctrine:migrations:migrate --no-interaction --all-or-nothing
+
+    - name: Clear Cache
+      run: |
+        php bin/console cache:clear --no-warmup
+        php bin/console cache:warmup
+
     - name: Use Node.js 18.x
       uses: actions/setup-node@v3
       with:
@@ -46,10 +60,9 @@ jobs:
     - name: Install NPM
       run: npm install
 
-    - name: Build Webpack
+    - name: Build Encore
       run: |
-        npx webpack
-        ./node_modules/.bin/encore production
+       npm run build
 
     - name: 📂 Deploy Files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -79,3 +92,4 @@ jobs:
               **/phpunit*
               **/README.md
               **/symfony.exe
+              **/.env.local.php*
