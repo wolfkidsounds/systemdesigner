@@ -1,4 +1,4 @@
-<?php // src/Menu/MenuBuilder.php
+<?php // src/Menu/Builder.php
 
 namespace App\Menu;
 
@@ -8,7 +8,7 @@ use Knp\Menu\FactoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Novaway\Bundle\FeatureFlagBundle\Manager\DefaultFeatureManager;
 
-class MenuBuilder extends AbstractController
+class Builder extends AbstractController
 {
     private $factory;
     private DefaultFeatureManager $featureManager;

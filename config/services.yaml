@@ -22,7 +22,7 @@ services:
             - '../src/Kernel.php'
 
     app.menu_builder:
-        class: App\Menu\MenuBuilder
+        class: App\Menu\Builder
         arguments: ["@knp_menu.factory"]
         tags:
             - { name: knp_menu.menu_builder, method: main, alias: main }
