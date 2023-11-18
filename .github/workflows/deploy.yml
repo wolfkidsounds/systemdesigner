@@ -10,7 +10,8 @@ permissions:
   contents: read
 
 jobs:
-  symfony-build:
+  build-and-deploy:
+    name: Build And Deploy
     runs-on: ubuntu-latest
 
     steps:
@@ -45,34 +46,29 @@ jobs:
     - name: Build Webpack
       run: npx webpack
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: [symfony-build]  # Wait for the symfony-build job to complete
-    name: Deployment
-    
-    steps:
-      - name: Debug Local Files
-        run: |
-          ls -R ${{ secrets.LOCAL_PATH }}
+    - name: Debug Local Files
+      run: |
+        ls -R ${{ secrets.LOCAL_PATH }}
 
-      - name: 📂 Deploy Files
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-        with:
-            server: ${{ secrets.FTP_SERVER }}
-            port: ${{ secrets.FTP_PORT }}
-            local-dir: ./
-            protocol: ftps
-            server-dir: ${{ secrets.REMOTE_PATH }}
-            username: ${{ secrets.FTP_USERNAME }}
-            password: ${{ secrets.FTP_PASSWORD }}
-            dry-run: true
-            exclude: |
-                **/.data.db*
-                **/.git*
-                **/.git*/**
-                **/.github*
-                **/.vscode*
-          
-      - name: Debug Remote Files
-        run: | 
-          ssh ${{ secrets.FTP_USERNAME }}@${{ secrets.FTP_SERVER }} -p ${{ secrets.FTP_PORT }} ls -R ${{ secrets.REMOTE_PATH }}
+    - name: 📂 Deploy Files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+          timeout: 6000
+          server: ${{ secrets.FTP_SERVER }}
+          port: ${{ secrets.FTP_PORT }}
+          local-dir: ./
+          protocol: ftps
+          server-dir: ${{ secrets.REMOTE_PATH }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          dry-run: true
+          exclude: |
+              **/.data.db*
+              **/.git*
+              **/.git*/**
+              **/.github*
+              **/.vscode*
+        
+    - name: Debug Remote Files
+      run: | 
+        ssh ${{ secrets.FTP_USERNAME }}@${{ secrets.FTP_SERVER }} -p ${{ secrets.FTP_PORT }} ls -R ${{ secrets.REMOTE_PATH }}
