@@ -65,7 +65,6 @@ jobs:
             server-dir: ${{ secrets.REMOTE_PATH }}
             username: ${{ secrets.FTP_USERNAME }}
             password: ${{ secrets.FTP_PASSWORD }}
-            state-name: logs/.sync-state.json
             dry-run: true
             exclude: |
                 **/.data.db*
