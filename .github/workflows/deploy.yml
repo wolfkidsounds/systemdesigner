@@ -51,10 +51,6 @@ jobs:
         npx webpack
         ./node_modules/.bin/encore production
 
-    - name: Debug Local Files
-      run: |
-        ls -R ${{ secrets.LOCAL_PATH }}
-
     - name: 📂 Deploy Files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
@@ -66,23 +62,14 @@ jobs:
           server-dir: ${{ secrets.REMOTE_PATH }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          dry-run: true
+          dry-run: false
           exclude: |
-              **/.data.db*
+              **/data*/**
               **/.git*
               **/.git*/**
-              **/.github*/*
-              **/.vscode*/*
-              **/assets*/*
-              **/data*/*
-              **/node_modules*/*
-              **/tests*/*
-              **/vendor*/*
-              **/docker-compose.yaml*
-              **/docker-compose.override.yml*
-              **/install.bat*
-              **/README.md*
-        
-    - name: Debug Remote Files
-      run: | 
-        ssh ${{ secrets.FTP_USERNAME }}@${{ secrets.FTP_SERVER }} -p ${{ secrets.FTP_PORT }} ls -R ${{ secrets.REMOTE_PATH }}
+              **/.github*/**
+              **/.vscode/**
+              **/assets*/**
+              **/node_modules*/**
+              **/test*/**
+              **/vendor*/**
