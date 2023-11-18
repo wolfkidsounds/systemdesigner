@@ -96,3 +96,4 @@ jobs:
               **/phpunit*
               **/README.md
               **/symfony.exe
+              **/webpack.config.js
