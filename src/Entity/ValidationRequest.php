@@ -7,10 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ValidationRequestRepository;
 
 #[ORM\Entity(repositoryClass: ValidationRequestRepository::class)]
-#[ORM\HasLifecycleCallbacks]
 class ValidationRequest
 {
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
