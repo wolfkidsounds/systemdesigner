@@ -1,0 +1,21 @@
+.shepherd-modal-is-visible.shepherd-modal-overlay-container {
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    height: 100vh;
+    opacity: .5;
+    transform: translateZ(0);
+    transition: all .3s ease-out,height 0s 0s,opacity .3s 0s;
+    overflow: hidden;
+    pointer-events: none;
+    position: fixed;
+    width: 100vw;
+    z-index: 9997;
+}
+
+.shepherd-element {
+    box-shadow: 0 1px 4px rgba(0,0,0,.2);
+    transition: opacity .3s,visibility .3s;
+    z-index: 9999;
+}
