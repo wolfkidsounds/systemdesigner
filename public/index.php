@@ -7,7 +7,8 @@ use App\Kernel;
 require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
 
 return function (array $context) {
-    if ($context['APP_MAINTENANCE']) {
+
+    if ($context['APP_MAINTENANCE'] === true) {
         require_once 'maintenance.html';
     }
 
