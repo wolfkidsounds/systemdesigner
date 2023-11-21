@@ -14,7 +14,7 @@
             <div class="w-100 overflow-hidden position-relative">
 
                 {% use 'partials/header/header.html.twig' %}
-                <header class="p-3 p-lg-4 border-bottom">
+                <header class="p-3 p-lg-3 border-bottom overflow-hidden">
                     {% block header %}
                         {{ parent() }}
                     {% endblock %}
@@ -27,7 +27,7 @@
                 </div>
 
                 {% use 'partials/footer/footer.html.twig' %}
-                <footer class="p-3 p-lg-4 border-top mb-0 d-none">
+                <footer class="p-3 p-lg-4 border-top mb-0 d-none overflow-hidden">
                     {% block footer %}
                         {{ parent() }}
                     {% endblock %}

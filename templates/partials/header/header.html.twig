@@ -1,10 +1,15 @@
 {% block header %}
     <div class="row align-items-center">
         <div class="col">
-            <div class="d-flex justify-content-start">
+            <div class="d-flex justify-content-start align-content-center ">
                 <div class="flex-grow-1 overflow-hidden">
                     <h5 class="font-size-16 mb-0 text-truncate"><a href="#" class="text-reset">{{ title }}</a></h5>
                 </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="d-flex justify-content-end align-content-center ">
+                <button id="tourstart" type="button" class="btn btn-primary">{{ 'Start Tour'|trans }}</button>
             </div>
         </div>
     </div>
