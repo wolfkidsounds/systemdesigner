@@ -4,7 +4,6 @@ namespace App\Service;
 
 use App\Entity\Notification;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Event\ValidationRequestStatusChangeEvent;
 
 class NotificationService
 {
@@ -15,85 +14,35 @@ class NotificationService
         $this->entityManager = $entityManager;
     }
 
-    public function onValidationRequestStatusChange(ValidationRequestStatusChangeEvent $event)
+    public function create(string $name, string $message, string $status = 'unread'): Notification
     {
-        $entity = $event->getEntity();
-        $newStatus = $event->getNewStatus();
+        $notification = new Notification();
+        $notification
+            ->setName($name)
+            ->setMessage($message)
+            ->setStatus($status)
+            ->setCreatedAt(new \DateTimeImmutable());
 
-        if ($entity && ($newStatus === 'validated')) {
-            // Create a notification when the status changes
-            $notification = new Notification();
-            $notification->setName($entity->getName() . ' ' . $newStatus);
-            $notification->setMessage('Your request status changed to ' . $newStatus);
-            $notification->setStatus('unread');
-            $notification->setCreatedAt(new \DateTimeImmutable());
-            $notification->addUser($entity->getUser());
+        // Assuming you have EntityManager configured, persist the notification.
+        $this->entityManager->persist($notification);
+        $this->entityManager->flush();
 
-            if ($entity->getManufacturer()) {
-                $Manufacturer = $entity->getManufacturer()->setValidated(true);
-                $this->entityManager->persist($Manufacturer);
-            }
+        return $notification;
+    }
 
-            if ($entity->getProcessor()) {
-                $Processor = $entity->getProcessor()->setValidated(true);
-                $this->entityManager->persist($Processor);
-            }
+    public function setStatus(Notification $notification, string $newStatus): void
+    {
+        $notification->setStatus($newStatus);
+        
+        // Assuming you have EntityManager configured, update the notification.
+        $this->entityManager->persist($notification);
+        $this->entityManager->flush();
+    }
 
-            if ($entity->getAmplifier()) {
-                $Amplifier = $entity->getAmplifier()->setValidated(true);
-                $this->entityManager->persist($Amplifier);
-            }
-
-            if ($entity->getSpeaker()) {
-                $Speaker = $entity->getSpeaker()->setValidated(true);
-                $this->entityManager->persist($Speaker);
-            }
-
-            if ($entity->getChassis()) {
-                $Chassis = $entity->getChassis()->setValidated(true);
-                $this->entityManager->persist($Chassis);
-            }
-
-            $this->entityManager->persist($notification);
-            $this->entityManager->flush();
-        }
-
-        if ($entity && ($newStatus === 'rejected')) {
-            // Create a notification when the status changes
-            $notification = new Notification();
-            $notification->setName($entity->getName() . ' ' . $newStatus);
-            $notification->setMessage('Your request status changed to ' . $newStatus);
-            $notification->setStatus('unread');
-            $notification->setCreatedAt(new \DateTimeImmutable());
-            $notification->addUser($entity->getUser());
-
-            if ($entity->getManufacturer()) {
-                $Manufacturer = $entity->getManufacturer()->setValidated(false);
-                $this->entityManager->persist($Manufacturer);
-            }
-
-            if ($entity->getProcessor()) {
-                $Processor = $entity->getProcessor()->setValidated(false);
-                $this->entityManager->persist($Processor);
-            }
-
-            if ($entity->getAmplifier()) {
-                $Amplifier = $entity->getAmplifier()->setValidated(false);
-                $this->entityManager->persist($Amplifier);
-            }
-
-            if ($entity->getSpeaker()) {
-                $Speaker = $entity->getSpeaker()->setValidated(false);
-                $this->entityManager->persist($Speaker);
-            }
-
-            if ($entity->getChassis()) {
-                $Chassis = $entity->getChassis()->setValidated(false);
-                $this->entityManager->persist($Chassis);
-            }
-
-            $this->entityManager->persist($notification);
-            $this->entityManager->flush();
-        }
+    public function delete(Notification $notification): void
+    {
+        // Assuming you have EntityManager configured, remove the notification.
+        $this->entityManager->remove($notification);
+        $this->entityManager->flush();
     }
 }
