@@ -31,6 +31,8 @@ jobs:
         host: ${{ secrets.FTP_SERVER }}
         src: public/maintenance.php
         dest: ${{ secrets.REMOTE_MAINTENANCE_FILE }}
+        secure: true
+        verbose: true
 
     - name: Set Up Environment Variables
       run: |
@@ -107,6 +109,8 @@ jobs:
               **/symfony.exe
               **/webpack.config.js
               **/public/maintenance.php
+              **/var/cache/dev/**
+              **/var/log/**
 
     - name: Disable Maintenance Mode (Upload Public Index PHP)
       uses: bayssmekanique/action-simple-file-upload@v2
@@ -116,3 +120,5 @@ jobs:
         host: ${{ secrets.FTP_SERVER }}
         src: public/index.php
         dest: ${{ secrets.REMOTE_MAINTENANCE_FILE }}
+        secure: true
+        verbose: true
