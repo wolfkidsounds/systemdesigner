@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\TranslatableMessage;
@@ -11,9 +12,12 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     #[Route(path: '/login', name: 'app_login')]
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils, LoggerInterface $logger): Response
     {
+        $logger->info('Found Login Route');
+
         if ($this->getUser()) {
+            $logger->info('User is present redirect to app_main');
             return $this->redirectToRoute('app_main');
         }
 
@@ -22,6 +26,8 @@ class SecurityController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
+
+        $logger->info('Render Page');
         return $this->render('security/login.html.twig', [
             'title' => new TranslatableMessage('Login'),
             'last_username' => $lastUsername, 

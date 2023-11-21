@@ -9,6 +9,7 @@ use App\Form\ManufacturerType;
 use App\Entity\ValidationRequest;
 use App\Form\ValidationRequestType;
 use App\Repository\SettingRepository;
+use App\Service\NotificationService;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ManufacturerRepository;
 use Symfony\Component\HttpFoundation\Request;
