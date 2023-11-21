@@ -8,6 +8,7 @@ use App\Form\ProcessorType;
 use App\Service\ManualUploader;
 use App\Entity\ValidationRequest;
 use App\Form\ValidationRequestType;
+use App\Service\NotificationService;
 use App\Repository\ProcessorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
