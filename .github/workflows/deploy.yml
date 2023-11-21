@@ -23,6 +23,15 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Enable Maintenance Mode (Upload Maintenance PHP)
+      uses: bayssmekanique/action-simple-file-upload@v2
+      with:
+        user: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        host: ${{ secrets.FTP_SERVER }}
+        src: public/maintenance.php
+        dest: ${{ secrets.REMOTE_MAINTENANCE_FILE }}
+
     - name: Set Up Environment Variables
       run: |
         echo "APP_ENV=prod" >> $GITHUB_ENV
@@ -97,3 +106,13 @@ jobs:
               **/README.md
               **/symfony.exe
               **/webpack.config.js
+              **/public/maintenance.php
+
+    - name: Disable Maintenance Mode (Upload Public Index PHP)
+      uses: bayssmekanique/action-simple-file-upload@v2
+      with:
+        user: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        host: ${{ secrets.FTP_SERVER }}
+        src: public/index.php
+        dest: ${{ secrets.REMOTE_MAINTENANCE_FILE }}
