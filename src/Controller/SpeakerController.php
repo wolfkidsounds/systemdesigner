@@ -44,8 +44,8 @@ class SpeakerController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
-        if (!($user->isSubscriber()) && ($user->getAmplifiers()->count() >= 10)) {
-            return $this->render('subscription/limit.html.twig', [
+        if (!($user->isSubscriber()) && ($user->getSpeakers()->count() >= 10)) {
+            return $this->render('pages/subscription/limit.html.twig', [
                 'title' => new TranslatableMessage('Limit Reached'),
                 'crud_title' => new TranslatableMessage('Limit Reached'),
             ]);
@@ -59,8 +59,8 @@ class SpeakerController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            if (!($user->isSubscriber()) && ($user->getAmplifiers()->count() >= 10)) {
-                return $this->render('subscription/limit.html.twig', [
+            if (!($user->isSubscriber()) && ($user->getSpeakers()->count() >= 10)) {
+                return $this->render('pages/subscription/limit.html.twig', [
                     'title' => new TranslatableMessage('Limit Reached'),
                     'crud_title' => new TranslatableMessage('Limit Reached'),
                 ]);
