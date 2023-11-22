@@ -118,7 +118,7 @@ class ValidationRequest
 
     public function getStatus(): ?string
     {
-        dump($this->Status);
+        //dump($this->Status);
         return $this->Status;
     }
 
@@ -126,7 +126,7 @@ class ValidationRequest
     {
         $this->Status = $Status;
 
-        dump($Status);
+        //dump($Status);
 
         return $this;
     }
