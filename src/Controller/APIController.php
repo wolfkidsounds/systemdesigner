@@ -94,7 +94,7 @@ class APIController extends AbstractController
         $requestData = json_decode($request->getContent(), true);
         $message = '';
 
-        dump($requestData);
+        //dump($requestData);
 
         // Ensure that the properties you are trying to access are present in the $requestData array
         $speakerId = $requestData['speaker_id'];
