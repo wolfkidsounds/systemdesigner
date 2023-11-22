@@ -42,6 +42,7 @@ class ManufacturerController extends AbstractController
             'title' => new TranslatableMessage('Manufacturer'),
             'crud_title' => new TranslatableMessage('All Manufacturers'),
             'maxCount' => 10,
+            'tourButton' => true,
         ]);
         
     }
