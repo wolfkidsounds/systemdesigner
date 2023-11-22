@@ -1,7 +1,7 @@
 {{ form_start(form) }}
 <div class="d-flex flex-column overflow-hidden">
     <div class="row">
-        <div class="col shepherd-manufacturer">
+        <div class="col-sm shepherd-manufacturer">
             {{ form_row(form.Manufacturer, {
                 'attr': {
                     'class': 'form-select',
@@ -9,16 +9,16 @@
                 'placeholder': 'Select Manufacturer',
             }) }}
         </div>
-        <div class="col shepherd-name">
+        <div class="col-sm shepherd-name">
             {{ form_row(form.Name) }}
         </div>
     </div>
     <div class="divider seperator mb-3"><hr></div>
     <div class="row">
-        <div class="col shepherd-inputs">
+        <div class="col-sm shepherd-inputs">
             {{ form_row(form.ChannelsInput) }}
         </div>
-        <div class="col shepherd-outputs">
+        <div class="col-sm shepherd-outputs">
             {{ form_row(form.ChannelsOutput) }}
         </div>
     </div>

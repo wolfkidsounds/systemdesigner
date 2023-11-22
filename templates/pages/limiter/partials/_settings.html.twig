@@ -8,13 +8,13 @@
         <div class="collapse mt-3" id="collapseSettings">
             <div class="card card-body border-dark">
                 <div class="row mb-3">
-                    <div class="col">
+                    <div class="col-sm">
                         <div class="info-container mb-3">
                             {{ infoButton('The Limiter Algorithm used for calculations. Look into the FAQ for more information.') }}
                             {{ form_row(form.Algorithm) }}
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-sm">
                         <div class="info-container mb-3">
                             {{ infoButton('Scaling is applied to the voltage (since voltage is linear). This means you can scale down the limiter for better control and adjust to your needs. (Default is 100 %)') }}
                             {{ form_row(form.Scaling) }}
@@ -22,13 +22,13 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col">
+                    <div class="col-sm">
                         <div class="info-container mb-3">
                             {{ infoButton('Enabling Bridge Mode on an Amplifier results in combining at least two of the modules into one module, resulting in a higher power output at the cost of the load that the amplifier can handle. (Default is Disabled)') }}
                             {{ form_row(form.BridgeModeEnabled) }}
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-sm">
                         <div class="info-container mb-3">
                             {{ infoButton('The Input sensitivity can be set on the back of most amplifiers. Increasing the Input Sensitivity Results in the limiter kicking in earlier therefore for some controllers, setting the input sensitivity to a higher value can result in better control. (Default is 0.775 V)') }}
                             <div>
@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col">
+                    <div class="col-sm">
                         <div class="info-container mb-3">
                             {{ infoButton('This sets how many speakers are chained together in parallel. This results in the Resistance being lower and higher powerdraw. 0 means no speakers are connected at all. (Default is 1)') }}
                             {{ form_row(form.SpeakersInParallel) }}
