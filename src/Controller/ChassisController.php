@@ -36,6 +36,7 @@ class ChassisController extends AbstractController
             'chassis' => $chassis,
             'title' => new TranslatableMessage('Chassis'),
             'crud_title' => new TranslatableMessage('All Chassis'),
+            'tourButton' => true,
         ]);
     }
 
@@ -56,6 +57,7 @@ class ChassisController extends AbstractController
         return $this->render('pages/chassis/new.html.twig', [
             'chassis' => $chassis,
             'form' => $form,
+            'tourButton' => true,
         ]);
     }
 

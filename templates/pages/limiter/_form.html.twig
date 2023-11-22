@@ -15,7 +15,9 @@
 
         <div class="custom-loader-item unloaded">
 
-            {{ include('pages/limiter/partials/_calc_fields.html.twig') }}
+            <div class="shepherd-fields">
+                {{ include('pages/limiter/partials/_calc_fields.html.twig') }}
+            </div>
             
             {{ include('pages/limiter/partials/_lim_times.html.twig') }}
             
@@ -23,14 +25,16 @@
 
             <div class="divider seperator mb-3"><hr></div>
 
-            {{ include('pages/limiter/partials/_messagebox.html.twig') }}
+            <div class="shepherd-messagebox">
+                {{ include('pages/limiter/partials/_messagebox.html.twig') }}
+            </div>
         </div>
     </div>
 
     <div class="divider seperator mb-3"><hr></div> {# Add a separator here #}
 
     <div class="row">
-        <button class="btn btn-primary m-0 mb-0">{{ button_label|default('Save') }}</button>
+        <button class="btn btn-primary m-0 mb-0 shepherd-save">{{ button_label|default('Save') }}</button>
     </div>
 
 </div>

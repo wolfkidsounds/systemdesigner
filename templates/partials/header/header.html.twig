@@ -7,10 +7,12 @@
                 </div>
             </div>
         </div>
+        {% if tourButton == true %}
         <div class="col">
             <div class="d-flex justify-content-end align-content-center ">
                 <button id="tourstart" type="button" class="btn btn-primary">{{ 'Start Tour'|trans }}</button>
             </div>
         </div>
+        {% endif %}
     </div>
 {% endblock %}

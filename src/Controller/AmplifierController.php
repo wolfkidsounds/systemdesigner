@@ -40,6 +40,7 @@ class AmplifierController extends AbstractController
             'controller_name' => 'AmplifierController',
             'title' => new TranslatableMessage('Amplifier'),
             'crud_title' => new TranslatableMessage('All Amplifiers'),
+            'tourButton' => true,
         ]);
     }
 
@@ -94,6 +95,7 @@ class AmplifierController extends AbstractController
             'controller_name' => 'AmplifierController',
             'title' => new TranslatableMessage('Amplifier'),
             'crud_title' => new TranslatableMessage('New Amplifier'),
+            'tourButton' => true,
         ]);
     }
 

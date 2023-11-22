@@ -42,6 +42,7 @@ class ManufacturerController extends AbstractController
             'title' => new TranslatableMessage('Manufacturer'),
             'crud_title' => new TranslatableMessage('All Manufacturers'),
             'maxCount' => 10,
+            'tourButton' => true,
         ]);
         
     }
@@ -52,8 +53,8 @@ class ManufacturerController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
-        if (!($user->isSubscriber()) && ($user->getAmplifiers()->count() >= 10)) {
-            return $this->render('subscription/limit.html.twig', [
+        if (!($user->isSubscriber()) && ($user->getManufacturers()->count() >= 10)) {
+            return $this->render('pages/subscription/limit.html.twig', [
                 'title' => new TranslatableMessage('Limit Reached'),
                 'crud_title' => new TranslatableMessage('Limit Reached'),
             ]);
@@ -67,8 +68,8 @@ class ManufacturerController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            if (!($user->isSubscriber()) && ($user->getAmplifiers()->count() >= 10)) {
-                return $this->render('subscription/limit.html.twig', [
+            if (!($user->isSubscriber()) && ($user->getManufacturers()->count() >= 10)) {
+                return $this->render('pages/subscription/limit.html.twig', [
                     'title' => new TranslatableMessage('Limit Reached'),
                     'crud_title' => new TranslatableMessage('Limit Reached'),
                 ]);

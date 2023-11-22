@@ -1,7 +1,7 @@
 {{ form_start(form) }}
 <div class="d-flex flex-column overflow-hidden">
     <div class="row">
-        <div class="col">
+        <div class="col-sm shepherd-manufacturer">
             {{ form_row(form.Manufacturer, {
                 'attr': {
                     'class': 'form-select',
@@ -9,35 +9,35 @@
                 'placeholder': 'Select Manufacturer',
             }) }}
         </div>
-        <div class="col">
+        <div class="col-sm shepherd-name">
             {{ form_row(form.Name) }}
         </div>
     </div>
     <div class="divider seperator mb-3"><hr></div>
     <div class="row">
-        <div class="col">
+        <div class="col-sm shepherd-inputs">
             {{ form_row(form.ChannelsInput) }}
         </div>
-        <div class="col">
+        <div class="col-sm shepherd-outputs">
             {{ form_row(form.ChannelsOutput) }}
         </div>
     </div>
     <div class="divider seperator mb-3"><hr></div>
-    <div class="row">
+    <div class="row shepherd-offset">
         {{ form_label(form.OutputOffset, 'Output Offset', {'label_attr': {'class': 'form-label required'}}) }}
         <div class="input-group">
             {{ form_widget(form.OutputOffset, {'attr': {'inputmode': 'decimal', 'class': 'form-control'}}) }}
-            <span class="input-group-text">dBu</span>
+            <span class="input-group-text">dBu / dBFs</span>
         </div>
     </div>
     <div class="divider seperator mb-3"><hr></div>
-    <div class="row">
+    <div class="row shepherd-manual">
         {{ form_row(form.Manual) }}
     </div>
     <div class="divider seperator mb-3"><hr></div>
     <div class="row">
         {% set buttonLabelDefault = 'Save'|trans %}
-        <button class="btn btn-primary">{{ button_label|default(buttonLabelDefault) }}</button>
+        <button class="btn btn-primary shepherd-save">{{ button_label|default(buttonLabelDefault) }}</button>
     </div>
 </div>
 {{ form_end(form) }}
