@@ -1,7 +1,7 @@
 {{ form_start(form) }}
 <div class="d-flex flex-column overflow-hidden">
     <div class="row">
-        <div class="col shepherd-manufacturer">
+        <div class="col-sm shepherd-manufacturer">
             {{ form_row(form.Manufacturer, {
                 'attr': {
                     'class': 'form-select',
@@ -9,20 +9,20 @@
                 'placeholder': 'Select Manufacturer',
             }) }}
         </div>
-        <div class="col shepherd-name">
+        <div class="col-sm shepherd-name">
             {{ form_row(form.Name) }}
         </div>
     </div>
     <div class="divider seperator mb-3"><hr></div>
     <div class="row shepherd-power">
-        <div class="col mb-3">
+        <div class="col-sm mb-3">
             {{ form_label(form.Power16, 'Power @ 16 Ω', {'label_attr': {'class': 'form-label required'}}) }}
             <div class="input-group">
                 {{ form_widget(form.Power16, {'attr': {'inputmode': 'decimal', 'class': 'form-control'}}) }}
                 <span class="input-group-text">Watt</span>
             </div>
         </div>
-        <div class="col mb-3">
+        <div class="col-sm mb-3">
             {{ form_label(form.Power8, 'Power @ 8 Ω', {'label_attr': {'class': 'form-label required'}}) }}
             <div class="input-group">
                 {{ form_widget(form.Power8, {'attr': {'inputmode': 'decimal', 'class': 'form-control'}}) }}
@@ -31,14 +31,14 @@
         </div>
     </div>
     <div class="row">
-        <div class="col mb-3">
+        <div class="col-sm mb-3">
             {{ form_label(form.Power4, 'Power @ 4 Ω', {'label_attr': {'class': 'form-label required'}}) }}
             <div class="input-group">
                 {{ form_widget(form.Power4, {'attr': {'inputmode': 'decimal', 'class': 'form-control'}}) }}
                 <span class="input-group-text">Watt</span>
             </div>
         </div>
-        <div class="col mb-3">
+        <div class="col-sm mb-3">
             {{ form_label(form.Power2, 'Power @ 2 Ω', {'label_attr': {'class': 'form-label required'}}) }}
             <div class="input-group">
                 {{ form_widget(form.Power2, {'attr': {'inputmode': 'decimal', 'class': 'form-control'}}) }}
@@ -48,14 +48,14 @@
     </div>
     <div class="divider seperator mb-3"><hr></div>
     <div class="row shepherd-power-bridge">
-        <div class="col mb-3">
+        <div class="col-sm mb-3">
             {{ form_label(form.PowerBridge8, 'Power Bridged @ 8 Ω', {'label_attr': {'class': 'form-label required'}}) }}
             <div class="input-group">
                 {{ form_widget(form.PowerBridge8, {'attr': {'inputmode': 'decimal', 'class': 'form-control'}}) }}
                 <span class="input-group-text">Watt</span>
             </div>
         </div>
-        <div class="col mb-3">
+        <div class="col-sm mb-3">
             {{ form_label(form.PowerBridge4, 'Power Bridged @ 4 Ω', {'label_attr': {'class': 'form-label required'}}) }}
             <div class="input-group">
                 {{ form_widget(form.PowerBridge4, {'attr': {'inputmode': 'decimal', 'class': 'form-control'}}) }}
