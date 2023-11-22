@@ -3,6 +3,7 @@ twig:
     form_themes: ['bootstrap_5_layout.html.twig']
     globals:
         tourButton: false
+        app_version: '%env(APP_VERSION)%'
 
 when@test:
     twig:
