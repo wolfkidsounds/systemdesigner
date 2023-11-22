@@ -34,6 +34,7 @@ class SpeakerController extends AbstractController
             'speakers' => $speakers,
             'title' => new TranslatableMessage('Speaker'),
             'crud_title' => new TranslatableMessage('All Speakers'),
+            'tourButton' => true,
         ]);
     }
 
@@ -87,6 +88,7 @@ class SpeakerController extends AbstractController
             'form' => $form,
             'title' => new TranslatableMessage('Speaker'),
             'crud_title' => new TranslatableMessage('New Speaker'),
+            'tourButton' => true,
         ]);
     }
 
