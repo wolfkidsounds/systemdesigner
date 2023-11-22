@@ -24,7 +24,11 @@ Encore
     .addEntry('admin', './assets/admin.js')
     .addEntry('dashboard', './assets/dashboard.js')
     .addEntry('crud', './assets/crud.js')
-    .addEntry('manufacturer', './assets/manufacturer.js')
+
+    .addEntry('processor', './assets/processor.js')
+    .addEntry('amplifier', './assets/amplifier.js')
+    .addEntry('speaker', './assets/speaker.js')
+    .addEntry('limiter', './assets/limiter.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
