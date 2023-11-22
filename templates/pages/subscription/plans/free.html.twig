@@ -21,9 +21,7 @@
                         <a href="#" class="btn">Current Plan</a>
                     {% else %}
                         <!-- Use action="/create-checkout-session.php" if your server is PHP based. -->
-                        <form action="{{ path('app_payment_checkout') }}" method="POST">
-                            <button type="submit" class="btn btn-primary w-100">Get Plan</button>
-                        </form>
+                        
                     {% endif %}
                 </div>
             </div>

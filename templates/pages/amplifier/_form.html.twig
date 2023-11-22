@@ -1,7 +1,7 @@
 {{ form_start(form) }}
 <div class="d-flex flex-column overflow-hidden">
     <div class="row">
-        <div class="col">
+        <div class="col shepherd-manufacturer">
             {{ form_row(form.Manufacturer, {
                 'attr': {
                     'class': 'form-select',
@@ -9,12 +9,12 @@
                 'placeholder': 'Select Manufacturer',
             }) }}
         </div>
-        <div class="col">
+        <div class="col shepherd-name">
             {{ form_row(form.Name) }}
         </div>
     </div>
     <div class="divider seperator mb-3"><hr></div>
-    <div class="row">
+    <div class="row shepherd-power">
         <div class="col mb-3">
             {{ form_label(form.Power16, 'Power @ 16 Ω', {'label_attr': {'class': 'form-label required'}}) }}
             <div class="input-group">
@@ -47,7 +47,7 @@
         </div>
     </div>
     <div class="divider seperator mb-3"><hr></div>
-    <div class="row">
+    <div class="row shepherd-power-bridge">
         <div class="col mb-3">
             {{ form_label(form.PowerBridge8, 'Power Bridged @ 8 Ω', {'label_attr': {'class': 'form-label required'}}) }}
             <div class="input-group">
@@ -65,13 +65,13 @@
     </div>
 
     <div class="divider seperator mb-3"><hr></div>
-    <div class="row">
+    <div class="row shepherd-manual">
         {{ form_row(form.Manual) }}
     </div>
     <div class="divider seperator mb-3"><hr></div>
 
     <div class="row">
-        <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+        <button class="btn btn-primary shepherd-save">{{ button_label|default('Save') }}</button>
     </div>
 </div>
 {{ form_end(form) }}

@@ -30,6 +30,7 @@ class LimiterController extends AbstractController
             'limiters' => $limiterRepository->findBy(['User'=> $user]),
             'title' => new TranslatableMessage('Limiter'),
             'crud_title' => new TranslatableMessage('All Limiters'),
+            'tourButton' => true,
         ]);
     }
 
@@ -72,6 +73,7 @@ class LimiterController extends AbstractController
             'form' => $form,
             'title' => new TranslatableMessage('Limiter'),
             'crud_title' => new TranslatableMessage('New Limiter'),
+            'tourButton' => true,
         ]);
     }
 

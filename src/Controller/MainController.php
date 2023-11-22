@@ -25,6 +25,7 @@ class MainController extends AbstractController
             'controller_name' => 'MainController',
             'title' => 'Dashboard',
             'maxCount' => 10,
+            'tourButton' => true,
         ]);
     }
 
