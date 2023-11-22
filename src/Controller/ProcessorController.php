@@ -44,6 +44,7 @@ class ProcessorController extends AbstractController
             'controller_name' => 'ProcessorController',
             'title' => new TranslatableMessage('Processor'),
             'crud_title' => new TranslatableMessage('All Processors'),
+            'tourButton' => true,
         ]);
     }
 
@@ -98,6 +99,7 @@ class ProcessorController extends AbstractController
             'controller_name' => 'ProcessorController',
             'title' => new TranslatableMessage('Processor'),
             'crud_title' => new TranslatableMessage('New Processor'),
+            'tourButton' => true,
         ]);
     }
 
