@@ -2,7 +2,7 @@
 
 {% block title %}{{ parent() }} | Speakers{% endblock %}
 {% block crud_toolbar %}
-    <li class="list-inline-item d-lg-inline-block ms-0 m-0">
+    <li class="list-inline-item d-lg-inline-block ms-0 m-0 shepherd-search">
         <div class="dropdown dropstart">
             <button class="btn nav-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -14,7 +14,7 @@
             </div>
         </div>
     </li>
-    <li class="list-inline-item d-lg-inline-block ms-0 m-0">
+    <li class="list-inline-item d-lg-inline-block ms-0 m-0 shepherd-new">
         <a type="button" href="{{ path('app_speaker_new') }}" class="btn nav-btn">
             <i class="fa-solid fa-plus"></i>
         </a>
@@ -65,23 +65,8 @@
     </tbody>
 </table>
 {% endblock %}
-{% block crud_pagination %}
-<div class="d-flex justify-content-end mt-2">
-    <div class="pagination-wrap hstack gap-2" style="display: flex;">
-        <a class="page-item pagination-prev disabled" href="#">
-            Previous
-        </a>
-        <ul class="pagination listjs-pagination mb-0">
-            <li class="active">
-                <a class="page" href="#" data-i="1" data-page="8">1</a>
-            </li>
-            <li>
-                <a class="page" href="#" data-i="2" data-page="8">2</a>
-            </li>
-        </ul>
-        <a class="page-item pagination-next" href="#">
-            Next
-        </a>
-    </div>
-</div>
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('crud') }}
 {% endblock %}
