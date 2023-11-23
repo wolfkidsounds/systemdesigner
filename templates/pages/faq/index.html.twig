@@ -1,6 +1,6 @@
 {% extends 'content.html.twig' %}
 
-{% block title %}Hello FAQController!{% endblock %}
+{% block title %}{{ parent() }} | FAQ{% endblock %}
 
 {% block body %}
     <div class="card">
@@ -11,6 +11,8 @@
                     {% for faq in faqs %}
                         {% include 'pages/faq/_accordion.html.twig' %}
                     {% endfor %}
+                {% else %}
+                    <p class="text-center">{{ "We couldn't find any faq entries"|trans }}...</p>
                 {% endif %}
 
             </div>
