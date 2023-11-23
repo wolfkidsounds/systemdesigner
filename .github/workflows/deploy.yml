@@ -59,8 +59,8 @@ jobs:
       # DOWNLOAD data.db from remote
       # LOCAL_PATH /data/data.db
       # REMOTE_PATH /data/data.db
-    - name: Download data.db from remote
-      run: curl -u ${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }} ftp://${{ secrets.FTP_SERVER }}/${{ secrets.REMOTE_PATH }}/data/data.db -o /data/data.db
+    - name: Download Database
+      run: curl -u ${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }} ftp://${{ secrets.FTP_SERVER }}/${{ secrets.REMOTE_PATH }}/data/data.db -o ${{ github.workspace }}/data/data.db
 
     - name: Database Migrations
       run: |
@@ -75,7 +75,7 @@ jobs:
         user: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         host: ${{ secrets.FTP_SERVER }}
-        src: /data/data.db
+        src: ${{ github.workspace }}/data/data.db
         dest: ${{ secrets.REMOTE_PATH }}/data/data.db
         secure: true
         verbose: true
