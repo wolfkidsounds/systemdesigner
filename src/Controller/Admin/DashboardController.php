@@ -2,7 +2,9 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\FAQ;
 use App\Entity\User;
+use App\Entity\Update;
 use App\Entity\Chassis;
 use App\Entity\Speaker;
 use App\Entity\Amplifier;
@@ -11,6 +13,7 @@ use App\Entity\Manufacturer;
 use App\Entity\ValidationRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -36,14 +39,17 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::section('Users');
         yield MenuItem::linkToCrud('Users', 'fa fa-user', User::class);
+        yield MenuItem::section('Pages');
+        yield MenuItem::linkToCrud('FAQ', 'fas fa-question', FAQ::class);
         yield MenuItem::section('App');
+        yield MenuItem::linkToCrud('Validation', 'fa-solid fa-circle-check', ValidationRequest::class);
         yield MenuItem::linkToCrud('Manufacturers', 'fa-solid fa-industry', Manufacturer::class);
         yield MenuItem::linkToCrud('Processors', 'icon icon-processor', Processor::class);
         yield MenuItem::linkToCrud('Amplifiers', 'icon-amplifier', Amplifier::class);
         yield MenuItem::linkToCrud('Speaker', 'icon-speaker', Speaker::class);
         yield MenuItem::linkToCrud('Chassis', 'icon-chassis', Chassis::class);
-        yield MenuItem::section('Validation');
-        yield MenuItem::linkToCrud('Requests', 'fa-solid fa-circle-check', ValidationRequest::class);
+        yield MenuItem::section('System');
+        yield MenuItem::linkToCrud('Updates', 'fas fa-list', Update::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 
@@ -53,5 +59,10 @@ class DashboardController extends AbstractDashboardController
             ->addMenuItems([
                 MenuItem::linkToRoute('Back To System Designer', 'fa-solid fa-arrow-left', 'app_main'),
             ]);
+    }
+
+    public function configureAssets(): Assets
+    {
+        return Assets::new()->addWebpackEncoreEntry('admin');
     }
 }

@@ -1,0 +1,30 @@
+{% extends 'content.html.twig' %}
+
+{% block title %}{{ parent() }} | {{'Updates'|trans}}{% endblock %}
+
+{% block body %}
+<section class="timeline_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+
+                <!-- Timeline Area-->
+                <div class="apland-timeline-area mt-3">
+
+                {% if updates %}
+                    {% for update in updates %}
+                        {% include 'pages/update/partials/single.html.twig' %}
+                    {% endfor %}
+                {% else %}
+                    <div class="row text-center">
+                        <p>{{"We couldn't find any updates..."|trans}}
+                    </div>
+                {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -40,8 +40,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private ?bool $Subscriber = false;
 
-    #[ORM\Column(type: 'boolean')]
-    private ?bool $BetaAccessEnabled = false;
+    #[ORM\Column]
+    private ?bool $Beta = false;
 
     #[ORM\Column(type: 'boolean')]
     private ?bool $DatabaseAccessEnabled = false;
@@ -75,9 +75,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\ManyToMany(targetEntity: Notification::class, mappedBy: 'User')]
     private Collection $notifications;
-
-    #[ORM\Column]
-    private ?bool $Beta = false;
 
     public function __construct()
     {
@@ -371,18 +368,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDatabaseAccessEnabled(bool $DatabaseAccessEnabled): static
     {
         $this->DatabaseAccessEnabled = $DatabaseAccessEnabled;
-
-        return $this;
-    }
-
-    public function isBetaAccessEnabled(): ?bool
-    {
-        return $this->BetaAccessEnabled;
-    }
-
-    public function setBetaAccessEnabled(bool $BetaAccessEnabled): static
-    {
-        $this->BetaAccessEnabled = $BetaAccessEnabled;
 
         return $this;
     }
