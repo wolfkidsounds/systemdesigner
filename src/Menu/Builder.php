@@ -29,6 +29,13 @@ class Builder extends AbstractController
 
         $menu = $this->factory->createItem('sidebar');
 
+        $menu->addChild('Dashboard', [
+            'route' => 'app_main',
+            'extras' => [
+                'icon' => 'icon icon-chassis text-primary',
+            ],
+        ]);
+
         if ($this->isGranted('ROLE_ADMIN') && $this->featureManager->isEnabled('admin')) {
             $menu->addChild('Admin', [
                 'route' => 'admin',
