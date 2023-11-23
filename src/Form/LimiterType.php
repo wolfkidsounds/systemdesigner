@@ -88,7 +88,8 @@ class LimiterType extends AbstractType
             ])
 
             ->add('InputSensitivity', NumberType::class, [
-                'label' => 'Input Sensitivity'
+                'label' => 'Input Sensitivity',
+                'attr' => ['readonly' => false]
             ])
 
             ->add('SpeakersInParallel', NumberType::class, [
@@ -107,8 +108,8 @@ class LimiterType extends AbstractType
                 'label' => 'Calculation Algorithm',
                 'choices'  => [
                     'System Designer' => 'system_designer',
-                    'True Power' => 'true_power',
-                    'Power vs. RMS' => 'power_vs_rms',
+                    //'True Power' => 'true_power',
+                    //'Power vs. RMS' => 'power_vs_rms',
                 ],
             ])
         ;
