@@ -1,0 +1,11 @@
+<!-- Single Timeline Content-->
+<div class="single-timeline-area">
+    <div class="timeline-date">
+        <p>{{ update.date|date('Y-m-d') }}</p>
+    </div>
+    <div class="row">
+        {% for content in update.contents %}
+            {% include 'pages/update/partials/entry.html.twig' %}
+        {% endfor %}       
+    </div>
+</div>
