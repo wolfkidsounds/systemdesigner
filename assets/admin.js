@@ -1,7 +1,4 @@
 //Import Node Modules
-import '@popperjs/core';
-import 'bootstrap';
-import 'simplebar';
 
 // Import CSS Modules
 

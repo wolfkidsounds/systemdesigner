@@ -1,0 +1,16 @@
+<div class="accordion-item card border mb-2">
+    <div class="accordion-header" id="_{{ faq.category }}">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ faq.category }}" aria-expanded="false" aria-controls="{{ faq.category }}">
+            <h5 class="font-size-14 m-0">{{ faq.category|trans|capitalize }}</h5>
+        </button>
+    </div>
+    <div id="{{ faq.category }}" class="accordion-collapse collapse" aria-labelledby="_{{ faq.category }}" data-bs-parent="#faq" style="">
+        <div class="accordion-body">
+
+            {% for content in faq.contents %}
+                {% include 'pages/faq/_content.html.twig' %}
+            {% endfor %}
+        
+        </div>
+    </div>
+</div>
