@@ -28,7 +28,7 @@
                         {% if app.user.notifications|length > 0 %}
                         <span class="position-absolute top-1 start-99 translate-middle badge rounded-pill bg-primary text-body font-size-12">
                             {{ app.user.notifications|length }}
-                            <span class="visually-hidden">Unread Notifications</span>
+                            <span class="visually-hidden">{{'Unread Notifications'|trans}}</span>
                         </span>
                         {% endif %}
                     </i>
@@ -43,12 +43,14 @@
                     <i class="fa-solid fa-gear rounded-circle"></i>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><p class="dropdown-header">Version: {{ app_version }}</p></li>
+                    <li><p class="dropdown-header">{{ 'Version:'|trans }} {{ app_version }}</p></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item opacity-25 pe-none" href="{{ path('app_subscription') }}">Subscription</a></li>
-                    <li><a class="dropdown-item opacity-25 pe-none" href="{{ path('app_settings') }}">Settings</a></li>
+                    <li><a class="dropdown-item" href="{{ path('app_updates') }}">{{ 'Updates'|trans }}</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item text-danger" href="{{ path('app_logout') }}">Logout</a></li>
+                    <li><a class="dropdown-item opacity-25 pe-none" href="{{ path('app_subscription') }}">{{'Subscription'|trans}}</a></li>
+                    <li><a class="dropdown-item opacity-25 pe-none" href="{{ path('app_settings') }}">{{'Settings'|trans}}</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-danger" href="{{ path('app_logout') }}">{{'Logout'|trans}}</a></li>
                 </ul>
             </li>
         </ul>
