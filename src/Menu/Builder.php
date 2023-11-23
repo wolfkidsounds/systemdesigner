@@ -29,20 +29,29 @@ class Builder extends AbstractController
 
         $menu = $this->factory->createItem('sidebar');
 
-        $menu->addChild('Dashboard', [
-            'route' => 'app_main',
-            'extras' => [
-                'icon' => 'icon icon-chassis text-primary',
-            ],
-        ]);
+        $menu
+            ->addChild('Dashboard', [
+                'route' => 'app_main',
+                'extras' => [
+                    'icon' => 'icon icon-chassis text-primary',
+                ],
+            ])
+            ->setAttributes(
+                ['class' => 'nav-item d-lg-none']
+            )
+        ;
 
         if ($this->isGranted('ROLE_ADMIN') && $this->featureManager->isEnabled('admin')) {
-            $menu->addChild('Admin', [
+            $menu
+            ->addChild('Admin', [
                 'route' => 'admin',
                 'extras' => [
                     'icon' => 'fa-solid fa-dashboard',
                 ]
-            ]);
+            ])
+            ->setAttributes(
+                ['class' => 'nav-item']
+            );
 
             $menu->addChild('divider_1', [
                 'divider' => true,
@@ -53,48 +62,68 @@ class Builder extends AbstractController
         }
 
         if ($this->featureManager->isEnabled('manufacturers')) {
-            $menu->addChild('Manufacturer', [
+            $menu
+            ->addChild('Manufacturer', [
                 'route' => 'app_manufacturer_index',
                 'extras' => [
                     'icon' => 'fa-solid fa-industry',
                 ]
-            ]);
+            ])
+            ->setAttributes(
+                ['class' => 'nav-item']
+            );
         }
         
         if ($this->featureManager->isEnabled('processor')) {
-            $menu->addChild('Processor', [
+            $menu
+            ->addChild('Processor', [
                 'route' => 'app_processor_index',
                 'extras' => [
                     'icon' => 'icon icon-processor',
                 ]
-            ]);
+            ])
+            ->setAttributes(
+                ['class' => 'nav-item']
+            );
         }
 
         if ($this->featureManager->isEnabled('amplifier')) {
-            $menu->addChild('Amplifier', [
+            $menu
+            ->addChild('Amplifier', [
                 'route' => 'app_amplifier_index',
                 'extras' => [
                     'icon' => 'icon icon-amplifier',
                 ]
-            ]);
+            ])
+            ->setAttributes(
+                ['class' => 'nav-item']
+            );
         }
 
         if ($this->featureManager->isEnabled('speaker')) {
-            $menu->addChild('Speaker', [
+            $menu
+            ->addChild('Speaker', [
                 'route' => 'app_speaker_index',
                 'extras' => [
                     'icon' => 'icon icon-speaker',
                 ]
-            ]);
+            ])
+            ->setAttributes(
+                ['class' => 'nav-item']
+            );
         }
 
         if ($this->featureManager->isEnabled('chassis') && $user->isSubscriber()) {
-            $menu->addChild('Chassis', [
+            $menu
+            ->addChild('Chassis', [
                 'route' => 'app_chassis_index',
                 'extras' => [
                     'icon' => 'icon icon-chassis',
                 ]
-            ]);
+            ])
+            ->setAttributes(
+                ['class' => 'nav-item']
+            );
         }
 
         if ($this->featureManager->isEnabled('limiter')) {
@@ -105,12 +134,16 @@ class Builder extends AbstractController
                 ]
             ]);
 
-            $menu->addChild('Limiter', [
+            $menu
+            ->addChild('Limiter', [
                 'route' => 'app_limiter_index',
                 'extras' => [
                     'icon' => 'fa-solid fa-wave-square',
                 ]
-            ]);
+            ])
+            ->setAttributes(
+                ['class' => 'nav-item']
+            );
         }
 
         return $menu;
