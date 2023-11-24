@@ -14,12 +14,8 @@ class MainController extends AbstractController
 {
     #[IsGranted('ROLE_USER')]
     #[Route('/app', name: 'app_main')]
-    public function main(Request $request, LoggerInterface $logger): Response
+    public function main(LoggerInterface $logger): Response
     {
-        dump($request->getSession());
-        dump($request->getLocale());
-        dump($request->attributes->get('_locale'));
-
         $logger->info('User was found.');
         $logger->info('Render Page');
 
