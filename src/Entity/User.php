@@ -46,9 +46,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private ?bool $DatabaseAccessEnabled = false;
 
-    #[ORM\Column(type: 'boolean')]
-    private ?bool $ShowBetaFeaturesEnabled = false;
-
     #[ORM\OneToMany(mappedBy: 'User', targetEntity: Manufacturer::class)]
     private Collection $manufacturers;
 
@@ -368,18 +365,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDatabaseAccessEnabled(bool $DatabaseAccessEnabled): static
     {
         $this->DatabaseAccessEnabled = $DatabaseAccessEnabled;
-
-        return $this;
-    }
-
-    public function isShowBetaFeaturesEnabled(): ?bool
-    {
-        return $this->ShowBetaFeaturesEnabled;
-    }
-
-    public function setShowBetaFeaturesEnabled(bool $ShowBetaFeaturesEnabled): static
-    {
-        $this->ShowBetaFeaturesEnabled = $ShowBetaFeaturesEnabled;
 
         return $this;
     }
