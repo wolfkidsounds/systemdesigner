@@ -17,22 +17,23 @@ class SettingsType extends AbstractType
         $builder
             ->add('Locale', ChoiceType::class, [
                 'label' => new TranslatableMessage('Language'),
-                'choices' => [
+                'choices' => [  
                     'English' => 'en',
                     'German' => 'de',
-                ]
+                ],
+                'choice_attr' => [
+                    'English' => [
+                        'class' => 'fi fi-us'
+                    ],
+                    'German' => [
+                        'class' => 'fi fi-de'
+                    ],
+                ],
+
             ])
 
             ->add('DatabaseAccess', ChoiceType::class, [
                 'label' => new TranslatableMessage('Show All Items'),
-                'choices' => [
-                    'Disabled' => false,
-                    'Enabled' => true,
-                ]
-            ])
-
-            ->add('ShowBetaFeatures', ChoiceType::class, [
-                'label' => new TranslatableMessage('Show Beta Features'),
                 'choices' => [
                     'Disabled' => false,
                     'Enabled' => true,
