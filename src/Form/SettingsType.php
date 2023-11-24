@@ -42,7 +42,7 @@ class SettingsType extends AbstractType
             ])
 
             ->add('DatabaseAccessEnabled', ChoiceType::class, [
-                'label' => new TranslatableMessage('Show All Items'),
+                'label' => new TranslatableMessage('Show All Database Entries'),
                 'choices' => [
                     'Disabled' => false,
                     'Enabled' => true,
