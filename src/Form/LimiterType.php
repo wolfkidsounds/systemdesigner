@@ -89,7 +89,7 @@ class LimiterType extends AbstractType
 
             ->add('InputSensitivity', NumberType::class, [
                 'label' => 'Input Sensitivity',
-                'attr' => ['readonly' => false]
+                'attr' => ['readonly' => false],
             ])
 
             ->add('SpeakersInParallel', NumberType::class, [

@@ -8,7 +8,7 @@
 
 {% if app.user %}
     <div class="mb-3">
-        You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+        {{'You are logged in as'|trans}} {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">{{'Logout'|trans}}</a>
     </div>
 {% endif %}
 
@@ -16,8 +16,8 @@
     <div class="row justify-content-center">
         <div class="col-md-8 col-lg-6 col-xl-5">
             <div class="text-center mb-4">
-                <h4>Sign in</h4>
-                <p class="text-muted mb-4">Sign in to continue to SystemDesigner.</p>
+                <h4>{{'Sign in'|trans}}</h4>
+                <p class="text-muted mb-4">{{'Sign in to continue to SystemDesigner.'|trans}}</p>
             </div>
 
             <div class="card" style="background:rgba(0,0,0,.2);">
@@ -27,22 +27,22 @@
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
                             <div class="mb-3">
-                                <label class="form-label" for="inputEmail">Email</label>
+                                <label class="form-label" for="inputEmail">{{'Email'|trans}}</label>
                                 <input type="email" name="_username" id="inputEmail" class="form-control form-control-lg border-light bg-light-subtle rounded-1" value="{{ last_username }}" autocomplete="email" placeholder="Enter Email" aria-label="Enter Email" required autofocus>
                             </div>
 
                             <div class="mb-4">
-                                <label class="form-label" for="inputPassword">Password</label>
+                                <label class="form-label" for="inputPassword">{{'Password'|trans}}</label>
                                 <input type="password" name="_password" id="inputPassword" class="form-control form-control-lg border-light bg-light-subtle rounded-1" autocomplete="current-password" placeholder="Enter Password" aria-label="Enter Password" required>
                             </div>
 
                             <div class="form-check mb-4">
                                 <input type="checkbox" class="form-check-input" id="remember-check">
-                                <label class="form-check-label" for="remember-check">Remember me</label>
+                                <label class="form-check-label" for="remember-check">{{'Remember me'|trans}}</label>
                             </div>
 
                             <div class="d-grid">
-                                <button class="btn btn-primary rounded-1" type="submit">Sign in</button>
+                                <button class="btn btn-primary rounded-1" type="submit">{{'Sign in'|trans}}</button>
                             </div>
                         </form>
                     </div>

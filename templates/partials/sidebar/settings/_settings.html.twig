@@ -1,0 +1,20 @@
+
+{% include 'partials/sidebar/settings/_notifications.html.twig' %}
+
+{% include 'partials/sidebar/settings/_faq.html.twig' %}
+
+<li class="btn-group dropup dropend">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa-solid fa-gear rounded-circle"></i>
+    </a>
+    <ul class="dropdown-menu">
+        <li><p class="dropdown-header"><i class="fa-solid fa-code-compare me-2"></i>{{ 'Version:'|trans }} {{ app_version }}</p></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="{{ path('app_updates') }}"><i class="fa-solid fa-code-pull-request me-2"></i>{{ 'Updates'|trans }}</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item opacity-25 pe-none" href="{{ path('app_subscription') }}"><i class="fa-solid fa-circle-check me-2"></i>{{'Subscription'|trans}}</a></li>
+        <li><a class="dropdown-item" href="{{ path('app_settings') }}"><i class="fa-solid fa-gear me-2"></i>{{'Settings'|trans}}</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item text-danger" href="{{ path('app_logout') }}"><i class="fa-solid fa-power-off me-2"></i>{{'Logout'|trans}}</a></li>
+    </ul>
+</li>
