@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
@@ -15,9 +16,6 @@ class MainController extends AbstractController
     #[Route('/app', name: 'app_main')]
     public function main(LoggerInterface $logger): Response
     {
-        /** @var User $user */
-        $user = $this->getUser();
-
         $logger->info('User was found.');
         $logger->info('Render Page');
 
