@@ -8,9 +8,17 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Translation\TranslatableMessage;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class SettingsType extends AbstractType
 {
+    /** @var User $user */
+    private $user;
+
+    public function __construct(TokenStorageInterface $tokenStorage) {
+        $this->user = $tokenStorage->getToken()->getUser();
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
 
@@ -29,15 +37,17 @@ class SettingsType extends AbstractType
                         'class' => 'fi fi-de'
                     ],
                 ],
+                'data' => $this->user->getLocale(),
 
             ])
 
-            ->add('DatabaseAccess', ChoiceType::class, [
+            ->add('DatabaseAccessEnabled', ChoiceType::class, [
                 'label' => new TranslatableMessage('Show All Items'),
                 'choices' => [
                     'Disabled' => false,
                     'Enabled' => true,
-                ]
+                ],
+                'data' => $this->user->isDatabaseAccessEnabled(),
             ])
         ;
     }
