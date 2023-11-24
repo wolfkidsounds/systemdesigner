@@ -13,7 +13,6 @@
 <table class="table align-middle table-nowrap mb-0" data-tables='data-tables'>
     <thead class="">
         <tr>
-            <th class="sort text-uppercase align-middle">ID</th>
             <th class="sort text-uppercase align-middle">{{ 'Name'|trans }}</th>
             <th class="sort text-uppercase align-middle">{{ 'Actions'|trans }}</th>
         </tr>
@@ -21,9 +20,6 @@
     <tbody id="search-table" class="list form-check-all">
         {% for manufacturer in manufacturers %}
         <tr>
-            <td class="id">
-                <a class="text-body fw-bold" href="{{ path('app_manufacturer_show', {'id': manufacturer.id}) }}">{{ manufacturer.id }}</a>
-            </td>
             <td class="name">{{ manufacturer.Name }}</td>
             <td class="actions d-flex gap-2">
                 <a href="{{ path('app_manufacturer_show', {'id': manufacturer.id}) }}"><i class="fa-solid fa-eye"></i></a>
