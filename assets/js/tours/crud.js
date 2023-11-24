@@ -47,30 +47,6 @@ tour.addStep({
 
 });
 
-addStepIf(isDesktop(), {
-
-    text: 'Clicking the search icon enables you to search the entire table for every field you want.',
-    attachTo: {
-      element: '.shepherd-search',
-      on: 'left'
-    },
-
-    classes: 'me-3',
-    buttons: [
-      {
-        classes: 'btn btn-primary mt-3 me-3',
-        text: 'Next',
-        action: tour.next
-      },
-      {
-        classes: 'btn btn-secondary mt-3',
-        text: 'Cancel',
-        action: tour.cancel
-      }
-    ]
-
-});
-
 addStepIf(!isDesktop(), {
 
   text: 'This is the list of all the items you have created.',
