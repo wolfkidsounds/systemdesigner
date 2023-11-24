@@ -40,14 +40,6 @@ class SettingsController extends AbstractController
                 $user->setDatabaseAccessEnabled($dbAccess);
             }
             
-
-            //BETA FEATURES
-            $betaFeatures = $form->get('ShowBetaFeatures')->getData();
-
-            if ($betaFeatures) {
-                $user->setDatabaseAccessEnabled($betaFeatures);
-            }
-            
             $entityManager->flush();
 
             return $this->redirectToRoute('app_settings', [], Response::HTTP_SEE_OTHER);
