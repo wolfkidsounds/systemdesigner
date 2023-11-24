@@ -65,7 +65,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $limiters;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $Locale = null;
+    private ?string $Locale = 'en';
 
     #[ORM\OneToMany(mappedBy: 'User', targetEntity: Chassis::class)]
     private Collection $chassis;
