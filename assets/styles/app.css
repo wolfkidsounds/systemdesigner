@@ -16,6 +16,7 @@
 @import "./css/app/badge.css";
 @import "./css/app/divider.css";
 @import "./css/app/timeline.css";
+@import "./css/app/tables.css";
 
 /* Import Customizations */
 @import "./css/app/login_form.css";

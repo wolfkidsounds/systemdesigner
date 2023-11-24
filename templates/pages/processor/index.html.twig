@@ -2,18 +2,6 @@
 
 {% block title %}{{ parent() }} | {{ 'Processor'|trans }}{% endblock %}
 {% block crud_toolbar %}
-    <li class="list-inline-item d-lg-inline-block ms-0 m-0 shepherd-search">
-        <div class="dropdown dropstart">
-            <button class="btn nav-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-            <div class="dropdown-menu p-0 dropdown-menu-md">
-                <div class="search-box p-1">
-                    <input type="text" class="form-control bg-light border-0" id="search-input" placeholder="{{ 'Search'|trans }}..">
-                </div>
-            </div>
-        </div>
-    </li>
     <li class="list-inline-item d-lg-inline-block ms-0 m-0 shepherd-new">
         <a type="button" href="{{ path('app_processor_new') }}" class="btn nav-btn">
             <i class="fa-solid fa-plus"></i>
@@ -21,7 +9,7 @@
     </li>
 {% endblock %}
 {% block crud_body %}
-<table class="table align-middle table-nowrap mb-0">
+<table class="table align-middle table-nowrap mb-0" data-tables='data-tables'>
     <thead class="">
         <tr>
             <th class="sort text-uppercase align-middle" data-sort="id">ID</th>
@@ -33,7 +21,7 @@
             <th class="sort text-uppercase align-middle" data-sort="actions">{{ 'Actions'|trans }}</th>
         </tr>
     </thead>
-    <tbody id="search-table" class="list form-check-all"><tr>
+    <tbody id="search-table" class="list form-check-all">
         {% for processor in processors %}
         <tr>
             <td class="id"><a class="text-body fw-bold" href="{{ path('app_processor_show', {'id': processor.id}) }}">{{ processor.id }}</a></td>
@@ -54,10 +42,6 @@
                 {% endif %}
                 
             </td>
-        </tr>
-        {% else %}
-        <tr>
-            <td colspan="7">{{ 'We could not find any processors.'|trans }}</td>
         </tr>
         {% endfor %}
     </tbody>
