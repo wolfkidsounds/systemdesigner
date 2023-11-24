@@ -27,6 +27,8 @@ jobs:
 
       - name: Commit and Push Changes
         run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
           git add .env
           git commit -m "Increment version to $NEW_VERSION"
           git push
