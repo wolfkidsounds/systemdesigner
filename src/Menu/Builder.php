@@ -37,7 +37,7 @@ class Builder extends AbstractController
                 ],
             ])
             ->setAttributes(
-                ['class' => 'nav-item d-lg-none']
+                ['class' => 'nav-item d-lg-none shepherd-logo-m']
             )
         ;
 

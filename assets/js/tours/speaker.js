@@ -5,7 +5,7 @@ const tour = new Shepherd.Tour({
 
     useModalOverlay: true,
     defaultStepOptions: {
-      classes: 'z-9999 shadow p-3 bg-body rounded',
+      classes: 'z-9999 shadow p-3 fs-12 bg-body rounded w-75',
       scrollTo: true
     }
 
