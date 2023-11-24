@@ -21,6 +21,11 @@ class UpdateRepository extends ServiceEntityRepository
         parent::__construct($registry, Update::class);
     }
 
+    public function findAll()
+    {
+        return $this->findBy([], ['Date' => 'DESC']);
+    }
+
 //    /**
 //     * @return Update[] Returns an array of Update objects
 //     */

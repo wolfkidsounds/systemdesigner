@@ -3,10 +3,12 @@
     <!-- LOGO -->
     <div class="sidebar_profile d-none flex-lg-column d-lg-block">
         <ul class="nav justify-content-center">
-            <li class="btn-group dropdown shepherd-logo">
-                <a href="{{ path('app_main') }}" class="nav-link logo d-flex">
-                    <img src="{{ asset('images/logo.svg') }}" alt="" height="30">
-                </a>
+            <li class="btn-group dropdown">
+                <div class="shepherd-logo">
+                    <a href="{{ path('app_main') }}" class="nav-link logo d-flex">
+                        <img src="{{ asset('images/logo.svg') }}" alt="" height="30">
+                    </a>
+                </div>
             </li>
         </ul>
     </div>
@@ -20,9 +22,9 @@
 
     <!-- SETTINGS -->
     <div class="sidebar_logo d-none flex-lg-column d-lg-block">
-        <ul class="nav justify-content-center">
+        <ul class="nav justify-content-center shepherd-settings">
 
-            <li class="btn-group dropup dropend shepherd-notifications opacity-25 pe-none">
+            <li class="btn-group dropup dropend opacity-25 pe-none">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa-solid fa-bell">
                         {% if app.user.notifications|length > 0 %}
@@ -44,7 +46,7 @@
                 </a>
             </li>
 
-            <li class="btn-group dropup dropend shepherd-settings">
+            <li class="btn-group dropup dropend">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa-solid fa-gear rounded-circle"></i>
                 </a>
