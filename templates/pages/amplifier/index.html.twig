@@ -12,8 +12,7 @@
 <table class="table align-middle table-nowrap mb-0 display compact hover" data-tables='data-tables'>
     <thead class="">
         <tr>
-            <th class="sort text-uppercase align-middle" data-sort="id">ID</th>
-            <th class="sort text-uppercase align-middle" data-sort="manufacturer">Manufacturer</th>
+            <th class="sort text-uppercase align-middle" data-sort="manufacturer" data-manufacturer="manufacturer">Manufacturer</th>
             <th class="sort text-uppercase align-middle" data-sort="name">Name</th>
             <th class="sort text-uppercase align-middle" data-sort="power16">Power @ 16Ω</th>
             <th class="sort text-uppercase align-middle" data-sort="power8">Power @ 8Ω</th>
@@ -21,14 +20,13 @@
             <th class="sort text-uppercase align-middle" data-sort="power2">Power @ 2Ω</th>
             <th class="sort text-uppercase align-middle" data-sort="powerbridge8">Power Bridge @ 8Ω</th>
             <th class="sort text-uppercase align-middle" data-sort="powerbridge4">Power Bridge @ 4Ω</th>
-            <th class="sort text-uppercase align-middle" data-sort="id">Actions</th>
+            <th class="sort text-uppercase align-middle actions" data-sort="actions">Actions</th>
         </tr>
     </thead>
     <tbody id="search-table" class="list form-check-all">
         {% for amplifier in amplifiers %}
         <tr>
-            <td class="id">{{ amplifier.id }}</td>
-            <td class="manufacturer">{{ amplifier.Manufacturer.name }}</td>
+            <td class="manufacturer" data-manufacturer="{{ amplifier.Manufacturer.name }}">{{ amplifier.Manufacturer.name }}</td>
             <td class="name">{{ amplifier.Name }}</td>
             <td class="power16">{{ amplifier.Power16 }}</td>
             <td class="power8">{{ amplifier.Power8 }}</td>
