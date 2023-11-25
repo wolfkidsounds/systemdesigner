@@ -26,10 +26,10 @@ class SpeakerController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
-        if ($user->isDatabaseAccessEnabled()) {
+        if ($user->isSubscriber() && $user->isDatabaseAccessEnabled()) {
             $speakers = $speakerRepository->findByUserOrValidated($user);
         } else {
-            $speakers = $speakerRepository->findBy(['User' => $user]);
+            $speakers = $speakerRepository->findBy(['User' => $user], [], 10);
         }
 
         return $this->render('pages/speaker/index.html.twig', [
