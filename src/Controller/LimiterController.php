@@ -27,7 +27,7 @@ class LimiterController extends AbstractController
         $user = $this->getUser();
 
         if ($user->isSubscriber() && $user->isDatabaseAccessEnabled()) {
-            $limiters = $limiterRepository->findByUserOrValidated($user);
+            $limiters = $limiterRepository->findBy(['User' => $user]);
         } else {
             $limiters = $limiterRepository->findBy(['User' => $user], [], 10);
         }
