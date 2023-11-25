@@ -31,10 +31,10 @@ class ManufacturerController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
-        if ($user->isDatabaseAccessEnabled()) {
+        if ($user->isSubscriber() && $user->isDatabaseAccessEnabled()) {
             $manufacturers = $manufacturerRepository->findByUserOrValidated($user);
         } else {
-            $manufacturers = $manufacturerRepository->findBy(['User' => $user]);
+            $manufacturers = $manufacturerRepository->findBy(['User' => $user], [], 10);
         }
 
         return $this->render('pages/manufacturer/index.html.twig', [
