@@ -9,7 +9,7 @@ $(document).ready( function () {
 
         $('[data-tables]').DataTable({
             language: lang_de,
-            responsive: true,
+            //responsive: true,
             lengthMenu: [
                 [10, 25, 50, 100, -1],
                 [10, 25, 50, 100, 'All']
@@ -19,7 +19,7 @@ $(document).ready( function () {
     } else {
 
         $('[data-tables]').DataTable({
-            responsive: true,
+            //responsive: true,
             lengthMenu: [
                 [10, 25, 50, 100, -1],
                 [10, 25, 50, 100, 'All']
