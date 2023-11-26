@@ -10,7 +10,6 @@ use App\Entity\ValidationRequest;
 use App\Form\ValidationRequestType;
 use App\Repository\AmplifierRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Pagerfanta\Doctrine\ORM\QueryAdapter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,10 +30,10 @@ class AmplifierController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
-        if ($user->isDatabaseAccessEnabled()) {
+        if ($user->isSubscriber() && $user->isDatabaseAccessEnabled()) {
             $amplifiers = $amplifierRepository->findByUserOrValidated($user);
         } else {
-            $amplifiers = $amplifierRepository->findBy(['User' => $user]);
+            $amplifiers = $amplifierRepository->findBy(['User' => $user], [], 10);
         }
 
         return $this->render('pages/amplifier/index.html.twig', [

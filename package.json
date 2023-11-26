@@ -34,6 +34,7 @@
         "datatables.net-fixedcolumns-dt": "^4.3.0",
         "datatables.net-fixedheader-bs5": "^3.4.0",
         "datatables.net-fixedheader-dt": "^3.4.0",
+        "datatables.net-plugins": "^1.13.6",
         "datatables.net-responsive-bs5": "^2.5.0",
         "datatables.net-rowgroup-bs5": "^1.4.1",
         "datatables.net-scroller-bs5": "^2.3.0",

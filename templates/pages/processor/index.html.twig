@@ -14,9 +14,9 @@
         <tr>
             <th class="sort text-uppercase align-middle" data-sort="manufacturer">{{ 'Manufacturer'|trans }}</th>
             <th class="sort text-uppercase align-middle" data-sort="name">{{ 'Name'|trans }}</th>
-            <th class="sort text-uppercase align-middle" data-sort="inputs">{{ 'Inputs'|trans }}</th>
-            <th class="sort text-uppercase align-middle" data-sort="outputs">{{ 'Outputs'|trans }}</th>
-            <th class="sort text-uppercase align-middle" data-sort="offset">{{ 'Offset'|trans }}</th>
+            <th class="sort text-uppercase align-middle d-none d-sm-table-cell" data-sort="inputs">{{ 'Inputs'|trans }}</th>
+            <th class="sort text-uppercase align-middle d-none d-sm-table-cell" data-sort="outputs">{{ 'Outputs'|trans }}</th>
+            <th class="sort text-uppercase align-middle d-none d-sm-table-cell" data-sort="offset">{{ 'Offset'|trans }}</th>
             <th class="sort text-uppercase align-middle" data-sort="actions">{{ 'Actions'|trans }}</th>
         </tr>
     </thead>
@@ -25,9 +25,9 @@
         <tr>
             <td class="brand">{{ processor.Manufacturer.name }}</td>
             <td class="name">{{ processor.Name }}</td>
-            <td class="inputs">{{ processor.ChannelsInput }}</td>
-            <td class="outputs">{{ processor.ChannelsOutput }}</td>
-            <td class="offset">{{ processor.OutputOffset }}</td>
+            <td class="inputs d-none d-sm-table-cell">{{ processor.ChannelsInput }}</td>
+            <td class="outputs d-none d-sm-table-cell">{{ processor.ChannelsOutput }}</td>
+            <td class="offset d-none d-sm-table-cell">{{ processor.OutputOffset }}</td>
             <td class="actions d-flex gap-2">
                 <a href="{{ path('app_processor_show', {'id': processor.id}) }}"><i class="fa-solid fa-eye"></i></a>
 
