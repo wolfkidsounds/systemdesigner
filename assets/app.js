@@ -21,7 +21,6 @@ import './styles/overwrites/select2-bootstrap-theme.css';
 // Import Custom JS
 import './js/progress-circular.js';
 import './js/select2.js';
-//import './js/search.js';
 import './js/datatables.js';
 
 // Import SASS
