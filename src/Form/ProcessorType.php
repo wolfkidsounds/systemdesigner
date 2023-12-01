@@ -7,6 +7,7 @@ use App\Entity\Manufacturer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Translation\TranslatableMessage;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,19 +27,23 @@ class ProcessorType extends AbstractType
                 'attr' => ['data-select' => 'true']
             ])
             ->add('Name', TextType::class, [
+                'label' => new TranslatableMessage('Name'),
                 'constraints' => [new NotBlank()]
             ])
             ->add('ChannelsInput', IntegerType::class, [
+                'label' => new TranslatableMessage('Inputs'),
                 'constraints' => [new NotBlank()]
             ])
             ->add('ChannelsOutput', IntegerType::class, [
+                'label' => new TranslatableMessage('Outputs'),
                 'constraints' => [new NotBlank()]
             ])
             ->add('OutputOffset', IntegerType::class, [
+                'label' => new TranslatableMessage('Offset'),
                 'constraints' => [new NotBlank()]                
             ])
             ->add('Manual', FileType::class, [
-                'label' => 'Manual (PDF)',
+                'label' => new TranslatableMessage('Manual (PDF)'),
                 'mapped' => false, // not associated with any entity
                 'required' => false,
                 'constraints' => [

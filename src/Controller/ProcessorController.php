@@ -33,10 +33,10 @@ class ProcessorController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
-        if ($user->isDatabaseAccessEnabled()) {
+        if ($user->isSubscriber() && $user->isDatabaseAccessEnabled()) {
             $processors = $processorRepository->findByUserOrValidated($user);
         } else {
-            $processors = $processorRepository->findBy(['User' => $user]);
+            $processors = $processorRepository->findBy(['User' => $user], [], 10);
         }
 
         return $this->render('pages/processor/index.html.twig', [

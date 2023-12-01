@@ -1,0 +1,43 @@
+.data-tables-wrapper #t-entries {
+    display:inline-block;
+}
+
+.data-tables-wrapper #t-entries label select {
+    display:inline;
+    width:auto;
+}
+
+.data-tables-wrapper #t-filter {
+    display:inline-block;
+}
+
+.data-tables-wrapper #t-filter label input {
+    display:inline;
+    width:auto;
+    margin-left:1rem;
+}
+
+.data-tables-wrapper .data_table {
+
+
+}
+
+.data-tables-wrapper #t-info {
+
+
+}
+
+.data-tables-wrapper #t-page {
+
+
+}
+
+.data-tables-wrapper #t-page ul {
+    margin:0px;
+
+}
+
+.data-tables-wrapper #t-proc {
+
+
+}

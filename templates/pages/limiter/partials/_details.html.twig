@@ -6,9 +6,9 @@
                 <div class="card card-body border-dark">
                     <div class="col-sm">
                         <div class="info-container mb-3">
-                            {{ infoButton('The Vgain Value tells you how much dB the Amplifier tries to amplify until it runs out of power.') }}
+                            {{ infoButton('The Vgain Value tells you how much dB the Amplifier tries to amplify until it runs out of power.'|trans) }}
                             <div class="mb-3">
-                                <label for="details_Vgain" class="form-label">Vgain</label>
+                                <label for="details_Vgain" class="form-label">{{'Vgain'|trans}}</label>
                                 <div class="input-group">
                                     <input type="text" id="details_Vgain" name="details_Vgain" readonly="readonly" disabled="disabled" inputmode="decimal" class="form-control">
                                     <span class="input-group-text">dB</span>
@@ -19,9 +19,9 @@
                     <div class="row">
                         <div class="col-sm">
                             <div class="info-container mb-3">
-                                {{ infoButton('How much Power got requested from the Amplifier') }}
+                                {{ infoButton('How much Power got requested from the Amplifier'|trans) }}
                                 <div class="mb-3">
-                                    <label for="details_RMSRequest" class="form-label">RMS Power Request</label>
+                                    <label for="details_RMSRequest" class="form-label">{{'RMS Power Request'|trans}}</label>
                                     <div class="input-group">
                                         <input type="text" id="details_RMSRequest" name="details_RMSRequest" readonly="readonly" disabled="disabled" inputmode="decimal" class="form-control">
                                         <span class="input-group-text">Watt</span>
@@ -31,9 +31,9 @@
                         </div>
                         <div class="col-sm">
                             <div class="info-container mb-3">
-                                {{ infoButton('How much Power got requested from the Amplifier') }}
+                                {{ infoButton('How much Power got requested from the Amplifier'|trans) }}
                                 <div class="mb-3">
-                                    <label for="details_PRequest" class="form-label">Peak Power Request</label>
+                                    <label for="details_PRequest" class="form-label">{{'Peak Power Request'|trans}}</label>
                                     <div class="input-group ">
                                         <input type="text" id="details_PRequest" name="details_PRequest" readonly="readonly" disabled="disabled" inputmode="decimal" class="form-control">
                                         <span class="input-group-text">Watt</span>
@@ -45,9 +45,9 @@
                     <div class="row">
                         <div class="col-sm">
                             <div class="info-container mb-3">
-                                {{ infoButton('How much Power is supplied by the Amplifier') }}
+                                {{ infoButton('How much Power is supplied by the Amplifier'|trans) }}
                                 <div class="mb-3">
-                                    <label for="details_RMSSupply" class="form-label">RMS Power Supplied</label>
+                                    <label for="details_RMSSupply" class="form-label">{{'RMS Power Supplied'|trans}}</label>
                                     <div class="input-group ">
                                         <input type="text" id="details_RMSSupply" name="details_RMSSupply" readonly="readonly" disabled="disabled" inputmode="decimal" class="form-control">
                                         <span class="input-group-text">Watt</span>
@@ -57,9 +57,9 @@
                         </div>
                         <div class="col-sm">
                             <div class="info-container mb-3">
-                                {{ infoButton('How much Power is supplied by the Amplifier') }}
+                                {{ infoButton('How much Power is supplied by the Amplifier'|trans) }}
                                 <div class="mb-3">
-                                    <label for="details_PSupply" class="form-label">Peak Power Supplied</label>
+                                    <label for="details_PSupply" class="form-label">{{'Peak Power Supplied'|trans}}</label>
                                     <div class="input-group ">
                                         <input type="text" id="details_PSupply" name="details_PSupply" readonly="readonly" disabled="disabled" inputmode="decimal" class="form-control">
                                         <span class="input-group-text">Watt</span>
