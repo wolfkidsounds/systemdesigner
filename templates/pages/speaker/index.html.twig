@@ -14,10 +14,10 @@
         <tr>
             <th class="sort text-uppercase align-middle" data-sort="manufacturer">{{'Manufacturer'|trans}}</th>
             <th class="sort text-uppercase align-middle" data-sort="name">{{'Name'|trans}}</th>
-            <th class="sort text-uppercase align-middle" data-sort="rms_power">{{'RMS Power'|trans}}</th>
-            <th class="sort text-uppercase align-middle" data-sort="peak_power">{{'Peak Power'|trans}}</th>
-            <th class="sort text-uppercase align-middle" data-sort="impedance">{{'Impedance'|trans}}</th>
-            <th class="sort text-uppercase align-middle" data-sort="spl">{{'SPL'|trans}}</th>
+            <th class="sort text-uppercase align-middle d-none d-sm-table-cell" data-sort="rms_power">{{'RMS Power'|trans}}</th>
+            <th class="sort text-uppercase align-middle d-none d-sm-table-cell" data-sort="peak_power">{{'Peak Power'|trans}}</th>
+            <th class="sort text-uppercase align-middle d-none d-sm-table-cell" data-sort="impedance">{{'Impedance'|trans}}</th>
+            <th class="sort text-uppercase align-middle d-none d-sm-table-cell" data-sort="spl">{{'SPL'|trans}}</th>
             <th class="sort text-uppercase align-middle" data-sort="actions">{{'Actions'|trans}}</th>
         </tr>
     </thead>
@@ -26,10 +26,10 @@
         <tr>
             <td class="manufacturer">{{ speaker.Manufacturer.name }}</td>
             <td class="name">{{ speaker.Name }}</td>
-            <td class="rms_power">{{ speaker.PowerRMS }}</td>
-            <td class="peak_power">{{ speaker.PowerPeak }}</td>
-            <td class="impedance">{{ speaker.Impedance }}</td>
-            <td class="spl">{{ speaker.SPL }}</td>
+            <td class="rms_power d-none d-sm-table-cell">{{ speaker.PowerRMS }}</td>
+            <td class="peak_power d-none d-sm-table-cell">{{ speaker.PowerPeak }}</td>
+            <td class="impedance d-none d-sm-table-cell">{{ speaker.Impedance }}</td>
+            <td class="spl d-none d-sm-table-cell">{{ speaker.SPL }}</td>
             <td class="actions d-flex gap-2">
                 <a href="{{ path('app_speaker_show', {'id': speaker.id}) }}"><i class="fa-solid fa-eye"></i></a>
 

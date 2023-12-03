@@ -30,6 +30,8 @@ Encore
     .addEntry('speaker', './assets/speaker.js')
     .addEntry('limiter', './assets/limiter.js')
 
+    .addEntry('frontpage', './assets/frontpage.js')
+
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
 
