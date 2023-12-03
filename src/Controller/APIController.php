@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Translation\TranslatableMessage;
 use Novaway\Bundle\FeatureFlagBundle\Annotation\Feature;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -151,41 +152,41 @@ class APIController extends AbstractController
         // Messages
 
         if ($amplifier_power < $rms_power_request) {
-            $message .= '! Amplifier: RMS Power is low \n';
+            $message .= new TranslatableMessage('! Amplifier: RMS Power is low') . '\n';
         }
 
         if ($amplifier_power > ($peak_power_request * 2)) {
-            $message .= '! Amplifier: Peak Power is very high \n';
-            $message .= '! Speaker: Speaker may get damaged \n';
+            $message .= new TranslatableMessage('! Amplifier: Peak Power is very high') . '\n';
+            $message .= new TranslatableMessage('! Speaker: Speaker may get damaged')  . '\n';
         }
 
         if ($vpeak_dBu > ($vrms_dBu + 9)) {
-            $message .= '! Voltage Mismatch: Please consider decreasing the load (High Vpeak) \n';
+            $message .= new TranslatableMessage('! Voltage Mismatch: Please consider decreasing the load (High Vpeak)')  . '\n';
         }
 
         if ($vrms_dBu >= ($vpeak_dBu)) {
-            $message .= '! Voltage Mismatch: Please consider decreasing the load (High Vrms) \n';
+            $message .= new TranslatableMessage('! Voltage Mismatch: Please consider decreasing the load (High Vrms)')  . '\n';
         }
 
         if (!$bridge_mode_enabled && ($amplifier_power < $rms_power_request) && ($impedance_request > 4)) {
-            $message .= '? Amplifier: Consider enabling "Bridge Mode" for your Amplifier \n';
+            $message .= new TranslatableMessage('? Amplifier: Consider enabling "Bridge Mode" for your Amplifier')  . '\n';
         }
 
         if (number_format($vpeak, 2) === number_format($vrms, 2)) {
-            $message .= '# Amplifier: Power Mismatch (Vrms and Vpeak are Equal) \n';
+            $message .= new TranslatableMessage('# Amplifier: Power Mismatch (Vrms and Vpeak are Equal)')  . '\n';
         }
 
         if ($amplifier_power < $peak_power_request) {
-            $message .= '# Amplifier: Peak Power is low \n';
+            $message .= new TranslatableMessage('# Amplifier: Peak Power is low') . '\n';
         }
 
         // Specials
         if ($matching_impedance == 0) {
-            $message = '! Impedance Mismatch: Impedance could not be matched the the Amplifier \n';
+            $message = new TranslatableMessage('! Impedance Mismatch: Impedance could not be matched the the Amplifier') . '\n';
         }
 
         if (is_nan($vrms_dBu) || is_nan($vpeak_dBu)) {
-            $message = '! Impedance Mismatch: Impedance seems to be unsupported by Amplifier \n';
+            $message = new TranslatableMessage('! Impedance Mismatch: Impedance seems to be unsupported by Amplifier') . '\n';
         }
 
         $data = [
