@@ -25,6 +25,18 @@ class ManufacturerType extends AbstractType
                 'label' => new TranslatableMessage('Name'),
                 'constraints' => [new NotBlank()]
             ])
+            ->add('Category', ChoiceType::class, [
+                'label' => new TranslatableMessage('Category'),
+                'constraints' => [new NotBlank()],
+                'multiple' => true,
+                'attr' => ['data-select' => 'true'],
+                'choices' => [
+                    'Amplifier' => 'amplifier',
+                    'Processor' => 'processor',
+                    'Speaker' => 'speaker',
+                    'Chassis' => 'chassis',
+                ],
+            ])
         ;
     }
 

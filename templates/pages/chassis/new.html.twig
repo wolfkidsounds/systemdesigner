@@ -1,16 +1,20 @@
-{% extends 'base.html.twig' %}
+{% extends 'crud.html.twig' %}
 
-{% block title %}New Chassis{% endblock %}
+{% block title %}{{ parent() }} | {{'New Chassis'|trans}}{% endblock %}
 
-{% block body %}
-    <h1>Create new Chassis</h1>
+{% block crud_body %}
+    {{ include('pages/chassis/_form.html.twig') }}
+{% endblock %}
 
-    {{ include('chassis/_form.html.twig') }}
-
-    <a href="{{ path('app_chassis_index') }}">back to list</a>
+{% block crud_toolbar %}
+    <li class="list-inline-item d-lg-inline-block ms-0 m-0">
+        <a type="button" href="{{ path('app_chassis_index') }}" class="btn nav-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+    </li>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    {# {{ encore_entry_script_tags('chassis') }} #}
+    {{ encore_entry_script_tags('chassis') }}
 {% endblock %}
