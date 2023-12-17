@@ -35,8 +35,11 @@ jobs:
     - name: Set Up Environment Variables
       run: |
         echo "APP_ENV=prod" >> $GITHUB_ENV
-        echo "APP_DEBUG=0" >> $GITHUB_ENV
+        echo "APP_DEBUG=1" >> $GITHUB_ENV
         echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> $GITHUB_ENV
+        echo "MESSENGER_TRANSPORT_DSN=${{ secrets.MESSENGER_TRANSPORT_DSN }}" >> $GITHUB_ENV
+        echo "MAILER_DSN=null://null" >> $GITHUB_ENV
+        echo "APP_SECRET=${{ secrets.APP_SECRET }}" >> $GITHUB_ENV
 
     - name: Cache Composer packages
       id: composer-cache
@@ -53,37 +56,24 @@ jobs:
     - name: Generate Keys
       run: APP_RUNTIME_ENV=prod php bin/console secrets:generate-keys
 
-    - name: Production Environment
-      run: composer dump-env prod
-
-      # DOWNLOAD data.db from remote
-      # LOCAL_PATH /data/data.db
-      # REMOTE_PATH /data/data.db
-    - name: Download Database
-      run: curl -u ${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }} ftp://${{ secrets.FTP_SERVER }}/${{ secrets.REMOTE_PATH }}/data/data.db -o ${{ github.workspace }}/data/data.db
+    - name: Dump env vars for production usage
+      run: |
+        composer dump-env prod
+        echo "\$env['APP_DEBUG'] = '0';" >> .env.local.php
+        echo "\$env['DATABASE_URL'] = '${{ secrets.DATABASE_URL }}';" >> .env.local.php
+        echo "\$env['MESSENGER_TRANSPORT_DSN'] = '${{ secrets.MESSENGER_TRANSPORT_DSN }}';" >> .env.local.php
+        echo "\$env['MAILER_DSN'] = 'null://null';" >> .env.local.php
+        echo "\$env['APP_SECRET'] = '${{ secrets.APP_SECRET }}';" >> .env.local.php
 
     - name: Database Migrations
       run: |
         php bin/console doctrine:migrations:migrate --no-interaction --all-or-nothing
 
-      # UPLOAD data.db to remote
-      # LOCAL_PATH /data/data.db
-      # REMOTE_PATH /data/data.db
-    - name: Upload Migrated Database
-      uses: bayssmekanique/action-simple-file-upload@v2
-      with:
-        user: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        host: ${{ secrets.FTP_SERVER }}
-        src: ${{ github.workspace }}/data/data.db
-        dest: ${{ secrets.REMOTE_PATH }}/data/data.db
-        secure: true
-        verbose: true
-
-    - name: Clear Cache
+    - name: Clear Cache & Install Assets
       run: |
         php bin/console cache:clear --no-warmup
         php bin/console cache:warmup
+        php bin/console assets:install
 
     - name: Use Node.js 18.x
       uses: actions/setup-node@v3
