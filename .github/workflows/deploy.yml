@@ -56,9 +56,6 @@ jobs:
     - name: Production Environment
       run: composer dump-env prod
 
-      # DOWNLOAD data.db from remote
-      # LOCAL_PATH /data/data.db
-      # REMOTE_PATH /data/data.db
     - name: Download Database
       run: curl -u ${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }} ftp://${{ secrets.FTP_SERVER }}/${{ secrets.REMOTE_PATH }}/data/data.db -o ${{ github.workspace }}/data/data.db
 
@@ -66,9 +63,6 @@ jobs:
       run: |
         php bin/console doctrine:migrations:migrate --no-interaction --all-or-nothing
 
-      # UPLOAD data.db to remote
-      # LOCAL_PATH /data/data.db
-      # REMOTE_PATH /data/data.db
     - name: Upload Migrated Database
       uses: bayssmekanique/action-simple-file-upload@v2
       with:
@@ -80,10 +74,11 @@ jobs:
         secure: true
         verbose: true
 
-    - name: Clear Cache
+    - name: Clear Cache & Install Assets
       run: |
         php bin/console cache:clear --no-warmup
         php bin/console cache:warmup
+        php bin/console assets:install
 
     - name: Use Node.js 18.x
       uses: actions/setup-node@v3
