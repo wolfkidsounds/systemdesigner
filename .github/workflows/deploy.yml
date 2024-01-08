@@ -53,17 +53,22 @@ jobs:
     - name: Install Composer
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --no-dev --optimize-autoloader
 
+    - name: Dump .env
+      run: |
+        echo "" >> .env
+        echo "APP_DEBUG=1" >> .env
+        echo "DATABASE_URL='${{ secrets.DATABASE_URL }}'" >> .env
+        echo "MESSENGER_TRANSPORT_DSN=${{ secrets.MESSENGER_TRANSPORT_DSN }}" >> .env
+        echo "MAILER_DSN=null://null" >> .env
+        echo "APP_SECRET=${{ secrets.APP_SECRET }}" >> .env
+        echo "FILE_STORAGE_PATH='public/uploads'" >> .env
+
     - name: Generate Keys
       run: APP_RUNTIME_ENV=prod php bin/console secrets:generate-keys
 
     - name: Dump env vars for production usage
       run: |
         composer dump-env prod
-        echo "\$env['APP_DEBUG'] = '0';" >> .env.local.php
-        echo "\$env['DATABASE_URL'] = '${{ secrets.DATABASE_URL }}';" >> .env.local.php
-        echo "\$env['MESSENGER_TRANSPORT_DSN'] = '${{ secrets.MESSENGER_TRANSPORT_DSN }}';" >> .env.local.php
-        echo "\$env['MAILER_DSN'] = 'null://null';" >> .env.local.php
-        echo "\$env['APP_SECRET'] = '${{ secrets.APP_SECRET }}';" >> .env.local.php
 
     - name: Clear Cache & Install Assets
       run: |
