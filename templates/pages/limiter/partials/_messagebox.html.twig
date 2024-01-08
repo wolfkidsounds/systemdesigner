@@ -2,9 +2,9 @@
     <div class="row">
         <div class="col-sm">
             <div class="info-container mb-3">
-                {{ infoButton('...') }} 
+                {{ infoButton('Here you will see messages regarding the calculation. Where "#" represents an info message and "!" represent a warning or error.'|trans) }} 
                 <div class="mb-3">
-                    <label for="limiter_Message" class="form-label">Messages</label>
+                    <label for="limiter_Message" class="form-label">{{'Messages'|trans}}</label>
                     <textarea class="form-control text-danger" id="limiter_Message" rows="4" disabled readonly></textarea>
                 </div>
             </div>

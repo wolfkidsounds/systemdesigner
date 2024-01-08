@@ -8,35 +8,46 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Translation\TranslatableMessage;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class SettingsType extends AbstractType
 {
+    /** @var User $user */
+    private $user;
+
+    public function __construct(TokenStorageInterface $tokenStorage) {
+        $this->user = $tokenStorage->getToken()->getUser();
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
 
         $builder
             ->add('Locale', ChoiceType::class, [
                 'label' => new TranslatableMessage('Language'),
-                'choices' => [
+                'choices' => [  
                     'English' => 'en',
                     'German' => 'de',
-                ]
+                ],
+                'choice_attr' => [
+                    'English' => [
+                        'class' => 'fi fi-us'
+                    ],
+                    'German' => [
+                        'class' => 'fi fi-de'
+                    ],
+                ],
+                'data' => $this->user->getLocale(),
+
             ])
 
-            ->add('DatabaseAccess', ChoiceType::class, [
-                'label' => new TranslatableMessage('Show All Items'),
+            ->add('DatabaseAccessEnabled', ChoiceType::class, [
+                'label' => new TranslatableMessage('Show All Database Entries'),
                 'choices' => [
                     'Disabled' => false,
                     'Enabled' => true,
-                ]
-            ])
-
-            ->add('ShowBetaFeatures', ChoiceType::class, [
-                'label' => new TranslatableMessage('Show Beta Features'),
-                'choices' => [
-                    'Disabled' => false,
-                    'Enabled' => true,
-                ]
+                ],
+                'data' => $this->user->isDatabaseAccessEnabled(),
             ])
         ;
     }

@@ -1,0 +1,26 @@
+<header class="py-3 w-100">
+    <div class="m-auto d-flex align-items-center justify-content-between position-relative">
+        <div class="d-flex align-items-center justify-content-start">
+            <a href="{{ path('app_frontpage') }}">
+                <img src="{{ asset('images/logo.svg') }}" alt="" height="48">
+            </a>
+        </div>
+
+        <div class="h-auto d-flex align-items-center justify-content-center">
+            <nav class="navbar">
+                <ul class="d-flex align-items-center flex-row gap-3 navbar-nav list-unstyled ">
+                    <li class="nav-item"><a href="{{ path('app_frontpage')}}" class="nav-link">{{'Home'|trans}}</a></li>
+                    <li class="nav-item opacity-25 pe-none"><a href="#features" class="nav-link">{{'Features'|trans}}</a></li>
+                    <li class="nav-item opacity-25 pe-none"><a href="#pricing" class="nav-link">{{'Pricing'|trans}}</a></li>
+                    <li class="nav-item opacity-25 pe-none"><a href="#contact" class="nav-link">{{'Contact'|trans}}</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="h-auto d-flex align-items-center justify-content-end">
+            <div class="d-flex align-items-center gap-3">
+                <a id="sign-in" href="{{ path('app_login') }}" class="fw-bold py-3"><h5>{{'Sign In'|trans}}</h5></a>
+                <a id="sign-up" href="{{ path('app_register') }}" class="fw-bold px-4 py-2 bg-primary bg-opacity-10 rounded opacity-25 pe-none"><h5>{{'Sign Up'|trans}}</h5></a>
+            </div>
+        </div>
+    </div>
+</header>

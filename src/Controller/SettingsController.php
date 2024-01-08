@@ -33,21 +33,7 @@ class SettingsController extends AbstractController
                 $request->getSession()->set('_locale', $locale);
             }
             
-
-            // DATABASE ACCESS
-            $dbAccess = $form->get('DatabaseAccess')->getData();
-            if ($dbAccess) {
-                $user->setDatabaseAccessEnabled($dbAccess);
-            }
-            
-
-            //BETA FEATURES
-            $betaFeatures = $form->get('ShowBetaFeatures')->getData();
-
-            if ($betaFeatures) {
-                $user->setDatabaseAccessEnabled($betaFeatures);
-            }
-            
+            $entityManager->persist($user);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_settings', [], Response::HTTP_SEE_OTHER);

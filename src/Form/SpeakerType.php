@@ -10,6 +10,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Translation\TranslatableMessage;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -22,14 +23,16 @@ class SpeakerType extends AbstractType
     {
         $builder
             ->add('Manufacturer', EntityType::class, [
+                'label' => new TranslatableMessage('Manufacturer'),
                 'class' => Manufacturer::class,
                 'choice_label' => 'name',
                 'constraints' => [new NotBlank()],
                 'attr' => ['data-select' => 'true']
             ])
             ->add('Bandwidth', ChoiceType::class, [
+                'label' => new TranslatableMessage('Bandwidth'),
                 'choices'  => [
-                    'Select Bandwidth' => 'NONE',
+                    'Select Bandwidth' => new TranslatableMessage('NONE'),
                     'Full Range ( 20Hz - 20kHz )' => 'FR',
                     'Subwoofer ( < 200Hz )' => 'SUB',
                     'Low Fequency ( < 500Hz )' => 'LF',
@@ -38,24 +41,26 @@ class SpeakerType extends AbstractType
                 ],
             ])
             ->add('Name', TextType::class, [
+                'label' => new TranslatableMessage('Name'),
                 'constraints' => [new NotBlank()]
             ])
             ->add('PowerRMS', IntegerType::class,[
-                'label' => 'RMS Power',
+                'label' => new TranslatableMessage('RMS Power'),
                 'constraints' => [new NotBlank()]
             ])
             ->add('PowerPeak', IntegerType::class,[
-                'label' => 'Peak Power'
+                'label' => new TranslatableMessage('Peak Power'),
             ])
             ->add('Impedance', IntegerType::class, [
+                'label' => new TranslatableMessage('Impedance'),
                 'constraints' => [new NotBlank()]
             ])
             ->add('SPL', NumberType::class, [
-                'label' => 'Sensitivity (SPL @ 1W 1m)',
+                'label' => new TranslatableMessage('Sensitivity (SPL @ 1W 1m)'),
                 'required' => false,
             ])
             ->add('Manual', FileType::class, [
-                'label' => 'Manual (PDF)',
+                'label' => new TranslatableMessage('Manual (PDF)'),
                 'mapped' => false, // not associated with any entity
                 'required' => false,
                 'constraints' => [

@@ -5,9 +5,9 @@
                 <div class="row">
                     <div class="col-sm">
                         <div class="info-container mb-3">
-                            {{ infoButton('These values are suggestions based on speaker bandwidth.') }}
+                            {{ infoButton('These values are suggestions based on speaker bandwidth.'|trans) }}
                             <div>
-                                {{ form_label(form.VrmsAttack, 'Vrms Attack', {'label_attr': {'class': 'form-label'}}) }}
+                                {{ form_label(form.VrmsAttack, 'Vrms Attack'|trans, {'label_attr': {'class': 'form-label'}}) }}
                                 <div class="input-group">
                                     {{ form_widget(form.VrmsAttack, {'attr': {'readonly': 'readonly', 'class': 'form-control'}}) }}
                                     <span class="input-group-text">ms</span>
@@ -15,9 +15,9 @@
                             </div>
                         </div>
                         <div class="info-container mb-3">
-                            {{ infoButton('These values are suggestions based on speaker bandwidth.') }}
+                            {{ infoButton('These values are suggestions based on speaker bandwidth.'|trans) }}
                             <div>
-                                {{ form_label(form.VrmsRelease, 'Vrms Release', {'label_attr': {'class': 'form-label'}}) }}
+                                {{ form_label(form.VrmsRelease, 'Vrms Release'|trans, {'label_attr': {'class': 'form-label'}}) }}
                                 <div class="input-group">
                                     {{ form_widget(form.VrmsRelease, {'attr': {'readonly': 'readonly', 'class': 'form-control'}}) }}
                                     <span class="input-group-text">ms</span>
@@ -27,9 +27,9 @@
                     </div>
                     <div class="col-sm">
                         <div class="info-container mb-3">
-                            {{ infoButton('These values are suggestions based on speaker bandwidth.') }}
+                            {{ infoButton('These values are suggestions based on speaker bandwidth.'|trans) }}
                             <div>
-                                {{ form_label(form.VpeakAttack, 'Vpeak Attack', {'label_attr': {'class': 'form-label'}}) }}
+                                {{ form_label(form.VpeakAttack, 'Vpeak Attack'|trans, {'label_attr': {'class': 'form-label'}}) }}
                                 <div class="input-group">
                                     {{ form_widget(form.VpeakAttack, {'attr': {'readonly': 'readonly', 'class': 'form-control'}}) }}
                                     <span class="input-group-text">ms</span>
@@ -37,9 +37,9 @@
                             </div>
                         </div>
                         <div class="info-container mb-3">
-                            {{ infoButton('These values are suggestions based on speaker bandwidth.') }}
+                            {{ infoButton('These values are suggestions based on speaker bandwidth.'|trans) }}
                             <div>
-                                {{ form_label(form.VpeakRelease, 'Vpeak Release', {'label_attr': {'class': 'form-label'}}) }}
+                                {{ form_label(form.VpeakRelease, 'Vpeak Release'|trans, {'label_attr': {'class': 'form-label'}}) }}
                                 <div class="input-group">
                                     {{ form_widget(form.VpeakRelease, {'attr': {'readonly': 'readonly', 'class': 'form-control'}}) }}
                                     <span class="input-group-text">ms</span>

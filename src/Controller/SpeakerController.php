@@ -6,6 +6,8 @@ use App\Entity\User;
 use App\Entity\Speaker;
 use App\Form\SpeakerType;
 use App\Service\ManualUploader;
+use App\Entity\ValidationRequest;
+use App\Form\ValidationRequestType;
 use App\Repository\SpeakerRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,10 +26,10 @@ class SpeakerController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
-        if ($user->isDatabaseAccessEnabled()) {
+        if ($user->isSubscriber() && $user->isDatabaseAccessEnabled()) {
             $speakers = $speakerRepository->findByUserOrValidated($user);
         } else {
-            $speakers = $speakerRepository->findBy(['User' => $user]);
+            $speakers = $speakerRepository->findBy(['User' => $user], [], 10);
         }
 
         return $this->render('pages/speaker/index.html.twig', [
@@ -92,14 +94,36 @@ class SpeakerController extends AbstractController
         ]);
     }
 
-    #[Route('/show/{id}', name: 'app_speaker_show', methods: ['GET'])]
-    public function show(Speaker $speaker): Response
+    #[Route('/show/{id}', name: 'app_speaker_show', methods: ['GET', 'POST'])]
+    public function show(Speaker $speaker, Request $request, EntityManagerInterface $entityManager): Response
     {
         /** @var User $user */
         $user = $this->getUser();
+
+        $validationRequest = new ValidationRequest();
+        $validationRequest->setUser($user);
+        $validationRequest->setSpeaker($speaker);
+
+        $form = $this->createForm(ValidationRequestType::class, $validationRequest);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $validationRequest->setStatus('requested');
+            $entityManager->persist($validationRequest);
+            $entityManager->flush();
+        }
+
+        if ($speaker->getValidationRequests()->count() > 0) {
+            $validationRequested = true;
+        } else {
+            $validationRequested = false;
+        }
         
         return $this->render('pages/speaker/show.html.twig', [
             'speaker' => $speaker,
+            'form' => $form,
+            'validationRequested' => $validationRequested,
             'title' => new TranslatableMessage('Speaker'),
             'crud_title' => new TranslatableMessage('View Speaker'),
         ]);

@@ -5,6 +5,11 @@ import 'bootstrap';
 import 'simplebar';
 import 'select2/dist/js/select2.js';
 
+import 'datatables.net-buttons-bs5';
+import 'datatables.net-buttons/js/buttons.colVis.mjs';
+import 'datatables.net-buttons/js/buttons.html5.mjs';
+import 'datatables.net-responsive-bs5';
+
 // Import CSS Modules
 import '@fortawesome/fontawesome-free/css/all.css';
 import 'balloon-css';
@@ -16,7 +21,7 @@ import './styles/overwrites/select2-bootstrap-theme.css';
 // Import Custom JS
 import './js/progress-circular.js';
 import './js/select2.js';
-import './js/search.js';
+import './js/datatables.js';
 
 // Import SASS
 import './styles/app.scss';

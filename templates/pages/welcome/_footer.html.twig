@@ -1,0 +1,65 @@
+
+<div class="mt-3 py-3 w-100 footer">
+    <div class="py-5 px-3">
+        <div class="d-flex justify-content-between flex-wrap">
+
+            <div class="w-25">
+                <a href="{{ path('app_frontpage') }}" class="text-primary">
+                    <img src="{{ asset('images/logo.svg') }}" alt="" height="48"> System Designer
+                </a>
+                <ul class="px-2 list-unstyled gap-3 align-items-center d-flex flex-wrap mt-4">
+                    <li><a class="icon-link icon-link-hover" href="#"><i class="fa-solid fa-tree"></i></a></li>
+                    <li><a class="icon-link icon-link-hover" href="#"><i class="fa-brands fa-facebook"></i></a></li>
+                    <li><a class="icon-link icon-link-hover" href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                    <li><a class="icon-link icon-link-hover" href="#"><i class="fa-brands fa-spotify"></i></a></li>
+                    <li><a class="icon-link icon-link-hover" href="#"><i class="fa-brands fa-soundcloud"></i></a></li>
+                    <li><a class="icon-link icon-link-hover" href="#"><i class="fa-brands fa-github"></i></a></li>
+                </ul>
+            </div>
+
+
+            <div class="w-75 gap-2 d-flex justify-content-between flex-row d-none d-lg-flex">
+                <div class="">
+                    <h4 class="mb-4">{{'Quick Access'|trans}}</h4>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a href="{{ path('app_frontpage') }}" class="text-body nav-link p-1">Home</a></li>
+                        <li class="nav-item opacity-25 pe-none"><a href="#" class="text-body nav-link p-1">App</a></li>
+                        <li class="nav-item opacity-25 pe-none"><a href="#" class="text-body nav-link p-1">Pricing</a></li>
+                        <li class="nav-item opacity-25 pe-none"><a href="#" class="text-body nav-link p-1">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="">
+                    <h4 class="mb-4">{{'Features'|trans}}</h4>
+                    <ul class="nav flex-column">
+                        <li class="nav-item opacity-25 pe-none"><a href="#" class="text-body nav-link p-1">Database</a></li>
+                        <li class="nav-item opacity-25 pe-none"><a href="#" class="text-body nav-link p-1">Entities</a></li>
+                        <li class="nav-item opacity-25 pe-none"><a href="#" class="text-body nav-link p-1">Settings</a></li>
+                    </ul>
+                </div>
+                <div class="opacity-25 pe-none">
+                    <h4 class="mb-4">{{'Newsletter'|trans}}</h4>
+                    <p class="ac qe">{{'Subscribe to receive future updates'|trans}}</p>
+                    <form action="{{ path('app_main') }}" method="POST">
+                        <div class="">
+                            <input type="text" name="email" placeholder="Email address" class="form-control mb-3">
+                            <button type="submit" class="btn btn-secondary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="border-top d-flex justify-content-between align-items-center py-3">
+        <div class="">
+            <ul class="nav tc wf gg">
+                <li class="nav-item"><a href="#" class="text-body nav-link p-0 my-3 me-3 opacity-25 pe-none">Terms Of Use</a></li>
+                <li class="nav-item"><a href="#" class="text-body nav-link p-0 my-3 me-3 opacity-25 pe-none">Privacy Policy</a></li>
+                <li class="nav-item"><a href="#" class="text-body nav-link p-0 my-3 me-3 opacity-25 pe-none">Support</a></li>
+            </ul>
+        </div>
+        <div class="">
+            <p class="my-3">© {{ 'now' | date('Y') }} Pulsation Audio - System Designer</p>
+        </div>
+    </div>
+</div>

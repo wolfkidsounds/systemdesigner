@@ -5,11 +5,23 @@ const tour = new Shepherd.Tour({
 
     useModalOverlay: true,
     defaultStepOptions: {
-      classes: 'z-9999 shadow p-3 bg-body rounded',
+      classes: 'z-9999 shadow p-3 fs-12 bg-body rounded w-75',
       scrollTo: true
     }
 
 });
+
+// Function to check if the device is a desktop
+function isDesktop() {
+  return window.innerWidth >= 992; // Adjust the width as needed
+}
+
+// Function to add a step based on device type
+function addStepIf(condition, step) {
+  if (condition) {
+    tour.addStep(step);
+  }
+}
 
 tour.addStep({
 
@@ -35,7 +47,7 @@ tour.addStep({
 
 });
 
-tour.addStep({
+addStepIf(isDesktop(), {
 
     text: 'Use this button to get back to the overview.',
     attachTo: {
@@ -59,7 +71,7 @@ tour.addStep({
 
 });
 
-tour.addStep({
+addStepIf(isDesktop(), {
 
     text: 'Use this button to view additional settings.',
     attachTo: {
@@ -83,7 +95,7 @@ tour.addStep({
 
 });
 
-tour.addStep({
+addStepIf(isDesktop(), {
 
     text: 'Use this button to view information about the limiter timing suggestions.',
     attachTo: {
@@ -107,7 +119,7 @@ tour.addStep({
 
 });
 
-tour.addStep({
+addStepIf(isDesktop(), {
 
     text: 'Use this button to view some useful information about the calcualtion process.',
     attachTo: {

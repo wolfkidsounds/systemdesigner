@@ -40,6 +40,31 @@ body {
         height:70px;
         align-items: center;
     }
+
+    .data_table table,
+    .data_table th,
+    .data_table tr,
+    .data_table td,
+    .data-tables-wrapper #t-page a,
+    .data-tables-wrapper #t-filter input,
+    .data-tables-wrapper #t-entries label select  {
+        font-size:12px !important;
+    }
+
+    .data-tables-wrapper .pagination {
+        --bs-pagination-padding-x:.5rem;
+        --bs-pagination-padding-y:.3rem;
+    }
+
+    .data-tables-wrapper #t-info {
+        display:none !important;
+    }
+
+    .data-tables-wrapper #t-filter,
+    .data-tables-wrapper #t-entries {
+        font-size: 0px;
+    }
+    
 }
 
 /* `xl` applies to large devices (desktops, less than 1200px) */

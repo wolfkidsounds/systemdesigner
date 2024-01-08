@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{'Welcome'|trans}}{% endblock %}
+
+{% block layout %}
+    <div class="container">
+        {% include 'pages/welcome/_header.html.twig' %}
+
+        {% include 'pages/welcome/_main.html.twig' %}
+
+        {% include 'pages/welcome/_footer.html.twig' %}
+    </div>
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('frontpage') }}
+{% endblock %}

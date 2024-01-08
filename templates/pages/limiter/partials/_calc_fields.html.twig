@@ -1,9 +1,9 @@
 <div class="row calculated-fields mt-3 mb-3">
     <div class="col-sm shepherad-vrms">
         <div class="info-container mb-3">
-            {{ infoButton('If your controller only supports one limiter, we suggest using the RMS Voltage. - However, keep in mind that this can increase the crest-faktor and therfore the power-compression significantly.') }}
+            {{ infoButton('If your controller only supports one limiter, we suggest using the RMS Voltage. - However, keep in mind that this can increase the crest-faktor and therfore the power-compression significantly.'|trans) }}
             <div>
-                {{ form_label(form.Vrms, 'Vrms', {'label_attr': {'class': 'form-label required'}}) }}
+                {{ form_label(form.Vrms, 'Vrms'|trans, {'label_attr': {'class': 'form-label required'}}) }}
                 <div class="input-group">
                     {{ form_widget(form.Vrms, {'attr': {'readonly': 'readonly', 'inputmode': 'decimal', 'class': 'form-control'}}) }}
                     <span class="input-group-text">Vrms</span>
@@ -12,9 +12,9 @@
         </div>
 
         <div class="info-container mb-3">
-            {{ infoButton('This is the value in dBu/dB/dBFS (according to the processor) that needs to be set in order to keep the limit at the given Vrms Voltage.') }}
+            {{ infoButton('This is the value in dBu/dB/dBFS (according to the processor) that needs to be set in order to keep the limit at the given Vrms Voltage.'|trans) }}
             <div>
-                {{ form_label(form.VrmsValue, 'VrmsValue', {'label_attr': {'class': 'form-label required'}}) }}
+                {{ form_label(form.VrmsValue, 'Vrms Value'|trans, {'label_attr': {'class': 'form-label required'}}) }}
                 <div class="input-group">
                     {{ form_widget(form.VrmsValue, {'attr': {'readonly': 'readonly', 'inputmode': 'decimal', 'class': 'form-control'}}) }}
                     <span class="input-group-text">dBu | dBFS</span>
@@ -24,9 +24,9 @@
     </div>
     <div class="col-sm shepherad-vpeak">
         <div class="info-container mb-3">
-            {{ infoButton('If your controller only supports one limiter, we suggest using the RMS Voltage. - However, keep in mind that this can increase the crest-faktor and therfore the power-compression significantly.') }}
+            {{ infoButton('If your controller only supports one limiter, we suggest using the RMS Voltage. - However, keep in mind that this can increase the crest-faktor and therfore the power-compression significantly.'|trans) }}
             <div>
-                {{ form_label(form.Vpeak, 'Vpeak', {'label_attr': {'class': 'form-label required'}}) }}
+                {{ form_label(form.Vpeak, 'Vpeak'|trans, {'label_attr': {'class': 'form-label required'}}) }}
                 <div class="input-group">
                     {{ form_widget(form.Vpeak, {'attr': {'readonly': 'readonly', 'inputmode': 'decimal', 'class': 'form-control'}}) }}
                     <span class="input-group-text">Vpeak</span>
@@ -34,9 +34,9 @@
             </div>
         </div>
         <div class="info-container mb-3">
-            {{ infoButton('This is the value in dBu/dB/dBFS (according to the processor) that needs to be set in order to keep the limit at the given Vpeak Voltage.') }}
+            {{ infoButton('This is the value in dBu/dB/dBFS (according to the processor) that needs to be set in order to keep the limit at the given Vpeak Voltage.'|trans) }}
             <div>
-                {{ form_label(form.VpeakValue, 'VpeakValue', {'label_attr': {'class': 'form-label required'}}) }}
+                {{ form_label(form.VpeakValue, 'Vpeak Value'|trans, {'label_attr': {'class': 'form-label required'}}) }}
                 <div class="input-group">
                     {{ form_widget(form.VpeakValue, {'attr': {'readonly': 'readonly', 'inputmode': 'decimal', 'class': 'form-control'}}) }}
                     <span class="input-group-text">dBu | dBFS</span>

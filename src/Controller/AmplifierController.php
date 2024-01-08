@@ -6,9 +6,10 @@ use App\Entity\User;
 use App\Entity\Amplifier;
 use App\Form\AmplifierType;
 use App\Service\ManualUploader;
+use App\Entity\ValidationRequest;
+use App\Form\ValidationRequestType;
 use App\Repository\AmplifierRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Pagerfanta\Doctrine\ORM\QueryAdapter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,10 +30,10 @@ class AmplifierController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
-        if ($user->isDatabaseAccessEnabled()) {
+        if ($user->isSubscriber() && $user->isDatabaseAccessEnabled()) {
             $amplifiers = $amplifierRepository->findByUserOrValidated($user);
         } else {
-            $amplifiers = $amplifierRepository->findBy(['User' => $user]);
+            $amplifiers = $amplifierRepository->findBy(['User' => $user], [], 10);
         }
 
         return $this->render('pages/amplifier/index.html.twig', [
@@ -99,14 +100,36 @@ class AmplifierController extends AbstractController
         ]);
     }
 
-    #[Route('/show/{id}', name: 'app_amplifier_show', methods: ['GET'])]
-    public function show(Amplifier $amplifier): Response
+    #[Route('/show/{id}', name: 'app_amplifier_show', methods: ['GET', 'POST'])]
+    public function show(Amplifier $amplifier, Request $request, EntityManagerInterface $entityManager): Response
     {
         /** @var User $user */
         $user = $this->getUser();
+
+        $validationRequest = new ValidationRequest();
+        $validationRequest->setUser($user);
+        $validationRequest->setAmplifier($amplifier);
+
+        $form = $this->createForm(ValidationRequestType::class, $validationRequest);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $validationRequest->setStatus('requested');
+            $entityManager->persist($validationRequest);
+            $entityManager->flush();
+        }
+
+        if ($amplifier->getValidationRequests()->count() > 0) {
+            $validationRequested = true;
+        } else {
+            $validationRequested = false;
+        }
         
         return $this->render('pages/amplifier/show.html.twig', [
             'amplifier' => $amplifier,
+            'form' => $form,
+            'validationRequested' => $validationRequested,
             'controller_name' => 'AmplifierController',
             'title' => new TranslatableMessage('Amplifier'),
             'crud_title' => new TranslatableMessage('Show Amplifier'),

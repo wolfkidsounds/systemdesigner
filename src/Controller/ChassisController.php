@@ -26,10 +26,10 @@ class ChassisController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
-        if ($user->isDatabaseAccessEnabled()) {
+        if ($user->isSubscriber() && $user->isDatabaseAccessEnabled()) {
             $chassis = $chassisRepository->findByUserOrValidated($user);
         } else {
-            $chassis = $chassisRepository->findBy(['User' => $user]);
+            $chassis = $chassisRepository->findBy(['User' => $user], [], 10);
         }
 
         return $this->render('pages/chassis/index.html.twig', [
