@@ -55,7 +55,7 @@ jobs:
 
     - name: Dump .env
       run: |
-        echo "APP_ENV=prod" >> .env
+        echo "" >> .env
         echo "APP_DEBUG=1" >> .env
         echo "DATABASE_URL='${{ secrets.DATABASE_URL }}'" >> .env
         echo "MESSENGER_TRANSPORT_DSN=${{ secrets.MESSENGER_TRANSPORT_DSN }}" >> .env
