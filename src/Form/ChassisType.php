@@ -10,9 +10,11 @@ use Symfony\Component\Form\AbstractType;
 use App\Repository\ManufacturerRepository;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Translation\TranslatableMessage;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -32,9 +34,9 @@ class ChassisType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if ($this->user->isSubscriber() && $this->user->isDatabaseAccessEnabled()) {
-            $manufacturers = $this->manufacturerRepository->findByUserOrValidated($this->user, 'chassis');
+            $manufacturers = $this->manufacturerRepository->findByUserOrValidatedWithCategory($this->user, 'chassis');
         } else {
-            $manufacturers = $this->manufacturerRepository->findBy(['User' => $this->user], [], 10);
+            $manufacturers = $this->manufacturerRepository->findBy(['User' => $this->user, 'Category' => 'chassis'], [], 10);
         }
 
         $builder
@@ -158,6 +160,23 @@ class ChassisType extends AbstractType
                 ],
                 'attr' => ['placeholder' => 'Winding Material'],
                 'constraints' => [new NotBlank()],
+            ])
+
+        // Datasheet
+            ->add('Datasheet', FileType::class, [
+                'label' => new TranslatableMessage('Datasheet (PDF)'),
+                'mapped' => false, // not associated with any entity
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '25m',
+                        'mimeTypes' => [
+                            'application/pdf',
+                            'application/x-pdf',
+                        ],
+                        'mimeTypesMessage' => 'You can only upload PDF Files',
+                    ])
+                ],
             ])
         ;
     }
