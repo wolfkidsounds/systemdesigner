@@ -29,14 +29,14 @@ echo ======================================================
 call git stash save "Stashing current changes"
 
 echo ======================================================
-echo Install Composer Dependencies
+echo Update Composer Dependencies
 echo ======================================================
-call composer install
+call composer update
 
 echo ======================================================
-echo Install Node Dependencies
+echo Update Node Dependencies
 echo ======================================================
-call npm install --force
+call npm update
 
 echo ======================================================
 echo Install Assets
@@ -47,7 +47,7 @@ echo ======================================================
 echo Save & Upload Changes
 echo ======================================================
 call git add .
-call git commit -m "Installing dependencies"
+call git commit -m "Update dependencies"
 call git push
 
 echo ======================================================

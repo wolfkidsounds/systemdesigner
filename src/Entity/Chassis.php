@@ -35,43 +35,43 @@ class Chassis
     private Collection $speakers;
 
     #[ORM\Column]
-    private ?float $ResonanceFrequency = null;
+    private ?float $Fs = null;
 
     #[ORM\Column]
-    private ?float $Compliance = null;
+    private ?float $Cms = null;
 
     #[ORM\Column]
-    private ?float $MovingMass = null;
+    private ?float $Mms = null;
 
     #[ORM\Column]
-    private ?float $MechanicalGrade = null;
+    private ?float $Qms = null;
 
     #[ORM\Column]
-    private ?float $ElectricalGrade = null;
+    private ?float $Qes = null;
 
     #[ORM\Column]
-    private ?float $TotalGrade = null;
+    private ?float $Qts = null;
 
     #[ORM\Column]
-    private ?float $EquivalentVolume = null;
+    private ?float $Vas = null;
 
     #[ORM\Column]
-    private ?float $ResistanceDC = null;
+    private ?float $Re = null;
 
     #[ORM\Column]
-    private ?float $ForceFactor = null;
+    private ?float $Bl = null;
 
     #[ORM\Column]
-    private ?float $VoiceCoilInductance = null;
+    private ?float $Le = null;
 
     #[ORM\Column]
-    private ?float $LinearDisplacement = null;
+    private ?float $Xmax = null;
 
     #[ORM\Column]
-    private ?float $EffectivePistonArea = null;
+    private ?float $Sd = null;
 
     #[ORM\Column(nullable: true)]
-    private ?float $NetWeight = null;
+    private ?float $Rms = null;
 
     #[ORM\Column]
     private ?int $NominalImpedance = null;
@@ -88,10 +88,29 @@ class Chassis
     #[ORM\OneToMany(mappedBy: 'Chassis', targetEntity: ValidationRequest::class)]
     private Collection $validationRequests;
 
+    #[ORM\Column(nullable: true)]
+    private ?float $Mmd = null;
+
+    #[ORM\Column]
+    private ?float $Vd = null;
+
+    #[ORM\Column]
+    private ?float $VoiceCoilDiameter = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Datasheet = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $Bandwidth = null;
+
     public function __construct()
     {
         $this->speakers = new ArrayCollection();
         $this->validationRequests = new ArrayCollection();
+    }
+
+    public function __toString() {
+        return $this->Manufacturer . ' - ' . $this->Name;
     }
 
     public function getId(): ?int
@@ -174,158 +193,158 @@ class Chassis
         return $this;
     }
 
-    public function getResonanceFrequency(): ?float
+    public function getFs(): ?float
     {
-        return $this->ResonanceFrequency;
+        return $this->Fs;
     }
 
-    public function setResonanceFrequency(float $ResonanceFrequency): static
+    public function setFs(float $Fs): static
     {
-        $this->ResonanceFrequency = $ResonanceFrequency;
+        $this->Fs = $Fs;
 
         return $this;
     }
 
-    public function getCompliance(): ?float
+    public function getCms(): ?float
     {
-        return $this->Compliance;
+        return $this->Cms;
     }
 
-    public function setCompliance(float $Compliance): static
+    public function setCms(float $Cms): static
     {
-        $this->Compliance = $Compliance;
+        $this->Cms = $Cms;
 
         return $this;
     }
 
-    public function getMovingMass(): ?float
+    public function getMms(): ?float
     {
-        return $this->MovingMass;
+        return $this->Mms;
     }
 
-    public function setMovingMass(float $MovingMass): static
+    public function setMms(float $Mms): static
     {
-        $this->MovingMass = $MovingMass;
+        $this->Mms = $Mms;
 
         return $this;
     }
 
-    public function getMechanicalGrade(): ?float
+    public function getQms(): ?float
     {
-        return $this->MechanicalGrade;
+        return $this->Qms;
     }
 
-    public function setMechanicalGrade(float $MechanicalGrade): static
+    public function setQms(float $Qms): static
     {
-        $this->MechanicalGrade = $MechanicalGrade;
+        $this->Qms = $Qms;
 
         return $this;
     }
 
-    public function getElectricalGrade(): ?float
+    public function getQes(): ?float
     {
-        return $this->ElectricalGrade;
+        return $this->Qes;
     }
 
-    public function setElectricalGrade(float $ElectricalGrade): static
+    public function setQes(float $Qes): static
     {
-        $this->ElectricalGrade = $ElectricalGrade;
+        $this->Qes = $Qes;
 
         return $this;
     }
 
-    public function getTotalGrade(): ?float
+    public function getQts(): ?float
     {
-        return $this->TotalGrade;
+        return $this->Qts;
     }
 
-    public function setTotalGrade(float $TotalGrade): static
+    public function setQts(float $Qts): static
     {
-        $this->TotalGrade = $TotalGrade;
+        $this->Qts = $Qts;
 
         return $this;
     }
 
-    public function getEquivalentVolume(): ?float
+    public function getVas(): ?float
     {
-        return $this->EquivalentVolume;
+        return $this->Vas;
     }
 
-    public function setEquivalentVolume(float $EquivalentVolume): static
+    public function setVas(float $Vas): static
     {
-        $this->EquivalentVolume = $EquivalentVolume;
+        $this->Vas = $Vas;
 
         return $this;
     }
 
-    public function getResistanceDC(): ?float
+    public function getRe(): ?float
     {
-        return $this->ResistanceDC;
+        return $this->Re;
     }
 
-    public function setResistanceDC(float $ResistanceDC): static
+    public function setRe(float $Re): static
     {
-        $this->ResistanceDC = $ResistanceDC;
+        $this->Re = $Re;
 
         return $this;
     }
 
-    public function getForceFactor(): ?float
+    public function getBl(): ?float
     {
-        return $this->ForceFactor;
+        return $this->Bl;
     }
 
-    public function setForceFactor(float $ForceFactor): static
+    public function setBl(float $Bl): static
     {
-        $this->ForceFactor = $ForceFactor;
+        $this->Bl = $Bl;
 
         return $this;
     }
 
-    public function getVoiceCoilInductance(): ?float
+    public function getLe(): ?float
     {
-        return $this->VoiceCoilInductance;
+        return $this->Le;
     }
 
-    public function setVoiceCoilInductance(float $VoiceCoilInductance): static
+    public function setLe(float $Le): static
     {
-        $this->VoiceCoilInductance = $VoiceCoilInductance;
+        $this->Le = $Le;
 
         return $this;
     }
 
-    public function getLinearDisplacement(): ?float
+    public function getXmax(): ?float
     {
-        return $this->LinearDisplacement;
+        return $this->Xmax;
     }
 
-    public function setLinearDisplacement(float $LinearDisplacement): static
+    public function setXmax(float $Xmax): static
     {
-        $this->LinearDisplacement = $LinearDisplacement;
+        $this->Xmax = $Xmax;
 
         return $this;
     }
 
-    public function getEffectivePistonArea(): ?float
+    public function getSd(): ?float
     {
-        return $this->EffectivePistonArea;
+        return $this->Sd;
     }
 
-    public function setEffectivePistonArea(float $EffectivePistonArea): static
+    public function setSd(float $Sd): static
     {
-        $this->EffectivePistonArea = $EffectivePistonArea;
+        $this->Sd = $Sd;
 
         return $this;
     }
 
-    public function getNetWeight(): ?float
+    public function getRms(): ?float
     {
-        return $this->NetWeight;
+        return $this->Rms;
     }
 
-    public function setNetWeight(?float $NetWeight): static
+    public function setRms(?float $Rms): static
     {
-        $this->NetWeight = $NetWeight;
+        $this->Rms = $Rms;
 
         return $this;
     }
@@ -404,6 +423,66 @@ class Chassis
                 $validationRequest->setChassis(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMmd(): ?float
+    {
+        return $this->Mmd;
+    }
+
+    public function setMmd(?float $Mmd): static
+    {
+        $this->Mmd = $Mmd;
+
+        return $this;
+    }
+
+    public function getVd(): ?float
+    {
+        return $this->Vd;
+    }
+
+    public function setVd(float $Vd): static
+    {
+        $this->Vd = $Vd;
+
+        return $this;
+    }
+
+    public function getVoiceCoilDiameter(): ?float
+    {
+        return $this->VoiceCoilDiameter;
+    }
+
+    public function setVoiceCoilDiameter(float $VoiceCoilDiameter): static
+    {
+        $this->VoiceCoilDiameter = $VoiceCoilDiameter;
+
+        return $this;
+    }
+
+    public function getDatasheet(): ?string
+    {
+        return $this->Datasheet;
+    }
+
+    public function setDatasheet(?string $Datasheet): static
+    {
+        $this->Datasheet = $Datasheet;
+
+        return $this;
+    }
+
+    public function getBandwidth(): ?string
+    {
+        return $this->Bandwidth;
+    }
+
+    public function setBandwidth(string $Bandwidth): static
+    {
+        $this->Bandwidth = $Bandwidth;
 
         return $this;
     }

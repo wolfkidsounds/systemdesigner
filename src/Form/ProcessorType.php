@@ -5,23 +5,42 @@ namespace App\Form;
 use App\Entity\Processor;
 use App\Entity\Manufacturer;
 use Symfony\Component\Form\AbstractType;
+use App\Repository\ManufacturerRepository;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Translation\TranslatableMessage;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Translation\TranslatableMessage;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class ProcessorType extends AbstractType
 {
+    /** @var User $user */
+    private $user;
+    private $manufacturerRepository;
+
+    public function __construct(TokenStorageInterface $tokenStorage, ManufacturerRepository $manufacturerRepository) {
+        $this->user = $tokenStorage->getToken()->getUser();
+        $this->manufacturerRepository = $manufacturerRepository;
+    }
+    
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        if ($this->user->isSubscriber() && $this->user->isDatabaseAccessEnabled()) {
+            $manufacturers = $this->manufacturerRepository->findByUserOrValidated($this->user, 'processor');
+        } else {
+            $manufacturers = $this->manufacturerRepository->findBy(['User' => $this->user], [], 10);
+        }
+
         $builder
             ->add('Manufacturer', EntityType::class, [
+                'label' => new TranslatableMessage('Manufacturer'),
                 'class' => Manufacturer::class,
+                'choices' => $manufacturers,
                 'choice_label' => 'name',
                 'constraints' => [new NotBlank()],
                 'attr' => ['data-select' => 'true']

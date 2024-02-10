@@ -55,7 +55,7 @@ jobs:
 
     - name: Dump .env
       run: |
-        echo "APP_ENV=prod" >> .env
+        echo "" >> .env
         echo "APP_DEBUG=1" >> .env
         echo "DATABASE_URL='${{ secrets.DATABASE_URL }}'" >> .env
         echo "MESSENGER_TRANSPORT_DSN=${{ secrets.MESSENGER_TRANSPORT_DSN }}" >> .env
@@ -73,7 +73,6 @@ jobs:
     - name: Clear Cache & Install Assets
       run: |
         php bin/console cache:clear --no-warmup
-        php bin/console cache:warmup
         php bin/console assets:install
 
     - name: Use Node.js 18.x
@@ -120,6 +119,23 @@ jobs:
               **/public/maintenance.php
               **/var/cache/dev/**
               **/var/log/**
+
+    - name: Create Empty Directory
+      run: mkdir .empty
+
+    - name: 📂 Clear Cache # Clears Cache
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+          timeout: 60000
+          server: ${{ secrets.FTP_SERVER }}
+          port: ${{ secrets.FTP_PORT }}
+          local-dir: .empty/
+          protocol: ftps
+          server-dir: ${{ secrets.STAGING_BASE_PATH }}/var/cache/
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          dangerous-clean-slate	: true
+          dry-run: false
 
     - name: Disable Maintenance Mode (Upload Public Index PHP)
       uses: bayssmekanique/action-simple-file-upload@v2

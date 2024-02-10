@@ -15,7 +15,7 @@ use Novaway\Bundle\FeatureFlagBundle\Annotation\Feature;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Feature(name: "limiter")]
+#[Feature(name: "chassis")]
 #[IsGranted('ROLE_USER')]
 #[Route('/app/chassis')]
 class ChassisController extends AbstractController
@@ -43,11 +43,17 @@ class ChassisController extends AbstractController
     #[Route('/new', name: 'app_chassis_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
+
         $chassis = new Chassis();
         $form = $this->createForm(ChassisType::class, $chassis);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $chassis->setUser($user);
+            $chassis->setValidated(false);
+            
             $entityManager->persist($chassis);
             $entityManager->flush();
 
@@ -56,6 +62,8 @@ class ChassisController extends AbstractController
 
         return $this->render('pages/chassis/new.html.twig', [
             'chassis' => $chassis,
+            'title' => new TranslatableMessage('Chassis'),
+            'crud_title' => new TranslatableMessage('New Chassis'),
             'form' => $form,
             'tourButton' => true,
         ]);
