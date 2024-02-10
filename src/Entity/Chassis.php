@@ -97,10 +97,20 @@ class Chassis
     #[ORM\Column]
     private ?float $VoiceCoilDiameter = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Datasheet = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $Bandwidth = null;
+
     public function __construct()
     {
         $this->speakers = new ArrayCollection();
         $this->validationRequests = new ArrayCollection();
+    }
+
+    public function __toString() {
+        return $this->Manufacturer . ' - ' . $this->Name;
     }
 
     public function getId(): ?int
@@ -449,6 +459,30 @@ class Chassis
     public function setVoiceCoilDiameter(float $VoiceCoilDiameter): static
     {
         $this->VoiceCoilDiameter = $VoiceCoilDiameter;
+
+        return $this;
+    }
+
+    public function getDatasheet(): ?string
+    {
+        return $this->Datasheet;
+    }
+
+    public function setDatasheet(?string $Datasheet): static
+    {
+        $this->Datasheet = $Datasheet;
+
+        return $this;
+    }
+
+    public function getBandwidth(): ?string
+    {
+        return $this->Bandwidth;
+    }
+
+    public function setBandwidth(string $Bandwidth): static
+    {
+        $this->Bandwidth = $Bandwidth;
 
         return $this;
     }
