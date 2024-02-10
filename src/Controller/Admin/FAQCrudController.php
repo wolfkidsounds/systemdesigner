@@ -18,9 +18,8 @@ class FAQCrudController extends AbstractCrudController
     }
 
     public function configureFields(string $pageName): iterable
-{
-    return [
-        ChoiceField::new('Category')
+    {
+        yield ChoiceField::new('Category')
             ->autocomplete()
             ->setChoices([
                 'Account' => 'account',
@@ -32,9 +31,8 @@ class FAQCrudController extends AbstractCrudController
                 'Subscription' => 'subscription',
                 'Security' => 'security',
             ])
-            ->renderAsBadges(),
-        Field::new('Name'),
-        Field::new('Description'),
-    ];
-}
+            ->renderAsBadges();
+        yield TextField::new('Name');
+        yield TextEditorField::new('Description');
+    }
 }

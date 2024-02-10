@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
@@ -13,14 +14,12 @@ class MainController extends AbstractController
 {
     #[IsGranted('ROLE_USER')]
     #[Route('/app', name: 'app_main')]
-    public function main(LoggerInterface $logger): Response
+    public function main(): Response
     {
-        /** @var User $user */
-        $user = $this->getUser();
-
-        $logger->info('User was found.');
-        $logger->info('Render Page');
-
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+        
         return $this->render('pages/main/index.html.twig', [
             'controller_name' => 'MainController',
             'title' => 'Dashboard',
@@ -30,14 +29,11 @@ class MainController extends AbstractController
     }
 
     #[Route('/', name: 'app_index')]
-    public function index(LoggerInterface $logger): Response
+    public function index(): Response
     {
-        $logger->info('Found Route /');
         if (!$this->getUser()) {
-            $logger->info('Redirect to app_login');
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('app_frontpage');
         } else {
-            $logger->info('Redirect to app_main');
             return $this->redirectToRoute('app_main');
         }
     }

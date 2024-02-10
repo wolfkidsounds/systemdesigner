@@ -3,10 +3,12 @@
     <!-- LOGO -->
     <div class="sidebar_profile d-none flex-lg-column d-lg-block">
         <ul class="nav justify-content-center">
-            <li class="btn-group dropdown shepherd-logo">
-                <a href="{{ path('app_main') }}" class="nav-link logo d-flex">
-                    <img src="{{ asset('images/logo.svg') }}" alt="" height="30">
-                </a>
+            <li class="btn-group dropdown">
+                <div class="shepherd-logo">
+                    <a href="{{ path('app_main') }}" class="nav-link logo d-flex">
+                        <img src="{{ asset('images/logo.svg') }}" alt="" height="30">
+                    </a>
+                </div>
             </li>
         </ul>
     </div>
@@ -20,45 +22,10 @@
 
     <!-- SETTINGS -->
     <div class="sidebar_logo d-none flex-lg-column d-lg-block">
-        <ul class="nav justify-content-center">
+        <ul class="nav justify-content-center shepherd-settings">
 
-            <li class="btn-group dropup dropend shepherd-notifications opacity-25 pe-none">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa-solid fa-bell">
-                        {% if app.user.notifications|length > 0 %}
-                        <span class="position-absolute top-1 start-99 translate-middle badge rounded-pill bg-primary text-body font-size-12">
-                            {{ app.user.notifications|length }}
-                            <span class="visually-hidden">{{'Unread Notifications'|trans}}</span>
-                        </span>
-                        {% endif %}
-                    </i>
-                </a>
-                <ul class="dropdown-menu">
-                    {{ include('partials/sidebar/notification/_notifications.html.twig')}}
-                </ul>  
-            </li>
-
-            <li class="btn-group">
-                <a class="nav-link" href="{{ path('app_faq') }}" role="button">
-                    <i class="fa-solid fa-circle-question"></i>
-                </a>
-            </li>
-
-            <li class="btn-group dropup dropend shepherd-settings">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa-solid fa-gear rounded-circle"></i>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><p class="dropdown-header">{{ 'Version:'|trans }} {{ app_version }}</p></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="{{ path('app_updates') }}">{{ 'Updates'|trans }}</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item opacity-25 pe-none" href="{{ path('app_subscription') }}">{{'Subscription'|trans}}</a></li>
-                    <li><a class="dropdown-item opacity-25 pe-none" href="{{ path('app_settings') }}">{{'Settings'|trans}}</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item text-danger" href="{{ path('app_logout') }}">{{'Logout'|trans}}</a></li>
-                </ul>
-            </li>
+            {% include 'partials/sidebar/settings/_settings.html.twig' %}
+            
         </ul>
     </div>
     

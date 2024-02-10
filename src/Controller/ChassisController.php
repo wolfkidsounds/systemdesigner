@@ -15,7 +15,7 @@ use Novaway\Bundle\FeatureFlagBundle\Annotation\Feature;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Feature(name: "limiter")]
+#[Feature(name: "chassis")]
 #[IsGranted('ROLE_USER')]
 #[Route('/app/chassis')]
 class ChassisController extends AbstractController
@@ -26,10 +26,10 @@ class ChassisController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
-        if ($user->isDatabaseAccessEnabled()) {
+        if ($user->isSubscriber() && $user->isDatabaseAccessEnabled()) {
             $chassis = $chassisRepository->findByUserOrValidated($user);
         } else {
-            $chassis = $chassisRepository->findBy(['User' => $user]);
+            $chassis = $chassisRepository->findBy(['User' => $user], [], 10);
         }
 
         return $this->render('pages/chassis/index.html.twig', [
@@ -56,6 +56,8 @@ class ChassisController extends AbstractController
 
         return $this->render('pages/chassis/new.html.twig', [
             'chassis' => $chassis,
+            'title' => new TranslatableMessage('Chassis'),
+            'crud_title' => new TranslatableMessage('New Chassis'),
             'form' => $form,
             'tourButton' => true,
         ]);

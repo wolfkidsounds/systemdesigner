@@ -1,0 +1,136 @@
+Amplifier: Verstärker
+'All Amplifiers': 'Alle Verstärker'
+'Limit Reached': 'Limits erreicht'
+'New Amplifier': 'Neuer Verstärker'
+'Show Amplifier': 'Verstärker Anzeigen'
+'Edit Amplifier': 'Verstärker Bearbeiten'
+Chassis: Treiber
+'All Chassis': 'Alle Treiber'
+'Frequently Asked Questions': 'Häufig gestellte Fragen'
+Limiter: Limiter
+'All Limiters': 'Alle Limiters'
+'New Limiter': 'Neuer Limiter'
+'Show Limiter': 'Limiter Anzeigen'
+'Edit Limiter': 'Limiter Bearbeiten'
+Manufacturer: Hersteller
+'All Manufacturers': 'Alle Hersteller'
+'New Manufacturer': 'Neuer Hersteller'
+'View Manufacturer': 'Hersteller Anzeigen'
+'Edit Manufacturer': 'Hersteller Bearbeiten'
+Processor: Prozessoren
+'All Processors': 'Alle Prozessoren'
+'New Processor': 'Neuer Prozessor'
+'View Processor': 'Prozessor Anzeigen'
+'Edit Processor': 'Prozessor Bearbeiten'
+'Confirm Your Email Address': 'Email Adresse bestätigen'
+'Your E-Mail has been verified.': 'Deine Email Adresse wurde bestätigt.'
+Login: Anmelden
+Settings: Einstellungen
+Speaker: Lautsprecher
+'All Speakers': 'Alle Lautsprecher'
+'New Speaker': 'Neuer Lautsprecher'
+'View Speaker': 'Lautsprecher Anzeigen'
+'Edit Speaker': 'Lautsprecher Bearbeiten'
+Subscription: Abonnement
+Updates: Updates
+Name: Name
+Language: Sprache
+'Show All Database Entries': 'Alle Elemente zeigen'
+Update: Update
+Actions: Aktionen
+"We couldn't find any faq entries": "Wir konnten keine Einträge für das FAQ finden."
+Edit: Bearbeiten
+User: Benutzer
+Validation: Validierung
+Validated: Bestätigt
+Requested: Angefragt
+Request: Anfrage
+'Are you sure you want to delete this item?': 'Bist du dir sicher, dass du dieses Element löschen möchtest?'
+Save: Speichern
+Inputs: Eingänge
+Outputs: Ausgänge
+Offset: Bezugspunkt/Versatz
+'Personal Settings': 'Persönliche Einstellungen'
+Account: Account
+Database: Datenbank
+"We couldn't find any updates...": "Wir konnten keine Updates finden..."
+'Start Tour': 'Tour Starten'
+'Unread Notifications': 'Ungelesene Benachrichtigungen'
+'Version:': 'Version:'
+Logout: Abmelden
+"We are currently in closed beta and don't accept any signups. - You can message ": "Wir befinden uns derzeit in der geschlossenen Beta-Phase und nehmen keine Anmeldungen an. - Du kannst an"
+' to apply for beta access.': ' eine Nachricht schicken, um dich für die Beta zu bewerben.'
+Sign in: Anmelden
+Sign in to continue to SystemDesigner.: Melde dich an, um mit dem SystemDesigner fortzufahren.
+Email: Email
+Password: Passwort
+Remember me: An mich erinnern
+Dashboard: Dashboard
+Admin: Admin
+Select Manufacturer: Hersteller wählen
+Output Offset: Bezugspunkt/Versatz
+Manual (PDF): Anleitung (PDF)
+Manual: Anleitung
+Download Manual: Anleitung herunterladen
+Power: Leistung
+Power Bridged: Leistung gebrückt
+Power @ 16 Ω: Leistung @ 16 Ω
+Power @ 8 Ω: Leistung @ 8 Ω
+Power @ 4 Ω: Leistung @ 4 Ω
+Power @ 2 Ω: Leistung @ 2 Ω
+Power Bridged @ 8 Ω: Leistung Gebrückt @ 8 Ω
+Power Bridged @ 4 Ω: Leistung Gebrückt @ 4 Ω
+RMS Power: RMS Leistung
+Peak Power: Peak Leistung
+Impedance: Impedanz
+SPL: SPL
+Bandwidth: Bandbreite
+Select Bandwidth: Bandbreite wählen
+Full Range ( 20Hz - 20kHz ): Volle Bandbreite ( 20Hz - 20kHz )
+Subwoofer ( < 200Hz ): Subwoofer ( < 200Hz )
+Low Fequency ( < 500Hz ): Tiefen ( < 500Hz )
+Mid Fequency ( 500Hz - 2kHz ): Mitten ( 500Hz - 2kHz )
+High Fequency ( > 2kHz ): Höhen ( > 2kHz )
+Sensitivity (SPL @ 1W 1m): Wirkungsgrad (SPL @ 1W 1m)
+Sensitivity: Wirkungsgrad
+Select Processor: Prozessor wählen
+Select Amplifier: Verstärker wählen
+Select Speaker: Lautsprecher wählen
+Calculation Algorithm: Begrenzer-Algorithmus
+Limiter Scaling: Skalierung
+Bridge Mode Enabled: Bridge Modus Aktiviert
+Disabled: Deaktiviert
+Enabled: Aktiviert
+Input Sensitivity: Eingangsempfindlichkeit
+Speakers in Parallel: Lautsprecher in Parallel
+"If your controller only supports one limiter, we suggest using the RMS Voltage. - However, keep in mind that this can increase the crest-faktor and therfore the power-compression significantly.": "Wenn dein Controller nur einen Limiter unterstützt, empfehlen wir die Verwendung der RMS-Spannung. - Beachten jedoch, dass dies den Crest-Faktor und damit die Powerkompression deutlich erhöhen kann."
+"This is the value in dBu/dB/dBFS (according to the processor) that needs to be set in order to keep the limit at the given Vrms Voltage.": "Dies ist der Wert in dBu/dB/dBFS (je nach Prozessor), der eingestellt werden muss, um die Grenze bei der gegebenen Vrms-Spannung zu halten."
+Vrms Value: Vrms Wert
+"This is the value in dBu/dB/dBFS (according to the processor) that needs to be set in order to keep the limit at the given Vpeak Voltage.": "Dies ist der Wert in dBu/dB/dBFS (je nach Prozessor), der eingestellt werden muss, um den Grenzwert bei der gegebenen Vpeak-Spannung zu halten."
+Vpeak Value: Vpeak Wert
+"These values are suggestions based on speaker bandwidth.": "Diese Werte sind Vorschläge, die auf der Bandbreite des Lautsprechers basieren."
+"The Vgain Value tells you how much dB the Amplifier tries to amplify until it runs out of power.": "Der Vgain-Wert gibt an, wie viel dB der Verstärker zu verstärken versucht, bis ihm die Leistung ausgeht."
+"How much Power got requested from the Amplifier": "Wie viel Leistung vom Verstärker angefordert wurde"
+RMS Power Request: RMS Leistung (angefordert)
+Peak Power Request: Peak Leistung (angefordert)
+"How much Power is supplied by the Amplifier": "Wie viel Leistung des Verstärkers zur Verfügung steht"
+RMS Power Supplied: RMS Leistung (verfügbar)
+Peak Power Supplied: Peak Leistung (verfügbar)
+'Here you will see messages regarding the calculation. Where "#" represents an info message and "!" represent a warning or error.': 'Hier erscheinen Meldungen zur Berechnung. Dabei steht "#" für eine Informationsmeldung und "!" für eine Warnung oder einen Fehler.'
+Messages: Nachrichten
+"The Limiter Algorithm used for calculations. Look into the FAQ for more information.": "Der für die Berechnungen verwendete Begrenzer-Algorithmus. Schau in das FAQ für weitere Informationen."
+"Scaling is applied to the voltage (since voltage is linear). This means you can scale down the limiter for better control and adjust to your needs. (Default is 100 %)": "Die Skalierung wird auf die Spannung angewendet (da die Spannung linear ist). Das bedeutet, dass der Begrenzer zur besseren Kontrolle herabgestuft und an deine Bedürfnisse angepasst werden kann. (Standard ist 100 %)"
+"Enabling Bridge Mode on an Amplifier results in combining at least two of the modules into one module, resulting in a higher power output at the cost of the load that the amplifier can handle. (Default is Disabled)": "Das Aktivieren des Bridge-Modus bei einem Verstärker führt dazu, dass mindestens zwei der Module zu einem Modul zusammengefasst werden, was zu einer höheren Ausgangsleistung führt, allerdings auf Kosten der Last, die der Verstärker verträgt. (Standard ist Deaktiviert)"
+"The Input sensitivity can be set on the back of most amplifiers. Increasing the Input Sensitivity Results in the limiter kicking in earlier therefore for some controllers, setting the input sensitivity to a higher value can result in better control. (Default is 0.775 V)": "Die Eingangsempfindlichkeit kann bei den meisten Verstärkern auf der Rückseite eingestellt werden. Eine Erhöhung der Eingangsempfindlichkeit führt dazu, dass der Limiter früher einsetzt. Daher kann bei einigen Controllern eine höhere Einstellung der Eingangsempfindlichkeit zu einer besseren Kontrolle führen. (Standard ist 0,775 V)"
+"This sets how many speakers are chained together in parallel. This results in the Resistance being lower and higher powerdraw. 0 means no speakers are connected at all. (Default is 1)": "Hier wird festgelegt, wie viele Lautsprecher parallel geschaltet werden. Dies führt dazu, dass der Widerstand niedriger und die Leistungsaufnahme höher wird. 0 bedeutet, dass überhaupt keine Lautsprecher angeschlossen sind. (Standard ist 1)"
+Back To System Designer: Zurück zum System Designer
+Users: Benutzer
+Pages: Seiten
+Manufacturers: Hersteller
+Processors: Prozessoren
+Amplifiers: Verstärker
+Username: Benutzername
+Is Verified: Ist Verifiziert
+Subscriber: Abonnent
+Database Access Enabled: Datenbank Zugriff Aktiviert
+Date: Datum

@@ -42,6 +42,9 @@ class Manufacturer
     #[ORM\OneToMany(mappedBy: 'Manufacturer', targetEntity: ValidationRequest::class)]
     private Collection $validationRequests;
 
+    #[ORM\Column(nullable: true)]
+    private ?array $Category = null;
+
     public function __construct()
     {
         $this->processors = new ArrayCollection();
@@ -242,6 +245,18 @@ class Manufacturer
                 $validationRequest->setManufacturer(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCategory(): ?array
+    {
+        return $this->Category;
+    }
+
+    public function setCategory(?array $Category): static
+    {
+        $this->Category = $Category;
 
         return $this;
     }

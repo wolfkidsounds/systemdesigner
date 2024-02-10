@@ -97,13 +97,13 @@ class APIController extends AbstractController
         //dump($requestData);
 
         // Ensure that the properties you are trying to access are present in the $requestData array
-        $speakerId = $requestData['speaker_id'];
-        $amplifierId = $requestData['amplifier_id'];
-        $processorId = $requestData['processor_id'];
-        $speakerCount = $requestData['speakers_in_parallel'];
-        $inputSensitiviy = $requestData['input_sensitivity'];
-        $scaling = $requestData['scaling'] / 100;
-        $bridge_mode_enabled = $requestData['bridge_mode_enabled'];
+        $speakerId = intval($requestData['speaker_id']);
+        $amplifierId = intval($requestData['amplifier_id']);
+        $processorId = intval($requestData['processor_id']);
+        $speakerCount = intval($requestData['speakers_in_parallel']);
+        $inputSensitiviy = floatval(str_replace(',', '.', $requestData['input_sensitivity']));
+        $scaling = floatval($requestData['scaling'] / 100);
+        $bridge_mode_enabled = boolval($requestData['bridge_mode_enabled']);
 
         $speaker = $entityManager->getRepository(Speaker::class)->find($speakerId);
         $amplifier = $entityManager->getRepository(Amplifier::class)->find($amplifierId);
@@ -197,6 +197,8 @@ class APIController extends AbstractController
 
             'peak_power_supplied' => $amplifier_power,
             'peak_power_request' => $peak_power_request,
+
+            'input_sensitvity' => $inputSensitiviy,
 
             'vgain' => number_format($vgain, 2),
 

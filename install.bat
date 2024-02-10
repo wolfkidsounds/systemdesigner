@@ -36,19 +36,18 @@ call composer install
 echo ======================================================
 echo Install Node Dependencies
 echo ======================================================
-call npm install
+call npm install --force
 
 echo ======================================================
-echo Install Updates
+echo Install Assets
 echo ======================================================
-call composer update
-call npm update
+call php bin/console assets:install
 
 echo ======================================================
 echo Save & Upload Changes
 echo ======================================================
 call git add .
-call git commit -m "Update dependencies"
+call git commit -m "Installing dependencies"
 call git push
 
 echo ======================================================

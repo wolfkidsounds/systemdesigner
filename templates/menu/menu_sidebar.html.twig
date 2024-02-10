@@ -58,7 +58,7 @@
                 <li class="divider seperator"><hr class="dropdown-divider"></li>
             
             {% else %}
-            <li class="nav-item" {{ knp_menu.attributes(attributes) }}>
+            <li {{ knp_menu.attributes(attributes) }}>
 
                 {%- if item.uri is not empty and (not matcher.isCurrent(item) or options.currentAsLink) %}
 

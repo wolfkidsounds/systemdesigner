@@ -1,19 +1,7 @@
 {% extends 'crud.html.twig' %}
 
-{% block title %}{{ parent() }} | {{ 'Chassis'|trans }}{% endblock %}
+{% block title %}{{ parent() }} | {{'Chassis'|trans}}{% endblock %}
 {% block crud_toolbar %}
-    <li class="list-inline-item d-lg-inline-block ms-0 m-0 shepherd-search">
-        <div class="dropdown dropstart">
-            <button class="btn nav-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-            <div class="dropdown-menu p-0 dropdown-menu-md">
-                <div class="search-box p-1">
-                    <input type="text" class="form-control bg-light border-0" id="search-input" placeholder="Search..">
-                </div>
-            </div>
-        </div>
-    </li>
     <li class="list-inline-item d-lg-inline-block ms-0 m-0 shepherd-new">
         <a type="button" href="{{ path('app_chassis_new') }}" class="btn nav-btn">
             <i class="fa-solid fa-plus"></i>
@@ -21,20 +9,18 @@
     </li>
 {% endblock %}
 {% block crud_body %}
-<table class="table align-middle table-nowrap mb-0">
+<table class="table align-middle table-nowrap mb-0 display compact hover" data-tables='data-tables'>
     <thead class="">
         <tr>
-            <th class="sort text-uppercase align-middle" data-sort="id">ID</th>
-            <th class="sort text-uppercase align-middle" data-sort="manufacturer">{{ 'Manufacturer'|trans }}</th>
-            <th class="sort text-uppercase align-middle" data-sort="name">{{ 'Name'|trans }}</th>
-            <th class="sort text-uppercase align-middle" data-sort="actions">{{ 'Actions'|trans }}</th>
+            <th class="sort text-uppercase align-middle" data-sort="manufacturer" data-manufacturer="manufacturer">{{'Manufacturer'|trans}}</th>
+            <th class="sort text-uppercase align-middle" data-sort="name">{{'Name'|trans}}</th>
+            <th class="sort text-uppercase align-middle actions" data-sort="actions">{{'Actions'|trans}}</th>
         </tr>
     </thead>
-    <tbody id="search-table" class="list form-check-all"><tr>
+    <tbody id="search-table" class="list form-check-all">
         {% for chassi in chassis %}
         <tr>
-            <td class="id"><a class="text-body fw-bold" href="{{ path('app_chassi_show', {'id': chassi.id}) }}">{{ chassi.id }}</a></td>
-            <td class="manufacturer">{{ chassi.Manufacturer.name }}</td>
+            <td class="manufacturer" data-manufacturer="{{ chassi.Manufacturer.name }}">{{ chassi.Manufacturer.name }}</td>
             <td class="name">{{ chassi.Name }}</td>
             <td class="actions d-flex gap-2">
                 <a href="{{ path('app_chassi_show', {'id': chassi.id}) }}"><i class="fa-solid fa-eye"></i></a>
@@ -46,12 +32,7 @@
                 {% if chassi.Manual is not null and chassi.Manual is not empty and chassi.Manual is defined %}
                     <a href="{{ asset('uploads/manuals/' ~ chassi.Manual) }}" download><i class="fa-solid fa-file-pdf"></i></a>
                 {% endif %}
-
             </td>
-        </tr>
-        {% else %}
-        <tr>
-            <td colspan="7">We could not find any chassis.</td>
         </tr>
         {% endfor %}
     </tbody>

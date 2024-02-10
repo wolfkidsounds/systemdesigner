@@ -26,8 +26,14 @@ class LimiterController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
+        if ($user->isSubscriber() && $user->isDatabaseAccessEnabled()) {
+            $limiters = $limiterRepository->findBy(['User' => $user]);
+        } else {
+            $limiters = $limiterRepository->findBy(['User' => $user], [], 10);
+        }
+
         return $this->render('pages/limiter/index.html.twig', [
-            'limiters' => $limiterRepository->findBy(['User'=> $user]),
+            'limiters' => $limiters,
             'title' => new TranslatableMessage('Limiter'),
             'crud_title' => new TranslatableMessage('All Limiters'),
             'tourButton' => true,

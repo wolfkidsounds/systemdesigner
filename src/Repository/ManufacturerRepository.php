@@ -36,28 +36,20 @@ class ManufacturerRepository extends ServiceEntityRepository
         ;
     }
 
-//    /**
-//     * @return Manufacturer[] Returns an array of Manufacturer objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('m')
-//            ->andWhere('m.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('m.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Manufacturer
-//    {
-//        return $this->createQueryBuilder('m')
-//            ->andWhere('m.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /**
+     * @return Manufacturer[] Returns an array of Manufacturer objects
+     */
+    public function findByUserOrValidatedWithCategory($User, $Category): array
+    {
+        return $this->createQueryBuilder('manufacturer')
+            ->andWhere('manufacturer.User = :User')
+            ->orWhere('manufacturer.Validated = :Validated')
+            ->andWhere('manufacturer.Category LIKE :Category')
+            ->setParameter('User', $User)
+            ->setParameter('Validated', true)
+            ->setParameter('Category', '%' . $Category . '%')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
