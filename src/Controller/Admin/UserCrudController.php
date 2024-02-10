@@ -36,8 +36,9 @@ class UserCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
+        yield FormField::addFieldset('General');
         yield TextField::new('Username')
-        ->setColumns(3);
+        ->setColumns(4);
 
         yield ChoiceField::new('roles')
         ->allowMultipleChoices()
@@ -46,20 +47,20 @@ class UserCrudController extends AbstractCrudController
             'Admin' => 'ROLE_ADMIN',
             'User' => 'ROLE_USER',
         ])
-        ->setColumns(3);
+        ->setColumns(4);
 
         yield FormField::addRow();
         yield EmailField::new('email')
-        ->setColumns(3);
+        ->setColumns(6);
         yield ChoiceField::new('locale')
         ->renderAsBadges()
         ->setChoices([
             'German' => 'de',
             'English' => 'en',
         ])
-        ->setColumns(3);
+        ->setColumns(2);
 
-        yield FormField::addRow();
+        yield FormField::addFieldset('Settings');
         yield BooleanField::new('isVerified')
         ->setColumns(2);
         yield BooleanField::new('Subscriber')
@@ -67,7 +68,7 @@ class UserCrudController extends AbstractCrudController
         yield BooleanField::new('Beta')
         ->setColumns(2);
 
-        yield FormField::addRow();
+        yield FormField::addFieldset('Password');
         yield TextField::new('password')
         ->setFormType(RepeatedType::class)
         ->setFormTypeOptions([
