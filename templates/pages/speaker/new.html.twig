@@ -8,9 +8,17 @@
 
 {% block crud_toolbar %}
     <li class="list-inline-item d-lg-inline-block ms-0 m-0">
-        <a type="button" href="{{ path('app_speaker_index') }}" class="btn nav-btn">
+        <a type="button" href="{{ path('app_limiter_index') }}" class="btn nav-btn shepherd-back">
             <i class="fa-solid fa-arrow-left"></i>
         </a>
+        
+        {% if app.user.isSubscriber %}
+
+        <button class="btn bg-opacity-10 bg-dark rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapseChassis" aria-expanded="false" aria-controls="collapseChassis" aria-label="Show Chassis" data-balloon-pos="down">
+            <i class="icon icon-chassis fs-16"></i>
+        </button>
+        
+        {% endif %}
     </li>
 {% endblock %}
 
