@@ -1,54 +1,21 @@
 {{ form_start(form) }}
 <div class="d-flex flex-column overflow-hidden">
     <div class="row">
-        <div class="col-sm shepherd-manufacturer">
-            {{ form_row(form.Manufacturer, {
-                'attr': {
-                    'class': 'form-select',
-                },
-                'placeholder': 'Select Manufacturer',
-            }) }}
-        </div>
-        <div class="col-sm shepherd-name">
-            {{ form_row(form.Name) }}
-        </div>
+        {{ include('pages/speaker/partials/_general.html.twig') }}
+    </div>
+    <div class="row shepherd-bandwidth">
+        {{ include('pages/speaker/partials/_chassis.html.twig') }}
     </div>
     <div class="row shepherd-bandwidth">
         {{ form_row(form.Bandwidth) }}
     </div>
     <div class="divider seperator mb-3"><hr></div>
     <div class="row">
-        <div class="col-sm mb-3 shepherd-power-rms">
-            {{ form_label(form.PowerRMS, 'RMS Power', {'label_attr': {'class': 'form-label required'}}) }}
-            <div class="input-group">
-                {{ form_widget(form.PowerRMS, {'attr': {'inputmode': 'decimal', 'class': 'form-control'}}) }}
-                <span class="input-group-text">Watt</span>
-            </div>
-        </div>
-        <div class="col-sm mb-3 shepherd-power-peak">
-            {{ form_label(form.PowerPeak, 'Peak Power', {'label_attr': {'class': 'form-label required'}}) }}
-            <div class="input-group">
-                {{ form_widget(form.PowerPeak, {'attr': {'inputmode': 'decimal', 'class': 'form-control'}}) }}
-                <span class="input-group-text">Watt</span>
-            </div>
-        </div>
+        {{ include('pages/speaker/partials/_power.html.twig') }}
     </div>
     <div class="divider seperator mb-3"><hr></div>
     <div class="row">
-        <div class="col-sm mb-3 shepherd-impedance">
-            {{ form_label(form.Impedance, 'Impedance', {'label_attr': {'class': 'form-label required'}}) }}
-            <div class="input-group">
-                {{ form_widget(form.Impedance, {'attr': {'inputmode': 'decimal', 'class': 'form-control'}}) }}
-                <span class="input-group-text">Ω</span>
-            </div>
-        </div>
-        <div class="col-sm shepherd-spl">
-            {{ form_label(form.SPL, 'Sensitivity (SPL @ 1W 1m)', {'label_attr': {'class': 'form-label required'}}) }}
-            <div class="input-group">
-                {{ form_widget(form.SPL, {'attr': {'inputmode': 'decimal', 'class': 'form-control'}}) }}
-                <span class="input-group-text">dB</span>
-            </div>
-        </div>
+        {{ include('pages/speaker/partials/_acoustical.html.twig') }}
     </div>
 
     <div class="divider seperator mb-3"><hr></div>
