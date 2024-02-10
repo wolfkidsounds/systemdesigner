@@ -7,6 +7,7 @@ parameters:
     router.request_context.scheme: 'https'
     asset.request_context.secure: true
     manuals_dir: '%kernel.project_dir%/public/uploads/manuals'
+    datasheets_dir: '%kernel.project_dir%/public/uploads/datasheets'
 
 services:
     # default configuration for services in *this* file
@@ -32,5 +33,9 @@ services:
     App\Service\ManualUploader:
         arguments:
             $targetDirectory: '%manuals_dir%'
+
+    App\Service\DatasheetUploader:
+        arguments:
+            $targetDirectory: '%datasheets_dir%'
 
     App\Service\InfoService:
