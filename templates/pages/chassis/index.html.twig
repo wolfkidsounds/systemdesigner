@@ -14,6 +14,11 @@
         <tr>
             <th class="sort text-uppercase align-middle" data-sort="manufacturer" data-manufacturer="manufacturer">{{'Manufacturer'|trans}}</th>
             <th class="sort text-uppercase align-middle" data-sort="name">{{'Name'|trans}}</th>
+            <th class="sort text-uppercase align-middle" data-sort="bandwidth">{{'Bandwidth'|trans}}</th>
+            <th class="sort text-uppercase align-middle" data-sort="impedance">{{'Impedance'|trans}}</th>
+            <th class="sort text-uppercase align-middle" data-sort="power">{{'Power'|trans}}</th>
+            <th class="sort text-uppercase align-middle" data-sort="qts">{{'Qts'|trans}}</th>
+            <th class="sort text-uppercase align-middle" data-sort="xmax">{{'Xmax'|trans}}</th>
             <th class="sort text-uppercase align-middle actions" data-sort="actions">{{'Actions'|trans}}</th>
         </tr>
     </thead>
@@ -22,15 +27,34 @@
         <tr>
             <td class="manufacturer" data-manufacturer="{{ chassi.Manufacturer.name }}">{{ chassi.Manufacturer.name }}</td>
             <td class="name">{{ chassi.Name }}</td>
+            <td class="bandwidth">
+                {% if chassi.Bandwidth == 'FR' %}
+                    {{ 'Full Range'|trans }}
+                {% elseif chassi.Bandwidth == 'SUB' %}
+                    {{ 'Subwoofer'|trans }}
+                {% elseif chassi.Bandwidth == 'LF' %}
+                    {{ 'Low Frequencies'|trans }}
+                {% elseif chassi.Bandwidth == 'MF' %}
+                    {{ 'Mid Frequencies'|trans }}
+                {% elseif chassi.Bandwidth == 'HF' %}
+                    {{ 'High Frequencies'|trans }}
+                {% elseif chassi.Bandwidth == 'TW' %}
+                    {{ 'Tweeter'|trans }}
+                {% endif %}
+                </td>
+            <td class="impedance">{{ chassi.NominalImpedance }} Ω</td>
+            <td class="power">{{ chassi.PowerRMS }} Watt</td>
+            <td class="qts">{{ chassi.Qts }}</td>
+            <td class="xmax">{{ chassi.Xmax }} mm</td>
             <td class="actions d-flex gap-2">
-                <a href="{{ path('app_chassi_show', {'id': chassi.id}) }}"><i class="fa-solid fa-eye"></i></a>
+                <a href="{{ path('app_chassis_show', {'id': chassi.id}) }}"><i class="fa-solid fa-eye"></i></a>
 
                 {% if chassi.user == app.user %}
-                    <a href="{{ path('app_chassi_edit', {'id': chassi.id}) }}"><i class="fa-solid fa-pen"></i></a>
+                    <a href="{{ path('app_chassis_edit', {'id': chassi.id}) }}"><i class="fa-solid fa-pen"></i></a>
                 {% endif %}
 
-                {% if chassi.Manual is not null and chassi.Manual is not empty and chassi.Manual is defined %}
-                    <a href="{{ asset('uploads/manuals/' ~ chassi.Manual) }}" download><i class="fa-solid fa-file-pdf"></i></a>
+                {% if chassi.Datasheet is not null and chassi.Datasheet is not empty and chassi.Datasheet is defined %}
+                    <a href="{{ asset('uploads/datasheet/' ~ chassi.Datasheet) }}" download><i class="fa-solid fa-file-pdf"></i></a>
                 {% endif %}
             </td>
         </tr>
