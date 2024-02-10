@@ -43,11 +43,17 @@ class ChassisController extends AbstractController
     #[Route('/new', name: 'app_chassis_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
+
         $chassis = new Chassis();
         $form = $this->createForm(ChassisType::class, $chassis);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $chassis->setUser($user);
+            $chassis->setValidated(false);
+            
             $entityManager->persist($chassis);
             $entityManager->flush();
 
