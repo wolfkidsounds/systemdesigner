@@ -41,3 +41,7 @@
 .icon-chassis:before {
     content: "\e903";
 }
+
+.fs-16 {
+    font-size:16px !important;
+}
