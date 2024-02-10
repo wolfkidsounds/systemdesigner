@@ -19,7 +19,7 @@ novaway_feature_flag:
             enabled: true
 
         chassis:
-            enabled: false
+            enabled: true
 
         manufacturers:
             enabled: true

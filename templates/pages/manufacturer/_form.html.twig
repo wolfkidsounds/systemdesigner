@@ -1,5 +1,14 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+<div class="d-flex flex-column overflow-hidden">
+    <div class="row shepherd-general">
+        <div class="col-sm">
+            {{ form_row(form.Name) }}
+        </div>
+        <div class="col-sm">
+            {{ form_row(form.Category) }}
+        </div>
+    </div>
+</div>
     {% set buttonLabelDefault = 'Save'|trans %}
     <button class="btn btn-primary">{{ button_label|default(buttonLabelDefault) }}</button>
 {{ form_end(form) }}
