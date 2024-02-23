@@ -40,6 +40,23 @@ jobs:
         echo "MESSENGER_TRANSPORT_DSN=${{ secrets.MESSENGER_TRANSPORT_DSN }}" >> $GITHUB_ENV
         echo "MAILER_DSN=null://null" >> $GITHUB_ENV
         echo "APP_SECRET=${{ secrets.APP_SECRET }}" >> $GITHUB_ENV
+        echo "HOST='spur1.media'" >> $GITHUB_ENV
+        echo "FILE_STORAGE_PATH='public/uploads'" >> $GITHUB_ENV
+        echo "CORS_ALLOW_ORIGIN='^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$'" >> $GITHUB_ENV
+
+    - name: Dump .env
+      run: |
+        rm -f .env
+        echo "APP_ENV=prod" >> .env
+        echo "APP_DEBUG=1" >> .env
+        echo "DATABASE_URL='${{ secrets.DATABASE_URL }}'" >> .env
+        echo "MESSENGER_TRANSPORT_DSN=${{ secrets.MESSENGER_TRANSPORT_DSN }}" >> .env
+        echo "MAILER_DSN=null://null" >> .env
+        echo "APP_SECRET=${{ secrets.APP_SECRET }}" >> .env
+        echo "HOST='spur1.media'" >> .env
+        echo "FILE_STORAGE_PATH='public/uploads'" >> .env
+        echo "CORS_ALLOW_ORIGIN='^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$'" >> .env
+        echo "APP_VERSION='beta-0.0.11'" >> .env
 
     - name: Cache Composer packages
       id: composer-cache
@@ -53,72 +70,218 @@ jobs:
     - name: Install Composer
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --no-dev --optimize-autoloader
 
-    - name: Dump .env
-      run: |
-        echo "" >> .env
-        echo "APP_DEBUG=1" >> .env
-        echo "DATABASE_URL='${{ secrets.DATABASE_URL }}'" >> .env
-        echo "MESSENGER_TRANSPORT_DSN=${{ secrets.MESSENGER_TRANSPORT_DSN }}" >> .env
-        echo "MAILER_DSN=null://null" >> .env
-        echo "APP_SECRET=${{ secrets.APP_SECRET }}" >> .env
-        echo "FILE_STORAGE_PATH='public/uploads'" >> .env
-
-    - name: Generate Keys
-      run: APP_RUNTIME_ENV=prod php bin/console secrets:generate-keys
-
-    - name: Dump env vars for production usage
+    - name: Dump Environment Vars To Production
       run: |
         composer dump-env prod
 
-    - name: Clear Cache & Install Assets
+    # TODO: Manually at the moment
+    #- name: Database Migrations
+    #  run: php bin/console doctrine:migrations:migrate --no-interaction --all-or-nothing
+
+    - name: Clear Cache, Install Assets
       run: |
         php bin/console cache:clear --no-warmup
         php bin/console assets:install
 
-    - name: Use Node.js 18.x
+    - name: Use Node.js 18.16.1
       uses: actions/setup-node@v3
       with:
-        node-version: 18.x
+        node-version: 18.16.1
 
-    - name: Install NPM
-      run: npm install
-
-    - name: Build Encore
+    - name: Build Encore/NPM
       run: |
-       npm run build
+        npm cache clean --force
+        npm install --force
+        npm run build
 
-    - name: 📂 Deploy Files
+    - name: 📂 Deploy Source Files # Deploys /src /bin /config /sync-state and ./ 
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
-          timeout: 20000
+          timeout: 60000
           server: ${{ secrets.FTP_SERVER }}
           port: ${{ secrets.FTP_PORT }}
           local-dir: ./
           protocol: ftp
-          server-dir: ${{ secrets.REMOTE_PATH }}
+          server-dir: ${{ secrets.REMOTE_PATH }}/
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           dry-run: false
+          state-name: sync-state/.main.json
           exclude: |
-              **/data*/**
-              **/.git*
-              **/.git*/**
-              **/.github*/**
-              **/.vscode/**
-              **/assets*/**
-              **/node_modules*/**
-              **/test*/**
-              **/.env.test*
-              **/docker-compose*
-              **/install.bat*
-              **/package*
-              **/phpunit*
-              **/README.md
-              **/symfony.exe
-              **/webpack.config.js
-              **/public/maintenance.php
-              **/var/cache/dev/**
-              **/var/log/**
+            **/.git*/**
+            **/.git*
+            **/.git/**
+            **/.github/**
+            **/assets/**
+            **/migrations/**
+            **/node_modules/**
+            **/templates/**
+            **/translations/**
+            **/public/**
+            **/tests/**
+            **/var/**
+            **/vendor/**
+            **/.env.local
+            **/.env.test
+            **/.git*
+            **/compose.override.yaml
+            **/compose.yaml
+            **/install.bat
+            **/package-lock.json
+            **/package.json
+            **/phpunit.xml.dist
+            **/todo.md
+            **/update.bat
+            **/webpack.config.js
+            **/build.bat
+
+    - name: 📂 Deploy Templates # Deploys /templates /translations
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+          timeout: 60000
+          server: ${{ secrets.FTP_SERVER }}
+          port: ${{ secrets.FTP_PORT }}
+          local-dir: ./
+          protocol: ftp
+          server-dir: ${{ secrets.REMOTE_PATH }}/
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          dry-run: false
+          state-name: sync-state/.templates.json
+          exclude: |
+            **/.git*/**
+            **/.git*
+            **/.git/**
+            **/.github/**
+            **/assets/**
+            **/migrations/**
+            **/node_modules/**
+            **/src/**
+            **/bin/**
+            **/config/**
+            **/sync-state/**
+            **/public/**
+            **/tests/**
+            **/var/**
+            **/vendor/**
+            **/.env.local
+            **/.env.test
+            **/.git*
+            **/compose.override.yaml
+            **/compose.yaml
+            **/install.bat
+            **/package-lock.json
+            **/package.json
+            **/phpunit.xml.dist
+            **/todo.md
+            **/update.bat
+            **/webpack.config.js
+            **/.env
+            **/.env.local.php
+            **/composer.json
+            **/composer.lock
+            **/symfony.lock
+            **/index.php
+            **/build.bat
+
+    - name: 📂 Deploy Assets # Deploys /public
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+          timeout: 60000
+          server: ${{ secrets.FTP_SERVER }}
+          port: ${{ secrets.FTP_PORT }}
+          local-dir: ./
+          protocol: ftp
+          server-dir: ${{ secrets.REMOTE_PATH }}/
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          dry-run: false
+          state-name: sync-state/.assets.json
+          exclude: |
+            **/.git*/**
+            **/.git*
+            **/.git/**
+            **/.github/**
+            **/assets/**
+            **/migrations/**
+            **/node_modules/**
+            **/sync-state/**
+            **/tests/**
+            **/var/**
+            **/config/**
+            **/vendor/**
+            **/src/**
+            **/bin/**
+            **/templates/**
+            **/translations/**
+            **/.env.local
+            **/.env.test
+            **/.git*
+            **/compose.override.yaml
+            **/compose.yaml
+            **/install.bat
+            **/package-lock.json
+            **/package.json
+            **/phpunit.xml.dist
+            **/todo.md
+            **/update.bat
+            **/webpack.config.js
+            **/.env
+            **/.env.local.php
+            **/composer.json
+            **/composer.lock
+            **/symfony.lock
+            **/index.php
+            **/build.bat
+
+    - name: 📂 Deploy Vendor Files # Deploys /vendor
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+          timeout: 60000
+          server: ${{ secrets.FTP_SERVER }}
+          port: ${{ secrets.FTP_PORT }}
+          local-dir: ./
+          protocol: ftp
+          server-dir: ${{ secrets.REMOTE_PATH }}/
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          dry-run: false
+          state-name: sync-state/.vendor.json
+          exclude: |
+            **/.git*/**
+            **/.git*
+            **/.git/**
+            **/.github/**
+            **/assets/**
+            **/migrations/**
+            **/node_modules/**
+            **/config/**
+            **/public/**
+            **/sync-state/**
+            **/templates/**
+            **/translations/**
+            **/tests/**
+            **/var/**
+            **/src/**
+            **/bin/**
+            **/.env.local
+            **/.env.test
+            **/.git*
+            **/compose.override.yaml
+            **/compose.yaml
+            **/install.bat
+            **/package-lock.json
+            **/package.json
+            **/phpunit.xml.dist
+            **/todo.md
+            **/update.bat
+            **/webpack.config.js
+            **/.env
+            **/.env.local.php
+            **/composer.json
+            **/composer.lock
+            **/symfony.lock
+            **/build.bat
 
     - name: Create Empty Directory
       run: mkdir .empty
@@ -130,8 +293,8 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           port: ${{ secrets.FTP_PORT }}
           local-dir: .empty/
-          protocol: ftps
-          server-dir: ${{ secrets.STAGING_BASE_PATH }}/var/cache/
+          protocol: ftp
+          server-dir: ${{ secrets.REMOTE_PATH }}/var/cache/
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           dangerous-clean-slate	: true
