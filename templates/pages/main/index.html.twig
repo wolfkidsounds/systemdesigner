@@ -3,27 +3,51 @@
 {% block page_content %}
     <div class="row" data-turbo="false">
         {% if isFeatureEnabled('manufacturers') %}
-            {% include 'pages/main/manufacturer/dashboard_badge.html.twig' %}
+            {{ component('DashboardCard', {
+                title: 'Manufacturer',
+                items: app.user.Manufacturers,
+                icon: 'fa-solid fa-industry'
+            }) }}
         {% endif %}
 
         {% if isFeatureEnabled('processor') %}
-            {% include 'pages/main/processor/dashboard_badge.html.twig' %}
+            {{ component('DashboardCard', {
+                title: 'Processor',
+                items: app.user.Processors,
+                icon: 'icon-processor'
+            }) }}
         {% endif %}
 
         {% if isFeatureEnabled('amplifier') %}
-            {% include 'pages/main/amplifier/dashboard_badge.html.twig' %}
+            {{ component('DashboardCard', {
+                title: 'Amplifier',
+                items: app.user.Amplifiers,
+                icon: 'icon-amplifier'
+            }) }}
         {% endif %}
 
         {% if isFeatureEnabled('speaker') %}
-            {% include 'pages/main/speaker/dashboard_badge.html.twig' %}
+            {{ component('DashboardCard', {
+                title: 'Speaker',
+                items: app.user.Speakers,
+                icon: 'icon-speaker'
+            }) }}
         {% endif %}
 
         {% if isFeatureEnabled('chassis') and app.user.isSubscriber %}
-            {% include 'pages/main/chassis/dashboard_badge.html.twig' %}
+            {{ component('DashboardCard', {
+                title: 'Chassis',
+                items: app.user.Chassis,
+                icon: 'icon-chassis'
+            }) }}
         {% endif %}
 
         {% if isFeatureEnabled('limiter') %}
-            {% include 'pages/main/limiter/dashboard_badge.html.twig' %}
+            {{ component('DashboardCard', {
+                title: 'Limiter',
+                items: app.user.Limiters,
+                icon: 'fa-solid fa-wave-square'
+            }) }}
         {% endif %}
     </div>
 {% endblock %}
