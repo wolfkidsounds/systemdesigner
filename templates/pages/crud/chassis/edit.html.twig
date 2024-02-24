@@ -1,19 +1,19 @@
 {% extends 'crud.html.twig' %}
 
-{% block title %}{{ parent() }} | Edit: {{ amplifier.Manufacturer.name }} - {{ amplifier.Name }}{% endblock %}
+{% block title %}{{ parent() }} | Edit: {{ chassis.Manufacturer.name }} - {{ chassis.Name }}{% endblock %}
 
 {% block crud_body %}
     {% set buttonLabel = 'Update'|trans %}
-    {{ include('pages/amplifier/_form.html.twig', {'button_label': buttonLabel}) }}
+    {{ include('pages/crud/chassis/_form.html.twig', {'button_label': buttonLabel}) }}
 {% endblock %}
 
 {% block crud_toolbar %}
 <li class="list-inline-item d-lg-inline-block ms-0 m-0">
-    <a type="button" href="{{ path('app_amplifier_index') }}" class="btn nav-btn">
+    <a type="button" href="{{ path('app_chassis_index') }}" class="btn nav-btn">
         <i class="fa-solid fa-arrow-left"></i>
     </a>
 </li>
 <li class="list-inline-item d-lg-inline-block ms-0 m-0">
-    {{ include('pages/amplifier/_delete_form.html.twig') }}
+    {{ include('pages/crud/chassis/_delete_form.html.twig') }}
 </li>
 {% endblock %}
