@@ -1,0 +1,23 @@
+{% extends 'pages/crud/_template/index.html.twig' %}
+{% set page = {
+    title: 'Manufacturer',
+    base_path: 'app_manufacturer'
+} %}
+
+{% set crud = {
+    toolbar: true,
+    add: true,
+    items: manufacturers,
+    table: {
+        fields: {
+            Name: 'Name',
+            Categories: 'Category'
+        },
+        actions: true
+    },
+} %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('crud') }}
+{% endblock %}

@@ -1,0 +1,15 @@
+{% if this.add is defined %}
+    <li class="list-inline-item d-lg-inline-block ms-0 m-0 shepherd-new">
+        <a type="button" href="{{ path(this.path ~ '_new') }}" class="btn nav-btn">
+            <i class="fa-solid fa-plus"></i>
+        </a>
+    </li>
+{% endif %}
+
+{% if this.back is defined %}
+    <li class="list-inline-item d-lg-inline-block ms-0 m-0">
+        <a type="button" href="{{ path(this.path ~ '_index') }}" class="btn nav-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+    </li>
+{% endif %}

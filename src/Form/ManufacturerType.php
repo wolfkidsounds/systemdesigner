@@ -6,11 +6,15 @@ use App\Entity\Manufacturer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\FormBuilderInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Translation\TranslatableMessage;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 
 class ManufacturerType extends AbstractType
 {
@@ -22,14 +26,21 @@ class ManufacturerType extends AbstractType
     {
         $builder
             ->add('Name', TextType::class, [
-                'label' => new TranslatableMessage('Name'),
-                'constraints' => [new NotBlank()]
+                'label' => false,
+                'constraints' => [new NotBlank()],
+                'attr' => [
+                    'placeholder' => new TranslatableMessage('Name') . '...',
+                ],
             ])
+
             ->add('Category', ChoiceType::class, [
-                'label' => new TranslatableMessage('Category'),
+                'label' => false,
                 'constraints' => [new NotBlank()],
                 'multiple' => true,
-                'attr' => ['data-select' => 'true'],
+                'attr' => [
+                    'data-select' => 'true',
+                    'placeholder' => new TranslatableMessage('Category') . '...',
+                ],
                 'choices' => [
                     'Amplifier' => 'amplifier',
                     'Processor' => 'processor',

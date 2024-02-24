@@ -39,7 +39,7 @@ class ProcessorController extends AbstractController
             $processors = $processorRepository->findBy(['User' => $user], [], 10);
         }
 
-        return $this->render('pages/processor/index.html.twig', [
+        return $this->render('pages/crud/processor/index.html.twig', [
             'processors' => $processors,
             'controller_name' => 'ProcessorController',
             'title' => new TranslatableMessage('Processor'),
@@ -93,7 +93,7 @@ class ProcessorController extends AbstractController
             return $this->redirectToRoute('app_processor_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('pages/processor/new.html.twig', [
+        return $this->render('pages/crud/processor/new.html.twig', [
             'processor' => $processor,
             'form' => $form,
             'controller_name' => 'ProcessorController',
@@ -130,7 +130,7 @@ class ProcessorController extends AbstractController
             $validationRequested = false;
         }
         
-        return $this->render('pages/processor/show.html.twig', [
+        return $this->render('pages/crud/processor/show.html.twig', [
             'processor' => $processor,
             'form' => $form,
             'validationRequested' => $validationRequested,
@@ -164,7 +164,7 @@ class ProcessorController extends AbstractController
             return $this->redirectToRoute('app_processor_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('pages/processor/edit.html.twig', [
+        return $this->render('pages/crud/processor/edit.html.twig', [
             'processor' => $processor,
             'form' => $form,
             'controller_name' => 'ProcessorController',

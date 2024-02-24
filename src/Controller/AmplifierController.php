@@ -36,7 +36,7 @@ class AmplifierController extends AbstractController
             $amplifiers = $amplifierRepository->findBy(['User' => $user], [], 10);
         }
 
-        return $this->render('pages/amplifier/index.html.twig', [
+        return $this->render('pages/crud/amplifier/index.html.twig', [
             'amplifiers' => $amplifiers,
             'controller_name' => 'AmplifierController',
             'title' => new TranslatableMessage('Amplifier'),
@@ -90,7 +90,7 @@ class AmplifierController extends AbstractController
             return $this->redirectToRoute('app_amplifier_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('pages/amplifier/new.html.twig', [
+        return $this->render('pages/crud/amplifier/new.html.twig', [
             'amplifier' => $amplifier,
             'form' => $form,
             'controller_name' => 'AmplifierController',
@@ -126,7 +126,7 @@ class AmplifierController extends AbstractController
             $validationRequested = false;
         }
         
-        return $this->render('pages/amplifier/show.html.twig', [
+        return $this->render('pages/crud/amplifier/show.html.twig', [
             'amplifier' => $amplifier,
             'form' => $form,
             'validationRequested' => $validationRequested,
@@ -159,7 +159,7 @@ class AmplifierController extends AbstractController
             return $this->redirectToRoute('app_amplifier_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('pages/amplifier/edit.html.twig', [
+        return $this->render('pages/crud/amplifier/edit.html.twig', [
             'amplifier' => $amplifier,
             'form' => $form,
             'controller_name' => 'AmplifierController',

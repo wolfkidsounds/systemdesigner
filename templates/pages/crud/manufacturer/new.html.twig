@@ -1,0 +1,15 @@
+{% extends 'pages/crud/_template/new.html.twig' %}
+{% set page = {
+    title: 'Manufacturer',
+    base_path: 'app_manufacturer'
+} %}
+
+{% set crud = {
+    toolbar: true,
+    back: true,
+    form: form,
+} %}
+
+{% block crud_body %}
+    {{ include('pages/crud/manufacturer/_form.html.twig') }}
+{% endblock %}

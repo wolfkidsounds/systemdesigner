@@ -37,7 +37,7 @@ class ManufacturerController extends AbstractController
             $manufacturers = $manufacturerRepository->findBy(['User' => $user], [], 10);
         }
 
-        return $this->render('pages/manufacturer/index.html.twig', [
+        return $this->render('pages/crud/manufacturer/index.html.twig', [
             'manufacturers' => $manufacturers,
             'title' => new TranslatableMessage('Manufacturer'),
             'crud_title' => new TranslatableMessage('All Manufacturers'),
@@ -81,7 +81,7 @@ class ManufacturerController extends AbstractController
             return $this->redirectToRoute('app_manufacturer_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('pages/manufacturer/new.html.twig', [
+        return $this->render('pages/crud/manufacturer/new.html.twig', [
             'manufacturer' => $manufacturer,
             'form' => $form,
             'title' => new TranslatableMessage('Manufacturer'),
@@ -117,7 +117,7 @@ class ManufacturerController extends AbstractController
             $validationRequested = false;
         }
 
-        return $this->render('pages/manufacturer/show.html.twig', [
+        return $this->render('pages/crud/manufacturer/show.html.twig', [
             'manufacturer' => $manufacturer,
             'form' => $form,
             'validationRequested' => $validationRequested,
@@ -138,7 +138,7 @@ class ManufacturerController extends AbstractController
             return $this->redirectToRoute('app_manufacturer_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('pages/manufacturer/edit.html.twig', [
+        return $this->render('pages/crud/manufacturer/edit.html.twig', [
             'manufacturer' => $manufacturer,
             'form' => $form,
             'title' => new TranslatableMessage('Manufacturer'),

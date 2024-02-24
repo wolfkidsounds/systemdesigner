@@ -32,7 +32,7 @@ class ChassisController extends AbstractController
             $chassis = $chassisRepository->findBy(['User' => $user], [], 10);
         }
 
-        return $this->render('pages/chassis/index.html.twig', [
+        return $this->render('pages/crud/chassis/index.html.twig', [
             'chassis' => $chassis,
             'title' => new TranslatableMessage('Chassis'),
             'crud_title' => new TranslatableMessage('All Chassis'),
@@ -60,7 +60,7 @@ class ChassisController extends AbstractController
             return $this->redirectToRoute('app_chassis_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('pages/chassis/new.html.twig', [
+        return $this->render('pages/crud/chassis/new.html.twig', [
             'chassis' => $chassis,
             'title' => new TranslatableMessage('Chassis'),
             'crud_title' => new TranslatableMessage('New Chassis'),
@@ -72,7 +72,7 @@ class ChassisController extends AbstractController
     #[Route('/show/{id}', name: 'app_chassis_show', methods: ['GET'])]
     public function show(Chassis $chassis): Response
     {
-        return $this->render('pages/chassis/show.html.twig', [
+        return $this->render('pages/crud/chassis/show.html.twig', [
             'chassis' => $chassis,
         ]);
     }
@@ -89,7 +89,7 @@ class ChassisController extends AbstractController
             return $this->redirectToRoute('app_chassis_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('pages/chassis/edit.html.twig', [
+        return $this->render('pages/crud/chassis/edit.html.twig', [
             'chassis' => $chassis,
             'form' => $form,
         ]);

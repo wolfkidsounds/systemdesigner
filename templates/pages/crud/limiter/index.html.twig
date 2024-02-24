@@ -1,0 +1,28 @@
+{% extends 'pages/crud/_template/index.html.twig' %}
+{% set page = {
+    title: 'Limiters',
+    base_path: 'app_limiter'
+} %}
+
+{% set crud = {
+    toolbar: true,
+    add: true,
+    items: limiters,
+    table: {
+        fields: {
+            'Processor': 'Processor',
+            'Amplifier': 'Amplifier',
+            'Speaker': 'Speaker',
+            'Vrms': 'Vrms',
+            'Vrms Value': 'VrmsValue',
+            'Vpeak': 'Vpeak',
+            'Vpeak Value': 'VpeakValue',
+        },
+        actions: true
+    },
+} %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('crud') }}
+{% endblock %}
