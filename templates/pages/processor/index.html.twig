@@ -36,7 +36,7 @@
                 {% endif %}
 
                 {% if processor.Manual is not null and processor.Manual is not empty and processor.Manual is defined %}
-                    <a href="{{ asset('uploads/manuals/' ~ processor.Manual) }}" download><i class="fa-solid fa-file-pdf"></i></a>
+                    <a href="{{ path('app_download', { 'slug': processor.Manual }) }}" download><i class="fa-solid fa-file-pdf"></i></a>
                 {% endif %}
                 
             </td>

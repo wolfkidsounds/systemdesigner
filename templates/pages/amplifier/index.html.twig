@@ -42,7 +42,7 @@
                 {% endif %}
 
                 {% if amplifier.Manual is not null and amplifier.Manual is not empty and amplifier.Manual is defined %}
-                    <a href="{{ asset('uploads/manuals/' ~ amplifier.Manual) }}" download><i class="fa-solid fa-file-pdf"></i></a>
+                    <a href="{{ path('app_download', { 'slug': amplifier.Manual }) }}" download><i class="fa-solid fa-file-pdf"></i></a>
                 {% endif %}
             </td>
         </tr>

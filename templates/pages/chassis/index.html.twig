@@ -54,7 +54,7 @@
                 {% endif %}
 
                 {% if chassi.Datasheet is not null and chassi.Datasheet is not empty and chassi.Datasheet is defined %}
-                    <a href="{{ asset('uploads/datasheet/' ~ chassi.Datasheet) }}" download><i class="fa-solid fa-file-pdf"></i></a>
+                    <a href="{{ path('app_download', { 'slug': chassi.Datasheet }) }}" download><i class="fa-solid fa-file-pdf"></i></a>
                 {% endif %}
             </td>
         </tr>
