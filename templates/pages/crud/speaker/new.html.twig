@@ -1,0 +1,15 @@
+{% extends 'pages/crud/_template/new.html.twig' %}
+{% set page = {
+    title: 'Speaker',
+    base_path: 'app_speaker'
+} %}
+
+{% set crud = {
+    toolbar: true,
+    back: true,
+    form: form,
+} %}
+
+{% block crud_body %}
+    {{ include('pages/crud/speaker/_form.html.twig') }}
+{% endblock %}

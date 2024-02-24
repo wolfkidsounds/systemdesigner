@@ -32,7 +32,7 @@ class SpeakerController extends AbstractController
             $speakers = $speakerRepository->findBy(['User' => $user], [], 10);
         }
 
-        return $this->render('pages/speaker/index.html.twig', [
+        return $this->render('pages/crud/speaker/index.html.twig', [
             'speakers' => $speakers,
             'title' => new TranslatableMessage('Speaker'),
             'crud_title' => new TranslatableMessage('All Speakers'),
@@ -85,7 +85,7 @@ class SpeakerController extends AbstractController
             return $this->redirectToRoute('app_speaker_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('pages/speaker/new.html.twig', [
+        return $this->render('pages/crud/speaker/new.html.twig', [
             'speaker' => $speaker,
             'form' => $form,
             'title' => new TranslatableMessage('Speaker'),
@@ -120,7 +120,7 @@ class SpeakerController extends AbstractController
             $validationRequested = false;
         }
         
-        return $this->render('pages/speaker/show.html.twig', [
+        return $this->render('pages/crud/speaker/show.html.twig', [
             'speaker' => $speaker,
             'form' => $form,
             'validationRequested' => $validationRequested,
@@ -141,7 +141,7 @@ class SpeakerController extends AbstractController
             return $this->redirectToRoute('app_speaker_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('pages/speaker/edit.html.twig', [
+        return $this->render('pages/crud/speaker/edit.html.twig', [
             'speaker' => $speaker,
             'form' => $form,
             'title' => new TranslatableMessage('Speaker'),

@@ -1,0 +1,26 @@
+{% extends 'crud.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ page.title|trans }}{% endblock %}
+
+{% block crud_toolbar %}
+    {% if crud.toolbar is defined %}
+        {{ component('CrudToolbar', {
+            add: true,
+            path: page.base_path
+        }) }}
+    {% endif %}
+{% endblock %}
+
+{% block crud_body %}
+    {{ component('CrudTable', {
+        fields: crud.table.fields,
+        actions: crud.table.actions,
+        items: crud.items,
+        path: page.base_path
+    }) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('crud') }}
+{% endblock %}

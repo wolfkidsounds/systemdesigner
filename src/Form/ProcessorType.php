@@ -38,31 +38,46 @@ class ProcessorType extends AbstractType
 
         $builder
             ->add('Manufacturer', EntityType::class, [
-                'label' => new TranslatableMessage('Manufacturer'),
+                'label' => false,
                 'class' => Manufacturer::class,
                 'choices' => $manufacturers,
                 'choice_label' => 'name',
                 'constraints' => [new NotBlank()],
-                'attr' => ['data-select' => 'true']
+                'attr' => [
+                    'data-select' => 'true',
+                    'placeholder' => new TranslatableMessage('Select Manufacturer') . '...',
+                ],
             ])
             ->add('Name', TextType::class, [
-                'label' => new TranslatableMessage('Name'),
-                'constraints' => [new NotBlank()]
+                'label' => false,
+                'constraints' => [new NotBlank()],
+                'attr' => [
+                    'placeholder' => new TranslatableMessage('Name') . '...',
+                ],
             ])
             ->add('ChannelsInput', IntegerType::class, [
-                'label' => new TranslatableMessage('Inputs'),
-                'constraints' => [new NotBlank()]
+                'label' => false,
+                'constraints' => [new NotBlank()],
+                'attr' => [
+                    'placeholder' => new TranslatableMessage('Inputs') . '...',
+                ],
             ])
             ->add('ChannelsOutput', IntegerType::class, [
-                'label' => new TranslatableMessage('Outputs'),
-                'constraints' => [new NotBlank()]
+                'label' => false,
+                'constraints' => [new NotBlank()],
+                'attr' => [
+                    'placeholder' => new TranslatableMessage('Outputs') . '...',
+                ],
             ])
             ->add('OutputOffset', IntegerType::class, [
-                'label' => new TranslatableMessage('Offset'),
-                'constraints' => [new NotBlank()]                
+                'label' => false,
+                'constraints' => [new NotBlank()],
+                'attr' => [
+                    'placeholder' => new TranslatableMessage('Output Offset') . '...',
+                ],
             ])
             ->add('Manual', FileType::class, [
-                'label' => new TranslatableMessage('Manual (PDF)'),
+                'label' => false,
                 'mapped' => false, // not associated with any entity
                 'required' => false,
                 'constraints' => [
@@ -74,6 +89,9 @@ class ProcessorType extends AbstractType
                         ],
                         'mimeTypesMessage' => 'You can only upload PDF Files',
                     ])
+                ],
+                'attr' => [
+                    'placeholder' => new TranslatableMessage('Manual') . '...',
                 ],
             ])
         ;

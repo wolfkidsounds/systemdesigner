@@ -1,0 +1,28 @@
+{% extends 'pages/crud/_template/index.html.twig' %}
+{% set page = {
+    title: 'Amplifiers',
+    base_path: 'app_amplifier'
+} %}
+
+{% set crud = {
+    toolbar: true,
+    add: true,
+    items: amplifiers,
+    table: {
+        fields: {
+            Manufacturer: 'Manufacturer',
+            Name: 'Name',
+            'Power @ 16Ω': 'Power16',
+            'Power @ 8Ω': 'Power8',
+            'Power @ 4Ω': 'Power4',
+            'Power Bridged @ 8Ω': 'PowerBridge8',
+            'Power Bridged @ 4Ω': 'PowerBridge4',
+        },
+        actions: true
+    },
+} %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('crud') }}
+{% endblock %}

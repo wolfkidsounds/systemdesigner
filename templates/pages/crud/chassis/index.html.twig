@@ -1,0 +1,27 @@
+{% extends 'pages/crud/_template/index.html.twig' %}
+{% set page = {
+    title: 'Chassis',
+    base_path: 'app_chassis'
+} %}
+
+{% set crud = {
+    toolbar: true,
+    add: true,
+    items: chassis,
+    table: {
+        fields: {
+            'Manufacturer': 'Manufacturer',
+            'Name': 'Name',
+            'Impedance': 'Impedance',
+            'Power': 'Power',
+            'Qts': 'Qts',
+            'Xmax': 'Xmax',
+        },
+        actions: true
+    },
+} %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('crud') }}
+{% endblock %}

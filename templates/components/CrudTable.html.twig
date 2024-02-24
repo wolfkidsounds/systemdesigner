@@ -1,0 +1,48 @@
+<div class="table-responsive overflow-hidden table-card mb-4">
+    <table class="table align-middle table-nowrap mb-0" data-tables='data-tables'>
+        <thead class="">
+            <tr>
+                {% for key in this.fields|keys %}
+                    <th class="sort text-uppercase align-middle">{{ key|trans }}</th>
+                {% endfor %}
+                {% if actions %}
+                    <th class="sort text-uppercase align-middle">{{ 'Actions'|trans }}</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody id="search-table" class="list form-check-all">
+            {% for item in this.items %}
+                <tr>
+                    {% for field in this.fields %}
+                        {% set fieldValue = attribute(item, field) %}
+                        {% if fieldValue is iterable %}
+                            <td class="{{ field|lower }}">
+                                {% for iterable_field in fieldValue %}
+                                    <span class="badge text-bg-dark text-black">{{ iterable_field|capitalize|trans }}</span>
+                                {% endfor %}
+                            </td>
+                        {% else %}
+                            <td class="{{ field|lower }}">{{ fieldValue }}</td>
+                        {% endif %}
+                    {% endfor %}
+                    {% if actions %}
+                        <td class="actions d-flex gap-2">
+
+                            <a href="{{ path(this.path ~ '_show', {'id': item.id}) }}"><i class="fa-solid fa-eye"></i></a>
+
+                            {% if item.user == app.user %}
+                                <a href="{{ path(this.path ~ '_edit', {'id': item.id}) }}"><i class="fa-solid fa-pen"></i></a>                    
+                            {% endif %}
+
+                            {% if item.Manual is defined %}
+                                {% if not item.Manual is empty or item.Manual is null %}
+                                    <a href="{{ path('app_download', { 'slug': item.Manual }) }}" download><i class="fa-solid fa-file-pdf"></i></a>
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

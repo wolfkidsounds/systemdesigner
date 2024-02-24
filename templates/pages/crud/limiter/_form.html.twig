@@ -1,11 +1,11 @@
 {{ form_start(form) }}
 <div class="d-flex flex-column overflow-hidden">
         
-    {{ include('pages/limiter/partials/_selector.html.twig') }}
+    {{ include('pages/crud/limiter/partials/_selector.html.twig') }}
 
     <div class="divider seperator mb-3"><hr></div>
 
-    {{ include('pages/limiter/partials/_settings.html.twig') }}
+    {{ include('pages/crud/limiter/partials/_settings.html.twig') }}
 
     <div class="loading-container-wrapper p-3">
 
@@ -16,17 +16,17 @@
         <div class="custom-loader-item unloaded">
 
             <div class="shepherd-fields">
-                {{ include('pages/limiter/partials/_calc_fields.html.twig') }}
+                {{ include('pages/crud/limiter/partials/_calc_fields.html.twig') }}
             </div>
             
-            {{ include('pages/limiter/partials/_lim_times.html.twig') }}
+            {{ include('pages/crud/limiter/partials/_lim_times.html.twig') }}
             
-            {{ include('pages/limiter/partials/_details.html.twig') }}
+            {{ include('pages/crud/limiter/partials/_details.html.twig') }}
 
             <div class="divider seperator mb-3"><hr></div>
 
             <div class="shepherd-messagebox">
-                {{ include('pages/limiter/partials/_messagebox.html.twig') }}
+                {{ include('pages/crud/limiter/partials/_messagebox.html.twig') }}
             </div>
         </div>
     </div>

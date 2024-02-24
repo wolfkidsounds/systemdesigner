@@ -16,9 +16,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive overflow-hidden table-card mb-4">
-                        {% block crud_body %}{% endblock %}
-                    </div>
+                    {% block crud_body %}{% endblock %}
                     
                     {% block crud_pagination %}{% endblock %}
                 </div>

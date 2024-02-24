@@ -1,0 +1,26 @@
+{% extends 'pages/crud/_template/index.html.twig' %}
+{% set page = {
+    title: 'Processors',
+    base_path: 'app_processor'
+} %}
+
+{% set crud = {
+    toolbar: true,
+    add: true,
+    items: processors,
+    table: {
+        fields: {
+            Manufacturer: 'Manufacturer',
+            Name: 'Name',
+            Inputs: 'ChannelsInput',
+            Outputs: 'ChannelsOutput',
+            Offset: 'OutputOffset'
+        },
+        actions: true
+    },
+} %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('crud') }}
+{% endblock %}

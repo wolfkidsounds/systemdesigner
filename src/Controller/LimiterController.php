@@ -32,7 +32,7 @@ class LimiterController extends AbstractController
             $limiters = $limiterRepository->findBy(['User' => $user], [], 10);
         }
 
-        return $this->render('pages/limiter/index.html.twig', [
+        return $this->render('pages/crud/limiter/index.html.twig', [
             'limiters' => $limiters,
             'title' => new TranslatableMessage('Limiter'),
             'crud_title' => new TranslatableMessage('All Limiters'),
@@ -74,7 +74,7 @@ class LimiterController extends AbstractController
             return $this->redirectToRoute('app_limiter_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('pages/limiter/new.html.twig', [
+        return $this->render('pages/crud/limiter/new.html.twig', [
             'limiter' => $limiter,
             'form' => $form,
             'title' => new TranslatableMessage('Limiter'),
@@ -86,7 +86,7 @@ class LimiterController extends AbstractController
     #[Route('/show/{id}', name: 'app_limiter_show', methods: ['GET'])]
     public function show(Limiter $limiter): Response
     {
-        return $this->render('pages/limiter/show.html.twig', [
+        return $this->render('pages/crud/limiter/show.html.twig', [
             'limiter' => $limiter,
             'title' => new TranslatableMessage('Limiter'),
             'crud_title' => new TranslatableMessage('Show Limiter'),
@@ -105,7 +105,7 @@ class LimiterController extends AbstractController
             return $this->redirectToRoute('app_limiter_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('pages/limiter/edit.html.twig', [
+        return $this->render('pages/crud/limiter/edit.html.twig', [
             'limiter' => $limiter,
             'form' => $form,
             'title' => new TranslatableMessage('Limiter'),

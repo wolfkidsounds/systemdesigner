@@ -1,0 +1,27 @@
+{% extends 'pages/crud/_template/index.html.twig' %}
+{% set page = {
+    title: 'Speakers',
+    base_path: 'app_speaker'
+} %}
+
+{% set crud = {
+    toolbar: true,
+    add: true,
+    items: speakers,
+    table: {
+        fields: {
+            'Manufacturer': 'Manufacturer',
+            'Name': 'Name',
+            'RMS Power': 'PowerRMS',
+            'Peak Power': 'PowerPeak',
+            'Impedance': 'Impedance',
+            'SPL': 'SPL',
+        },
+        actions: true
+    },
+} %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('crud') }}
+{% endblock %}
